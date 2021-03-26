@@ -1,0 +1,140 @@
+@use '../tools/mixins';
+
+.squares-times {
+  display         : flex;
+  justify-content : space-evenly;
+  align-items     : center;
+  flex-direction  : row;
+  width           : 100%;
+  max-width       : 1110px;
+  margin-top      : 115px;
+  margin-bottom   : 166px;
+}
+
+.square {
+  display         : flex;
+  justify-content : center;
+  align-items     : center;
+  flex-direction  : column;
+  height          : 210px;
+  width           : 220px;
+  background      : white;
+  border-radius   : 30px;
+  border          : var(--border-primary) 5px solid;
+  color           : var(--color-primary);
+  font-size       : 72px;
+
+  & > em {
+    margin-top : .5rem;
+    font-size  : 32px;
+    color      : var(--color);
+  }
+}
+
+#seconds {
+  color       : var(--danger);
+  font-weight : 600;
+}
+
+@include mixins.down(1449.99) {
+  .square {
+    height    : 180px;
+    width     : 190px;
+    font-size : 68px;
+
+    & > em {
+      margin-top : .5rem;
+      font-size  : 28px;
+      color      : var(--color);
+    }
+  }
+}
+
+@include mixins.down(1010.99) {
+  .square {
+    height    : 150px;
+    width     : 160px;
+    font-size : 48px;
+
+    & > em {
+      margin-top : .5rem;
+      font-size  : 24px;
+      color      : var(--color);
+    }
+  }
+}
+
+@include mixins.down(1010.99) {
+  .square {
+    height    : 150px;
+    width     : 160px;
+    font-size : 48px;
+
+    & > em {
+      margin-top : .5rem;
+      font-size  : 24px;
+      color      : var(--color);
+    }
+  }
+}
+
+@include mixins.down(767.99) {
+  .square {
+    height        : 140px;
+    width         : 150px;
+    font-size     : 38px;
+    margin-bottom : 1.75rem;
+
+    & > em {
+      margin-top : .5rem;
+      font-size  : 18px;
+      color      : var(--color);
+    }
+  }
+}
+
+@include mixins.down(741.99) {
+  .square {
+    height        : 120px;
+    width         : 130px;
+    font-size     : 28px;
+
+    & > em {
+      margin-top : .5rem;
+      font-size  : 16px;
+      color      : var(--color);
+    }
+  }
+}
+
+@include mixins.down(567.99) {
+  .square {
+    height        : 100px;
+    width         : 110px;
+    font-size     : 26px;
+
+    & > em {
+      margin-top : .5rem;
+      font-size  : 16px;
+      color      : var(--color);
+    }
+  }
+}
+
+@include mixins.down(513.99) {
+  .squares-times {
+    flex-direction : column;
+    margin-bottom : 50px;
+  }
+  .square {
+    height        : 160px;
+    width         : 170px;
+    font-size     : 28px;
+
+    & > em {
+      margin-top : .5rem;
+      font-size  : 16px;
+      color      : var(--color);
+    }
+  }
+}

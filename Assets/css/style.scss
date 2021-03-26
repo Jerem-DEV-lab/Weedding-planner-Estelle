@@ -1,0 +1,131 @@
+//=====================
+// Tools
+//=====================
+@use 'tools/reset';
+@use 'tools/mixins';
+@use 'tools/typography';
+@use 'tools/layout';
+
+//=====================
+// Components
+//=====================
+@use 'components/square';
+
+body {
+  position    : relative;
+  font-family : typography.$font;
+}
+
+//=====================
+// Variables
+//=====================
+:root {
+  --color          : #41413B;
+  --border-primary : #C2C2C2;
+  --danger         : #FD5949;
+  --color-primary  : #DDBB8E;
+}
+
+.overlay {
+  content    : '';
+  position   : absolute;
+  top        : 0;
+  right      : 0;
+  bottom     : 0;
+  left       : 0;
+  background : rgba(#000, .7);
+  z-index    : 2;
+}
+
+.waiting-screen {
+  position            : relative;
+  display             : flex;
+  justify-content     : center;
+  align-items         : center;
+  flex-direction      : column;
+  min-height          : 100vh;
+  background-image    : url('../images/waiting-screen/IMG_5745.JPG');
+  background-size     : cover;
+  background-repeat   : no-repeat;
+  background-position : center center;
+  color               : white;
+
+  h1 {
+    text-align  : center;
+    font-size   : 58px;
+    line-height : 1.9;
+    font-weight : 600;
+    padding     : .75rem 1.75rem;
+  }
+}
+
+.waiting-screen-header, .squares-times, footer {
+  z-index : 3;
+}
+
+section > footer {
+  cursor      : pointer;
+  font-size   : 36px;
+  text-align  : center;
+  padding     : .75rem 1.25rem;
+  line-height : 1.5;
+  font-weight : 500;
+
+  & .social-links {
+    display         : flex;
+    justify-content : center;
+    margin-top      : 50px;
+    height          : auto;
+    width           : 100%;
+    padding         : .75rem .5rem;
+    align-items     : center;
+
+    li.social-item:first-of-type {
+      margin-right : 1.25rem;
+    }
+  }
+}
+
+@include mixins.down(1407.99) {
+  .waiting-screen h1 {
+    font-size : 48px;
+  }
+}
+
+@include mixins.down(1449.99) {
+  .waiting-screen h1 {
+    font-size : 38px;
+  }
+}
+
+@include mixins.down(991.99) {
+  section > footer {
+    font-size : 28px;
+
+    .social-links {
+      margin-top : 20px;
+    }
+  }
+  .waiting-screen h1 {
+    font-size : 32px;
+  }
+}
+
+@include mixins.down(767.99) {
+  .waiting-screen {
+    height : auto;
+  }
+  section > footer {
+     font-size : 24px;
+   }
+}
+
+@include mixins.down(513.99) {
+  .waiting-screen h1 {
+    font-size : 20px;
+    line-height: 1.9;
+  }
+  section > footer {
+    font-size : 18px;
+  }
+}
