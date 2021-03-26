@@ -1,0 +1,31 @@
+// Media query
+// ==================
+@mixin up($size) {
+  @media (min-width : $size * 1px) {
+    @content;
+  }
+}
+
+@mixin down($size) {
+  @media (max-width : $size * 1px) {
+    @content;
+  }
+}
+
+@mixin between($down, $up) {
+  @media (min-width : #{$down} * 1px) and (max-width : #{$up} * 1px) {
+    @content;
+  }
+}
+
+// Espacement
+// ==================
+@mixin container($width, $padding) {
+  width         : 100%;
+  padding-left  : $padding;
+  padding-right : $padding;
+  @include up($width + 2 * $padding) {
+    padding-left  : calc(50vw - #{$width / 2});
+    padding-right : calc(50vw - #{$width / 2});
+  }
+}
