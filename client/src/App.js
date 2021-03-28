@@ -1,8 +1,9 @@
+import Routes from './Components/Routes/Routes'
+
 function App() {
-  return (
-    <div className="App">
-    </div>
-  );
+  return <>
+    <Routes />
+  </>
 }
 
 export default App;
