@@ -1,0 +1,27 @@
+const express                          = require('express')
+const bodyParser                       = require('body-parser')
+const cors                             = require('cors')
+const app                              = express()
+const mongoose                         = require('mongoose')
+const { createRouterAuthentification } = require('./routes/UserRoutes/AuthenficationRoute')
+const cookieParser                     = require('cookie-parser')
+require('dotenv').config()
+
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(cors())
+app.use(cookieParser())
+app.use('/', createRouterAuthentification())
+
+mongoose.connect(
+  `${process.env.DB}`,
+  {
+    useNewUrlParser   : true,
+    useCreateIndex    : true,
+    useUnifiedTopology: true,
+    useFindAndModify  : true,
+  }
+        )
+        .then(() => console.log('Connected to mongoDB'))
+        .catch(err => console.log('Connection failed to mongoDB =>' + ' ' + err))
+app.listen(process.env.PORT, () => console.log(`Service correctement démarrer sur le ${process.env.PORT}`))
