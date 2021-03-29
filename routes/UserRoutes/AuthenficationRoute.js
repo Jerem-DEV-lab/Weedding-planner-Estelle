@@ -1,11 +1,13 @@
-const Authentification = require('../../controller/User/Authentification')
-const router           = require('express').Router()
+const Authentification   = require('../../controller/User/Authentification')
+const { checkUserLogin } = require('../../tools/Auth')
+const router             = require('express').Router()
 
-function createRouterAuthentification (req, res) {
+function createRouterAuthentification (req, res, next) {
   const AuthentificationController = new Authentification(req, res)
   
   router.post('/register', AuthentificationController.createUser)
   router.post('/login', AuthentificationController.loginUser)
+  router.get('/check', checkUserLogin)
   return router
 }
 

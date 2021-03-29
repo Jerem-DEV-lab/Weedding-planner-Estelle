@@ -10,30 +10,30 @@ const NavBar = () => {
   const NavItems   = [
     {
       label: lang.home,
-      url  : '/'
+      url  : '/fr/'
     },
     {
       label  : lang.organization,
-      url    : '/organisation',
+      url    : '/fr/organisation',
       subLink: [
         {
           label: 'Mariage',
-          url  : '/mariage',
+          url  : '/fr/mariage',
         },
         {
           label: 'Cérémonie laïque',
-          url  : '/ceremonie-laique',
+          url  : '/fr/ceremonie-laique',
         },
         {
           label: 'EVJF / EVJG',
-          url  : '/enterrement-vie-jeune',
+          url  : '/fr/enterrement-vie-jeune',
         },
         {
           label: 'Baby Shower',
-          url  : '/baby-shower',
+          url  : '/fr/baby-shower',
         }, {
           label: 'Autre évènements privés',
-          url  : '/events-private',
+          url  : '/fr/events-private',
         },]
     },
     {
@@ -117,7 +117,7 @@ const NavBar = () => {
         </div>
       </div>
       <div className="nav-item account-user">
-        <NavLink to="/login">
+        <NavLink to="/fr/login">
           <span><FaUser/></span>{lang.login} / {lang.register}
         </NavLink>
       </div>
