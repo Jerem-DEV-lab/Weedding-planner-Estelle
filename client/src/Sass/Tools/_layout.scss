@@ -1,0 +1,33 @@
+.grid-modal.form-register {
+  @include down(528) {
+    display        : flex;
+    flex-direction : column;
+    flex-wrap      : wrap;
+    width          : 100%;
+  }
+  @include up(768.99) {
+    display         : grid;
+    width           : 100%;
+    grid-template   : repeat(5, calc(80px - .75rem)) / repeat(2, calc(50% - 1.5rem));
+    justify-content : center;
+    grid-column-gap : 1.5rem;
+    grid-row-gap    : .75rem;
+    flex            : 0 0 auto
+  }
+}
+
+%m-auto,
+.m-auto {
+  margin : auto;
+}
+
+.btn-group {
+  display : inline-block;
+  width   : 100%;
+}
+
+.btn-center {
+  display         : flex;
+  justify-content : center;
+  margin-top      : 1.75rem;
+}

@@ -1,0 +1,84 @@
+%form-control,
+.form-control {
+  display            : block;
+  width              : 100%;
+  padding            : .375rem .75rem;
+  font-size          : 1rem;
+  font-weight        : 400;
+  line-height        : 1.5;
+  color              : #212529;
+  background-color   : #FFFFFF;
+  background-clip    : padding-box;
+  border             : 1px solid var(--color-primary);
+  appearance         : none;
+  -webkit-appearance : none;
+  -moz-appearance    : none;
+  border-radius      : .25rem;
+  transition         : border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+
+  &:focus {
+    outline       : none;
+    border        : solid 3px rgba(#DDBB8E, .5);
+    box-shadow    : 0 0 5px var(--color-primary);
+    border-radius : .25rem;
+  }
+}
+
+%form-label,
+.form-label {
+  display       : inline-block;
+  margin-bottom : .75rem;
+  font-weight   : 500;
+}
+
+%form-check,
+.form-check {
+  display       : inline-flex;
+  align-items   : center;
+  min-height    : 1.5rem;
+  padding-left  : 1.5em;
+  margin-bottom : .125rem;
+}
+
+%form-check-label,
+.form-check-label {
+  display   : inline-block;
+  font-size : 14px;
+}
+
+.form-check-input {
+  width               : 1em;
+  height              : 1em;
+  margin-top          : .25em;
+  vertical-align      : top;
+  background-color    : #FFFFFF;
+  background-repeat   : no-repeat;
+  background-position : center;
+  background-size     : contain;
+  border              : 1px solid rgba(0, 0, 0, .25);
+  -webkit-appearance  : none;
+  -moz-appearance     : none;
+  appearance          : none;
+  color-adjust        : exact;
+}
+
+.form-check .form-check-input {
+  float       : left;
+  margin-left : -1.5em;
+}
+
+.form-check-input[type='checkbox'] {
+  border-radius : 99em;
+  border        : solid 5px var(--color-primary);
+  width         : 1.2em;
+  height        : 1.2em;
+}
+
+.form-check-input:checked {
+  background-color : #749460;
+  border           : solid 3px var(--color-primary);
+}
+
+fieldset legend, fieldset {
+  font-weight : 500;
+}

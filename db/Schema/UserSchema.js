@@ -12,7 +12,7 @@ const UserSchema = new Schema
      validate : [isEmail]
    },
    password                : { type: String, required: true, minlength: 6, maxlength: 1024 },
-   roles                   : [{type: String, defaultValue: "ROLE_USER"}],
+   roles                   : [{ type: String, defaultValue: 'ROLE_USER' }],
    firstName               : { type: String, required: true, minlength: 3, maxlength: 25 },
    lastName                : { type: String, required: true, minlength: 3, maxlength: 25 },
    userIsBan               : { type: Boolean, required: true, default: false },
@@ -21,7 +21,11 @@ const UserSchema = new Schema
    confirmAccountToken     : { type: String, default: '' },
    expireTokenResetPassword: { type: Date, default: '' },
    userAvatar              : { type: String, required: true, default: 'https://i.pravatar.cc/300' },
-   phone                   : { type: String, required: true }
+   phone                   : { type: String, required: true },
+   civility                : { type: String, required: true },
+   birthday                : { type: String, required: true },
+   newsLetter              : { type: Boolean, required: true }
+  
  }, { timestamps: true })
 
 module.exports = model('user', UserSchema)

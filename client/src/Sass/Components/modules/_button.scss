@@ -1,0 +1,28 @@
+%btn,
+.btn {
+  display        : inline-block;
+  font-size      : 14px;
+  font-weight    : 500;
+  font-family    : 'Montserrat', sans-serif;
+  text-align     : center;
+  white-space    : nowrap;
+  vertical-align : middle;
+  user-select    : none;
+  border         : 1px solid transparent;
+  background     : transparent;
+  color          : inherit;
+  cursor         : pointer;
+  border-radius  : 3px;
+  padding        : .375rem .75rem;
+  transition     : all .5s ease-in-out;
+}
+
+%btn-primary,
+.btn-primary {
+  background : var(--color-primary);
+}
+
+.btn.hover-outline:hover {
+  border-color : var(--color-primary);
+  background   : transparent;
+}
