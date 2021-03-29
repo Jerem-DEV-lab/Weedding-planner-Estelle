@@ -1,11 +1,78 @@
 import React, { useState }         from 'react'
-import { NavItems }                from './NavItems'
 import { NavLink }                 from 'react-router-dom'
 import { FaBars, FaTimes, FaUser } from 'react-icons/fa'
+import useChangeLang               from '../../Hooks/useChangeLang'
 
 const NavBar = () => {
   const [navOpen, setNavOpen] = useState(false)
+  const [lang, changeLang]    = useChangeLang()
   
+  const NavItems   = [
+    {
+      label: lang.home,
+      url  : '/'
+    },
+    {
+      label  : lang.organization,
+      url    : '/organisation',
+      subLink: [
+        {
+          label: 'Mariage',
+          url  : '/mariage',
+        },
+        {
+          label: 'Cérémonie laïque',
+          url  : '/ceremonie-laique',
+        },
+        {
+          label: 'EVJF / EVJG',
+          url  : '/enterrement-vie-jeune',
+        },
+        {
+          label: 'Baby Shower',
+          url  : '/baby-shower',
+        }, {
+          label: 'Autre évènements privés',
+          url  : '/events-private',
+        },]
+    },
+    {
+      label  : lang.workshop,
+      url    : '/ateliers',
+      subLink: [
+        {
+          label: 'Mariage',
+          url  : '/mariage',
+        },
+        {
+          label: 'Cérémonie laïque',
+          url  : '/ceremonie-laique',
+        },
+        {
+          label: 'EVJF / EVJG',
+          url  : '/enterrement-vie-jeune',
+        },
+        {
+          label: 'Baby Shower',
+          url  : '/baby-shower',
+        }, {
+          label: 'Autre évènements privés',
+          url  : '/events-private',
+        }]
+    },
+    {
+      label: lang.gallery,
+      url  : '/galerie',
+    },
+    {
+      label: lang.about,
+      url  : '/a-propos',
+    },
+    {
+      label: lang.contact,
+      url  : '/contact',
+    }
+  ]
   const openNavBar = () => {
     setNavOpen(!navOpen)
   }
@@ -51,7 +118,7 @@ const NavBar = () => {
       </div>
       <div className="nav-item account-user">
         <NavLink to="/login">
-          <span><FaUser/></span>Connexion / Inscription
+          <span><FaUser/></span>{lang.login} / {lang.register}
         </NavLink>
       </div>
     </nav>
