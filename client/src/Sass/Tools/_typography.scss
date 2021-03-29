@@ -1,8 +1,13 @@
-body{
-  font-family : "Montserrat", sans-serif;
+body {
+  font-family : 'Montserrat', sans-serif;
 }
 
 %h1,
-.h1{
+.h1 {
   font-size : 30px;
+}
+
+%text-center,
+.text-center {
+  text-align : center;
 }
