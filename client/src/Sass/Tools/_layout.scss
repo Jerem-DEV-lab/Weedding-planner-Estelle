@@ -31,3 +31,77 @@
   justify-content : center;
   margin-top      : 1.75rem;
 }
+
+.btn-center-x {
+  display         : inline-flex;
+  align-items     : center;
+  justify-content : center;
+  margin          : .75rem auto;
+  width           : 100%;
+}
+
+// Conteneur
+// ==================
+:root {
+  --container-padding : 20px;
+  --container-width   : calc(100vw - var(--container-padding) * 2);
+}
+
+@media only screen and (min-width : 900px) {
+  :root {
+    --container-padding : 32px;
+  }
+}
+
+@media only screen and (min-width : 1370px) {
+  :root {
+    --container-padding : 20px;
+    --container-width   : 1330px;
+  }
+}
+
+// Container
+// ==============
+%container,
+.container {
+  box-sizing    : border-box;
+  width         : 100%;
+  padding-left  : calc(50% - var(--container-width) / 2);
+  padding-right : calc(50% - var(--container-width) / 2);
+}
+
+%container-margin,
+.container-margin {
+  margin-left  : auto;
+  margin-right : auto;
+  width        : var(--container-width);
+}
+
+//GRID - FLEX
+@include up(767.99) {
+  .grid-3-col-md {
+    display         : flex;
+    justify-content : space-evenly;
+    align-items     : center;
+    flex-wrap       : wrap;
+
+    > * {
+      margin : .5rem auto;
+    }
+  }
+}
+
+@include down(767.99) {
+  .card-group-sm {
+    display   : flex;
+    flex-wrap : wrap;
+    flex      : 0 0 auto;
+
+    > * {
+      margin : .5rem auto;
+    }
+  }
+  .flex-column-sm {
+    flex-direction : column;
+  }
+}
