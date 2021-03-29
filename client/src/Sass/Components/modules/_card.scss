@@ -1,0 +1,70 @@
+%card,
+.card {
+  background    : white;
+  border-radius : .25rem;
+  overflow      : hidden;
+}
+
+%card-presta,
+.card-presta {
+  @extend %card;
+  display       : grid;
+  grid-template : repeat(1, 90px) repeat(1, 40px) repeat(2, 75px) / repeat(3, 120px);
+  max-width     : 500px;
+  @include down(427.99) {
+    grid-template : repeat(4, 60px) / repeat(3, 1fr);
+    margin        : auto;
+    width         : 80%;
+    max-width     : 400px;
+  }
+}
+
+.card-title {
+  /* Début de la ligne (row) - début de la colonne(col) - fin de la ligne(row) - find de la colonne (col)*/
+  grid-area : 1 / 1 / 5 / 5;
+}
+
+.card-title-content {
+  display         : flex;
+  justify-content : center;
+  align-items     : center;
+  grid-area       : 2 / 1 / 2 / 4;
+  font-weight     : 600;
+
+  h3:after {
+    content    : '';
+    display    : inline-flex;
+    width      : 50%;
+    background : var(--color-success);
+    height     : 2px;
+  }
+}
+
+.card-icons {
+  display         : flex;
+  justify-content : center;
+  align-items     : center;
+  color           : var(--color-success);
+  grid-area       : 1 / 1 / 1 / 4;
+}
+
+.card-content {
+  display         : flex;
+  justify-content : center;
+  align-items     : center;
+  font-weight     : 500;
+  grid-area       : 3 / 1 / 5 / 4;
+}
+
+.card-img {
+  grid-area           : 2 / 1 / 5 / 5;
+  overflow            : hidden;
+  background-position : bottom center;
+  background-size     : cover;
+
+  img {
+    object-fit : cover;
+    width      : auto;
+    height     : 100%;
+  }
+}
