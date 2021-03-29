@@ -1,8 +1,8 @@
 import axios from 'axios'
-
 export const LOGIN_USER_LOADING = 'LOGIN_USER_LOADING'
 export const LOGIN_USER_ERROR   = 'LOGIN_USER_ERROR'
 export const LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS'
+export const LANG_USER_PREF     = 'LANG_USER_PREF'
 
 export const REGISTER_USER = 'REGISTER_USER'
 
@@ -11,10 +11,17 @@ export const loginUserLoading = () => {
     type: LOGIN_USER_LOADING
   }
 }
+
+export const changeLangPref   = (lang) => {
+  return {
+    type   : LANG_USER_PREF,
+    payload: lang
+  }
+}
 export const loginUserSuccess = (user, message) => {
   return {
     type   : LOGIN_USER_SUCCESS,
-    payload: {user, message}
+    payload: { user, message }
   }
 }
 export const loginUserError   = (err) => {
