@@ -7,7 +7,14 @@
 
 :root {
   --color-primary : #DDBB8E;
+  --color-success : #749460;
+  --color         : #41413B;
   --space         : 8px;
 }
 
+body {
+  color : var(--color);
+}
+
 @import 'Components/ModalAuth';
+@import 'Components/NavBar';
