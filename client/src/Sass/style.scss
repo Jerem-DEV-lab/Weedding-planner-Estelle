@@ -1,15 +1,15 @@
 @import 'Tools/reset';
 @import 'Tools/mixins';
-@import 'Tools/layout';
 @import 'Tools/typography';
 @import 'Tools/_form';
+@import 'Tools/layout';
 @import 'Components/modules/button';
+@import 'Components/modules/card';
 
 :root {
-  --color-primary : #DDBB8E;
+  --color-primary : #ddbf9c;
   --color-success : #749460;
   --color         : #41413B;
-  --space         : 8px;
 }
 
 body {
@@ -18,3 +18,5 @@ body {
 
 @import 'Components/ModalAuth';
 @import 'Components/NavBar';
+@import 'Components/HeroPage';
+@import 'Pages/HomePage';
