@@ -31,5 +31,41 @@ module.exports.ComparePassword = async (passwordDb, userPassword) => {
 }
 
 module.exports.setTokenAuth = (role, userId, timeStampCookie) => {
-  return jwt.sign({ role, userId }, process.env.SECRET_KEY, { expiresIn: timeStampCookie })
+  return jwt.sign({ role, userId }, `${process.env.SECRET_KEY}`, { expiresIn: timeStampCookie })
+}
+
+module.exports.checkUserLogin = (req, res) => {
+  const token = req.cookies.jwt
+  
+  if (token) {
+    jwt.verify(token, process.env.SECRET_KEY, async (err, decodedToken) => {
+      if (err) {
+        res.locals.user = null
+        return res.status(400).json({ err })
+        
+      } else {
+        const user = res.locals.user = await UserSchema.findById(decodedToken.userId).select('-password')
+        return res.status(200).json(user)
+      }
+    })
+  } else {
+    res.locals.user = null
+    return res.status(400).json({})
+  }
+}
+
+module.exports.requireAuth = (req, res, next) => {
+  const token = req.cookies.jwt
+  if (!token) {
+    return res.status(400).json({ errorMessage: 'Veuillez vous connecter' })
+  }
+  if (token) {
+    jwt.verify(token, process.env.SECRET_KEY, async (err, decodedToken) => {
+      if (err) {
+        return res.status(200).send('no token')
+      } else {
+        return res.status(200).send('no token')
+      }
+    })
+  }
 }
