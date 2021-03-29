@@ -1,0 +1,36 @@
+%hero,
+.hero {
+  display             : flex;
+  align-items         : center;
+  justify-content     : center;
+  background-size     : cover;
+  background-position : center center;
+  min-height          : 250px;
+  height              : auto;
+  position            : relative;
+  color               : #FFFFFF;
+
+  &:after {
+    content    : '';
+    display    : block;
+    background : rgba(#000, .4);
+    position   : absolute;
+    top        : 0;
+    left       : 0;
+    right      : 0;
+    bottom     : 0;
+  }
+}
+
+.hero-content {
+  z-index : 1;
+
+  > h1.hero-title {
+    text-align  : center;
+    padding     : .375rem;
+    line-height : 30px;
+    font-weight : 500;
+    font-size   : 20px;
+    max-width   : 630px;
+  }
+}

@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom'
 import Maintenance                                          from '../../Pages/Maintenance'
 import LoginPage                                            from '../../Pages/Authentification/LoginPage'
+import Home                                                 from '../../Pages/Home/Home'
 
 const Routes = () => {
   const maintenance = false
@@ -11,9 +12,10 @@ const Routes = () => {
        <Redirect to="/"/>
      </> :
      <Switch>
+       <Route path="/" exact component={Home}/>
        <Route path="/register" exact component={LoginPage}/>
        <Route path="/login" exact component={LoginPage}/>
-       <Redirect to="/register"/>
+       <Redirect to="/"/>
      </Switch>}
   </Router>
 }
