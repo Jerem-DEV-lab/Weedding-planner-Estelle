@@ -11,12 +11,16 @@ import { useDispatch, useSelector } from 'react-redux'
 export default function useChangeLang () {
   const dispatch                        = useDispatch()
   const [langUserPref, setLangUserPref] = useState({})
-  const { langPref }                    = useSelector(state => state.userReducers)
+  const langPref                        = useSelector(state => state.userReducers)
   const changeLanguage                  = (e) => {
     dispatch(changeLangPref(e.target.id))
   }
+  
+  const paramLang = window.location.href
+  const langEN    = paramLang.split('http://localhost:3000')[1].includes('/en/')
+  
   useEffect(() => {
-    if (langPref === 'EN_en') {
+    if (langPref.langPref === 'EN_en' || langEN) {
       setLangUserPref({
                         ...LANG_CARD_EN, ...LANG_HOME_EN, ...LANG_NAVBAR_EN,
                       })

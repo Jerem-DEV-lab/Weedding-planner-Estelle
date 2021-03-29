@@ -2,8 +2,12 @@ import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-d
 import Maintenance                                          from '../../Pages/Maintenance'
 import LoginPage                                            from '../../Pages/Authentification/LoginPage'
 import Home                                                 from '../../Pages/Home/Home'
+import { useSelector }                                      from 'react-redux'
 
 const Routes = () => {
+  const { langPref } = useSelector(state => state.userReducers)
+  const paramLang = window.location.href
+  const langEN    = paramLang.split('http://localhost:3000')[1].includes('/en/')
   const maintenance = false
   return <Router>
     {maintenance ?
@@ -11,11 +15,18 @@ const Routes = () => {
        <Route path="/" exact component={Maintenance}/>
        <Redirect to="/"/>
      </> :
+     langPref && langPref === 'EN_en' || langEN ?
      <Switch>
-       <Route path="/" exact component={Home}/>
-       <Route path="/register" exact component={LoginPage}/>
-       <Route path="/login" exact component={LoginPage}/>
-       <Redirect to="/"/>
+       <Route path={`/en/`} exact component={Home}/>
+       <Route path="/en/register" exact component={LoginPage}/>
+       <Route path="/en/login" exact component={LoginPage}/>
+       {<Redirect to={`/en/`}/>}
+     </Switch> :
+     <Switch>
+       <Route path={`/fr/`} exact component={Home}/>
+       <Route path="/fr/register" exact component={LoginPage}/>
+       <Route path="/fr/login" exact component={LoginPage}/>
+       {<Redirect to={`/fr/`}/>}
      </Switch>}
   </Router>
 }
