@@ -1,3 +1,4 @@
+/*
 .nav-brand {
   display     : flex;
   height      : 100%;
@@ -146,6 +147,13 @@
   }
 }
 
+.userAvatar img {
+  display         : flex;
+  justify-content : center;
+  align-items     : center;
+  border-radius   : 99rem;
+}
+
 @include up(1017.98) {
   .nav-brand {
     display : none;
@@ -153,7 +161,6 @@
   .main-nav {
     display         : flex;
     max-height      : 60px;
-    overflow        : hidden;
     justify-content : space-between;
     align-items     : center;
     border-bottom   : solid 1px silver;
@@ -166,19 +173,11 @@
   }
   .nav-items ul {
     display         : flex;
-    justify-content : center;
     align-items     : center;
-    height          : 60px;
-
     a.nav-link {
-      display     : inline-flex;
-      align-items : center;
-      margin      : auto;
-      height      : 100%;
-      padding     : 0 .75rem;
       font-size   : .9rem;
+      padding: 0.5rem 1rem;
       font-weight : 500;
-
       &.active {
         border-bottom : solid 3px var(--color-success);
       }
@@ -187,15 +186,21 @@
   .small-screen {
     display : none;
   }
+  .nav-item {
+    display     : flex;
+    height      : 60px;
+    align-items : center;
+  }
   .nav-content {
     position        : relative;
     display         : flex;
     justify-content : space-evenly;
     left            : 0;
     width           : auto;
-    height          : auto;
+    height          : 60px;
     opacity         : 1;
     visibility      : visible;
+    min-height      : 5px;
   }
   .overlay-nav.modal-open {
     visibility : hidden;
@@ -214,5 +219,181 @@
   }
   .nav-content {
     width : 80%;
+  }
+}
+*/
+.navbar {
+  position        : relative;
+  background      : #FFFFFF;
+  height          : 60px;
+  display         : flex;
+  justify-content : space-between;
+  align-items     : center;
+  font-size       : 1rem;
+}
+
+.navbar-account.connected {
+  span {
+    width         : 90px;
+    font-size     : 14px;
+    font-weight   : 500;
+    text-wrap     : none;
+    overflow      : hidden;
+    text-overflow : ellipsis;
+    white-space   : nowrap;
+  }
+}
+
+.navbar-avatar {
+  display       : flex;
+  align-items   : center;
+  border-radius : 99rem;
+  margin-right  : .5rem;
+
+  img {
+    width         : 30px;
+    border-radius : 99rem;
+  }
+}
+
+.navbar-logo {
+  color           : #fff;
+  justify-self    : start;
+  margin-left     : 20px;
+  cursor          : pointer;
+  text-decoration : none;
+  font-size       : 2rem;
+}
+
+.nav-menu {
+  display               : grid;
+  grid-template-columns : repeat(7, auto);
+  grid-gap              : 10px;
+  font-size             : 14px;
+  font-weight           : 500;
+  text-align            : center;
+  width                 : 80vw;
+  justify-content       : center;
+  margin-right          : 2rem;
+}
+
+.nav-item {
+  display     : flex;
+  align-items : center;
+  height      : 60px;
+  transition  : all ease-in-out .4s;
+}
+
+.nav-links {
+  text-decoration : none;
+  padding         : 0.5rem 1rem;
+}
+
+.nav-links:hover {
+  //todo
+  color : green;
+}
+
+.menu-icon {
+  display : none;
+}
+
+.navbar-account {
+  display                : flex;
+  justify-content        : center;
+  align-items            : center;
+  width                  : 10vw;
+  background             : var(--color-primary);
+  height                 : 100%;
+  border-top-left-radius : 50px;
+  font-size              : 15px;
+  transition             : all .3s ease-in;
+
+  > svg {
+    margin-right : .375rem;
+  }
+}
+
+@include down(1386.99) {
+  .navbar-account {
+    display                : inline-flex;
+    justify-content        : center;
+    width                  : 5vw;
+    border-top-left-radius : 25px;
+    color                  : #FFFFFF;
+  }
+  .navbar-account span {
+    display : none;
+  }
+  .navbar-account svg {
+    font-size    : 26px;
+    margin-right : 0;
+  }
+}
+
+@media screen and (max-width : 998.99px) {
+  .navbar-account {
+    width                   : 10vw;
+    border-top-right-radius : 25px;
+    color                   : #FFFFFF;
+  }
+  .NavbarItems {
+    position : relative;
+  }
+  .nav-menu {
+    display        : flex;
+    flex-direction : column;
+    width          : 40vh;
+    height         : 100vh;
+    position       : fixed;
+    top            : 0;
+    left           : -100%;
+    opacity        : 1;
+    transition     : all 0.5s ease;
+  }
+  .nav-menu.active {
+    background : white;
+    z-index    : 3;
+    left       : 0;
+    opacity    : 1;
+    transition : all 0.5s ease;
+  }
+  .nav-links {
+    text-align : start;
+    padding    : 2rem;
+    width      : 100%;
+    display    : table;
+  }
+  .navbar-logo {
+    display : none;
+  }
+  .menu-icon {
+    display   : block;
+    position  : absolute;
+    top       : 0;
+    right     : 0;
+    transform : translate(-100%, 60%);
+    font-size : 1.8rem;
+    cursor    : pointer;
+  }
+  .overlay-nav {
+    background : rgba(#000, .5);
+    min-height : 100vh;
+    position   : fixed;
+    top        : 0;
+    bottom     : 0;
+    left       : -100%;
+    right      : 0;
+    z-index    : 2;
+    visibility : hidden;
+    transition : all .5s ease-in-out;
+  }
+  .overlay-nav.active {
+    left       : 0;
+    visibility : visible;
+  }
+  .navbar-account {
+    border-top-left-radius : 0;
+    color                  : #FFFFFF;
   }
 }

@@ -5,12 +5,10 @@ import { FaChartBar, FaHeart, FaMedal } from 'react-icons/fa'
 import useChangeLang                    from '../../Hooks/useChangeLang'
 
 const Home = () => {
-  const [language, changeLanguage] = useChangeLang()
-  
+  const [language] = useChangeLang()
   function injectHtmlCode (text) {
     return { __html: text }
   }
-  
   return language && <>
     <HeaderPage language={language} nameImg={'home.jpg'}/>
     <div className="section-decoration"/>

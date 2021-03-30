@@ -25,7 +25,7 @@ const ModalAuth = () => {
       email   : '',
     })
   useEffect(() => {
-    setStateForm(useRoutesMatch.path.split('/')[1])
+    setStateForm(useRoutesMatch.path.split('/fr/')[1])
   }, [useRoutesMatch])
   const FormRegister       = [
     { type: 'text', label: 'Nom : *', id: 'lastName', required: true },
