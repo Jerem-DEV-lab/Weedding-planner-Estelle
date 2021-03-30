@@ -773,6 +773,13 @@ body {
   margin-right: 0.4rem;
 }
 
+.userAvatar img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 99rem;
+}
+
 @media (min-width: 1017.98px) {
   .nav-brand {
     display: none;
