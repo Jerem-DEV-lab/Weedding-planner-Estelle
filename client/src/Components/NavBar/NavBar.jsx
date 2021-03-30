@@ -1,13 +1,14 @@
-import React, { useState }         from 'react'
-import { NavLink }                 from 'react-router-dom'
-import { FaBars, FaTimes, FaUser } from 'react-icons/fa'
-import useChangeLang               from '../../Hooks/useChangeLang'
+import React, { useContext, useState } from 'react'
+import { NavLink }                     from 'react-router-dom'
+import { FaBars, FaTimes, FaUser }     from 'react-icons/fa'
+import useChangeLang                   from '../../Hooks/useChangeLang'
+import { UserContext }                 from '../../Context/UserContext'
 
 const NavBar = () => {
   const [navOpen, setNavOpen] = useState(false)
   const [lang, changeLang]    = useChangeLang()
   
-  const NavItems   = [
+  const NavItems    = [
     {
       label: lang.home,
       url  : '/fr/'
@@ -73,6 +74,8 @@ const NavBar = () => {
       url  : '/contact',
     }
   ]
+  const userContext = useContext(UserContext)
+  console.log(userContext)
   const openNavBar = () => {
     setNavOpen(!navOpen)
   }
@@ -117,9 +120,14 @@ const NavBar = () => {
         </div>
       </div>
       <div className="nav-item account-user">
-        <NavLink to="/fr/login">
-          <span><FaUser/></span>{lang.login} / {lang.register}
-        </NavLink>
+        {userContext.isLogged ? <NavLink to="/fr/login">
+                                <span className="userAvatar">
+                                  <img src={userContext.userAvatar} alt="Avatar utilisateur" height={30} width={30}/>
+                                </span> {userContext.firstName} {userContext.lastName}
+                              </NavLink> :
+         <NavLink to="/fr/login">
+           <span><FaUser/></span>{lang.login} / {lang.register}
+         </NavLink>}
       </div>
     </nav>
   </>

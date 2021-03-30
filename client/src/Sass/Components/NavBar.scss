@@ -146,6 +146,13 @@
   }
 }
 
+.userAvatar img {
+  display         : flex;
+  justify-content : center;
+  align-items     : center;
+  border-radius   : 99rem;
+}
+
 @include up(1017.98) {
   .nav-brand {
     display : none;
