@@ -1,11 +1,11 @@
-import React from 'react'
-import NavBar              from '../NavBar/NavBar'
+import React    from 'react'
 import HeroPage from '../HeroPage/HeroPage'
+import Nav      from '../NavBar/Nav'
 
-const HeaderPage = ({language, nameImg}) => {
+const HeaderPage = ({ language, nameImg }) => {
   return <>
     <header>
-      <NavBar/>
+      <Nav/>
       <HeroPage nameImg={nameImg}>
         <h1 className="hero-title">{language.titleHero}</h1>
       </HeroPage>
