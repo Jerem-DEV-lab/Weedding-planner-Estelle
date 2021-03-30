@@ -1,82 +1,89 @@
 import React, { useContext, useState } from 'react'
-import { NavLink }                     from 'react-router-dom'
+import { Link, NavLink }               from 'react-router-dom'
 import { FaBars, FaTimes, FaUser }     from 'react-icons/fa'
 import useChangeLang                   from '../../Hooks/useChangeLang'
 import { UserContext }                 from '../../Context/UserContext'
+import Dropdown                        from '../Dropdown/Dropdown'
 
 const NavBar = () => {
-  const [navOpen, setNavOpen] = useState(false)
-  const [lang, changeLang]    = useChangeLang()
+  const [navOpen, setNavOpen]   = useState(false)
+  const [lang]                  = useChangeLang()
+  const [dropdown, setDropdown] = useState(false)
+  const onMouseEnter            = () => {
+    if (window.innerWidth < 960) {
+      setDropdown(false)
+    } else {
+      setDropdown(true)
+    }
+  }
   
-  const NavItems    = [
+  const onMouseLeave      = () => {
+    if (window.innerWidth < 960) {
+      setDropdown(false)
+    } else {
+      setDropdown(false)
+    }
+  }
+  const MenuDropdownItems = [
     {
-      label: lang.home,
-      url  : '/fr/'
-    },
-    {
-      label  : lang.organization,
-      url    : '/fr/organisation',
-      subLink: [
+      organization: [
         {
           label: 'Mariage',
           url  : '/fr/mariage',
+          cName: 'dropdown-link'
         },
         {
           label: 'Cérémonie laïque',
           url  : '/fr/ceremonie-laique',
+          cName: 'dropdown-link'
         },
         {
           label: 'EVJF / EVJG',
           url  : '/fr/enterrement-vie-jeune',
+          cName: 'dropdown-link'
         },
         {
           label: 'Baby Shower',
           url  : '/fr/baby-shower',
+          cName: 'dropdown-link'
         }, {
           label: 'Autre évènements privés',
           url  : '/fr/events-private',
-        },]
+          cName: 'dropdown-link'
+        }
+      ]
     },
     {
-      label  : lang.workshop,
-      url    : '/ateliers',
-      subLink: [
+      scenographe: [
         {
           label: 'Mariage',
-          url  : '/mariage',
+          url  : '/fr/mariage',
+          cName: 'dropdown-link'
         },
         {
           label: 'Cérémonie laïque',
-          url  : '/ceremonie-laique',
+          url  : '/fr/ceremonie-laique',
+          cName: 'dropdown-link'
         },
         {
           label: 'EVJF / EVJG',
-          url  : '/enterrement-vie-jeune',
+          url  : '/fr/enterrement-vie-jeune',
+          cName: 'dropdown-link'
         },
         {
           label: 'Baby Shower',
-          url  : '/baby-shower',
+          url  : '/fr/baby-shower',
+          cName: 'dropdown-link'
         }, {
           label: 'Autre évènements privés',
-          url  : '/events-private',
-        }]
-    },
-    {
-      label: lang.gallery,
-      url  : '/galerie',
-    },
-    {
-      label: lang.about,
-      url  : '/a-propos',
-    },
-    {
-      label: lang.contact,
-      url  : '/contact',
+          url  : '/fr/events-private',
+          cName: 'dropdown-link'
+        }
+      ]
     }
   ]
-  const userContext = useContext(UserContext)
-  console.log(userContext)
-  const openNavBar = () => {
+  const userContext       = useContext(UserContext)
+  const openNavBar        = () => {
     setNavOpen(!navOpen)
   }
   return <>
@@ -106,11 +113,26 @@ const NavBar = () => {
         </div>
         <div className="nav-items">
           <ul>
-            {NavItems.map(item => <>
-              <li>
-                <NavLink activeClassName="active" className="nav-link" to={item.url}>{item.label}</NavLink>
-              </li>
-            </>)}
+            <li className="nav-item">
+              <NavLink activeClassName="active" className="nav-link" to="/fr/">{lang.home}</NavLink>
+            </li>
+            <li onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} className="nav-item">
+              <Link
+                to='/fr/organisation'
+                className='nav-links'>
+                {lang.organization}
+              </Link>
+              {dropdown && <Dropdown items={MenuDropdownItems[0].organization}/>}
+            </li>
+            <li onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} className="nav-item">
+              <Link
+                to='/fr/organisation'
+                className='nav-links'>
+                {lang.organization}
+              </Link>
+              {dropdown && <Dropdown items={MenuDropdownItems[1].scenographe}/>}
+            </li>
+  
           </ul>
         </div>
         <div className="small-screen">
