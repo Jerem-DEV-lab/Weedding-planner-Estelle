@@ -69,3 +69,49 @@ module.exports.requireAuth = (req, res, next) => {
     })
   }
 }
+module.exports.ErrorForm   = (err) => {
+  let errors = {
+    email           : '',
+    lastName        : '',
+    firstName       : '',
+    eventDep        : '',
+    organizationName: '',
+    numberOfGuests  : '',
+    message         : ''
+  }
+  
+  if (err.message.includes('email') && err.message.includes('is required')) {
+    errors.email = 'Vous devez renseigner une adresse mail valide'
+  }
+  if (err.message.includes('lastName') && err.message.includes('is required')) {
+    errors.lastName = 'Ce champs est requis'
+  }
+  if (err.message.includes('firstName') && err.message.includes('is required')) {
+    errors.firstName = 'Ce champs est requis'
+  }
+  if (err.message.includes('numberOfGuests') && err.message.includes('is required')) {
+    errors.numberOfGuests = 'Veuillez renseigner un nombre approximative d\'invités'
+  }
+  if (err.message.includes('organizationName') && err.message.includes('is required')) {
+    errors.organizationName = 'Sélectionner une organisation'
+  }
+  if (err.message.includes('eventDep') && err.message.includes('is required')) {
+    errors.eventDep = 'Sélection le département dans lequel où se déroulera votre évènement'
+  }
+  if (err.message.includes('message') && err.message.includes('is required')) {
+    errors.message = 'Décrivez votre projet en quelques lignes'
+  }
+  if (err.message.includes('numberOfGuests') && err.message.includes('Number')) {
+    errors.numberOfGuests = 'Vous devez entrer un chiffre valide'
+  }
+  if (err.message.includes('email') && err.message.includes('Validator failed') && err.message.includes('with value')) {
+    errors.email = 'L\'adresse mail saisie n\'est pas valide'
+  }
+  if (err.message.includes('message') && err.message.includes('is shorter')) {
+    errors.message = 'Votre message doit faire un minimum de 20 caractères'
+  }
+  if (err.message.includes('message') && err.message.includes('is longer')) {
+    errors.message = 'Votre message doit faire un minimum de 255 caractères'
+  }
+  return errors
+}
