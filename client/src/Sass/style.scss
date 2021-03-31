@@ -1,15 +1,18 @@
 @import 'Tools/reset';
+@import 'Tools/function';
 @import 'Tools/mixins';
 @import 'Tools/typography';
 @import 'Tools/_form';
 @import 'Tools/layout';
 @import 'Components/modules/button';
 @import 'Components/modules/card';
+@import 'Components/modules/formContact';
 
 :root {
   --color-primary : #ddbf9c;
   --color-success : #749460;
   --color         : #41413B;
+  --space         : 8px;
 }
 
 body {
@@ -21,3 +24,4 @@ body {
 @import 'Components/NavBar';
 @import 'Components/HeroPage';
 @import 'Pages/HomePage';
+@import 'Pages/Contact';

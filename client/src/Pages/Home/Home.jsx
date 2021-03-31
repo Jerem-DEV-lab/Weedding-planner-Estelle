@@ -10,7 +10,7 @@ const Home = () => {
     return { __html: text }
   }
   return language && <>
-    <HeaderPage language={language} nameImg={'home.jpg'}/>
+    <HeaderPage titleHero={language.titleHero} nameImg={'home.jpg'}/>
     <div className="section-decoration"/>
     <section>
       <div className="container-margin">

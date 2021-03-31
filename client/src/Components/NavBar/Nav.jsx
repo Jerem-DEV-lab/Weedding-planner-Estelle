@@ -11,7 +11,6 @@ const Nav = () => {
   const [lang]                  = useChangeLang()
   const userContext             = useContext(UserContext)
   const handleClick             = () => setClick(!click)
-  console.log(userContext)
   const testDrop = () => {
     setOpenDrop(!openDrop)
   }
@@ -100,7 +99,7 @@ const Nav = () => {
           className="nav-item"
           onClick={testDrop}
         >
-          <NavLink to={'/fr/gallery'} className="nav-links">{lang.gallery}</NavLink>
+          <NavLink to={'/fr/contact'} className="nav-links">{lang.contact}</NavLink>
         </li>
       </ul>
       {!userContext.isLogged ?

@@ -1,0 +1,43 @@
+.grid-contact-left {
+  .contact-img {
+    display       : flex;
+    max-width     : max-content;
+    margin        : auto;
+    box-shadow    : 0 0 5px rgba(#EC5F5F, .6);
+    border-radius : 99rem;
+
+    img {
+      border-radius : 99rem;
+      height        : 150px;
+      width         : 150px;
+      margin        : auto;
+    }
+  }
+}
+
+.contact-name-company {
+  font-size   : 36px;
+  font-weight : 700;
+  margin      : 20px auto;
+  line-height : 50px;
+  color       : #71869C;
+}
+
+.contact-description-company {
+  font-weight : 600;
+  font-size   : 18px;
+
+  & li {
+    line-height : 37px;
+  }
+}
+
+.network-link {
+  width  : 30%;
+  margin : 20px auto;
+}
+
+.grid-contact-right {
+  background : white;
+  padding : 30px;
+}

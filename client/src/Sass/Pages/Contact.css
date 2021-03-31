@@ -1,0 +1,9 @@
+.grid-contact-left {
+  display: flex;
+}
+.grid-contact-left .contact-img img {
+  height: 50px;
+  width: 50px;
+}
+
+/*# sourceMappingURL=Contact.css.map */
