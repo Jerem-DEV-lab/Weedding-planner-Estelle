@@ -105,3 +105,108 @@
     flex-direction : column;
   }
 }
+
+.grid-contact {
+  display               : grid;
+  grid-template-columns : 45% 55%;
+  @include down(998.99) {
+    grid-template-columns : 1fr;
+  }
+}
+
+.bg-success-100 {
+  background : #749460 !important;
+}
+
+.bg-success-20 {
+  background : rgba(#749460, .2) !important;
+}
+
+.row-network {
+  display         : flex;
+  flex-wrap       : wrap;
+  width           : 100%;
+  justify-content : space-around;
+}
+
+.d-flex {
+  display : flex;
+
+  &.justify-center {
+    justify-content : center;
+  }
+}
+
+
+// Spaces
+// =============
+.mla {
+  margin-left: auto;
+}
+@for $i from 0 through 5 {
+  body {
+    .p#{$i} {
+      padding: space($i);
+    }
+
+    .pt#{$i} {
+      padding-top: space($i);
+    }
+
+    .pb#{$i} {
+      padding-bottom: space($i);
+    }
+
+    .px#{$i} {
+      padding-left: space($i);
+      padding-right: space($i);
+    }
+
+    .py#{$i} {
+      padding-top: space($i);
+      padding-bottom: space($i);
+    }
+
+    .my#{$i} {
+      margin-top: space($i);
+      margin-bottom: space($i);
+    }
+
+    .m#{$i} {
+      margin: space($i);
+    }
+
+    .mx#{$i} {
+      margin-left: space($i);
+      margin-right: space($i);
+    }
+
+    .mt#{$i} {
+      margin-top: space($i);
+    }
+
+    .mb#{$i} {
+      margin-bottom: space($i);
+    }
+
+    .mr#{$i} {
+      margin-right: space($i);
+    }
+
+    .ml#{$i} {
+      margin-left: space($i);
+    }
+  }
+}
+
+.mobile-only {
+  @include up(700) {
+    display: none;
+  }
+}
+
+.mobile-hidden {
+  @include down(700) {
+    display: none;
+  }
+}

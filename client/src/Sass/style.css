@@ -199,11 +199,12 @@ body {
   text-align: center;
 }
 
+.form-select,
 .form-control {
   display: block;
   width: 100%;
   padding: 0.375rem 0.75rem;
-  font-size: 1rem;
+  font-size: 0.85rem;
   font-weight: 400;
   line-height: 1.5;
   color: #212529;
@@ -216,15 +217,17 @@ body {
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
+.form-select:focus,
 .form-control:focus {
   outline: none;
-  border: solid 3px rgba(221, 187, 142, 0.5);
-  box-shadow: 0 0 5px var(--color-primary);
+  border: solid 1px rgba(221, 187, 142, 0.5);
+  box-shadow: 0 0 2px var(--color-primary);
   border-radius: 0.25rem;
 }
 
 .form-label {
   display: inline-block;
+  font-size: 15px;
   margin-bottom: 0.75rem;
   font-weight: 500;
 }
@@ -277,6 +280,18 @@ body {
 
 fieldset legend, fieldset {
   font-weight: 500;
+}
+
+.form-row {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+}
+.form-row .form-group,
+.form-row textarea {
+  width: 100%;
+  margin-right: 1rem;
+  margin-bottom: 0.75rem;
 }
 
 @media (max-width: 528px) {
@@ -376,6 +391,300 @@ fieldset legend, fieldset {
     flex-direction: column;
   }
 }
+.grid-contact {
+  display: grid;
+  grid-template-columns: 45% 55%;
+}
+@media (max-width: 998.99px) {
+  .grid-contact {
+    grid-template-columns: 1fr;
+  }
+}
+
+.bg-success-100 {
+  background: #749460 !important;
+}
+
+.bg-success-20 {
+  background: rgba(116, 148, 96, 0.2) !important;
+}
+
+.row-network {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.d-flex {
+  display: flex;
+}
+.d-flex.justify-center {
+  justify-content: center;
+}
+
+.mla {
+  margin-left: auto;
+}
+
+body .p0 {
+  padding: calc(0 * var(--space));
+}
+body .pt0 {
+  padding-top: calc(0 * var(--space));
+}
+body .pb0 {
+  padding-bottom: calc(0 * var(--space));
+}
+body .px0 {
+  padding-left: calc(0 * var(--space));
+  padding-right: calc(0 * var(--space));
+}
+body .py0 {
+  padding-top: calc(0 * var(--space));
+  padding-bottom: calc(0 * var(--space));
+}
+body .my0 {
+  margin-top: calc(0 * var(--space));
+  margin-bottom: calc(0 * var(--space));
+}
+body .m0 {
+  margin: calc(0 * var(--space));
+}
+body .mx0 {
+  margin-left: calc(0 * var(--space));
+  margin-right: calc(0 * var(--space));
+}
+body .mt0 {
+  margin-top: calc(0 * var(--space));
+}
+body .mb0 {
+  margin-bottom: calc(0 * var(--space));
+}
+body .mr0 {
+  margin-right: calc(0 * var(--space));
+}
+body .ml0 {
+  margin-left: calc(0 * var(--space));
+}
+
+body .p1 {
+  padding: calc(1 * var(--space));
+}
+body .pt1 {
+  padding-top: calc(1 * var(--space));
+}
+body .pb1 {
+  padding-bottom: calc(1 * var(--space));
+}
+body .px1 {
+  padding-left: calc(1 * var(--space));
+  padding-right: calc(1 * var(--space));
+}
+body .py1 {
+  padding-top: calc(1 * var(--space));
+  padding-bottom: calc(1 * var(--space));
+}
+body .my1 {
+  margin-top: calc(1 * var(--space));
+  margin-bottom: calc(1 * var(--space));
+}
+body .m1 {
+  margin: calc(1 * var(--space));
+}
+body .mx1 {
+  margin-left: calc(1 * var(--space));
+  margin-right: calc(1 * var(--space));
+}
+body .mt1 {
+  margin-top: calc(1 * var(--space));
+}
+body .mb1 {
+  margin-bottom: calc(1 * var(--space));
+}
+body .mr1 {
+  margin-right: calc(1 * var(--space));
+}
+body .ml1 {
+  margin-left: calc(1 * var(--space));
+}
+
+body .p2 {
+  padding: calc(2 * var(--space));
+}
+body .pt2 {
+  padding-top: calc(2 * var(--space));
+}
+body .pb2 {
+  padding-bottom: calc(2 * var(--space));
+}
+body .px2 {
+  padding-left: calc(2 * var(--space));
+  padding-right: calc(2 * var(--space));
+}
+body .py2 {
+  padding-top: calc(2 * var(--space));
+  padding-bottom: calc(2 * var(--space));
+}
+body .my2 {
+  margin-top: calc(2 * var(--space));
+  margin-bottom: calc(2 * var(--space));
+}
+body .m2 {
+  margin: calc(2 * var(--space));
+}
+body .mx2 {
+  margin-left: calc(2 * var(--space));
+  margin-right: calc(2 * var(--space));
+}
+body .mt2 {
+  margin-top: calc(2 * var(--space));
+}
+body .mb2 {
+  margin-bottom: calc(2 * var(--space));
+}
+body .mr2 {
+  margin-right: calc(2 * var(--space));
+}
+body .ml2 {
+  margin-left: calc(2 * var(--space));
+}
+
+body .p3 {
+  padding: calc(3 * var(--space));
+}
+body .pt3 {
+  padding-top: calc(3 * var(--space));
+}
+body .pb3 {
+  padding-bottom: calc(3 * var(--space));
+}
+body .px3 {
+  padding-left: calc(3 * var(--space));
+  padding-right: calc(3 * var(--space));
+}
+body .py3 {
+  padding-top: calc(3 * var(--space));
+  padding-bottom: calc(3 * var(--space));
+}
+body .my3 {
+  margin-top: calc(3 * var(--space));
+  margin-bottom: calc(3 * var(--space));
+}
+body .m3 {
+  margin: calc(3 * var(--space));
+}
+body .mx3 {
+  margin-left: calc(3 * var(--space));
+  margin-right: calc(3 * var(--space));
+}
+body .mt3 {
+  margin-top: calc(3 * var(--space));
+}
+body .mb3 {
+  margin-bottom: calc(3 * var(--space));
+}
+body .mr3 {
+  margin-right: calc(3 * var(--space));
+}
+body .ml3 {
+  margin-left: calc(3 * var(--space));
+}
+
+body .p4 {
+  padding: calc(4 * var(--space));
+}
+body .pt4 {
+  padding-top: calc(4 * var(--space));
+}
+body .pb4 {
+  padding-bottom: calc(4 * var(--space));
+}
+body .px4 {
+  padding-left: calc(4 * var(--space));
+  padding-right: calc(4 * var(--space));
+}
+body .py4 {
+  padding-top: calc(4 * var(--space));
+  padding-bottom: calc(4 * var(--space));
+}
+body .my4 {
+  margin-top: calc(4 * var(--space));
+  margin-bottom: calc(4 * var(--space));
+}
+body .m4 {
+  margin: calc(4 * var(--space));
+}
+body .mx4 {
+  margin-left: calc(4 * var(--space));
+  margin-right: calc(4 * var(--space));
+}
+body .mt4 {
+  margin-top: calc(4 * var(--space));
+}
+body .mb4 {
+  margin-bottom: calc(4 * var(--space));
+}
+body .mr4 {
+  margin-right: calc(4 * var(--space));
+}
+body .ml4 {
+  margin-left: calc(4 * var(--space));
+}
+
+body .p5 {
+  padding: calc(5 * var(--space));
+}
+body .pt5 {
+  padding-top: calc(5 * var(--space));
+}
+body .pb5 {
+  padding-bottom: calc(5 * var(--space));
+}
+body .px5 {
+  padding-left: calc(5 * var(--space));
+  padding-right: calc(5 * var(--space));
+}
+body .py5 {
+  padding-top: calc(5 * var(--space));
+  padding-bottom: calc(5 * var(--space));
+}
+body .my5 {
+  margin-top: calc(5 * var(--space));
+  margin-bottom: calc(5 * var(--space));
+}
+body .m5 {
+  margin: calc(5 * var(--space));
+}
+body .mx5 {
+  margin-left: calc(5 * var(--space));
+  margin-right: calc(5 * var(--space));
+}
+body .mt5 {
+  margin-top: calc(5 * var(--space));
+}
+body .mb5 {
+  margin-bottom: calc(5 * var(--space));
+}
+body .mr5 {
+  margin-right: calc(5 * var(--space));
+}
+body .ml5 {
+  margin-left: calc(5 * var(--space));
+}
+
+@media (min-width: 700px) {
+  .mobile-only {
+    display: none;
+  }
+}
+
+@media (max-width: 700px) {
+  .mobile-hidden {
+    display: none;
+  }
+}
+
 .btn {
   display: inline-block;
   font-size: 14px;
@@ -481,6 +790,7 @@ fieldset legend, fieldset {
   --color-primary: #ddbf9c;
   --color-success: #749460;
   --color: #41413B;
+  --space: 8px;
 }
 
 body {
@@ -1204,6 +1514,46 @@ section p strong {
 section.section-top-left-rounded {
   background: rgba(236, 213, 184, 0.5);
   border-top-left-radius: 100px;
+}
+
+.grid-contact-left .contact-img {
+  display: flex;
+  max-width: max-content;
+  margin: auto;
+  box-shadow: 0 0 5px rgba(236, 95, 95, 0.6);
+  border-radius: 99rem;
+}
+.grid-contact-left .contact-img img {
+  border-radius: 99rem;
+  height: 150px;
+  width: 150px;
+  margin: auto;
+}
+
+.contact-name-company {
+  font-size: 36px;
+  font-weight: 700;
+  margin: 20px auto;
+  line-height: 50px;
+  color: #71869C;
+}
+
+.contact-description-company {
+  font-weight: 600;
+  font-size: 18px;
+}
+.contact-description-company li {
+  line-height: 37px;
+}
+
+.network-link {
+  width: 30%;
+  margin: 20px auto;
+}
+
+.grid-contact-right {
+  background: white;
+  padding: 30px;
 }
 
 /*# sourceMappingURL=style.css.map */
