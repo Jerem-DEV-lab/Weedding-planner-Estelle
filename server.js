@@ -4,6 +4,7 @@ const cors                             = require('cors')
 const app                              = express()
 const mongoose                         = require('mongoose')
 const { createRouterAuthentification } = require('./routes/UserRoutes/AuthenficationRoute')
+const { createRouterContact }          = require('./routes/UserRoutes/ContactToAdminRoute')
 const cookieParser                     = require('cookie-parser')
 require('dotenv').config()
 
@@ -12,6 +13,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cors())
 app.use(cookieParser())
 app.use('/', createRouterAuthentification())
+app.use('/', createRouterContact())
 
 mongoose.connect(
   `${process.env.DB}`,
