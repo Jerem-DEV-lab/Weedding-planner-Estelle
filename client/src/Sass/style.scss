@@ -6,12 +6,15 @@
 @import 'Tools/layout';
 @import 'Components/modules/button';
 @import 'Components/modules/card';
+@import 'Components/modules/alert';
 @import 'Components/modules/formContact';
 
 :root {
   --color-primary : #ddbf9c;
   --color-success : #749460;
   --color         : #41413B;
+  --danger        : #FD5949;
+  --success       : #42940F;
   --space         : 8px;
 }
 
