@@ -1,4 +1,10 @@
 {
   "floralSceno": "Floral scenography",
-  "eventOrganizer": "Event organizer "
+  "eventOrganizer": "Event organizer ",
+  "error_requiredField": "This field is required",
+  "error_emailField": "You must enter a valid email address",
+  "error_numberOfGuestsField": "Please enter an approximate number of guests",
+  "error_messageField": "Describe your project in a few lines",
+  "error_regionField": "Select the department in which your event will take place ",
+  "error_concernedOrganizationField": "Select an organization"
 }

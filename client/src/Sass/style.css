@@ -199,6 +199,10 @@ body {
   text-align: center;
 }
 
+.text-strong {
+  font-weight: 600;
+}
+
 .form-select,
 .form-control {
   display: block;
