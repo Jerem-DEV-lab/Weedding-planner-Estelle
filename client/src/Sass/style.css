@@ -224,6 +224,27 @@ body {
   box-shadow: 0 0 2px var(--color-primary);
   border-radius: 0.25rem;
 }
+.is-invalid.form-select,
+.form-control.is-invalid {
+  border: solid 2px var(--danger);
+}
+
+.form-select .is-invalid {
+  border: solid 2px var(--danger);
+}
+
+.form-group span.is-invalid {
+  display: flex;
+  align-items: start;
+  font-size: 12px;
+  line-height: 18px;
+  margin: 0.5rem 0;
+  color: var(--danger);
+}
+.form-group span.is-invalid svg {
+  margin-top: 0.15rem;
+  margin-right: 0.15rem;
+}
 
 .form-label {
   display: inline-block;
@@ -786,10 +807,35 @@ body .ml5 {
   height: 100%;
 }
 
+.alert {
+  display: inline-flex;
+  align-items: center;
+  width: 100%;
+  padding: 0.75rem 1.25rem;
+  font-size: 14px;
+  font-weight: 400;
+  margin: 0.55rem auto;
+  border-radius: 0.2rem;
+  line-height: 21px;
+}
+.alert span {
+  margin-left: 1rem;
+}
+.alert svg {
+  font-size: 20px;
+}
+
+.alert-success {
+  background: var(--success);
+  color: #FFFFFF;
+}
+
 :root {
   --color-primary: #ddbf9c;
   --color-success: #749460;
   --color: #41413B;
+  --danger: #FD5949;
+  --success: #42940F;
   --space: 8px;
 }
 

@@ -22,6 +22,28 @@
     box-shadow    : 0 0 2px var(--color-primary);
     border-radius : .25rem;
   }
+
+  &.is-invalid {
+    border : solid 2px var(--danger);
+  }
+}
+
+.form-select .is-invalid {
+  border : solid 2px var(--danger);
+}
+
+.form-group span.is-invalid {
+  display   : flex;
+  align-items: start;
+  font-size : 12px;
+  line-height: 18px;
+  margin    : .5rem 0;
+  color     : var(--danger);
+
+  & svg {
+    margin-top : .15rem;
+    margin-right : .15rem;
+  }
 }
 
 %form-label,

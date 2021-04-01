@@ -28,7 +28,7 @@ export const requestApiContact = (data) => {
     dispatch(contactLoading())
     axios.post('/contact', data)
          .then(res => {
-           dispatch(contactSuccess(res.data.message))
+           dispatch(contactSuccess(res.data))
          })
          .catch(err => {
            dispatch(contactError(err.response))
