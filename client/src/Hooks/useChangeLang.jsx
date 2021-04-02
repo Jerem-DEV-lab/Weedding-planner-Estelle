@@ -9,6 +9,8 @@ import LANG_NAVBAR_FR               from '../Translate/lang_FR/Navbar/Navbar_FR.
 import LANG_NAVBAR_EN               from '../Translate/lang_EN/Navbar/Navbar_EN.json'
 import LANG_CONTACT_FR              from '../Translate/lang_FR/Contact/Contact_FR.json'
 import LANG_CONTACT_EN              from '../Translate/lang_EN/Contact/Contact_EN.json'
+import LANG_ORG_WEDDING_FR          from '../Translate/lang_FR/Organization/wedding_FR.json'
+import LANG_ORG_WEDDING_EN          from '../Translate/lang_EN/Organization/weeding_EN.json'
 import { changeLangPref }           from '../actions/authenticatorAction'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -27,10 +29,10 @@ export default function useChangeLang () {
     if (langPref.langPref === 'EN_en' || langEN) {
       setLangUserPref({
                         ...LANG_CARD_EN, ...LANG_HOME_EN, ...LANG_NAVBAR_EN,
-                        ...LANG_CONTACT_EN, ...LANG_GENERAL_EN
+                        ...LANG_CONTACT_EN, ...LANG_GENERAL_EN, ...LANG_ORG_WEDDING_EN
                       })
     } else {
-      setLangUserPref({ ...LANG_CARD_FR, ...LANG_HOME_FR, ...LANG_NAVBAR_FR, ...LANG_CONTACT_FR, ...LANG_GENERAL_FR })
+      setLangUserPref({ ...LANG_CARD_FR, ...LANG_HOME_FR, ...LANG_NAVBAR_FR, ...LANG_CONTACT_FR, ...LANG_GENERAL_FR, ...LANG_ORG_WEDDING_FR })
     }
   }, [langPref])
   return [langUserPref, changeLanguage]

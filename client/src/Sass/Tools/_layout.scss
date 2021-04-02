@@ -122,6 +122,9 @@
   background : rgba(#749460, .2) !important;
 }
 
+.section-bg{
+  background: rgba(236, 213, 184, 0.5);
+}
 .row-network {
   display         : flex;
   flex-wrap       : wrap;
@@ -134,6 +137,12 @@
 
   &.justify-center {
     justify-content : center;
+  }
+  &.space-around{
+    justify-content: space-around;
+  }
+  &.align-center{
+    align-items: center;
   }
 }
 

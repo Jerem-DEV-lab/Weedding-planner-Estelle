@@ -1,0 +1,78 @@
+.grid-tarifs {
+  width : 100%;
+}
+
+%tarifs-row,
+.tarifs-row {
+  display         : inline-flex;
+  align-items     : center;
+  justify-content : space-between;
+  background      : #FFFFFF;
+  color           : var(--color);
+  min-height      : 50px;
+  width           : 100%;
+  padding         : .375rem 1.25rem;
+  border-bottom   : solid 1px silver;
+  cursor          : pointer;
+  transition      : background .3s ease-in-out;
+
+  &:hover {
+    background : #f6f6f6;
+    color      : var(--color);
+  }
+}
+
+.tarif-name, .tarif-price {
+  font-size : 14px;
+}
+
+.tarif-name {
+  line-height : 1.5rem;
+  font-weight : 400;
+  width       : 60%;
+}
+
+.tarif-price {
+  display         : inline-flex;
+  justify-content : end;
+  width           : 28%;
+  font-weight     : 500;
+}
+
+.grid-header {
+  @extend %tarifs-row;
+  line-height : 1.5rem;
+  font-size   : 14px;
+  font-weight : 700;
+  background  : #eeeeee;
+}
+
+@include up(500) {
+  .grid-tarifs {
+    width : 374px;
+  }
+  .tarif-price {
+    justify-content : center;
+  }
+}
+
+.img-section {
+  display  : flex;
+  height   : 100%;
+  overflow : hidden;
+  position : relative;
+  &:after {
+    content    : '';
+    position   : absolute;
+    top        : 0;
+    bottom     : 0;
+    right      : 0;
+    left       : 0;
+    background : rgba(#000, .2);
+  }
+
+  img {
+    height : 450px;
+    width  : 750px;
+  }
+}
