@@ -186,6 +186,10 @@ hr {
   outline: none;
 }
 
+.text-uppercase {
+  text-transform: uppercase !important;
+}
+
 .squares-times {
   display: flex;
   justify-content: space-evenly;
@@ -313,7 +317,7 @@ hr {
 }
 body {
   position: relative;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
 }
 
 :root {
@@ -321,12 +325,12 @@ body {
   --border-primary: #C2C2C2;
   --danger: #FD5949;
   --color-primary: #DDBB8E;
+  --strong-text: #e7a66f;
 }
 
 .overlay {
   content: "";
-  position: fixed;
-  height: 100%;
+  position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
