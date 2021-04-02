@@ -100,7 +100,7 @@ const Wedding = () => {
             </div>
           </div>
           <div className="img-section">
-            <img src="/assets/home.jpg" alt=""/>
+            <img src="/assets/weddingPlanerService.jpg" alt=""/>
           </div>
         </div>
       </div>

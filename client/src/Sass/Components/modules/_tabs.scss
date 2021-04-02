@@ -72,7 +72,9 @@
   }
 
   img {
-    height : 450px;
-    width  : 750px;
+    object-position : bottom center;
+    object-fit      : cover;
+    height          : 450px;
+    width           : 750px;
   }
 }
