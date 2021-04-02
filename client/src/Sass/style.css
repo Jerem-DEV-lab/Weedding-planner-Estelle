@@ -1050,6 +1050,8 @@ body .ml5 {
   background: rgba(0, 0, 0, 0.2);
 }
 .img-section img {
+  object-position: bottom center;
+  object-fit: cover;
   height: 450px;
   width: 750px;
 }

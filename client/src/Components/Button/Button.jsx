@@ -1,13 +1,28 @@
 import React    from 'react'
 import { Link } from 'react-router-dom'
 
-const Button = ({ isButton = true, size = '', label, color, onClick, className, type = 'submit' }) => {
+const Button = ({
+                  isButton = true,
+                  size = '',
+                  label,
+                  color,
+                  onClick,
+                  className,
+                  type = 'submit',
+                  link = '',
+                  isAnchor = false
+                }) => {
   return <>
-    {isButton ? <>
+    {isButton && <>
       <button className={`btn btn-${color} ${className}`} type={type} onClick={onClick}>{label}</button>
-    </> : <Link className={`btn btn-${color} ${size ? `btn-${size}` : ''} ${className}`}>
+    </>}
+    {isAnchor &&
+     <a className={`btn btn-${color} ${size ? `btn-${size}` : ''} ${className}`} href={link}>
        {label}
-     </Link>}
+     </a>}
+    {!isButton && !isAnchor &&
+     <Link className={`btn btn-${color} ${size ? `btn-${size}` : ''} ${className}`} to={link}>{label}</Link>}
+  
   </>
 }
 
