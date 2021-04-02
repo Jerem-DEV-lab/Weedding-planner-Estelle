@@ -6,5 +6,9 @@
   "error_numberOfGuestsField": "Veuillez renseigner un nombre approximatif d'invités",
   "error_messageField": "Décrivez votre projet en quelques lignes",
   "error_regionField": "Sélection le département dans lequel où se déroulera votre évènement",
-  "error_concernedOrganizationField": "Sélectionner une organisation"
+  "error_concernedOrganizationField": "Sélectionner une organisation",
+  "cardBestFormuleTitle": "Meilleur Formule",
+  "cardMediumFormuleTitle": "Économique",
+  "cardVipFormuleTitle": "VIP",
+  "priceList": "Ma grille tarifaire"
 }

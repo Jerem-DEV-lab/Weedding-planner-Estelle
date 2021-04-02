@@ -6,5 +6,9 @@
   "error_numberOfGuestsField": "Please enter an approximate number of guests",
   "error_messageField": "Describe your project in a few lines",
   "error_regionField": "Select the department in which your event will take place ",
-  "error_concernedOrganizationField": "Select an organization"
+  "error_concernedOrganizationField": "Select an organization",
+  "cardBestFormuleTitle": "Best Offer ",
+  "cardMediumFormuleTitle": "Economic",
+  "cardVipFormuleTitle": "VIP",
+  "priceList": "My price list"
 }
