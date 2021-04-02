@@ -6,6 +6,7 @@ const mongoose                         = require('mongoose')
 const { createRouterAuthentification } = require('./routes/UserRoutes/AuthenficationRoute')
 const { createRouterContact }          = require('./routes/UserRoutes/ContactToAdminRoute')
 const cookieParser                     = require('cookie-parser')
+const path = require('path')
 require('dotenv').config()
 
 app.use(bodyParser.json())
@@ -14,7 +15,10 @@ app.use(cors())
 app.use(cookieParser())
 app.use('/', createRouterAuthentification())
 app.use('/', createRouterContact())
-
+app.use(express.static(path.join(__dirname, '../build')))
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../build'))
+})
 mongoose.connect(
   `${process.env.DB}`,
   {
