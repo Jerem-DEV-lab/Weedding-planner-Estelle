@@ -16,22 +16,22 @@ const Nav = () => {
   }
   const sublink  = [
     {
-      label: lang.home,
+      label: lang.wedding,
+      url  : '/fr/organisation/mariage',
+      cName: 'dropdown-link'
+    },
+    {
+      label: lang.secularCeremony ,
+      url  : '/fr/organisation/ceremonie-laique',
+      cName: 'dropdown-link'
+    },
+    {
+      label: lang.evjg,
       url  : '/fr/home',
       cName: 'dropdown-link'
     },
     {
-      label: lang.home,
-      url  : '/fr/home',
-      cName: 'dropdown-link'
-    },
-    {
-      label: lang.home,
-      url  : '/fr/home',
-      cName: 'dropdown-link'
-    },
-    {
-      label: lang.home,
+      label: lang.babyShower,
       url  : '/fr/home',
       cName: 'dropdown-link'
     },
