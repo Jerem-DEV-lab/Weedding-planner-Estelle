@@ -21,6 +21,15 @@
 .btn-primary {
   background : var(--color-primary);
 }
+%btn-primary-light,
+.btn-primary-light {
+  background : var(--color-primary-light);
+}
+
+.btn-lg {
+  padding   : .75rem 1.25rem;
+  font-size : 15px;
+}
 
 .btn.hover-outline:hover {
   border-color : var(--color-primary);

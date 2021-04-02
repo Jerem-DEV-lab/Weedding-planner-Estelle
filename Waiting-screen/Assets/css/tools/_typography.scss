@@ -2,3 +2,7 @@
 
 $font     : 'Montserrat', sans-serif;
 $font-alt : 'Inter', sans-serif;
+%text-uppercase,
+.text-uppercase {
+  text-transform : uppercase !important;
+}

@@ -13,7 +13,7 @@
 
 body {
   position    : relative;
-  font-family : typography.$font;
+  font-family : 'Montserrat', sans-serif !important;
 }
 
 //=====================
@@ -24,6 +24,7 @@ body {
   --border-primary : #C2C2C2;
   --danger         : #FD5949;
   --color-primary  : #DDBB8E;
+  --strong-text    : #e7a66f;
 }
 
 .overlay {

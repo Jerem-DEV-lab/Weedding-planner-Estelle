@@ -9,20 +9,25 @@ section {
   margin-bottom : 30px;
   padding       : 20px 0;
 
+  h2, h1 {
+    font-size   : 19px;
+    margin      : auto auto 15px;
+    line-height : 35px;
+    font-weight : 600;
+    max-width   : 80%;
+  }
+
   h2 {
-    font-size     : 19px;
-    margin-bottom : 15px;
-    line-height   : 35px;
-    text-align    : center;
-    font-weight   : 600;
+    text-align : center;
   }
 
   p {
     font-size   : 14px;
-    line-height : 24px;
+    line-height : 26px;
     text-align  : justify;
     max-width   : 80%;
     margin      : auto;
+    font-weight : 500;
   }
 
   p strong {
