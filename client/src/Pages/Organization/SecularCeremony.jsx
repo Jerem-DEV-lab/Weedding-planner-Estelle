@@ -19,7 +19,8 @@ const SecularCeremony = () => {
           <div className="col">
             <div className="d-flex align-center flex-column h-100">
               <img src="/assets/secularCeremony-lg.jpg" alt=""/>
-              <Button isButton={false} label="Voir mes offres" className="mt3" color="primary-light" size="lg"/>
+              <Button isButton={false} isAnchor={true} label={lang.seeMyOffers} className="mt3" color="primary-light"
+                      size="lg" link={'/fr/organisation/ceremonie-laique#Mes-formules'}/>
             </div>
           </div>
           <div className="col">
@@ -49,36 +50,36 @@ const SecularCeremony = () => {
         </div>
       </div>
     </section>
-    <section className="pt0">
+    <section className="pt0" id="Mes-formules">
       <div className="container-margin py3" style={{ background: '#FCFCFC' }}>
-        <h1 className="h1 text-strong text-center mb5">Nos formules pour les cérémonies laïque</h1>
+        <h1 className="h1 text-strong text-center mb5">{lang.myPlanForSecularCeremonies} :</h1>
         <div className="grid-3-col-md card-group-sm flex-column-sm">
           <FormuleCard formuleTitle={lang.cardMediumFormuleTitle}
                        cardContent={formuleContent}
                        pathImg="/assets/secularCeremony2-lg.jpg"
                        cardSubtitle={lang.cardServiceSecularSubtitle}
-                       formuleInfo="A partir de :"
-                       formuleOfferInfo="Offre personnalisable"
+                       formuleInfo={lang.offerFrom}
+                       formuleOfferInfo={lang.customizableOffer}
                        formulePrice="800 €"
-          
+        
           />
           <FormuleCard formuleTitle={lang.cardBestFormuleTitle}
                        cardContent={formuleContent}
                        pathImg="/assets/home.jpg"
                        isImportant={true}
                        cardSubtitle={lang.cardServiceSecularSubtitle2}
-                       formuleOfferInfo="Offre personnalisable"
+                       formuleOfferInfo={lang.customizableOffer}
                        formulePrice="1300 €"
-                       formuleInfo="A partir de :"
+                       formuleInfo={lang.offerFrom}
           
           />
           <FormuleCard formuleTitle={lang.cardVipFormuleTitle}
                        cardContent={formuleContent}
                        pathImg="/assets/contact.jpg"
                        cardSubtitle={lang.cardServiceSecularSubtitle3}
-                       formuleOfferInfo="Offre personnalisable"
+                       formuleOfferInfo={lang.customizableOffer}
                        formulePrice="2400 €"
-                       formuleInfo="A partir de :"
+                       formuleInfo={lang.offerFrom}
           />
         </div>
       </div>

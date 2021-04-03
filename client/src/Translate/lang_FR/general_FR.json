@@ -10,5 +10,9 @@
   "cardBestFormuleTitle": "Meilleur Formule",
   "cardMediumFormuleTitle": "Économique",
   "cardVipFormuleTitle": "VIP",
-  "priceList": "Ma grille tarifaire"
+  "priceList": "Ma grille tarifaire",
+  "myPlanForSecularCeremonies": "Mes formules pour les cérémonies laïque",
+  "seeMyOffers": "Voir mes offres",
+  "customizableOffer": "Offre personnalisable",
+  "offerFrom": "A partir de :"
 }
