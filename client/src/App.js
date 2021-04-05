@@ -2,7 +2,6 @@ import Routes                  from './Components/Routes/Routes'
 import { UserContext }         from './Context/UserContext'
 import { useEffect, useState } from 'react'
 import axios                   from 'axios'
-import { useTranslation }      from 'react-i18next'
 function App () {
   const [uid, setUid] = useState(
     {
@@ -28,7 +27,6 @@ function App () {
       console.log('connected')
     }
   }, [uid.isLogged])
-  const { t } = useTranslation()
   return <>
     <UserContext.Provider value={uid}>
       <Routes/>

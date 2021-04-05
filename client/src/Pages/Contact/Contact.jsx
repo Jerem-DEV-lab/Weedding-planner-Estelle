@@ -15,7 +15,7 @@ const Contact = () => {
           <div className="grid-contact-left">
             <div className="contact-img">
               <img src="https://cdn.pixabay.com/photo/2014/11/13/17/04/heart-529607_960_720.jpg"
-                   alt="https://cdn.pixabay.com/photo/2014/11/13/17/04/heart-529607_960_720.jpg"/>
+                   alt="Source Pixabay.com"/>
             </div>
             <h2 className="contact-name-company">
               Estelle Rouillé

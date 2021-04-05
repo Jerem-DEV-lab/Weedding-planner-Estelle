@@ -95,7 +95,7 @@ const ModalAuth = () => {
              <div className="form-check">
                <input id="newsletter" type="checkbox" className="form-check-input" onChange={onChangeRegister}/>
                <label htmlFor="rgpd" className="form-check-label">Accepter les <strong>
-                 <a href="#">
+                 <a href="/condition-general">
                    conditions générale d'utilisation.
                  </a>
                </strong>
