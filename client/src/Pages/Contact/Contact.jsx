@@ -1,12 +1,12 @@
-import React         from 'react'
-import HeaderPage    from '../../Components/HeaderPage/HeaderPage'
-import useChangeLang from '../../Hooks/useChangeLang'
-import ContactForm   from './ContactForm'
+import React              from 'react'
+import HeaderPage         from '../../Components/HeaderPage/HeaderPage'
+import ContactForm        from './ContactForm'
+import { useTranslation } from 'react-i18next'
 
 const Contact = () => {
-  const [language] = useChangeLang()
+  const { t } = useTranslation()
   return <>
-    <HeaderPage titleHero={language.titleHeroContact} nameImg={'contact.jpg'}/>
+    <HeaderPage titleHero={t('titleHeroContact')} nameImg={'contact.jpg'}/>
     <div className="section-decoration bg-success-100"/>
     
     <section>
@@ -21,8 +21,8 @@ const Contact = () => {
               Estelle Rouillé
             </h2>
             <ul className="contact-description-company text-center">
-              <li>{language.floralSceno},&nbsp;</li>
-              <li>{language.eventOrganizer}</li>
+              <li>{t('floralSceno')},&nbsp;</li>
+              <li>{t('eventOrganizer')}</li>
             </ul>
             
             <ul className="row-network network-link text-center">

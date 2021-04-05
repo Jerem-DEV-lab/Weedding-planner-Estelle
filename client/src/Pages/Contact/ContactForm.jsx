@@ -5,17 +5,17 @@ import { useDispatch, useSelector } from 'react-redux'
 import { requestApiContact }        from '../../actions/contactAction'
 import { FaTimes }                  from 'react-icons/fa'
 import Alert                        from '../../Components/Alert/Alert'
-import useChangeLang                from '../../Hooks/useChangeLang'
+import { useTranslation }           from 'react-i18next'
 
 const ContactForm = () => {
   const [formContact, setFormContact] = useState({})
   const dispatch                      = useDispatch()
   const { formError, successSubmit }  = useSelector(state => state.contactReducers)
-  const [lang]                       = useChangeLang()
-  const onChangeContact = (e) => {
+  const { t }                         = useTranslation()
+  const onChangeContact               = (e) => {
     setFormContact({ ...formContact, [e.target.id]: e.target.value })
   }
-  const handleSubmit    = (e) => {
+  const handleSubmit                  = (e) => {
     e.preventDefault()
     dispatch(requestApiContact(formContact))
   }
@@ -25,40 +25,40 @@ const ContactForm = () => {
        <Alert type="success" message={`${successSubmit && successSubmit}`}/>}
       <div className="form-row">
         <div className={`form-group`}>
-          <label htmlFor="lastName" className="form-label">{lang.lastName}</label>
+          <label htmlFor="lastName" className="form-label">{t('lastName')}</label>
           <input type="text" id="lastName"
                  className={`form-control ${formError.lastName ? 'is-invalid' : ''}`}
                  placeholder="Dupont"
                  onChange={onChangeContact}/>
           {formError.lastName &&
-           <span className="is-invalid"> <FaTimes/> {lang.error_requiredField}</span>}
+           <span className="is-invalid"> <FaTimes/> {t('error_requiredField')}</span>}
       
         </div>
         <div className={`form-group`}>
-          <label htmlFor="firstName" className="form-label">{lang.firstName}</label>
+          <label htmlFor="firstName" className="form-label">{t('firstName')}</label>
           <input type="text" id="firstName" className={`form-control ${formError.firstName ? 'is-invalid' : ''}`}
                  placeholder="Christiane"
                  onChange={onChangeContact}/>
           {formError.firstName &&
-           <span className="is-invalid"> <FaTimes/> {lang.error_requiredField}</span>}
+           <span className="is-invalid"> <FaTimes/> {t('error_requiredField')}</span>}
         </div>
       </div>
       <div className="form-row">
         <div className={`form-group`}>
-          <label htmlFor="email" className="form-label">{lang.email}</label>
+          <label htmlFor="email" className="form-label">{t('email')}</label>
           <input type="email" id="email" className={`form-control ${formError.email ? 'is-invalid' : ''}`}
                  onChange={onChangeContact}
                  placeholder="example@example.com"
           />
           {formError.email &&
-           <span className="is-invalid"> <FaTimes/> {lang.error_emailField}</span>}
+           <span className="is-invalid"> <FaTimes/> {t('error_emailField')}</span>}
         </div>
         <div className={`form-group`}>
-          <label htmlFor="eventDep" className="form-label">{lang.yourDepartment}</label>
+          <label htmlFor="eventDep" className="form-label">{t('yourDepartment')}</label>
           <select id="eventDep" className={`form-select ${formError.eventDep ? 'is-invalid' : ''}`}
                   onChange={onChangeContact}>
             <option defaultValue="Sélectionnez la région où aura lieu l'évènement...">
-              {lang.helper_yourRegion}
+              {t('helper_yourRegion')}
             </option>
             {departementJSON.map(dep => <>
               <option value={`${dep.num_dep} - ${dep.region_name}`}>
@@ -67,36 +67,36 @@ const ContactForm = () => {
             </>)}
           </select>
           {formError.eventDep &&
-           <span className="is-invalid"> <FaTimes/> {lang.error_regionField}</span>}
+           <span className="is-invalid"> <FaTimes/> {t('error_regionField')}</span>}
         </div>
       </div>
       <div className="form-row">
         <div className={`form-group`}>
-          <label htmlFor="organizationName" className="form-label">{lang.concernedOrganization}</label>
+          <label htmlFor="organizationName" className="form-label">{t('concernedOrganization')}</label>
           <select id="organizationName" className={`form-select ${formError.organizationName ? 'is-invalid' : ''}`}
                   onChange={onChangeContact}>
-            <option defaultValue="Organisation / Service concernée" className="text-strong">{lang.helper_organisation}</option>
+            <option defaultValue="Organisation / Service concernée" className="text-strong">{t('helper_organisation')}</option>
             <option value="Organisation de mariage">Organisation de mariage</option>
             <option value="Organisation d'une baby shower">Organisation d'une baby shower</option>
             <option value="Organisation d'une EVJF / EVJG">Organisation d'une EVJF / EVJG</option>
             <option value="Un atelier">Un atelier</option>
           </select>
           {formError.organizationName &&
-           <span className="is-invalid"> <FaTimes/> {lang.error_concernedOrganizationField}</span>}
+           <span className="is-invalid"> <FaTimes/> {('error_concernedOrganizationField')}</span>}
         </div>
       </div>
       <div className="form-row">
         <div className="form-group">
-          <label htmlFor="numberOfGuests" className="form-label ">{lang.numberOfGuests}</label>
+          <label htmlFor="numberOfGuests" className="form-label ">{t('numberOfGuests')}</label>
           <input type="number" className={`form-control ${formError.numberOfGuests ? 'is-invalid' : ''}`}
                  id="numberOfGuests" onChange={onChangeContact}
                   placeholder="300"
           />
           {formError.numberOfGuests &&
-           <span className="is-invalid"> <FaTimes/> {lang.error_numberOfGuestsField}</span>}
+           <span className="is-invalid"> <FaTimes/> {t('error_numberOfGuestsField')}</span>}
         </div>
         <div className="form-group">
-          <label htmlFor="budget" className="form-label">{lang.yourBudget}</label>
+          <label htmlFor="budget" className="form-label">{t('yourBudget')}</label>
           <input type="number" id="budget" className={`form-control ${formError.budget ? 'is-invalid' : ''}`}
                  placeholder="1 500 €"
                  onChange={onChangeContact}/>
@@ -105,14 +105,14 @@ const ContactForm = () => {
         </div>
       </div>
       <div className="form-group">
-        <label htmlFor="message" className="form-label">{lang.message}</label>
+        <label htmlFor="message" className="form-label">{t('message')}</label>
         <textarea id="message" cols="6" rows="3" className={`form-control ${formError.message ? 'is-invalid' : ''}`}
-                  placeholder={lang.helper_message}
+                  placeholder={t('helper_message')}
                   onChange={onChangeContact}/>
-        {formError.message && <span className="is-invalid"> <FaTimes/> {lang.error_messageField} </span>}
+        {formError.message && <span className="is-invalid"> <FaTimes/> {t('error_messageField')} </span>}
       </div>
       <div className="d-flex justify-center">
-        <Button label="Envoyer" color="primary" type="submit" className="mt2"/>
+        <Button label={t('send')} color="primary" type="submit" className="mt2"/>
       </div>
     </form>
   </>

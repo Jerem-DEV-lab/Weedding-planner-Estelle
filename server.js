@@ -16,14 +16,14 @@ app.use(cookieParser())
 app.use('/', createRouterAuthentification())
 app.use('/', createRouterContact())
 app.use(express.static('client/build'));
-
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'))
+})
+/*
 if (process.env.NODE_ENV === 'production') {
   console.log('ici ?')
   app.use(express.static('client/build'))
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'))
-  })
-}
+}*/
 
 mongoose.connect(
   `${process.env.DB}`,

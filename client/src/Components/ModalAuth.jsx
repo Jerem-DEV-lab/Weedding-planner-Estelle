@@ -25,7 +25,7 @@ const ModalAuth = () => {
       email   : '',
     })
   useEffect(() => {
-    setStateForm(useRoutesMatch.path.split('/fr/')[1])
+    setStateForm(useRoutesMatch.path)
   }, [useRoutesMatch])
   const FormRegister       = [
     { type: 'text', label: 'Nom : *', id: 'lastName', required: true },
@@ -67,7 +67,7 @@ const ModalAuth = () => {
       {stateLogin.isLoading && 'Chargement...'}
       {stateLogin.userInfo.message && stateLogin.userInfo.message}
       
-      {stateForm === 'register' ?
+      {stateForm === '/inscription' ?
        <form className="form-register" onSubmit={submitFormRegister}>
          <div className="grid-modal form-register">
            <fieldset className="form-group-civility">
@@ -107,7 +107,7 @@ const ModalAuth = () => {
              </div>
            </fieldset>
            <div className="link-existing-account">
-             <Link to="/login">
+             <Link to="/connexion">
                Déjà un compte ? Se connecter...
              </Link>
            </div>
@@ -115,7 +115,7 @@ const ModalAuth = () => {
          <div className="btn-group btn-center">
            <button className="btn btn-primary hover-outline">S'inscrire</button>
          </div>
-       </form> : stateForm === 'login' && <form className="form-login" onSubmit={submitFormLogin}>
+       </form> : stateForm === '/connexion'  && <form className="form-login" onSubmit={submitFormLogin}>
         <div className="grid-modal form-login">
           {FormLogin.map(input => (
             <>
@@ -126,7 +126,7 @@ const ModalAuth = () => {
             </>
           ))}
           <div className="link-register-account">
-            <Link to="/register">
+            <Link to="/inscription">
               Pas encore de compte ? S'inscrire
             </Link>
           </div>
