@@ -4,11 +4,28 @@ import { FaBars, FaCaretDown, FaUser } from 'react-icons/fa'
 import Dropdown                        from '../Dropdown/Dropdown'
 import { UserContext }                 from '../../Context/UserContext'
 import { useTranslation }              from 'react-i18next'
+import i18next                         from 'i18next'
+/*import cookies                         from 'js-cookie'*/
 
 const Nav = () => {
+  const languages = [
+    {
+      code        : 'fr',
+      name        : 'Français',
+      country_code: 'fr',
+    },
+    {
+      code        : 'en',
+      name        : 'English',
+      country_code: 'gb'
+    }
+  ]
+  /*  const currentLanguageCode     = cookies.get('i18next') || 'fr'
+   const currentLanguage         = languages.find((l) => l.code === currentLanguageCode)
+   */
+  const { t }                   = useTranslation()
   const [click, setClick]       = useState(false)
   const [openDrop, setOpenDrop] = useState(false)
-  const { t }                   = useTranslation()
   const userContext             = useContext(UserContext)
   const handleClick             = () => setClick(!click)
   const testDrop                = () => {
@@ -45,7 +62,8 @@ const Nav = () => {
       <div className="menu-icon" onClick={handleClick}>
         <FaBars size={25}/>
       </div>
-      
+      {languages.map((l, index) => (
+        <button className="nav-lang" key={index} onClick={() => i18next.changeLanguage(l.code)}>{l.code}</button>))}
       <ul className={click ? 'nav-menu active' : 'nav-menu'}>
         <li className="nav-item">
           <NavLink activeClassName="active" className="nav-links" to="/">{t('home')}</NavLink>
