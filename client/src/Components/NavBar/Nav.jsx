@@ -44,7 +44,7 @@ const Nav = () => {
     },
     {
       label: t('evjg'),
-      url  : '/home',
+      url  : '/organisation/evj',
       cName: 'dropdown-link'
     },
     {

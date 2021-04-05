@@ -5,6 +5,7 @@ import Home                                                 from '../../Pages/Ho
 import Contact                                              from '../../Pages/Contact/Contact'
 import Wedding                                              from '../../Pages/Organization/Wedding'
 import SecularCeremony                                      from '../../Pages/Organization/SecularCeremony'
+import Evj                                                  from '../../Pages/Organization/Evj'
 
 const Routes = () => {
   const maintenance = false
@@ -17,6 +18,7 @@ const Routes = () => {
      <Switch>
        <Route path={`/`} exact component={Home}/>
        <Route path={`/organisation/mariage`} exact component={Wedding}/>
+       <Route path={`/organisation/evj`} exact component={Evj}/>
        <Route path={`/organisation/ceremonie-laique`} exact component={SecularCeremony}/>
        <Route path="/inscription" exact component={LoginPage}/>
        <Route path="/connexion" exact component={LoginPage}/>
