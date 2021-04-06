@@ -17,7 +17,7 @@ const SecularCeremony = () => {
       <div className="container-margin">
         <div className="grid grid-x2-lg">
           <div className="col">
-            <div className="d-flex align-center flex-column h-100">
+            <div className="d-flex align-center flex-column h-100 mx-auto my2">
               <img src="/assets/secularCeremony-lg.jpg" alt=""/>
               <Button isButton={false} isAnchor={true} label={t('seeMyOffers')} className="mt3" color="primary-light"
                       size="lg" link={'ceremonie-laique#Mes-formules'}/>
@@ -43,7 +43,7 @@ const SecularCeremony = () => {
             </div>
             <img src="/assets/flowers1.png" className="p-absolute img-bottom-left" aria-hidden={'true'} alt="fleurs"/>
           </div>
-          <div className="col">
+          <div className="col m-auto mt2 ">
             <img src="/assets/secularCeremony2-lg.jpg" alt="example de cérémonie laïque qu'organise Estelle Rouillé"
                  aria-describedby="example de cérémonie laïque qu'organise Estelle Rouillé"/>
           </div>
