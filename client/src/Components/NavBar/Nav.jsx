@@ -5,7 +5,6 @@ import Dropdown                        from '../Dropdown/Dropdown'
 import { UserContext }                 from '../../Context/UserContext'
 import { useTranslation }              from 'react-i18next'
 import i18next                         from 'i18next'
-/*import cookies                         from 'js-cookie'*/
 
 const Nav = () => {
   const languages = [
@@ -20,13 +19,11 @@ const Nav = () => {
       country_code: 'gb'
     }
   ]
-  /*  const currentLanguageCode     = cookies.get('i18next') || 'fr'
-   const currentLanguage         = languages.find((l) => l.code === currentLanguageCode)
-   */
   const { t }                   = useTranslation()
   const [click, setClick]       = useState(false)
   const [openDrop, setOpenDrop] = useState(false)
   const userContext             = useContext(UserContext)
+  
   const handleClick             = () => setClick(!click)
   const testDrop                = () => {
     setOpenDrop(!openDrop)
