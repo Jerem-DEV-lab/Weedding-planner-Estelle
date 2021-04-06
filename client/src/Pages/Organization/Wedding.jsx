@@ -16,7 +16,7 @@ const Wedding = () => {
     <section className="section-bg">
       <div className="container-margin">
         <h1 className="h1 text-center text-strong mb5">{t('priceList')}</h1>
-        <div className="d-flex space-around align-center">
+        <div className="d-flex space-around align-center wrap-reverse-sm">
           <div className="grid-tarifs">
             <div className="grid-header">
               <div className="tarif-name-title">

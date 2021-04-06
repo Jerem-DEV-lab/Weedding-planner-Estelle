@@ -11,9 +11,10 @@
   grid-template : repeat(1, 90px) repeat(1, 40px) repeat(2, 75px) / repeat(3, 120px);
   max-width     : 500px;
   @include down(427.99) {
-    grid-template : repeat(4, 60px) / repeat(3, 1fr);
-    margin        : auto;
-    width         : 80%;
+    padding       : .375rem;
+    grid-template : repeat(5, 70px) / repeat(3, 1fr);
+    margin        : 1.2rem auto;
+    width         : auto;
     max-width     : 400px;
   }
 }
@@ -30,12 +31,20 @@
   grid-area       : 2 / 1 / 2 / 4;
   font-weight     : 600;
 
+  h3 {
+    line-height : 26px;
+  }
+
   h3:after {
     content    : '';
     display    : inline-flex;
     width      : 50%;
     background : var(--color-success);
     height     : 2px;
+    margin     : auto;
+    @include down(319.991) {
+      display : none;
+    }
   }
 }
 

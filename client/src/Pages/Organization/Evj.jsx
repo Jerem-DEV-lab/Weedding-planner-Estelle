@@ -17,8 +17,9 @@ const Evj = () => {
         <div className="grid grid-x2-lg">
           <div className="col">
             <div className="d-flex align-center flex-column h-100">
-              <img src="/assets/EVJ_section.jpg" alt="illustration de 3 copines assis sur une branche d'un arbre"/>
-              <Button isButton={false} isAnchor={true} label={t('seeMyOffers')} className="mt3" color="primary-light"
+              <img src="/assets/EVJ_section.jpg" className="my3"
+                   alt="illustration de 3 copines assis sur une branche d'un arbre"/>
+              <Button isButton={false} isAnchor={true} label={t('seeMyOffers')} className="my3" color="primary-light"
                       size="lg" link={'ceremonie-laique#Mes-formules'}/>
             </div>
           </div>
@@ -37,8 +38,8 @@ const Evj = () => {
             <h1 className="text-uppercase">{t('title_evj_section1')}</h1>
             <p>{t('content_evj_section1')}</p>
           </div>
-          <div className="col">
-            <div className="d-flex align-center flex-column h-100">
+          <div className="col my3">
+            <div className="d-flex align-center flex-column h-100 ">
               <img src="/assets/evjg.jpg" alt="illustration de 3 copines assis sur une branche d'un arbre"/>
               <Button isButton={false} isAnchor={true} label={t('seeMyOffers')} className="mt3" color="primary-light"
                       size="lg" link={'ceremonie-laique#Mes-formules'}/>

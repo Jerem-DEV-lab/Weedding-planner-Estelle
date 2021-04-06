@@ -188,7 +188,7 @@ hr {
 }
 
 body {
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .h1 {
@@ -761,7 +761,7 @@ body .ml5 {
   display: inline-block;
   font-size: 14px;
   font-weight: 500;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   text-align: center;
   white-space: nowrap;
   vertical-align: middle;
@@ -886,40 +886,32 @@ body .ml5 {
   font-weight: 600;
 }
 
-.card-presta,
+.t,
 .card {
-  background: white;
-  border-radius: 0.25rem;
+  background    : white;
+  border-radius : 0.25rem;
 }
 
 .card-presta {
-  display: grid;
-  grid-template: repeat(1, 90px) repeat(1, 40px) repeat(2, 75px)/repeat(3, 120px);
-  max-width: 500px;
-}
-@media (max-width: 427.99px) {
-  .card-presta {
-    grid-template: repeat(4, 60px)/repeat(3, 1fr);
-    margin: auto;
-    width: 80%;
-    max-width: 400px;
-  }
+  display       : grid;
+  grid-template : repeat(1, 90px) repeat(1, 40px) repeat(2, 75px)/repeat(3, 120px);
+  max-width     : 500px;
 }
 
 .card-title {
   /* Début de la ligne (row) - début de la colonne(col) - fin de la ligne(row) - find de la colonne (col)*/
-  grid-area: 1/1/5/5;
+  grid-area : 1/1/5/5;
 }
 
 .card-title-content {
-  display: flex;
-  justify-content: center;
+  display         : flex;
+  justify-content : center;
   align-items: center;
   grid-area: 2/1/2/4;
   font-weight: 600;
 }
 .card-title-content h3:after {
-  content: "";
+  content: '';
   display: inline-flex;
   width: 50%;
   background: var(--color-success);
@@ -1041,7 +1033,7 @@ body .ml5 {
   position: relative;
 }
 .img-section:after {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   bottom: 0;
@@ -1120,7 +1112,7 @@ body {
   }
 }
 .modal-auth .modal-title:after {
-  content: "";
+  content: '';
   display: block;
   width: 30%;
   margin: 20px auto;
@@ -1156,7 +1148,7 @@ body {
 }
 
 .overlay-modal {
-  content: "";
+  content: '';
   position: fixed;
   top: 0;
   right: 0;
@@ -1699,7 +1691,7 @@ body {
   color: #FFFFFF;
 }
 .hero:after {
-  content: "";
+  content: '';
   display: block;
   background: rgba(0, 0, 0, 0.4);
   position: absolute;

@@ -28,9 +28,15 @@
   > h1.hero-title {
     text-align  : center;
     padding     : .375rem;
-    line-height : 30px;
+    line-height : 45px;
     font-weight : 500;
     font-size   : 36px;
     max-width   : 630px;
+    @include down(520){
+      font-size   : 32px;
+    }
+    @include down(400){
+      font-size   : 26px;
+    }
   }
 }
