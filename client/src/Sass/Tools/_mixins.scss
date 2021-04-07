@@ -1,17 +1,17 @@
 // Media query
 // ==================
 @mixin up($size) {
-  @media (min-width: $size * 1px) {
+  @media only screen and (min-width: $size * 1px) {
     @content;
   }
 }
 @mixin down($size) {
-  @media (max-width: $size * 1px) {
+  @media only screen and (max-width: $size * 1px) {
     @content;
   }
 }
 @mixin between($down, $up) {
-  @media (min-width: #{$down}px) and (max-width: #{$up}px) {
+  @media only screen and (min-width: #{$down}px) and (max-width: #{$up}px) {
     @content;
   }
 }

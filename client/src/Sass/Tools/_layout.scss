@@ -38,6 +38,16 @@
   margin : auto;
 }
 
+%ml-auto,
+.ml-auto {
+  margin-left : auto;
+}
+
+%mr-auto,
+.mr-auto {
+  margin-right : auto;
+}
+
 .btn-group {
   display : inline-block;
   width   : 100%;
@@ -152,7 +162,7 @@
 }
 
 .d-flex {
-  display : flex;
+  display : flex !important;
 
   &.justify-center {
     justify-content : center;
@@ -264,4 +274,8 @@
 
 .d-flex.flex-column {
   flex-direction : column;
+}
+
+.justify-start {
+  justify-content : flex-start !important;
 }

@@ -6,6 +6,7 @@
 @import 'Tools/layout';
 @import 'Components/modules/button';
 @import 'Components/modules/formuleCard';
+@import 'Components/modules/switch';
 @import 'Components/modules/card';
 @import 'Components/modules/alert';
 @import 'Components/modules/formContact';
@@ -19,6 +20,8 @@
   --danger              : #FD5949;
   --success             : #42940F;
   --space               : 8px;
+  --color-female        : #672853;
+  --color-male          : #495470;
 }
 
 body {
@@ -30,5 +33,6 @@ body {
 @import 'Components/NavBar';
 @import 'Components/HeroPage';
 @import 'Pages/HomePage';
+@import 'Pages/UserProfil';
 @import 'Pages/Organization/SecularCeremony';
 @import 'Pages/Contact';

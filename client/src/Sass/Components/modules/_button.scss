@@ -21,6 +21,7 @@
 .btn-primary {
   background : var(--color-primary);
 }
+
 %btn-primary-light,
 .btn-primary-light {
   background : var(--color-primary-light);
@@ -31,6 +32,11 @@
   font-size : 15px;
 }
 
+.btn-md {
+  padding   : .55rem .95rem;
+  font-size : 14px;
+}
+
 .btn.hover-outline:hover {
   border-color : var(--color-primary);
   background   : transparent;
@@ -39,4 +45,34 @@
 .btn.hover-opacity:hover {
   border-color : #e9c393;
   background   : #E9C393;
+}
+
+.btn-profil {
+  border-color : white;
+  background   : rgba(#FFC4EC, .5);
+
+  &:hover {
+    background : transparent;
+  }
+}
+
+.btn-danger {
+  background : var(--danger);
+  color      : white;
+
+  &:hover {
+    background : rgba(#FD5949, .7);
+  }
+}
+
+.btn-update {
+  border-color : white;
+  background   : var(--color-female);
+  color        : #FFFFFF;
+
+  &:hover {
+    color        : var(--color);
+    border-color : var(--color);
+    background   : transparent;
+  }
 }

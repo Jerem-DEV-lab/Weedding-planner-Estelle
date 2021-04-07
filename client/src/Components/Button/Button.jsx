@@ -7,7 +7,7 @@ const Button = ({
                   label,
                   color,
                   onClick,
-                  className,
+                  className = '',
                   type = 'submit',
                   link = '',
                   isAnchor = false

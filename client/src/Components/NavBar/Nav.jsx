@@ -23,7 +23,6 @@ const Nav = () => {
   const [click, setClick]       = useState(false)
   const [openDrop, setOpenDrop] = useState(false)
   const userContext             = useContext(UserContext)
-  
   const handleClick             = () => setClick(!click)
   const testDrop                = () => {
     setOpenDrop(!openDrop)
