@@ -16,9 +16,15 @@ import ParamsAccount          from '../../Components/UserProfil/ParamsAccount'
 function RouterProfil () {
   return <>
     <Switch>
-      <Route component={ResumeProfil} exact path="/profil/:userId"/>
-      <Route component={MessageProfil} exact path="/profil/:userId/messages"/>
-      <Route component={ParamsAccount} exact path="/profil/:userId/gestion-compte"/>
+      <Route exact path="/profil/:userId">
+        <ResumeProfil/>
+      </Route>
+      <Route exact path="/profil/:userId/messages">
+        <MessageProfil/>
+      </Route>
+      <Route exact path="/profil/:userId/gestion-compte">
+        <ParamsAccount/>
+      </Route>
     </Switch>
   </>
 }
