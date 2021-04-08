@@ -50,7 +50,7 @@ class Authentification {
       const passwordMatch = await ComparePassword(password, findUser.password)
       if (passwordMatch) {
         const tokenAuth = setTokenAuth(findUser.roles, findUser._id, maxAge)
-        response.cookie('jwt', tokenAuth, { httpOnly: true, maxAge })
+        response.cookie('jwt', 'Bearer' + ' ' + tokenAuth  , { httpOnly: true, maxAge })
         return response.status(200).json(
           {
             userAuthenticated: true,
