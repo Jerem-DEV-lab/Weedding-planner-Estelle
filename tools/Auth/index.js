@@ -3,7 +3,15 @@ const jwt               = require('jsonwebtoken')
 const { hash, compare } = require('bcryptjs')
 
 module.exports.ErrorAuthentification = (err) => {
-  let errors = { email: '', password: '', confirmPassword: '' }
+  let errors = {
+    email          : '',
+    password       : '',
+    confirmPassword: '',
+    civility       : '',
+    birthday       : '',
+    phone          : '',
+    postalCode     : '',
+  }
   if (err.message.includes('email') && err.message.includes('is required')) {
     errors.name = 'Vous devez renseigner une adresse mail valide'
   }
@@ -13,7 +21,18 @@ module.exports.ErrorAuthentification = (err) => {
   if (err.code === 11000 && Object.keys(err.keyValue)[0].includes('email')) {
     errors.email = 'Vous possédez déjà un compte'
   }
-  
+  if (err.message.includes('civility') && err.message.includes('is required')) {
+    errors.civility = 'Vous devez renseigner votre civilité'
+  }
+  if (err.message.includes('birthday') && err.message.includes('is required')) {
+    errors.birthday = 'Vous devez renseigner votre date de naissance'
+  }
+  if (err.message.includes('phone') && err.message.includes('is required')) {
+    errors.phone = 'Vous devez renseigner votre numéro de téléphone'
+  }
+  if (err.message.includes('postalCode') && err.message.includes('is required')) {
+    errors.postalCode = 'Vous devez renseigner votre département / région'
+  }
   return errors
 }
 

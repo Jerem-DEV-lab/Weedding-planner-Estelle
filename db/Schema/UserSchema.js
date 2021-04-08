@@ -21,11 +21,12 @@ const UserSchema = new Schema
    confirmAccountToken     : { type: String, default: '' },
    expireTokenResetPassword: { type: Date, default: '' },
    userAvatar              : { type: String, required: true, default: 'https://i.pravatar.cc/300' },
-   phone                   : { type: String, required: true },
+   phone                   : { type: String, required: true, maxlength: 10 },
    civility                : { type: String, required: true },
    birthday                : { type: String, required: true },
-   newsLetter              : { type: Boolean, required: true }
-  
+   newsLetter              : { type: Boolean, required: true, default: false },
+   address                 : { type: String, required: true },
+   postalCode              : { type: String, required: true, maxlength: 5, minlength: 5 },
  }, { timestamps: true })
 
 module.exports = model('user', UserSchema)
