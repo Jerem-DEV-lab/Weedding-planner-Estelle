@@ -14,7 +14,7 @@ function createRouterUpdateProfil () {
       let { actualPassword, newPassword, confirmPassword } = req.body
       
       let errors         = {
-        actualPasswordPassword: '',
+        actualPassword: '',
         newPassword           : '',
         confirmPassword       : ''
       }
@@ -23,8 +23,8 @@ function createRouterUpdateProfil () {
       const isMatch      = await ComparePassword(actualPassword, passwordInDB)
       
       if (!isMatch) {
-        errors.actualPasswordPassword = 'Mot de passe incorrecte !'
-        return res.status(200).json(errors)
+        errors.actualPassword= 'Mot de passe incorrecte !'
+        return res.status(400).json(errors)
       }
       
       if (isEmpty(newPassword) && isEmpty(confirmPassword)) {
