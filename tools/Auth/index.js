@@ -54,10 +54,10 @@ module.exports.setTokenAuth = (role, userId, timeStampCookie) => {
 }
 
 module.exports.checkUserLogin = (req, res) => {
-  const token = req.cookies.jwt
-  
-  if (token) {
-    jwt.verify(token, process.env.SECRET_KEY, async (err, decodedToken) => {
+  const authTokenJWT = req.cookies.jwt
+  if (authTokenJWT.startsWith('Bearer ')) {
+    let parsedCookie = authTokenJWT.split('Bearer ')[1]
+    jwt.verify(parsedCookie, process.env.SECRET_KEY, async (err, decodedToken) => {
       if (err) {
         res.locals.user = null
         return res.status(400).json({ err })
