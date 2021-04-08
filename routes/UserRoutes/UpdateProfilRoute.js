@@ -4,7 +4,7 @@ const { isEmpty }         = require('../../tools/Auth')
 const { ComparePassword } = require('../../tools/Auth')
 
 function createRouterUpdateProfil () {
-  router.post('/changePassword', async (req, res) => {
+  router.post('/user/changePassword', async (req, res) => {
     const authCookie    = req.cookies
     const authJwtCookie = authCookie.jwt
     if (!authJwtCookie || !authJwtCookie.startsWith('Bearer ')) {
@@ -12,9 +12,9 @@ function createRouterUpdateProfil () {
     }
     try {
       let { actualPassword, newPassword, confirmPassword } = req.body
-      
+    
       let errors         = {
-        actualPassword: '',
+        actualPassword        : '',
         newPassword           : '',
         confirmPassword       : ''
       }
@@ -46,8 +46,8 @@ function createRouterUpdateProfil () {
       }
       
       await user.changePassword(newPassword)
-      
-      return res.status(200).json({ success: 'Votre nouveau mot de passe à bien modifier' })
+    
+      return res.status(200).json({ success: 'Votre nouveau mot de passe à bien été modifier' })
     } catch (e) {
       console.log('err', '=>>>>>', e)
     }
