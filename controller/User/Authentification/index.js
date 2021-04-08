@@ -12,8 +12,8 @@ class Authentification {
   }
   
   async createUser (request, response) {
-    const { email, password, address, firstName, lastName, phone } = request.body
-    
+    const { email, password, address, firstName, lastName, phone, birthday, civility, postalCode } = request.body
+  
     const ROLE           = 'ROLE_USER'
     const hashedPassword = await HashPassword(password)
     try {
@@ -25,12 +25,17 @@ class Authentification {
           address,
           firstName,
           lastName,
-          phone
+          phone,
+          birthday,
+          civility,
+          postalCode,
+        
         })
       await newUser.save()
       return response.status(200).json({ message: 'Un email vient de vous être envoyé pour confirmer votre compte.' })
     } catch (e) {
       const errors = ErrorAuthentification(e)
+      console.log(e)
       return response.status(400).json(errors)
     }
   }
@@ -45,7 +50,7 @@ class Authentification {
       const passwordMatch = await ComparePassword(password, findUser.password)
       if (passwordMatch) {
         const tokenAuth = setTokenAuth(findUser.roles, findUser._id, maxAge)
-        response.cookie('jwt', tokenAuth, { httpOnly: true, maxAge })
+        response.cookie('jwt', 'Bearer' + ' ' + tokenAuth  , { httpOnly: true, maxAge })
         return response.status(200).json(
           {
             userAuthenticated: true,

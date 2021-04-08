@@ -3,7 +3,15 @@ const jwt               = require('jsonwebtoken')
 const { hash, compare } = require('bcryptjs')
 
 module.exports.ErrorAuthentification = (err) => {
-  let errors = { email: '', password: '', confirmPassword: '' }
+  let errors = {
+    email          : '',
+    password       : '',
+    confirmPassword: '',
+    civility       : '',
+    birthday       : '',
+    phone          : '',
+    postalCode     : '',
+  }
   if (err.message.includes('email') && err.message.includes('is required')) {
     errors.name = 'Vous devez renseigner une adresse mail valide'
   }
@@ -13,7 +21,18 @@ module.exports.ErrorAuthentification = (err) => {
   if (err.code === 11000 && Object.keys(err.keyValue)[0].includes('email')) {
     errors.email = 'Vous possédez déjà un compte'
   }
-  
+  if (err.message.includes('civility') && err.message.includes('is required')) {
+    errors.civility = 'Vous devez renseigner votre civilité'
+  }
+  if (err.message.includes('birthday') && err.message.includes('is required')) {
+    errors.birthday = 'Vous devez renseigner votre date de naissance'
+  }
+  if (err.message.includes('phone') && err.message.includes('is required')) {
+    errors.phone = 'Vous devez renseigner votre numéro de téléphone'
+  }
+  if (err.message.includes('postalCode') && err.message.includes('is required')) {
+    errors.postalCode = 'Vous devez renseigner votre département / région'
+  }
   return errors
 }
 
@@ -35,10 +54,10 @@ module.exports.setTokenAuth = (role, userId, timeStampCookie) => {
 }
 
 module.exports.checkUserLogin = (req, res) => {
-  const token = req.cookies.jwt
-  
-  if (token) {
-    jwt.verify(token, process.env.SECRET_KEY, async (err, decodedToken) => {
+  const authTokenJWT = req.cookies.jwt
+  if (authTokenJWT.startsWith('Bearer ')) {
+    let parsedCookie = authTokenJWT.split('Bearer ')[1]
+    jwt.verify(parsedCookie, process.env.SECRET_KEY, async (err, decodedToken) => {
       if (err) {
         res.locals.user = null
         return res.status(400).json({ err })
@@ -114,4 +133,14 @@ module.exports.ErrorForm   = (err) => {
     errors.message = 'Votre message doit faire un minimum de 255 caractères'
   }
   return errors
+}
+
+module.exports.isEmpty = (value) => {
+  return (
+    value === undefined ||
+    value === null ||
+    (typeof value === 'object' && Object.keys(value).length === 0) ||
+    (typeof value === 'string' && value.trim().length === 0) ||
+    (typeof value === 'array' && value !== 'undefined' && value.length != null && value.length > 0)
+  )
 }
