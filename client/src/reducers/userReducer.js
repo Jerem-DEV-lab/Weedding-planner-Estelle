@@ -3,7 +3,8 @@ import {
   LOGIN_USER_ERROR,
   LOGIN_USER_LOADING,
   LOGIN_USER_SUCCESS
-} from '../actions/authenticatorAction'
+}                                                                                     from '../actions/authenticatorAction'
+import { CHANGE_USER_INFO_ERROR, CHANGE_USER_INFO_LOADING, CHANGE_USER_INFO_SUCCESS } from '../actions/userAction'
 
 const initialState = {
   isLoading          : false,
@@ -42,7 +43,25 @@ export default function userReducers (state = initialState, action) {
         loginSuccess       : '',
         registrationFail   : '',
         registrationSuccess: ''
-      
+  
+      }
+    case CHANGE_USER_INFO_LOADING:
+      return {
+        ...state,
+        isLoading: true
+      }
+    case CHANGE_USER_INFO_SUCCESS:
+      return {
+        ...state,
+        successChange: 'sa marche',
+        isLoading    : false,
+        userInfo     : action.payload
+      }
+    case CHANGE_USER_INFO_ERROR:
+      return {
+        ...state,
+        isLoading  : false,
+        changeError: action.payload
       }
     case LANG_USER_PREF:
       return {

@@ -1,9 +1,5 @@
 const UserSchema = require('../../db/Schema/UserSchema')
 const jwt        = require('jsonwebtoken')
-/*const { isEmpty }         = require('../../tools/Auth')
- const ObjectId            = require('mongoose').Types.ObjectId
- const { ComparePassword } = require('../../tools/Auth')
- const bcrypt              = require('bcryptjs')*/
 const { HashPassword } = require('../../tools/Auth')
 
 class User {
@@ -12,8 +8,11 @@ class User {
     this.userInfo = this.getParsedToken()
   }
   
-  static async updateProfilInfo () {
-  
+  async updateProfilInfo (newInfo) {
+    return UserSchema.findByIdAndUpdate({ _id: this.userInfo.userId }, newInfo, { new: false }, (err, doc) => {
+      return !err ? doc : err
+    }).select('-password')
+    
   }
   
   async getEncryptedPassword () {

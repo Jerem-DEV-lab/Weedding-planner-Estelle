@@ -24,15 +24,14 @@ export const changeInfoUserSuccess = (message) => {
   }
 }
 
-export const requestApiChangeInfoUser = (userId, data) => {
+export const requestApiChangeInfoUser = (data) => {
   return dispatch => {
     dispatch(changeInfoUserLoading())
-    axios.post(`/user/update-info/${userId}`, data, {
-           withCredentials: true,
-           userId         : userId
+    axios.post(`/user/changeInfo`, data, {
+           withCredentials: true
          })
          .then(res => {
-           dispatch(changeInfoUserSuccess(res.data))
+           dispatch(changeInfoUserSuccess(res.data.success))
          })
          .catch(err => {
            dispatch(changeInfoUserError(err.response.data))

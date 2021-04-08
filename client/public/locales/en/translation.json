@@ -94,5 +94,8 @@
   "label_preferences": "Preferences",
   "pref_code_promo": "Receive promotional codes by email.",
   "pref_newsletter": "I wish to receive the newsletters by email.",
-  "my_interest": "My interests"
+  "my_interest": "My interests",
+  "old_password": "Old password",
+  "new_password": "New password",
+  "confirm_password": "Confirm new password"
 }

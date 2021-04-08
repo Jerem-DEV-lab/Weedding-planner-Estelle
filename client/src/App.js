@@ -2,6 +2,9 @@ import Routes                  from './Components/Routes/Routes'
 import { UserContext }         from './Context/UserContext'
 import { useEffect, useState } from 'react'
 import axios                   from 'axios'
+import { useDispatch }         from 'react-redux'
+import { loginUserSuccess }    from './actions/authenticatorAction'
+
 function App () {
   const [uid, setUid] = useState(
     {
@@ -9,6 +12,7 @@ function App () {
       userId  : null,
       userRole: 'ROLE_USER'
     })
+  const dispatch      = useDispatch()
   const fetchToken    = async () => {
     await axios.get('/check', {
                  withCredentials: true
@@ -18,14 +22,12 @@ function App () {
                           isLogged: true,
                           ...res.data
                         })
+                 dispatch(loginUserSuccess(res.data, ''))
                })
                .catch(err => console.log('no token'))
   }
   useEffect(() => {
     fetchToken()
-    if (uid.isLogged === true) {
-      console.log('connected')
-    }
   }, [uid.isLogged])
   return <>
     <UserContext.Provider value={uid}>

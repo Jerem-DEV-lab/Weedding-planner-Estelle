@@ -12,6 +12,7 @@ import {
 import ResumeProfil           from '../../Components/UserProfil/ResumeProfil'
 import MessageProfil          from '../../Components/UserProfil/MessageProfil'
 import ParamsAccount          from '../../Components/UserProfil/ParamsAccount'
+import { useSelector }        from 'react-redux'
 
 function RouterProfil () {
   return <>
@@ -55,32 +56,32 @@ function MenuProfil ({ userId = '' }) {
 }
 
 const UserProfil = () => {
-  const userContext = useContext(UserContext)
+  const {userInfo} = useSelector(state => state.userReducers)
   return <>
     <HeaderPage nameImg="home.jpg"/>
-    <HeaderProfil userAvatar={userContext.userAvatar} userId={userContext._id}/>
-    <RouterProfil />
+    <HeaderProfil userInfo={userInfo}/>
+    <RouterProfil/>
   </>
 }
 
 export default UserProfil
 
-function HeaderProfil ({ userAvatar, userId }) {
+function HeaderProfil ({ userInfo = '' }) {
   const { t } = useTranslation()
   return <>
     <div className="container-profil container-margin color-female">
       <div className="profil-info">
         <div className="profil-avatar">
-          <img src={userAvatar} alt=""/>
+          <img src={userInfo.userAvatar} alt=""/>
         </div>
-        <div className="profil-name text-strong">Sandrine Dupont</div>
-        <div className="profil-address">18 route du mariage</div>
-        <div className="profil-postalCode">82 150 Bordeaux</div>
-        <div className="profil-phone">N ° : 06.00.00.00.00</div>
-        <Button isButton={false} label="Modifier vos informations" color='profil'/>
+        <div className="profil-name text-strong">{userInfo.lastName} {userInfo.firstName}</div>
+        <div className="profil-address">{userInfo.address}</div>
+        <div className="profil-postalCode">{userInfo.postalCode}</div>
+        <div className="profil-phone">N ° : {userInfo.phone}</div>
+        <Button isButton={false} label="Modifier vos informations" color="profil"/>
       </div>
       <div className="profil-notif">
-        <h2 className="text-strong welcome-profil">{t('welcome_message')} Sandrine</h2>
+        <h2 className="text-strong welcome-profil">{t('welcome_message')} {userInfo.firstName}</h2>
         <div className="notif">
           <div className="icon">
             <FaBell/>
@@ -99,7 +100,7 @@ function HeaderProfil ({ userAvatar, userId }) {
       </div>
     </div>
     <div className="container-margin">
-      <MenuProfil userId={userId}/>
+      <MenuProfil userId={userInfo._id}/>
     </div>
   </>
 }

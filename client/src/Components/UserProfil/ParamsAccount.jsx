@@ -1,28 +1,16 @@
-import React, { useContext, useState }      from 'react'
-import { useTranslation }                   from 'react-i18next'
-import { FaLock, FaTimes, FaTrash, FaUser } from 'react-icons/fa'
-import Button                               from '../Button/Button'
-import { UserContext }                      from '../../Context/UserContext'
-import axios                                from 'axios'
+import React, { useContext, useEffect, useState } from 'react'
+import { useTranslation }                         from 'react-i18next'
+import { FaLock, FaTimes, FaTrash, FaUser }       from 'react-icons/fa'
+import Button                                     from '../Button/Button'
+import axios                                      from 'axios'
 import 'toastr/build/toastr.min.css'
-import Toastify                             from '../Toastify'
+import Toastify                                   from '../Toastify'
+import { useDispatch, useSelector }               from 'react-redux'
+import { requestApiChangeInfoUser }               from '../../actions/userAction'
 
 const ParamsAccount = () => {
-  const { t }          = useTranslation()
-  const userContext    = useContext(UserContext)
-  const FormUpdateInfo = [
-    { type: 'email', label: `${t('label_email')} : *`, id: 'email', required: true, value: userContext.email },
-    { type: 'text', label: `${t('label_address')} : *`, id: 'address', required: true, value: '18 route du mariage' },
-    { type: 'text', label: `${t('label_postal_code')} : *`, id: 'postalCode', required: true, value: '93780' },
-    {
-      type    : 'phone',
-      label   : `${t('label_number_phone')} : *`,
-      id      : 'phoneNumber',
-      required: true,
-      value   : '06.06.06.06.06'
-    },
-  ]
-
+  const { t } = useTranslation()
+  
   const FormUpdatePreference = [
     {
       type    : 'checkbox',
@@ -46,7 +34,6 @@ const ParamsAccount = () => {
         <div className="col-left">
           <FormUpdateProfil
             icon={<FaUser/>}
-            formEntries={FormUpdateInfo}
             title={t('my_informations')}
             labelBtn={t('update_my_informations')}
           />
@@ -65,25 +52,65 @@ const ParamsAccount = () => {
 
 export default ParamsAccount
 
-function FormUpdateProfil ({ icon, title, formEntries = [], labelBtn, onsubmit }) {
-  const { email }                                         = useContext(UserContext)
-  const [stateFormInformations, setStateFormInformations] = useState(
+function FormUpdateProfil ({ icon, title, labelBtn }) {
+  const dispatch                = useDispatch()
+  const { userInfo }            = useSelector(state => state.userReducers)
+  const { t }                   = useTranslation()
+  const [formInfo, setFormInfo] = useState({ ...userInfo })
+  const FormUpdateInfo          = [
     {
-      email      : email,
-      address    : '18 route du mariage',
-      postalCode : '93780',
-      phoneNumber: '06.06.06.06.08'
-    })
-  const onChangeInfos                                     = (e) => {
-    setStateFormInformations({ ...stateFormInformations, [e.target.id]: e.target.value })
+      type    : 'email',
+      label   : `${t('label_email')} : *`,
+      id      : 'email',
+      required: true,
+      value   : userInfo.email
+    },
+    {
+      type    : 'text',
+      label   : `${t('label_address')} : *`,
+      id      : 'address',
+      required: true,
+      value   : userInfo.address
+    },
+    {
+      type    : 'text',
+      label   : `${t('label_postal_code')} : *`,
+      id      : 'postalCode',
+      required: true,
+      value   : userInfo.postalCode
+      
+    },
+    {
+      type    : 'phone',
+      label   : `${t('label_number_phone')} : *`,
+      id      : 'phoneNumber',
+      required: true,
+      value   : userInfo.phone
+    },
+  ]
+  useEffect(() => {
+    setFormInfo(
+      {
+        email     : userInfo.email,
+        address   : userInfo.address,
+        postalCode: userInfo.postalCode,
+        phone     : userInfo.phone
+      })
+  }, [userInfo])
+  const onChangeInfos          = (e) => {
+    setFormInfo({ ...formInfo, [e.target.id]: e.target.value })
+  }
+  const handleSubmitChangeInfo = (e) => {
+    e.preventDefault()
+    dispatch(requestApiChangeInfoUser(formInfo))
   }
   return <>
     <div className="name-form">
       {icon} {title}
     </div>
-    <form className="mb2" onSubmit={() => onsubmit(stateFormInformations)}>
+    <form className="mb2" onSubmit={handleSubmitChangeInfo}>
       <div className="container-form">
-        {formEntries.map((entries, index) => <div className="form-group" key={index}>
+        {FormUpdateInfo.map((entries, index) => <div className="form-group" key={index}>
           <label htmlFor={entries.id} className="form-label text-uppercase">{entries.label}</label>
           {entries.type === 'select' ? <select className="form-control" id={entries.id} onChange={onChangeInfos}>
                                        {entries.options.map((opt, index) => <option key={index}>{opt.label}</option>)}
@@ -113,7 +140,7 @@ function FormChangePassword () {
   const submitNewPassword                 = (e) => {
     e.preventDefault()
     setFormError({})
-    axios.post('/changePassword', state)
+    axios.post('/user/changePassword', state)
          .then(res => {
            setSubmitSuccess(res.data.success)
            setState(
@@ -138,7 +165,7 @@ function FormChangePassword () {
     <form className="mb2" onSubmit={submitNewPassword}>
       <div className="container-form">
         <div className="form-group">
-          <input type="password" placeholder="Ancien mot de passe"
+          <input type="password" placeholder={t('old_password')}
                  className={`form-control ${formError.actualPassword ? 'is-invalid' : ''}`}
                  id="actualPassword"
                  value={state.actualPassword}
@@ -149,7 +176,7 @@ function FormChangePassword () {
           }
         </div>
         <div className="form-group">
-          <input type="password" placeholder="Nouveau mot de passe"
+          <input type="password" placeholder={t('new_password')}
                  className={`form-control ${formError.newPassword ? 'is-invalid' : ''}`}
                  id="newPassword"
                  onChange={onChangeInput}
@@ -160,7 +187,7 @@ function FormChangePassword () {
           }
         </div>
         <div className="form-group">
-          <input type="password" placeholder="Nouveau mot de passe"
+          <input type="password" placeholder={t('confirm_password')}
                  className={`form-control ${formError.confirmPassword ? 'is-invalid' : ''}`}
                  id="confirmPassword"
                  onChange={onChangeInput}
