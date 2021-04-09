@@ -104,5 +104,6 @@
   "date_event": "Date de votre événement",
   "type_event": "Type de votre événement",
   "date_next_workshop": "Date du prochaine atelier",
-  "type_workshop": "Type du prochaine atelier"
+  "type_workshop": "Type du prochaine atelier",
+  "label_edit": "Modifier"
 }

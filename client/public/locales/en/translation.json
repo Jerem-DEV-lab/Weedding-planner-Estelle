@@ -103,5 +103,6 @@
   "date_event": "Date of event",
   "type_event": "Type of event",
   "date_next_workshop": "Date of next workshop",
-  "type_workshop": "Date of next workshop"
+  "type_workshop": "Date of next workshop",
+  "label_edit": "Edit"
 }

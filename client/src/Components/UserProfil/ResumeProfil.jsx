@@ -9,7 +9,7 @@ const ResumeProfil = () => {
   return <>
     <div className="container-margin">
       <div className="update-profil">
-        <Button isButton={false} label="Modifier" size="md" color="update"
+        <Button isButton={false} label={t('label_edit')} size="md" color="update"
                 link={`/profil/${userInfoContext._id}/gestion-compte`}/>
       </div>
       <div className="profil-content">

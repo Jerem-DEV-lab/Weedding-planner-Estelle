@@ -79,7 +79,7 @@ function HeaderProfil ({ userInfo = '' }) {
         <div className="profil-address">{userInfo.address}</div>
         <div className="profil-postalCode">{userInfo.postalCode}</div>
         <div className="profil-phone">N ° : {userInfo.phone}</div>
-        <Button isButton={false} label="Modifier vos informations" color="profil"
+        <Button isButton={false} label={t('update_my_informations')} color="profil"
                 link={`/profil/${userContext._id}/gestion-compte`}/>
       </div>
       <div className="profil-notif">
