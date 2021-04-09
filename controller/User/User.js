@@ -37,6 +37,16 @@ class User {
       password: newPasswordHashed
     }, { new: false })
   }
+  
+  static logoutUser (req, res) {
+    return res.cookie('jwt', '', { maxAge: 1 })
+  }
+  
+  async deleteAccount () {
+    return UserSchema.findByIdAndDelete({ _id: this.userInfo.userId })
+                     .then(() => ({ success: 'Votre compte à bien été supprimer' }))
+                     .catch(err => err)
+  }
 }
 
 module.exports = User

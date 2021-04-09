@@ -1,8 +1,7 @@
-const router              = require('express').Router()
-const User                = require('../../controller/User/User')
-const { ErrorInfoUser }   = require('../../tools/UserTools')
-const { isEmpty }         = require('../../tools/Auth')
-const { ComparePassword } = require('../../tools/Auth')
+const router                       = require('express').Router()
+const User                         = require('../../controller/User/User')
+const { ErrorInfoUser }            = require('../../tools/UserTools')
+const { isEmpty, ComparePassword } = require('../../tools/Auth')
 
 function createRouterUpdateProfil () {
   router.post('/user/changePassword', async (req, res) => {
@@ -71,6 +70,25 @@ function createRouterUpdateProfil () {
       return res.status(200).json({ success: await user.updateProfilInfo({ ...req.body }) })
     } catch (e) {
       console.log('err', '=>>>>>', e)
+    }
+  })
+  
+  router.get('/user/delete-account', async (req, res) => {
+    const authCookie    = req.cookies
+    const authJwtCookie = authCookie.jwt
+    if (!authJwtCookie || !authJwtCookie.startsWith('Bearer ')) {
+      return res.status(400).json({ error: 'Vous devez être connecté' })
+    }
+    
+    try {
+      const user          = new User(authJwtCookie.split('Bearer ')[1])
+      const deleteAccount = await user.deleteAccount()
+      if (deleteAccount.success) {
+        User.logoutUser(req, res)
+        return res.status(200).json(deleteAccount)
+      }
+    } catch (e) {
+      console.log(e)
     }
   })
   return router

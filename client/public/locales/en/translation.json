@@ -97,5 +97,6 @@
   "my_interest": "My interests",
   "old_password": "Old password",
   "new_password": "New password",
-  "confirm_password": "Confirm new password"
+  "confirm_password": "Confirm new password",
+  "label_delete_account": "Are you no longer satisfied with the content of the site? <br/> Or do you wish to delete all information associated with this account?"
 }

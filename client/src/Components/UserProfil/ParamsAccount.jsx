@@ -1,16 +1,16 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { useTranslation }                         from 'react-i18next'
-import { FaLock, FaTimes, FaTrash, FaUser }       from 'react-icons/fa'
-import Button                                     from '../Button/Button'
-import axios                                      from 'axios'
+import React, { useEffect, useState }       from 'react'
+import { useTranslation }                   from 'react-i18next'
+import { FaLock, FaTimes, FaTrash, FaUser } from 'react-icons/fa'
+import Button                               from '../Button/Button'
+import axios                                from 'axios'
+import cookie                               from 'js-cookie'
 import 'toastr/build/toastr.min.css'
-import Toastify                                   from '../Toastify'
-import { useDispatch, useSelector }               from 'react-redux'
-import { requestApiChangeInfoUser }               from '../../actions/userAction'
+import Toastify                             from '../Toastify'
+import { useDispatch, useSelector }         from 'react-redux'
+import { requestApiChangeInfoUser }         from '../../actions/userAction'
 
 const ParamsAccount = () => {
-  const { t } = useTranslation()
-  
+  const { t }                = useTranslation()
   const FormUpdatePreference = [
     {
       type    : 'checkbox',
@@ -246,12 +246,33 @@ function ChangePreferenceProfil ({ icon, title, formEntries = [], labelBtn, onCh
 }
 
 function DeleteAccount () {
+  const { t } = useTranslation()
+  
+  function injectHtmlCode (text) {
+    return { __html: text }
+  }
+  
+  const deleteAccount = () => {
+    let confirmDelete = window.confirm('Voulez-vous vraiment supprimer votre compte ?')
+    
+    if (confirmDelete) {
+      axios.get('/user/delete-account')
+           .then(res => {
+             if (window !== 'undefined') {
+               cookie.remove('jwt', { expires: 1 })
+             }
+             window.location.href = '/'
+           })
+           .catch(err => {
+             console.log(err)
+           })
+    }
+    return null
+  }
   return <div className="delete-account mb4">
     <h3 className="mb2"><FaTrash/> Supprimer votre compte</h3>
-    <p>Vous n'êtes plus satisfait du contenu du site ? <br/> Ou vous souhaitez supprimer toutes les informations
-      associées
-      à ce compte ?</p>
-    <button type="button" className="btn btn-danger btn-delete-account">
+    <p dangerouslySetInnerHTML={injectHtmlCode(t('label_delete_account'))}/>
+    <button type="button" className="btn btn-danger btn-delete-account" onClick={deleteAccount}>
       <FaTrash className="mr1"/> Supprimer votre compte
     </button>
   </div>
