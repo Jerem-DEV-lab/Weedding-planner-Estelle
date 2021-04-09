@@ -99,5 +99,10 @@
   "old_password": "Mot de passe actuel",
   "new_password": "Nouveau mot de passe",
   "confirm_password": "Confirmer le nouveau mot passe",
-  "label_delete_account": "Vous n'êtes plus satisfait du contenu du site ? <br/> Ou vous souhaitez supprimer toutes les informations associées à ce compte ?"
+  "label_delete_account": "Vous n'êtes plus satisfait du contenu du site ? <br/> Ou vous souhaitez supprimer toutes les informations associées à ce compte ?",
+  "your_information": "Vos coordonnées",
+  "date_event": "Date de votre événement",
+  "type_event": "Type de votre événement",
+  "date_next_workshop": "Date du prochaine atelier",
+  "type_workshop": "Type du prochaine atelier"
 }

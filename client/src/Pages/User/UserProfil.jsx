@@ -67,7 +67,8 @@ const UserProfil = () => {
 export default UserProfil
 
 function HeaderProfil ({ userInfo = '' }) {
-  const { t } = useTranslation()
+  const { t }       = useTranslation()
+  const userContext = useContext(UserContext)
   return <>
     <div className="container-profil container-margin color-female">
       <div className="profil-info">
@@ -78,7 +79,8 @@ function HeaderProfil ({ userInfo = '' }) {
         <div className="profil-address">{userInfo.address}</div>
         <div className="profil-postalCode">{userInfo.postalCode}</div>
         <div className="profil-phone">N ° : {userInfo.phone}</div>
-        <Button isButton={false} label="Modifier vos informations" color="profil"/>
+        <Button isButton={false} label="Modifier vos informations" color="profil"
+                link={`/profil/${userContext._id}/gestion-compte`}/>
       </div>
       <div className="profil-notif">
         <h2 className="text-strong welcome-profil">{t('welcome_message')} {userInfo.firstName}</h2>

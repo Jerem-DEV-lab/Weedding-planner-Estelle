@@ -98,5 +98,10 @@
   "old_password": "Old password",
   "new_password": "New password",
   "confirm_password": "Confirm new password",
-  "label_delete_account": "Are you no longer satisfied with the content of the site? <br/> Or do you wish to delete all information associated with this account?"
+  "label_delete_account": "Are you no longer satisfied with the content of the site? <br/> Or do you wish to delete all information associated with this account?",
+  "your_information": "Your contact information",
+  "date_event": "Date of event",
+  "type_event": "Type of event",
+  "date_next_workshop": "Date of next workshop",
+  "type_workshop": "Date of next workshop"
 }
