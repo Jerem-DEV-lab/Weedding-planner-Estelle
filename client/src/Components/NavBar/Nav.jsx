@@ -52,7 +52,7 @@ const Nav = () => {
   return <>
     <nav className="navbar">
       <div className={`overlay-nav ${click ? 'active' : ''}`} onClick={handleClick}/>
-      <Link to="/fr/" className='navbar-logo'>
+      <Link to="/" className="navbar-logo">
         <img src="/assets/logo.png" alt="Logo de côté campagne" height={50} width={50}/>
       </Link>
       <div className="menu-icon" onClick={handleClick}>
@@ -124,7 +124,9 @@ const Nav = () => {
          </span>
        </div> : <div className="navbar-account connected">
          <div className="navbar-avatar">
-           <img src={`${userContext.userAvatar}`} alt=""/>
+           <Link to={`/profil/${userContext._id}`}>
+             <img src={`${userContext.userAvatar}`} alt=""/>
+           </Link>
          </div>
          <span> <Link to={`/profil/${userContext._id}`}>{userContext.firstName} {userContext.lastName}</Link></span>
        </div>}
