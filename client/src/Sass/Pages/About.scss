@@ -1,0 +1,21 @@
+.bg-flowers {
+  position : absolute;
+  top      : 40%;
+  bottom   : 0;
+}
+
+.img-section-2 {
+  width  : clamp(280px, 50%, 80%);
+  margin : auto;
+}
+
+.container-deco {
+  top      : -50px;
+  right    : 0;
+  left     : 0;
+  bottom   : 0;
+  z-index  : -1;
+  overflow : hidden;
+  max-height: 100%;
+  width: 100%;
+}

@@ -11,6 +11,12 @@ body {
   }
 }
 
+%title-section,
+.title-section {
+  font-weight : 600;
+  font-size   : clamp(18px, 24px, 28px)
+}
+
 %text-center,
 .text-center {
   text-align : center;

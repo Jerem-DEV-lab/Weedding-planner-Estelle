@@ -8,6 +8,7 @@ import SecularCeremony                                      from '../../Pages/Or
 import Evj                                                  from '../../Pages/Organization/Evj'
 import ProtectedRoutes                                      from './ProtectedRoutes'
 import UserProfil                                           from '../../Pages/User/UserProfil'
+import About                                                from '../../Pages/About/About'
 
 const Routes = () => {
   const maintenance = false
@@ -22,7 +23,10 @@ const Routes = () => {
        <Route path={`/organisation/mariage`} exact component={Wedding}/>
        <Route path={`/organisation/evj`} exact component={Evj}/>
        <Route path={`/organisation/ceremonie-laique`} exact component={SecularCeremony}/>
-       <Route path={['/profil/:userId', '/profil/:userId/', '/profil/:userId/messages', '/profil/:userId/gestion-compte']} exact strict component={UserProfil}/>
+       <Route
+         path={['/profil/:userId', '/profil/:userId/', '/profil/:userId/messages', '/profil/:userId/gestion-compte']}
+         exact strict component={UserProfil}/>
+       <Route path={'/a-propos'} exact strict component={About}/>
        <ProtectedRoutes path="/inscription" exact component={LoginPage}/>
        <ProtectedRoutes path="/connexion" exact component={LoginPage}/>
        <Route path="/contact" exact component={Contact}/>

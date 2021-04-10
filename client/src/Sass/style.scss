@@ -2,6 +2,7 @@
 @import 'Tools/function';
 @import 'Tools/mixins';
 @import 'Tools/typography';
+@import 'Tools/images';
 @import 'Tools/_form';
 @import 'Tools/layout';
 @import 'Components/modules/button';
@@ -36,3 +37,4 @@ body {
 @import 'Pages/UserProfil';
 @import 'Pages/Organization/SecularCeremony';
 @import 'Pages/Contact';
+@import 'Pages/About';
