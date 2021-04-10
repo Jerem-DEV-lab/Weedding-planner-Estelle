@@ -56,11 +56,11 @@ const ModalAuth = ({ openModal }) => {
   }
   useEffect(() => {
     return () => {
-      if (stateLogin.loginSuccess) {
-        modalContext.changeContextModal()
+      if (stateLogin.loginSuccess || stateLogin.userIsLogged) {
+        modalContext.changeContextModal(false)
       }
     }
-  }, [stateLogin.loginSuccess])
+  }, [modalContext, stateLogin.loginSuccess, stateLogin.userIsLogged])
   
   const submitFormRegister = (e) => {
     e.preventDefault()
