@@ -21,7 +21,7 @@ const About = () => {
           <div className="content-section">
             <p>{t('my_background_content')}</p>
             <div className="btn-center-x">
-              <Button isButton={false} label={t('buttonSection1')} size={'sm'} color="primary"/>
+              <Button isButton={false} label={t('buttonSection1')} size={'lg'} color="primary"/>
             </div>
           </div>
         </div>
@@ -33,7 +33,7 @@ const About = () => {
           <div className="content-section">
             <p>{t('the_beginning_business_content')}</p>
             <div className="btn-center-x">
-              <Button isButton={false} label={t('buttonSection1')} size={'sm'} color="primary"/>
+              <Button isButton={false} label={t('buttonSection1')} size={'lg'} color="primary"/>
             </div>
           </div>
         </div>
@@ -54,7 +54,7 @@ const About = () => {
           <div className="content-section">
             <p>{t('my_progress_content')}</p>
             <div className="btn-center-x">
-              <Button isButton={false} label={t('buttonSection1')} size={'sm'} color="primary"/>
+              <Button isButton={false} label={t('buttonSection1')} size={'lg'} color="primary"/>
             </div>
           </div>
         </div>

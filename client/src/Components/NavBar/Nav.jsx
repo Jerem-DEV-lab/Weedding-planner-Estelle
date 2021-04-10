@@ -45,7 +45,7 @@ const Nav = () => {
     },
     {
       label: t('babyShower'),
-      url  : '/home',
+      url  : '/baby-shower',
       cName: 'dropdown-link'
     },
   ]
