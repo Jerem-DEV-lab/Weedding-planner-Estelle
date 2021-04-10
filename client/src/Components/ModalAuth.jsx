@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react'
-import { Link, useRouteMatch }        from 'react-router-dom'
-import { useDispatch, useSelector }   from 'react-redux'
-import { requestApiAuth }             from '../actions/authenticatorAction'
+import React, { useContext, useEffect, useState } from 'react'
+import { useDispatch, useSelector }               from 'react-redux'
+import { requestApiAuth }                         from '../actions/authenticatorAction'
+import { ModalAuthContext }                       from '../Context/ModalAuth'
 
-const ModalAuth = () => {
-  const [stateForm, setStateForm]       = useState('')
-  const useRoutesMatch                  = useRouteMatch()
-  const dispatch                        = useDispatch()
-  const stateLogin                      = useSelector(state => state.userReducers)
-  const [formRegister, setFormRegister] = useState(
+const ModalAuth = ({ openModal }) => {
+  const [contextFormModal, setContextFormModal] = useState('/connexion')
+  const modalContext                            = useContext(ModalAuthContext)
+  const dispatch                                = useDispatch()
+  const stateLogin                              = useSelector(state => state.userReducers)
+  const [formRegister, setFormRegister]         = useState(
     {
       civility       : '',
       lastName       : '',
@@ -24,9 +24,6 @@ const ModalAuth = () => {
       password: '',
       email   : '',
     })
-  useEffect(() => {
-    setStateForm(useRoutesMatch.path)
-  }, [useRoutesMatch])
   const FormRegister       = [
     { type: 'text', label: 'Nom : *', id: 'lastName', required: true },
     { type: 'text', label: 'Prénom : *', id: 'firstName', required: true },
@@ -53,21 +50,29 @@ const ModalAuth = () => {
       }
     }
   }
-  const submitFormLogin    = (e) => {
+  const submitFormLogin                         = (e) => {
     e.preventDefault()
     dispatch(requestApiAuth(formLogin))
   }
+  useEffect(() => {
+    return () => {
+      if (stateLogin.loginSuccess) {
+        modalContext.changeContextModal()
+      }
+    }
+  }, [stateLogin.loginSuccess])
+  
   const submitFormRegister = (e) => {
     e.preventDefault()
     dispatch(requestApiAuth(formRegister))
   }
   return <>
-    <div className={`modal-auth ${stateForm}`}>
+    <div className={`modal-auth ${openModal ? 'modal-auth-visible' : ''}`}>
       <h1 className="h1 modal-title">Rejoindre Côté Campagne :</h1>
       {stateLogin.isLoading && 'Chargement...'}
       {stateLogin.userInfo.message && stateLogin.userInfo.message}
       
-      {stateForm === '/inscription' ?
+      {contextFormModal === '/inscription' ?
        <form className="form-register" onSubmit={submitFormRegister}>
          <div className="grid-modal form-register">
            <fieldset className="form-group-civility">
@@ -107,15 +112,15 @@ const ModalAuth = () => {
              </div>
            </fieldset>
            <div className="link-existing-account">
-             <Link to="/connexion">
+             <button onClick={() => setContextFormModal('/connexion')}>
                Déjà un compte ? Se connecter...
-             </Link>
+             </button>
            </div>
          </div>
          <div className="btn-group btn-center">
            <button className="btn btn-primary hover-outline">S'inscrire</button>
          </div>
-       </form> : stateForm === '/connexion'  && <form className="form-login" onSubmit={submitFormLogin}>
+       </form> : contextFormModal === '/connexion' && <form className="form-login" onSubmit={submitFormLogin}>
         <div className="grid-modal form-login">
           {FormLogin.map(input => (
             <>
@@ -126,9 +131,7 @@ const ModalAuth = () => {
             </>
           ))}
           <div className="link-register-account">
-            <Link to="/inscription">
-              Pas encore de compte ? S'inscrire
-            </Link>
+            <button onClick={() => setContextFormModal('/inscription')}>Pas encore de compte ? S'inscrire</button>
           </div>
         </div>
         <div className="btn-group btn-center">

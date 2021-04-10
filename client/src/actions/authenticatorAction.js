@@ -36,7 +36,7 @@ export const requestApiAuth = (data) => {
     dispatch(loginUserLoading())
     axios.post('/login', data)
          .then(res => {
-           dispatch(loginUserSuccess(res.data))
+           dispatch(loginUserSuccess(res.data, res.data.message))
          })
          .catch(err => {
            dispatch(loginUserError(err.response.data.error))

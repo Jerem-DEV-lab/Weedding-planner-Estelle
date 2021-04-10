@@ -14,7 +14,10 @@ const initialState = {
   loginSuccess       : '',
   registrationFail   : '',
   registrationSuccess: '',
-  langPref           : 'FR_fr'
+  langPref           : 'FR_fr',
+  isLogged           : false,
+  userId             : null,
+  userRole           : 'ROLE_USER'
 }
 
 export default function userReducers (state = initialState, action) {
@@ -27,6 +30,7 @@ export default function userReducers (state = initialState, action) {
         isLoading          : false,
         userInfo           : action.payload.user,
         userIsLogged       : true,
+        isLogged           : true,
         loginSuccess       : action.payload.message,
         loginError         : '',
         registrationFail   : '',
@@ -39,6 +43,7 @@ export default function userReducers (state = initialState, action) {
         isLoading          : false,
         userInfo           : {},
         userIsLogged       : false,
+        isLogged           : false,
         loginError         : action.payload,
         loginSuccess       : '',
         registrationFail   : '',

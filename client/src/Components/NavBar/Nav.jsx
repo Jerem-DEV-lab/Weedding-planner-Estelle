@@ -2,12 +2,16 @@ import React, { useContext, useState } from 'react'
 import { Link, NavLink }               from 'react-router-dom'
 import { FaBars, FaCaretDown, FaUser } from 'react-icons/fa'
 import Dropdown                        from '../Dropdown/Dropdown'
-import { UserContext }                 from '../../Context/UserContext'
 import { useTranslation }              from 'react-i18next'
 import i18next                         from 'i18next'
+import { ModalAuthContext }            from '../../Context/ModalAuth'
+import { useSelector }                 from 'react-redux'
 
 const Nav = () => {
-  const languages = [
+  const modalContext = useContext(ModalAuthContext)
+  const userContext  = useSelector(state => state.userReducers)
+  console.log(userContext)
+  const languages               = [
     {
       code        : 'fr',
       name        : 'Français',
@@ -22,7 +26,6 @@ const Nav = () => {
   const { t }                   = useTranslation()
   const [click, setClick]       = useState(false)
   const [openDrop, setOpenDrop] = useState(false)
-  const userContext             = useContext(UserContext)
   const handleClick             = () => setClick(!click)
   const testDrop                = () => {
     setOpenDrop(!openDrop)
@@ -118,17 +121,18 @@ const Nav = () => {
       </ul>
       {!userContext.isLogged ?
        <div className="navbar-account">
-         <FaUser/>
+         <FaUser onClick={modalContext.changeContextModal}/>
          <span>
-           <Link to={'/inscription'}>{t('login')} / {t('register')}</Link>
+           <button onClick={modalContext.changeContextModal}>{t('login')} / {t('register')}</button>
          </span>
        </div> : <div className="navbar-account connected">
          <div className="navbar-avatar">
-           <Link to={`/profil/${userContext._id}`}>
-             <img src={`${userContext.userAvatar}`} alt=""/>
+           <Link to={`/profil/${userContext.userInfo._id}`}>
+             <img src={`${userContext.userInfo.userAvatar}`} alt=""/>
            </Link>
          </div>
-         <span> <Link to={`/profil/${userContext._id}`}>{userContext.firstName} {userContext.lastName}</Link></span>
+         <span> <Link
+           to={`/profil/${userContext.userInfo._id}`}>{userContext.userInfo.firstName} {userContext.userInfo.lastName}</Link></span>
        </div>}
     </nav>
   </>

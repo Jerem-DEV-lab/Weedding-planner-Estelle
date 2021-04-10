@@ -1,12 +1,10 @@
-body {
-  position   : relative;
-  min-height : 100vh;
-}
-
 .modal-auth {
   display        : flex;
   flex-direction : column;
-  position       : absolute;
+  position       : fixed;
+  top            : 50%;
+  left           : 50%;
+  transform      : translate(-50%, -50%);
   z-index        : 9999;
   width          : 100%;
   max-width      : 700px;
@@ -91,6 +89,7 @@ body {
   right            : 0;
   left             : 0;
   bottom           : 0;
+  z-index          : 1000;
   background-color : rgba(#000, .5);
 }
 
