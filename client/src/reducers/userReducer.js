@@ -2,7 +2,7 @@ import {
   LANG_USER_PREF,
   LOGIN_USER_ERROR,
   LOGIN_USER_LOADING,
-  LOGIN_USER_SUCCESS
+  LOGIN_USER_SUCCESS, LOGOUT_USER
 }                                                                                     from '../actions/authenticatorAction'
 import { CHANGE_USER_INFO_ERROR, CHANGE_USER_INFO_LOADING, CHANGE_USER_INFO_SUCCESS } from '../actions/userAction'
 
@@ -49,6 +49,15 @@ export default function userReducers (state = initialState, action) {
         registrationFail   : '',
         registrationSuccess: ''
   
+      }
+    case LOGOUT_USER:
+      return {
+        ...state,
+        isLoading   : false,
+        userInfo    : {},
+        isLogged    : false,
+        userIsLogged: false,
+        loginSuccess: ''
       }
     case CHANGE_USER_INFO_LOADING:
       return {

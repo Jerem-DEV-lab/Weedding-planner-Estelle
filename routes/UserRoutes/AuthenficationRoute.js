@@ -7,6 +7,7 @@ function createRouterAuthentification (req, res, next) {
   
   router.post('/register', AuthentificationController.createUser)
   router.post('/login', AuthentificationController.loginUser)
+  router.get('/logoutUser', AuthentificationController.logoutUser)
   router.get('/check', checkUserLogin)
   return router
 }

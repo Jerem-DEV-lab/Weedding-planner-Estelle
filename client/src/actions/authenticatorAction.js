@@ -1,10 +1,11 @@
-import axios from 'axios'
+import axios  from 'axios'
+import cookie from 'js-cookie'
+
 export const LOGIN_USER_LOADING = 'LOGIN_USER_LOADING'
 export const LOGIN_USER_ERROR   = 'LOGIN_USER_ERROR'
 export const LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS'
 export const LANG_USER_PREF     = 'LANG_USER_PREF'
-
-export const REGISTER_USER = 'REGISTER_USER'
+export const LOGOUT_USER        = 'LOGOUT_USER'
 
 export const loginUserLoading = () => {
   return {
@@ -28,6 +29,21 @@ export const loginUserError   = (err) => {
   return {
     type   : LOGIN_USER_ERROR,
     payload: err
+  }
+}
+
+export const logoutUserSuccess    = () => {
+  return {
+    type: LOGOUT_USER
+  }
+}
+export const requestApiLogoutUser = () => {
+  return dispatch => {
+    axios.get('/logoutUser')
+         .then(() => {
+           dispatch(logoutUserSuccess())
+         })
+         .catch(err => console.log(err))
   }
 }
 

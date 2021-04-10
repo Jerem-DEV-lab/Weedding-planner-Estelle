@@ -6,11 +6,11 @@ import { useTranslation }              from 'react-i18next'
 import i18next                         from 'i18next'
 import { ModalAuthContext }            from '../../Context/ModalAuth'
 import { useSelector }                 from 'react-redux'
+import Logout                          from '../Authentification/Logout'
 
 const Nav = () => {
   const modalContext = useContext(ModalAuthContext)
   const userContext  = useSelector(state => state.userReducers)
-  console.log(userContext)
   const languages               = [
     {
       code        : 'fr',
@@ -61,6 +61,7 @@ const Nav = () => {
       <div className="menu-icon" onClick={handleClick}>
         <FaBars size={25}/>
       </div>
+      <Logout/>
       {languages.map((l, index) => (
         <button className="nav-lang" key={index} onClick={() => i18next.changeLanguage(l.code)}>{l.code}</button>))}
       <ul className={click ? 'nav-menu active' : 'nav-menu'}>
@@ -132,7 +133,8 @@ const Nav = () => {
            </Link>
          </div>
          <span> <Link
-           to={`/profil/${userContext.userInfo._id}`}>{userContext.userInfo.firstName} {userContext.userInfo.lastName}</Link></span>
+           to={`/profil/${userContext.userInfo._id}`}>{userContext.userInfo.firstName} {userContext.userInfo.lastName}</Link>
+         </span>
        </div>}
     </nav>
   </>
