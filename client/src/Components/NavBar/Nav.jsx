@@ -103,21 +103,19 @@ const Nav = () => {
         </li>
         <li
           className="nav-item"
-          onClick={testDrop}
         >
           <NavLink to={'/gallery'} className="nav-links">{t('gallery')}</NavLink>
         </li>
         <li
           className="nav-item"
-          onClick={testDrop}
         >
           <NavLink to={'/a-propos'} className="nav-links">{t('about')}</NavLink>
         </li>
-        <li
-          className="nav-item"
-          onClick={testDrop}
-        >
+        <li className="nav-item">
           <NavLink to={'/contact'} className="nav-links">{t('contact')}</NavLink>
+        </li>
+        <li className="nav-item">
+          <NavLink to={'/admin'} className="nav-links">Admin</NavLink>
         </li>
       </ul>
       {!userContext.isLogged ?
