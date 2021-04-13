@@ -64,6 +64,11 @@ class Authentification {
       console.log(e)
     }
   }
+  
+  async logoutUser (request, response) {
+    response.cookie('jwt', '', { maxAge: 1 })
+    return response.status(200).json({ logout: true })
+  }
 }
 
 module.exports = Authentification
