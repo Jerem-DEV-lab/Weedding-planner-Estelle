@@ -1,9 +1,21 @@
-import Routes                  from './Components/Routes/Routes'
-import { UserContext }         from './Context/UserContext'
-import { useEffect, useState } from 'react'
-import axios                   from 'axios'
-import { useDispatch }         from 'react-redux'
-import { loginUserSuccess }    from './actions/authenticatorAction'
+import Routes                            from './Components/Routes/Routes'
+import { UserContext }                   from './Context/UserContext'
+import { useEffect, useState }           from 'react'
+import axios                             from 'axios'
+import { useDispatch }                   from 'react-redux'
+import { loginUserSuccess }              from './actions/authenticatorAction'
+import { ThemeProvider, createMuiTheme } from '@material-ui/core'
+
+const theme = createMuiTheme(
+  {
+    typography: {
+      fontFamily: [
+        '"Montserrat"',
+        '-apple-system',
+        'BlinkMacSystemFont'
+      ].join(','),
+    },
+  })
 
 function App () {
   const [uid, setUid] = useState(
@@ -39,10 +51,13 @@ function App () {
     fetchToken()
   }, [uid.isLogged])
   return <>
-    <UserContext.Provider value={uid}>
-      <Routes/>
-    </UserContext.Provider>
+    <ThemeProvider theme={theme}>
+      <UserContext.Provider value={uid}>
+        <Routes/>
+      </UserContext.Provider>
+    </ThemeProvider>
   </>
+  
 }
 
 export default App
