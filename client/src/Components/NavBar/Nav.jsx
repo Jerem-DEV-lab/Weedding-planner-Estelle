@@ -86,7 +86,7 @@ const Nav = () => {
           <div
             className={`nav-links `}
           >
-            {t('floralScenography')} <FaCaretDown/>
+            {t('secularCeremony')} <FaCaretDown/>
           </div>
           {<Dropdown items={sublink}/>}
         </li>
