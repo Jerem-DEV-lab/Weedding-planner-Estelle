@@ -17,14 +17,15 @@ const BabyShower = () => {
           <div className="img-section-2">
             <img src="/assets/baby-shower.jpg" alt="estelle rouillé"/>
           </div>
-          <div className="btn-center-x">
-            <Button isButton={false} label={t('seeMyOffers')} size={'lg'} color="primary"/>
-          </div>
         </div>
-        <div className="col-6-lg p-relative">
+        <div className="col-6-lg">
           <h1 className="title-section text-uppercase">{t('new_baby')}...</h1>
           <div className="content-section">
             <p>{t('new_baby_content')}</p>
+  
+            <div className="btn-center-x">
+              <Button isButton={false} label={t('seeMyOffers')} size={'lg'} color="primary"/>
+            </div>
           </div>
         </div>
       </div>
@@ -32,22 +33,18 @@ const BabyShower = () => {
     
     <section className="container-margin section-bg mb0">
       <div className="row wrap-sm">
-        <div className="col-6-lg p-relative">
-          <img src="/assets/foot-baby.png" className="p-absolute img-bottom-left" aria-hidden
-               alt="vecteurs pied de bébé" height={150} width={150}
-               style={{ zIndex: '-1', transform: 'rotate(30deg)', left: 0 }}
-          />
+        <div className="col-6-lg">
           <h1 className="title-section text-uppercase">{t('new_baby')}...</h1>
           <div className="content-section">
             <p>{t('new_baby_content_1')}</p>
+            <div className="btn-center-x">
+              <Button isButton={false} label={t('seeMyOffers')} size={'lg'} color="primary"/>
+            </div>
           </div>
         </div>
-        <div className="col-6-lg p-relative">
+        <div className="col-6-lg">
           <div className="img-section-2">
             <img src="/assets/baby-shower2.jpg" alt="estelle rouillé"/>
-          </div>
-          <div className="btn-center-x">
-            <Button isButton={false} label={t('seeMyOffers')} size={'lg'} color="primary"/>
           </div>
         </div>
       </div>

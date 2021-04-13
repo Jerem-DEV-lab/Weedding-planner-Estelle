@@ -1,7 +1,6 @@
 import React              from 'react'
 import HeaderPage         from '../../Components/HeaderPage/HeaderPage'
 import { useTranslation } from 'react-i18next'
-import Button             from '../../Components/Button/Button'
 
 const About = () => {
   const { t } = useTranslation()
@@ -9,7 +8,6 @@ const About = () => {
     <HeaderPage nameImg="about.jpg" positionImg="top 20% center" titleHero={`${t('title_about')}...`}/>
     <div className="section-decoration"/>
     <section className="container p-relative">
-      <img src="/assets/flowers-about.svg" aria-hidden className="p-absolute container-deco"/>
       <div className="row wrap-reverse-sm">
         <div className="col-6-lg">
           <div className="img-section-2">
@@ -20,9 +18,6 @@ const About = () => {
           <h1 className="title-section text-uppercase">{t('my_background')}...</h1>
           <div className="content-section">
             <p>{t('my_background_content')}</p>
-            <div className="btn-center-x">
-              <Button isButton={false} label={t('buttonSection1')} size={'lg'} color="primary"/>
-            </div>
           </div>
         </div>
       </div>
@@ -32,9 +27,6 @@ const About = () => {
           <h1 className="title-section text-uppercase">{t('the_beginning_business')} !</h1>
           <div className="content-section">
             <p>{t('the_beginning_business_content')}</p>
-            <div className="btn-center-x">
-              <Button isButton={false} label={t('buttonSection1')} size={'lg'} color="primary"/>
-            </div>
           </div>
         </div>
         <div className="col-6-lg">
@@ -53,9 +45,6 @@ const About = () => {
           <h1 className="title-section text-uppercase">{t('my_progress')}...</h1>
           <div className="content-section">
             <p>{t('my_progress_content')}</p>
-            <div className="btn-center-x">
-              <Button isButton={false} label={t('buttonSection1')} size={'lg'} color="primary"/>
-            </div>
           </div>
         </div>
       </div>
