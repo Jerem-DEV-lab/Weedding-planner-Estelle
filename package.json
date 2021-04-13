@@ -31,5 +31,8 @@
     "mongodb": "^3.6.5",
     "mongoose": "^5.12.2",
     "validator": "^13.5.2"
+  },
+  "devDependencies": {
+    "faker": "^5.5.3"
   }
 }
