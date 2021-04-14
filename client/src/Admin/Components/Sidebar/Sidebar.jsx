@@ -20,12 +20,14 @@ import { useStyleSidebar }                       from './StyleSidebar'
 import { Avatar, Badge, Button, Menu, MenuItem } from '@material-ui/core'
 import { SidebarAdminItems }                     from './SidebarItems'
 import { Link }                                  from 'react-router-dom'
+import { requestApiLogoutUser }                  from '../../../actions/authenticatorAction'
+import { useDispatch, useSelector }              from 'react-redux'
 
-export default function Sidebar ({children}) {
-  const classes         = useStyleSidebar()
-  const theme           = useTheme()
-  const [open, setOpen] = useState(false)
-  
+export default function Sidebar ({ children }) {
+  const classes          = useStyleSidebar()
+  const theme            = useTheme()
+  const [open, setOpen]  = useState(false)
+  const dispatch         = useDispatch()
   const handleDrawerOpen = () => {
     setOpen(true)
   }
@@ -35,12 +37,15 @@ export default function Sidebar ({children}) {
   }
   const [anchorEl, setAnchorEl] = useState(null)
   
-  const handleClick = (event) => {
+  const handleClick  = (event) => {
     setAnchorEl(event.currentTarget)
   }
-  
-  const handleClose = () => {
+  const { userInfo } = useSelector(state => state.userReducers)
+  const handleClose  = () => {
     setAnchorEl(null)
+  }
+  const logout       = () => {
+    dispatch(requestApiLogoutUser())
   }
   return (
     <div className={classes.root}>
@@ -58,22 +63,18 @@ export default function Sidebar ({children}) {
             edge="start"
             className={clsx(classes.menuButton, {
               [classes.hide]: open,
-            })}
-          >
+            })}>
             <MenuIcon/>
           </IconButton>
-          <Typography variant="h6" noWrap>
-            Mini variant drawer
-          </Typography>
           <div className={classes.appBarRightSide}>
             <Button>
               <Badge badgeContent={4} color="primary">
                 <MailIcon/>
               </Badge>
             </Button>
-            <Avatar alt="Remy Sharp" src={'/assets/evolution.jpg'}/>
+            <Avatar alt="Remy Sharp" src={userInfo.userAvatar}/>
             <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-              John Doe
+              {userInfo.firstName}
             </Button>
             <Menu
               id="simple-menu"
@@ -82,9 +83,7 @@ export default function Sidebar ({children}) {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
-              <MenuItem onClick={handleClose}>Profile</MenuItem>
-              <MenuItem onClick={handleClose}>My account</MenuItem>
-              <MenuItem onClick={handleClose}>Logout</MenuItem>
+              <MenuItem onClick={logout}>Logout</MenuItem>
             </Menu>
           </div>
         </Toolbar>

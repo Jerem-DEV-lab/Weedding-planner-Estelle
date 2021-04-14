@@ -79,21 +79,17 @@ const Nav = () => {
           </div>
           {<Dropdown items={sublink}/>}
         </li>
-        <li
-          className={`nav-item dropdown ${openDrop ? 'active' : ''} `}
+        <li className={`nav-item dropdown ${openDrop ? 'active' : ''} `}
           onClick={testDrop}
         >
-          <div
-            className={`nav-links `}
-          >
+          <div className={`nav-links `}>
             {t('secularCeremony')} <FaCaretDown/>
           </div>
           {<Dropdown items={sublink}/>}
         </li>
         <li
           className={`nav-item dropdown ${openDrop ? 'active' : ''} `}
-          onClick={testDrop}
-        >
+          onClick={testDrop}>
           <div
             className={`nav-links `}
           >

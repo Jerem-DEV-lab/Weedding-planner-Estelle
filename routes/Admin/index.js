@@ -1,7 +1,6 @@
 const router          = require('express').Router()
 const UserSchema      = require('../../db/Schema/UserSchema')
 const adminController = require('../../controller/Admin/AdminController')
-const { checkRole }   = require('../../tools/Auth')
 
 function createRouterAdmin () {
   router.get('/admin/get-users', async (req, res) => {
@@ -11,6 +10,10 @@ function createRouterAdmin () {
     } catch (e) {
       return res.status(400).json(e)
     }
+  })
+  router.get('/admin/get/formule', async (req, res) => {
+    const adminService = new adminController(req, res)
+    return adminService.getFormules(req, res)
   })
   router.post('/admin/create/formule', async (req, res) => {
     return adminController.formulaCreate(req, res)

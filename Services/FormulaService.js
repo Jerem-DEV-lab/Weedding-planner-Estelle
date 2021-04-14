@@ -12,6 +12,14 @@ module.exports.createFormula = async (req, res) => {
     return res.status(404).json({ errors: err })
   })
 }
+module.exports.getFormulas   = async (req, res) => {
+  await FormulaSchema.find({}, {}, {}, (err, docs) => {
+    if (!err || !docs) {
+      return res.status(200).json({ docs: docs })
+    }
+    return res.status(400).json({ errors: err })
+  })
+}
 
 module.exports.deleteFormula = async (req, res) => {
   const formulaId = req.params.formulaId

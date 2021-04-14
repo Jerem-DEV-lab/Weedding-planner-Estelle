@@ -34,7 +34,7 @@ function App () {
                    {
                      isLogged: true,
                      userId  : res.data.userId,
-                     userRole: res.data.userRole
+                     userRole: res.data.roles
                    })
                  dispatch(loginUserSuccess(res.data, res.data.message))
                })
