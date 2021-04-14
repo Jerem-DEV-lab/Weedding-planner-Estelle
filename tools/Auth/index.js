@@ -56,13 +56,13 @@ module.exports.setTokenAuth = (role, userId, timeStampCookie) => {
 
 module.exports.checkUserLogin = (req, res) => {
   const authTokenJWT = req.cookies.jwt
-  if (authTokenJWT.startsWith('Bearer ')) {
+  if (authTokenJWT && authTokenJWT.startsWith('Bearer ')) {
     let parsedCookie = authTokenJWT.split('Bearer ')[1]
     jwt.verify(parsedCookie, process.env.SECRET_KEY, async (err, decodedToken) => {
       if (err) {
         res.locals.user = null
         return res.status(400).json({ err })
-        
+      
       } else {
         const user = res.locals.user = await UserSchema.findById(decodedToken.userId).select('-password')
         return res.status(200).json(user)

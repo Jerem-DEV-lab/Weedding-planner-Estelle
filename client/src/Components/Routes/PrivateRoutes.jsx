@@ -3,7 +3,7 @@ import { Redirect, Route }   from 'react-router-dom'
 import { UserContext }       from '../../Context/UserContext'
 
 const PrivateRoutes = ({ component: Component, role, ...rest }) => {
-  const { isLogged, userRole } = useContext(UserContext)
+  const { userRole, isLogged } = useContext(UserContext).userLogged
   return <>
     {isLogged && userRole.includes(role) ? <Route {...rest} render={
       props => <Component {...rest} {...props} />

@@ -1,4 +1,4 @@
-import React, { useState }                                  from 'react'
+import React, { useContext, useState }                      from 'react'
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom'
 import Maintenance                                          from '../../Pages/Maintenance'
 import ModalAuthentification                                from '../../Pages/Authentification/ModalAuthentification'
@@ -19,7 +19,7 @@ import PrivateRoutes                                        from './PrivateRoute
 const Routes = () => {
   const maintenance     = false
   const [show, setShow] = useState(false)
-  const handleClose     = () => setShow(false)
+  const handleClose = () => setShow(false)
   return <ModalAuthContext.Provider value={{ contextModal: show, changeContextModal: () => setShow(!show) }}>
     <Router>
       {show && <>
