@@ -128,7 +128,7 @@ const ModalAuth = ({ openModal }) => {
                 <label htmlFor={input.id} className="form-label">{input.label}</label>
                 <input type={input.type} className="form-control" id={input.id} onChange={onChangeLogin}/>
               </div>
-            </>&&&&
+            </>
           ))}
           <div className="link-register-account">
             <button onClick={() => setContextFormModal('/inscription')}>Pas encore de compte ? S'inscrire</button>
