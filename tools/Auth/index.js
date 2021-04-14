@@ -1,5 +1,6 @@
 const UserSchema        = require('../../db/Schema/UserSchema')
 const jwt               = require('jsonwebtoken')
+const User              = require('../../controller/User/User')
 const { hash, compare } = require('bcryptjs')
 
 module.exports.ErrorAuthentification = (err) => {
@@ -55,13 +56,13 @@ module.exports.setTokenAuth = (role, userId, timeStampCookie) => {
 
 module.exports.checkUserLogin = (req, res) => {
   const authTokenJWT = req.cookies.jwt
-  if (authTokenJWT.startsWith('Bearer ')) {
+  if (authTokenJWT && authTokenJWT.startsWith('Bearer ')) {
     let parsedCookie = authTokenJWT.split('Bearer ')[1]
     jwt.verify(parsedCookie, process.env.SECRET_KEY, async (err, decodedToken) => {
       if (err) {
         res.locals.user = null
         return res.status(400).json({ err })
-        
+      
       } else {
         const user = res.locals.user = await UserSchema.findById(decodedToken.userId).select('-password')
         return res.status(200).json(user)
@@ -144,3 +145,24 @@ module.exports.isEmpty = (value) => {
     (typeof value === 'array' && value !== 'undefined' && value.length != null && value.length > 0)
   )
 }
+module.exports.checkRole = role => (req, res, next) => {
+  const token = req.cookies.jwt;
+  const parseCookie = token.split('Bearer ')
+  if (parseCookie[1]) {
+    jwt.verify(parseCookie[1], process.env.SECRET_KEY, async (err, decodedToken) => {
+      if (err) {
+        return res.status(400).json({access_denied: "Accès refuser"})
+      } else {
+        let user = await UserSchema.findById(decodedToken.userId);
+        if(!role.includes(user.roles)){
+          return res.status(401).send("Accès refuser")
+        } else {
+          next()
+        }
+      }
+    });
+  } else {
+    res.locals.user = null;
+    return res.status(400).json({access_denied: "Accès refuser"})
+  }
+};

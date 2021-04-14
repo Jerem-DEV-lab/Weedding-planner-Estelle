@@ -1,33 +1,47 @@
-import Routes                  from './Components/Routes/Routes'
-import { UserContext }         from './Context/UserContext'
-import { useEffect, useState } from 'react'
-import axios                   from 'axios'
-import { useDispatch }         from 'react-redux'
-import { loginUserSuccess }    from './actions/authenticatorAction'
+import Routes                            from './Components/Routes/Routes'
+import { UserContext }                   from './Context/UserContext'
+import { useEffect, useState }           from 'react'
+import axios                             from 'axios'
+import { useDispatch, useSelector }      from 'react-redux'
+import { loginUserSuccess }              from './actions/authenticatorAction'
+import { ThemeProvider, createMuiTheme } from '@material-ui/core'
+
+const theme = createMuiTheme(
+  {
+    typography: {
+      fontFamily: [
+        '"Montserrat"',
+        '-apple-system',
+        'BlinkMacSystemFont'
+      ].join(','),
+    },
+  })
 
 function App () {
-  const [uid, setUid] = useState(
+  const [userLogged, setUserLogged] = useState(
     {
       isLogged: false,
       userId  : null,
       userRole: 'ROLE_USER'
     })
-  const dispatch      = useDispatch()
-  const fetchToken    = async () => {
+  const { isLogged }                = useSelector(state => state.userReducers)
+  const value                       = { userLogged, setUserLogged }
+  const dispatch                    = useDispatch()
+  const fetchToken                  = async () => {
     await axios.get('/check', {
                  withCredentials: true
                })
                .then(res => {
-                 setUid(
+                 setUserLogged(
                    {
                      isLogged: true,
                      userId  : res.data.userId,
-                     userRole: res.data.userRole
+                     userRole: res.data.roles
                    })
                  dispatch(loginUserSuccess(res.data, res.data.message))
                })
                .catch(() => {
-                 setUid(
+                 setUserLogged(
                    {
                      isLogged: false,
                      userId  : null,
@@ -37,12 +51,22 @@ function App () {
   }
   useEffect(() => {
     fetchToken()
-  }, [uid.isLogged])
+    
+  }, [userLogged.isLogged])
+  
+  useEffect(() => {
+    if (isLogged || userLogged.isLogged) {
+      fetchToken()
+    }
+  }, [isLogged, userLogged.isLogged])
   return <>
-    <UserContext.Provider value={uid}>
-      <Routes/>
-    </UserContext.Provider>
+    <ThemeProvider theme={theme}>
+      <UserContext.Provider value={value}>
+        <Routes/>
+      </UserContext.Provider>
+    </ThemeProvider>
   </>
+  
 }
 
 export default App

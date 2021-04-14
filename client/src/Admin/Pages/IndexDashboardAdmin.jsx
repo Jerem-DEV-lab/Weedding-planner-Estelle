@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
+import { Switch, Route, Redirect }    from 'react-router-dom'
 import Sidebar                        from '../Components/Sidebar/Sidebar'
 import { Grid }                       from '@material-ui/core'
 import TableUsers                     from '../Components/Users/TableUsers'
 import axios                          from 'axios'
-import { Switch, Route }              from 'react-router-dom'
+import IndexFormules                  from './Formules/IndexFormules'
 
 export default function IndexDashboardAdmin () {
   const [users, setUsers] = useState([])
@@ -23,6 +24,10 @@ export default function IndexDashboardAdmin () {
           <Route path="/admin" exact>
             <TableUsers userDetails={users}/>
           </Route>
+          <Route path="/admin/gestion-formules" exact>
+            <IndexFormules/>
+          </Route>
+          <Redirect to="/admin"/>
         </Switch>
       </Grid>
     </Sidebar>

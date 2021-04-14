@@ -8,6 +8,7 @@ const { createRouterContact }          = require('./routes/UserRoutes/ContactToA
 const { createRouterUpdateProfil }     = require('./routes/UserRoutes/UpdateProfilRoute')
 const cookieParser                     = require('cookie-parser')
 const path                             = require('path')
+const { checkRole }                    = require('./tools/Auth')
 const { createRouterAdmin }            = require('./routes/Admin')
 const { createRouterTest }             = require('./routes/tools')
 require('dotenv').config()
@@ -19,7 +20,7 @@ app.use(cookieParser())
 app.use('/', createRouterAuthentification())
 app.use('/', createRouterContact())
 app.use('/', createRouterUpdateProfil())
-app.use('/', createRouterAdmin())
+app.use('/', checkRole('ROLE_ADMIN'), createRouterAdmin())
 app.use('/', createRouterTest())
 app.use(express.static('client/build'))
 app.get('*', (req, res) => {
@@ -37,7 +38,7 @@ mongoose.connect(
     useNewUrlParser   : true,
     useCreateIndex    : true,
     useUnifiedTopology: true,
-    useFindAndModify  : true,
+    useFindAndModify  : false,
   }
         )
         .then(() => console.log('Connected to mongoDB'))
