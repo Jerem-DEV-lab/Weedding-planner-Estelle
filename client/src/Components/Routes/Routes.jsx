@@ -42,8 +42,6 @@ const Routes = () => {
          <Route path={'/a-propos'} exact component={About}/>
          <Route path={'/baby-shower'} exact component={BabyShower}/>
          <PrivateRoutes path={'/admin*'} role="ROLE_ADMIN" exact component={IndexDashboardAdmin}/>
-         <ProtectedRoutes path="/inscription" exact component={ModalAuthentification}/>
-         <ProtectedRoutes path="/connexion" exact component={ModalAuthentification}/>
          <Route path="/contact" exact component={Contact}/>
          <Redirect to={'/'}/>
        </Switch>}

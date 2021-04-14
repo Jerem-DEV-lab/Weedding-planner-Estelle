@@ -72,18 +72,17 @@ const ModalAuth = ({ openModal }) => {
       {stateLogin.isLoading && 'Chargement...'}
       {stateLogin.userInfo.message && stateLogin.userInfo.message}
       
-      {contextFormModal === '/inscription' ?
-       <form className="form-register" onSubmit={submitFormRegister}>
-         <div className="grid-modal form-register">
-           <fieldset className="form-group-civility">
-             <legend className="col-form-label">Civilité : *</legend>
-             <div className="form-check">
-               <input id="Mme" type="checkbox" className="form-check-input"
-                      defaultChecked={formRegister.civility === 'Mme' ? 'true' : 'false'} onChange={onChangeRegister}/>
-               <label htmlFor="Mme" className="form-check-label">Mme</label>
-             </div>
-             <div className="form-check">
-               <input id="Mr" type="checkbox" className="form-check-input" onChange={onChangeRegister}
+      {contextFormModal === '/inscription' && <form className="form-register" onSubmit={submitFormRegister}>
+        <div className="grid-modal form-register">
+          <fieldset className="form-group-civility">
+            <legend className="col-form-label">Civilité : *</legend>
+            <div className="form-check">
+              <input id="Mme" type="checkbox" className="form-check-input"
+                     defaultChecked={formRegister.civility === 'Mme' ? 'true' : 'false'} onChange={onChangeRegister}/>
+              <label htmlFor="Mme" className="form-check-label">Mme</label>
+            </div>
+            <div className="form-check">
+              <input id="Mr" type="checkbox" className="form-check-input" onChange={onChangeRegister}
                       defaultChecked={formRegister.civility === 'Mr'}/>
                <label htmlFor="Mr" className="form-check-label">Mr</label>
              </div>
@@ -111,16 +110,17 @@ const ModalAuth = ({ openModal }) => {
                <label htmlFor="newsletter" className="form-check-label">Recevoir la newsletters</label>
              </div>
            </fieldset>
-           <div className="link-existing-account">
-             <button onClick={() => setContextFormModal('/connexion')}>
-               Déjà un compte ? Se connecter...
-             </button>
-           </div>
-         </div>
-         <div className="btn-group btn-center">
-           <button className="btn btn-primary hover-outline">S'inscrire</button>
-         </div>
-       </form> : contextFormModal === '/connexion' && <form className="form-login" onSubmit={submitFormLogin}>
+          <div className="link-existing-account">
+            <button onClick={() => setContextFormModal('/connexion')}>
+              Déjà un compte ? Se connecter...
+            </button>
+          </div>
+        </div>
+        <div className="btn-group btn-center">
+          <button className="btn btn-primary hover-outline">S'inscrire</button>
+        </div>
+      </form>}
+      {contextFormModal === '/connexion' && <form className="form-login" onSubmit={submitFormLogin}>
         <div className="grid-modal form-login">
           {FormLogin.map(input => (
             <>
@@ -128,7 +128,7 @@ const ModalAuth = ({ openModal }) => {
                 <label htmlFor={input.id} className="form-label">{input.label}</label>
                 <input type={input.type} className="form-control" id={input.id} onChange={onChangeLogin}/>
               </div>
-            </>
+            </>&&&&
           ))}
           <div className="link-register-account">
             <button onClick={() => setContextFormModal('/inscription')}>Pas encore de compte ? S'inscrire</button>
@@ -137,8 +137,7 @@ const ModalAuth = ({ openModal }) => {
         <div className="btn-group btn-center">
           <button className="btn btn-primary hover-outline">Se connecter</button>
         </div>
-      </form>
-      }
+      </form>}
     </div>
   </>
 }
