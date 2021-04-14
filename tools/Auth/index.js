@@ -147,15 +147,14 @@ module.exports.isEmpty = (value) => {
 }
 module.exports.checkRole = role => (req, res, next) => {
   const token = req.cookies.jwt;
-  const parseCookie = token.split('Bearer ')
-  if (parseCookie[1]) {
-    jwt.verify(parseCookie[1], process.env.SECRET_KEY, async (err, decodedToken) => {
+  if (token && token.split('Bearer ')) {
+    jwt.verify(token.split('Bearer ')[1], process.env.SECRET_KEY, async (err, decodedToken) => {
       if (err) {
-        return res.status(400).json({access_denied: "Accès refuser"})
+        return res.status(400).json({ access_denied: 'Accès refuser' })
       } else {
-        let user = await UserSchema.findById(decodedToken.userId);
-        if(!role.includes(user.roles)){
-          return res.status(401).send("Accès refuser")
+        let user = await UserSchema.findById(decodedToken.userId)
+        if (!role.includes(user.roles)) {
+          return res.status(401).send('Accès refuser')
         } else {
           next()
         }

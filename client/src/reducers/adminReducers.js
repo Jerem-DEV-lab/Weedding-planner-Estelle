@@ -12,7 +12,7 @@ import {
 } from '../actions/adminAction'
 
 const initialState = {
-  ListUser          : [],
+  listUser          : [],
   isLoading         : false,
   errorFetchUsers   : '',
   changePriceError  : '',
@@ -52,14 +52,14 @@ export default function adminReducers (state = initialState, action) {
     case GET_USER_SUCCESS:
       return {
         ...state,
-        ListUser : action.payload,
+        listUser : action.payload,
         isLoading: false
       }
     case GET_USER_ERROR:
       return {
         ...state,
         isLoading      : false,
-        users          : [],
+        listUser          : [],
         errorFetchUsers: action.payload
       }
     case CHANGE_PRICE_FORMULA_LOADING:

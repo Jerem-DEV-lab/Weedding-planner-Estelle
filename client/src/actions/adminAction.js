@@ -14,35 +14,32 @@ export const GET_FORMULA_LOADING          = 'GET_FORMULA_LOADING'
 export const GET_FORMULA_ERROR            = 'GET_FORMULA_ERROR'
 export const GET_FORMULA_SUCCESS          = 'GET_FORMULA_SUCCESS'
 
-export function setLoadingFetch (type) {
+export const getUserLoading  = () => {
   return {
-    type: type,
+    type: GET_USER_LOADING
   }
 }
-
-export function setSuccessFetch (type, data) {
+export const getUserSuccess  = (users) => {
   return {
-    type   : type,
-    payload: data
+    type   : GET_USER_SUCCESS,
+    payload: users
   }
 }
-
-export function setErrorFetch (type, payload) {
+export const getUserError    = (err) => {
   return {
-    type   : type,
-    payload: payload
+    type   : GET_USER_SUCCESS,
+    payload: err
   }
 }
-
 export const requestApiUsers = () => {
   return dispatch => {
-    dispatch(setLoadingFetch(GET_USER_LOADING))
+    dispatch(getUserLoading())
     axios.get('/admin/get-users')
          .then(res => {
-           dispatch(setSuccessFetch(GET_USER_SUCCESS, res.data))
+           dispatch(getUserSuccess(res.data.users))
          })
          .catch(err => {
-           dispatch(setErrorFetch(GET_USER_ERROR, err))
+           dispatch(getUserError(err))
          })
   }
 }
