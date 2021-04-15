@@ -20,7 +20,7 @@ app.use(cookieParser())
 app.use('/', createRouterAuthentification())
 app.use('/', createRouterContact())
 app.use('/', createRouterUpdateProfil())
-app.use('/', checkRole('ROLE_ADMIN'), createRouterAdmin())
+app.use('/', createRouterAdmin())
 app.use('/', createRouterTest())
 app.use(express.static('client/build'))
 app.get('*', (req, res) => {
