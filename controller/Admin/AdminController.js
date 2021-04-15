@@ -1,4 +1,6 @@
-const { createFormula, deleteFormula, updatePriceFormula, getFormulas } = require('../../Services/FormulaService')
+const { getAllMessages }                                                = require('../../Services/Admin/ContactService')
+const { sendNewsletter }                                                = require('../../Services/Admin/NewsletterService')
+const { createFormula, deleteFormula, updatePriceFormula, getFormulas } = require('../../Services/Admin/FormulaService')
 const ObjectId                                                          = require('mongoose').Types.ObjectId
 
 class AdminController {
@@ -34,6 +36,15 @@ class AdminController {
       return this.response.status(404).json({ errors: 'Vous devez renseigner un prix' })
     }
     return updatePriceFormula(request, response)
+  }
+  
+  async sendNewsletter (request, response) {
+    return sendNewsletter(request, response)
+  }
+  
+  async getAllMessages (request, response) {
+    const data = request.body.propertyMessage.isRead
+    return getAllMessages(request, response, data)
   }
 }
 

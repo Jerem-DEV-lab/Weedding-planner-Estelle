@@ -1,5 +1,7 @@
-const ContactSchema = require('../../../db/Schema/ContactSchema')
-const { ErrorForm } = require('../../../tools/Auth')
+const ContactSchema        = require('../../../db/Schema/ContactSchema')
+const { deleteMessage }    = require('../../../Services/Admin/ContactService')
+const { setMessageIsRead } = require('../../../Services/Admin/ContactService')
+const { ErrorForm }        = require('../../../tools/Auth')
 
 class Contact {
   constructor () {
@@ -29,6 +31,13 @@ class Contact {
     }
   }
   
+  static async setMessageIsRead (request, response) {
+    return await setMessageIsRead(request, response)
+  }
+  
+  static async deleteMessage (request, response) {
+    return await deleteMessage(request, response)
+  }
 }
 
 module.exports = Contact

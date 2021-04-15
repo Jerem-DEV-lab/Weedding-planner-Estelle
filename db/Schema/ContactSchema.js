@@ -39,6 +39,11 @@ const ContactSchema = new Schema
      required : true,
      maxlength: 255,
      minlength: 20
+   },
+   propertyMessage : {
+     isRead: {
+       type: Boolean, required: true, default: false
+     }
    }
   
  }, { timestamps: true })

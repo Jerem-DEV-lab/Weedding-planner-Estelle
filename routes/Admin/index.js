@@ -15,6 +15,10 @@ function createRouterAdmin () {
     const adminService = new adminController(req, res)
     return adminService.getFormules(req, res)
   })
+  router.get('/admin/get/messages', async (req, res) => {
+    const adminService = new adminController(req, res)
+    return adminService.getAllMessages(req, res)
+  })
   router.post('/admin/create/formule', async (req, res) => {
     return adminController.formulaCreate(req, res)
   })
@@ -25,6 +29,10 @@ function createRouterAdmin () {
   router.patch('/admin/update/formule-price/:formulaId', (req, res) => {
     const adminService = new adminController(req, res)
     return adminService.formuleUpdate(req, res)
+  })
+  router.post('/admin/send/news', (req, res) => {
+    const adminService = new adminController(req, res)
+    return adminService.sendNewsletter(req, res)
   })
   return router
 }

@@ -1,35 +1,34 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { Switch, Route, Redirect }    from 'react-router-dom'
 import Sidebar                        from '../Components/Sidebar/Sidebar'
-import { Grid }                       from '@material-ui/core'
 import TableUsers                     from '../Components/Users/TableUsers'
-import axios                          from 'axios'
 import IndexFormules                  from './Formules/IndexFormules'
+import IndexNewsLetter                from './NewsLetter/IndexNewsLetter'
+import { useDispatch, useSelector }   from 'react-redux'
+import { requestApiUsers }            from '../../actions/adminAction'
 
 export default function IndexDashboardAdmin () {
-  const [users, setUsers] = useState([])
-  const getUsersDb        = () => {
-    axios.get('/admin/get-users')
-         .then(res => setUsers(res.data.users))
-         .catch(err => console.log(err))
-  }
+  const dispatch          = useDispatch()
+  const adminState        = useSelector(state => state.adminReducers)
+  
   useEffect(() => {
-    getUsersDb()
+    dispatch(requestApiUsers())
   }, [])
   return <>
     
     <Sidebar>
-      <Grid container spacing={3}>
-        <Switch>
-          <Route path="/admin" exact>
-            <TableUsers userDetails={users}/>
-          </Route>
-          <Route path="/admin/gestion-formules" exact>
-            <IndexFormules/>
-          </Route>
-          <Redirect to="/admin"/>
-        </Switch>
-      </Grid>
+      <Switch>
+        <Route path="/admin" exact>
+          <TableUsers userDetails={adminState.listUser}/>
+        </Route>
+        <Route path="/admin/gestion-formules" exact>
+          <IndexFormules/>
+        </Route>
+        <Route path="/admin/newsletter" exact>
+          <IndexNewsLetter/>
+        </Route>
+        <Redirect to="/admin"/>
+      </Switch>
     </Sidebar>
   </>
 }
