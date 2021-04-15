@@ -1,3 +1,4 @@
+const { setMessageIsRead }                                              = require('../../Services/Admin/ContactService')
 const { getAllMessages }                                                = require('../../Services/Admin/ContactService')
 const { sendNewsletter }                                                = require('../../Services/Admin/NewsletterService')
 const { createFormula, deleteFormula, updatePriceFormula, getFormulas } = require('../../Services/Admin/FormulaService')
@@ -43,8 +44,11 @@ class AdminController {
   }
   
   async getAllMessages (request, response) {
-    const data = request.body.propertyMessage.isRead
-    return getAllMessages(request, response, data)
+    return getAllMessages(request, response)
+  }
+  
+  async setMessageIsRead (request, response) {
+    return setMessageIsRead(request, response)
   }
 }
 

@@ -4,11 +4,16 @@ import {
   CHANGE_PRICE_FORMULA_SUCCESS,
   DELETE_FORMULA_ERROR,
   DELETE_FORMULA_LOADING,
-  DELETE_FORMULA_SUCCESS, GET_FORMULA_ERROR, GET_FORMULA_LOADING, GET_FORMULA_SUCCESS,
+  DELETE_FORMULA_SUCCESS,
+  GET_FORMULA_ERROR,
+  GET_FORMULA_LOADING,
+  GET_FORMULA_SUCCESS, GET_MESSAGES_ERROR,
+  GET_MESSAGES_LOADING,
+  GET_MESSAGES_SUCCESS,
   GET_USER_ERROR,
   GET_USER_LOADING,
   GET_USER_SUCCESS,
-  RESET_EVENTS_ACTION
+  RESET_EVENTS_ACTION, SET_MESSAGES_ISREAD_ERROR, SET_MESSAGES_ISREAD_SUCCESS
 } from '../actions/adminAction'
 
 const initialState = {
@@ -22,7 +27,9 @@ const initialState = {
   deleteSuccess     : '',
   deleteError       : '',
   formulas          : [],
-  anyErrors         : ''
+  anyErrors         : '',
+  messages          : [],
+  
 }
 
 
@@ -111,6 +118,34 @@ export default function adminReducers (state = initialState, action) {
         deleteError  : action.payload
       }
     }
+    case GET_MESSAGES_LOADING:
+      return {
+        ...state,
+        isLoading: true,
+      }
+    case GET_MESSAGES_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        messages : action.payload
+      }
+    case GET_MESSAGES_ERROR:
+      return {
+        ...state,
+        isLoading: false,
+        messages : [],
+        anyErrors: action.payload
+      }
+    case SET_MESSAGES_ISREAD_SUCCESS:
+      return {
+        ...state,
+        isLoading: false
+      }
+    case SET_MESSAGES_ISREAD_ERROR:
+      return {
+        ...state,
+        isLoading: false
+      }
     case RESET_EVENTS_ACTION: {
       return {
         ...state,

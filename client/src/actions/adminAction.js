@@ -13,13 +13,18 @@ export const DELETE_FORMULA_ERROR         = 'DELETE_FORMULA_ERROR'
 export const GET_FORMULA_LOADING          = 'GET_FORMULA_LOADING'
 export const GET_FORMULA_ERROR            = 'GET_FORMULA_ERROR'
 export const GET_FORMULA_SUCCESS          = 'GET_FORMULA_SUCCESS'
+export const GET_MESSAGES_LOADING         = 'GET_MESSAGES_LOADING'
+export const GET_MESSAGES_ERROR           = 'GET_MESSAGES_ERROR'
+export const GET_MESSAGES_SUCCESS         = 'GET_MESSAGES_SUCCESS'
+export const SET_MESSAGES_ISREAD_ERROR    = 'SET_MESSAGES_ISREAD_ERROR'
+export const SET_MESSAGES_ISREAD_SUCCESS  = 'SET_MESSAGES_ISREAD_SUCCESS'
 
-export const getUserLoading  = () => {
+export const getUserLoading    = () => {
   return {
     type: GET_USER_LOADING
   }
 }
-export const getUserSuccess  = (users) => {
+export const getUserSuccess    = (users) => {
   return {
     type   : GET_USER_SUCCESS,
     payload: users
@@ -114,14 +119,12 @@ export const getFormulaLoading = () => {
     type: GET_FORMULA_LOADING
   }
 }
-
 export const getFormulaSuccess = (formulas) => {
   return {
     type   : GET_FORMULA_SUCCESS,
     payload: formulas
   }
 }
-
 export const getFormulaError   = (error) => {
   return {
     type   : GET_FORMULA_ERROR,
@@ -134,6 +137,53 @@ export const requestApiFormula = () => {
     axios.get('/admin/get/formule')
          .then(res => dispatch(getFormulaSuccess(res.data.docs)))
          .catch(err => dispatch(getFormulaError(err.response.data.errors)))
+  }
+}
+
+export const getMessageLoading = () => {
+  return {
+    type: GET_MESSAGES_LOADING
+  }
+}
+export const getMessageSuccess = (messages) => {
+  return {
+    type   : GET_MESSAGES_SUCCESS,
+    payload: messages
+  }
+}
+export const getMessageError   = (error) => {
+  return {
+    type   : GET_MESSAGES_ERROR,
+    payload: error
+  }
+}
+export const requestApiMessage = () => {
+  return dispatch => {
+    dispatch(getMessageLoading())
+    axios.get('/admin/get/messages')
+         .then(res => dispatch(getMessageSuccess(res.data)))
+         .catch(err => dispatch(getMessageError(err.response.data.errors)))
+  }
+}
+
+export const setMessageIsReadSuccess    = (messages) => {
+  return {
+    type   : SET_MESSAGES_ISREAD_SUCCESS,
+    payload: messages
+  }
+}
+export const setMessageIsReadError      = (error) => {
+  return {
+    type   : SET_MESSAGES_ISREAD_ERROR,
+    payload: error
+  }
+}
+export const requestApiSetMessageIsRead = (messageId) => {
+  return dispatch => {
+    dispatch(getMessageLoading())
+    axios.patch(`/admin/update/messages/${messageId}`)
+         .then(res => dispatch(setMessageIsReadSuccess(res.data)))
+         .catch(err => dispatch(setMessageIsReadError(err.response.data.errors)))
   }
 }
 

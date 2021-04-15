@@ -30,6 +30,10 @@ function createRouterAdmin () {
     const adminService = new adminController(req, res)
     return adminService.formuleUpdate(req, res)
   })
+  router.patch('/admin/update/messages/:messageId', (req, res) => {
+    const adminService = new adminController(req, res)
+    return adminService.setMessageIsRead(req, res)
+  })
   router.post('/admin/send/news', (req, res) => {
     const adminService = new adminController(req, res)
     return adminService.sendNewsletter(req, res)

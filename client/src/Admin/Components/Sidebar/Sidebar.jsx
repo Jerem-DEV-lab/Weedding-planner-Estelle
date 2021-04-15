@@ -1,4 +1,4 @@
-import React, { useState }                       from 'react'
+import React, { useEffect, useState }            from 'react'
 import clsx                                      from 'clsx'
 import { useTheme }                              from '@material-ui/core/styles'
 import Drawer                                    from '@material-ui/core/Drawer'
@@ -23,15 +23,19 @@ import { Link }                                  from 'react-router-dom'
 import { requestApiLogoutUser }                  from '../../../actions/authenticatorAction'
 import { useDispatch, useSelector }              from 'react-redux'
 
-export default function Sidebar ({ children }) {
-  const classes          = useStyleSidebar()
-  const theme            = useTheme()
-  const [open, setOpen]  = useState(false)
-  const dispatch         = useDispatch()
-  const handleDrawerOpen = () => {
-    setOpen(true)
+export default function Sidebar ({ messages, children }) {
+  const classes         = useStyleSidebar()
+  const theme           = useTheme()
+  const [open, setOpen] = useState(false)
+  const dispatch        = useDispatch()
+  
+  function checkMessageStatus (message) {
+    return message.propertyMessage.isRead === false
   }
   
+  const handleDrawerOpen        = () => {
+    setOpen(true)
+  }
   const handleDrawerClose       = () => {
     setOpen(false)
   }
@@ -68,7 +72,7 @@ export default function Sidebar ({ children }) {
           </IconButton>
           <div className={classes.appBarRightSide}>
             <Button>
-              <Badge badgeContent={4} color="primary">
+              <Badge badgeContent={messages.filter(checkMessageStatus).length} color="primary">
                 <MailIcon/>
               </Badge>
             </Button>

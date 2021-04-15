@@ -1,6 +1,10 @@
 const ContactSchema           = require('../../db/Schema/ContactSchema')
 module.exports.getAllMessages = async (req, res) => {
   return ContactSchema.find(function (err, docs) {
+  
+    if (!docs) {
+      return res.status(400).json({ docs: docs })
+    }
     if (!err) {
       return res.status(200).json(docs)
     }
@@ -12,8 +16,7 @@ module.exports.getAllMessages = async (req, res) => {
 
 module.exports.setMessageIsRead = async (request, response) => {
   const messageId   = request.params.messageId
-  const bodyUpdated = request.body.propertyMessage.isRead
-  return ContactSchema.findByIdAndUpdate({ _id: messageId }, { propertyMessage: { isRead: bodyUpdated } }, { new: true }, function (err, docs) {
+  return ContactSchema.findByIdAndUpdate({ _id: messageId }, { propertyMessage: { isRead: true } }, { new: true }, function (err, docs) {
     if (!err) {
       return response.status(200).json(docs)
     } else {
