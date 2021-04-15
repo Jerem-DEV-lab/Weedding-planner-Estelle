@@ -18,13 +18,16 @@ export const GET_MESSAGES_ERROR           = 'GET_MESSAGES_ERROR'
 export const GET_MESSAGES_SUCCESS         = 'GET_MESSAGES_SUCCESS'
 export const SET_MESSAGES_ISREAD_ERROR    = 'SET_MESSAGES_ISREAD_ERROR'
 export const SET_MESSAGES_ISREAD_SUCCESS  = 'SET_MESSAGES_ISREAD_SUCCESS'
+export const CREATE_NEWS_LOADING          = 'CREATE_NEWS_LOADING'
+export const CREATE_NEWS_SUCCESS          = 'CREATE_NEWS_SUCCESS'
+export const CREATE_NEWS_ERRORS           = 'CREATE_NEWS_ERRORS'
 
-export const getUserLoading    = () => {
+export const getUserLoading  = () => {
   return {
     type: GET_USER_LOADING
   }
 }
-export const getUserSuccess    = (users) => {
+export const getUserSuccess  = (users) => {
   return {
     type   : GET_USER_SUCCESS,
     payload: users
@@ -187,7 +190,32 @@ export const requestApiSetMessageIsRead = (messageId) => {
   }
 }
 
-export const resetEvent = () => {
+export const createNewsLoading          = () => {
+  return {
+    type: CREATE_NEWS_LOADING
+  }
+}
+export const createNewsSuccess          = (message) => {
+  return {
+    type   : CREATE_NEWS_SUCCESS,
+    payload: message
+  }
+}
+export const createNewsError            = (message) => {
+  return {
+    type   : CREATE_NEWS_ERRORS,
+    payload: message
+  }
+}
+export const requestApiCreateNewsletter = (data) => {
+  return dispatch => {
+    dispatch(createNewsLoading())
+    axios.post(`/admin/create/news`, data)
+         .then(res => dispatch(createNewsSuccess(res.data.success)))
+         .catch(err => dispatch(createNewsError(err.response.data)))
+  }
+}
+export const resetEvent                 = () => {
   return {
     type: RESET_EVENTS_ACTION
   }

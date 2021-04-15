@@ -1,7 +1,7 @@
 import {
   CHANGE_PRICE_FORMULA_ERROR,
   CHANGE_PRICE_FORMULA_LOADING,
-  CHANGE_PRICE_FORMULA_SUCCESS,
+  CHANGE_PRICE_FORMULA_SUCCESS, CREATE_NEWS_ERRORS, CREATE_NEWS_LOADING, CREATE_NEWS_SUCCESS,
   DELETE_FORMULA_ERROR,
   DELETE_FORMULA_LOADING,
   DELETE_FORMULA_SUCCESS,
@@ -29,7 +29,9 @@ const initialState = {
   formulas          : [],
   anyErrors         : '',
   messages          : [],
-  
+  newsLetters       : [],
+  successCreateNews : '',
+  errorsCreateNews  : {}
 }
 
 
@@ -146,6 +148,23 @@ export default function adminReducers (state = initialState, action) {
         ...state,
         isLoading: false
       }
+    case CREATE_NEWS_LOADING:
+      return {
+        ...state,
+        isLoading: true
+      }
+    case CREATE_NEWS_SUCCESS:
+      return {
+        ...state,
+        successCreateNews: action.payload,
+        errorsCreateNews : {}
+      }
+    case CREATE_NEWS_ERRORS:
+      return {
+        ...state,
+        errorsCreateNews : action.payload,
+        successCreateNews: ''
+      }
     case RESET_EVENTS_ACTION: {
       return {
         ...state,
@@ -154,7 +173,9 @@ export default function adminReducers (state = initialState, action) {
         changePriceSuccess: '',
         status            : 'closed',
         deleteSuccess     : '',
-        deleteError       : ''
+        deleteError       : '',
+        successCreateNews : '',
+        errorsCreateNews  : {}
       }
     }
     default:

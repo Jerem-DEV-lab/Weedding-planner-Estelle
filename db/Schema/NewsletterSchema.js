@@ -2,10 +2,6 @@ const { Schema, model } = require('mongoose')
 
 const NewsletterSchema = new Schema(
   {
-    users      : [{
-      type: Schema.Types.ObjectId,
-      ref : 'user'
-    }],
     titleNews   : {
       type    : String,
       required: true,

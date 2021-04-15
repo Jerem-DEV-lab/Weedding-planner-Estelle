@@ -2,11 +2,10 @@ import React, { useState }         from 'react'
 import { Grid, Paper, Typography } from '@material-ui/core'
 import { makeStyles }              from '@material-ui/core/styles'
 import { useSelector }             from 'react-redux'
-
-import PersonRoundedIcon     from '@material-ui/icons/PersonRounded'
-import NavigationIcon        from '@material-ui/icons/Navigation'
-import Button                from '@material-ui/core/Button'
-import ModalCreateNewsletter from '../../Components/ModalCreateNewsletter'
+import PersonRoundedIcon           from '@material-ui/icons/PersonRounded'
+import AddCircleIcon               from '@material-ui/icons/AddCircle'
+import Button                      from '@material-ui/core/Button'
+import ModalCreateNewsletter       from '../../Components/ModalNewsletter/ModalCreateNewsletter'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -15,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
     flexWrap          : 'wrap',
     width             : '100%',
     '& .MuiPaper-root': {
-      padding: theme.spacing(1),
+      padding: theme.spacing(3),
     },
     extendedIcon      : {
       marginRight: theme.spacing(1),
@@ -65,8 +64,8 @@ const IndexNewsLetter = () => {
                 size="small"
                 onClick={() => setCreateNews(true)}
                 className={classes.button}
-                endIcon={<NavigationIcon/>}>
-                Envoyer une newsletter
+                endIcon={<AddCircleIcon/>}>
+                Créer une newsletter
               </Button>
             </Paper>
           </Grid>

@@ -1,10 +1,11 @@
-const router          = require('express').Router()
-const UserSchema      = require('../../db/Schema/UserSchema')
-const adminController = require('../../controller/Admin/AdminController')
-const { checkRole }   = require('../../tools/Auth')
+const router               = require('express').Router()
+const UserSchema           = require('../../db/Schema/UserSchema')
+const adminController      = require('../../controller/Admin/AdminController')
+const { createNewsletter } = require('../../Services/Admin/NewsletterService')
+const { checkRole }        = require('../../tools/Auth')
 
 function createRouterAdmin () {
-  router.get('/admin/get-users', checkRole('ROLE_ADMIN'),async (req, res) => {
+  router.get('/admin/get-users', checkRole('ROLE_ADMIN'), async (req, res) => {
     try {
       const users = await UserSchema.find({ roles: 'ROLE_USER' }).select('-password')
       return res.status(200).json({ users: users })
@@ -35,9 +36,12 @@ function createRouterAdmin () {
     const adminService = new adminController(req, res)
     return adminService.setMessageIsRead(req, res)
   })
-  router.post('/admin/send/news',checkRole('ROLE_ADMIN'),  (req, res) => {
+  router.post('/admin/send/news', checkRole('ROLE_ADMIN'), (req, res) => {
     const adminService = new adminController(req, res)
     return adminService.sendNewsletter(req, res)
+  })
+  router.post('/admin/create/news', checkRole('ROLE_ADMIN'), (req, res) => {
+    return createNewsletter(req, res)
   })
   return router
 }
