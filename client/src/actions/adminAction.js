@@ -21,6 +21,15 @@ export const SET_MESSAGES_ISREAD_SUCCESS  = 'SET_MESSAGES_ISREAD_SUCCESS'
 export const CREATE_NEWS_LOADING          = 'CREATE_NEWS_LOADING'
 export const CREATE_NEWS_SUCCESS          = 'CREATE_NEWS_SUCCESS'
 export const CREATE_NEWS_ERRORS           = 'CREATE_NEWS_ERRORS'
+export const GET_NEWS_LOADING             = 'GET_NEWS_LOADING'
+export const GET_NEWS_SUCCESS             = 'GET_NEWS_SUCCESS'
+export const GET_NEWS_ERRORS              = 'GET_NEWS_ERRORS'
+export const DELETE_NEWS_LOADING          = 'DELETE_NEWS_LOADING'
+export const DELETE_NEWS_SUCCESS          = 'DELETE_NEWS_SUCCESS'
+export const DELETE_NEWS_ERRORS           = 'DELETE_NEWS_ERRORS'
+export const UPDATE_NEWS_LOADING          = 'UPDATE_NEWS_LOADING'
+export const UPDATE_NEWS_SUCCESS          = 'UPDATE_NEWS_SUCCESS'
+export const UPDATE_NEWS_ERRORS           = 'UPDATE_NEWS_ERRORS'
 
 export const getUserLoading  = () => {
   return {
@@ -207,12 +216,91 @@ export const createNewsError            = (message) => {
     payload: message
   }
 }
-export const requestApiCreateNewsletter = (data) => {
+export const requestApiCreateNewsletter   = (data) => {
   return dispatch => {
     dispatch(createNewsLoading())
     axios.post(`/admin/create/news`, data)
          .then(res => dispatch(createNewsSuccess(res.data.success)))
          .catch(err => dispatch(createNewsError(err.response.data)))
+  }
+}
+
+export const getNewsLoading = () => {
+  return {
+    type: GET_NEWS_LOADING
+  }
+}
+export const getNewsSuccess = (news) => {
+  return {
+    type   : GET_NEWS_SUCCESS,
+    payload: news
+  }
+}
+export const getNewsError   = (err) => {
+  return {
+    type   : GET_NEWS_ERRORS,
+    payload: err
+  }
+}
+
+export const requestApiGetNewsletter = () => {
+  return dispatch => {
+    dispatch(getNewsLoading())
+    axios.get(`/admin/get/news`)
+         .then(res => dispatch(getNewsSuccess(res.data)))
+         .catch(err => dispatch(getNewsError(err.response)))
+  }
+}
+export const deleteNewsLoading       = () => {
+  return {
+    type: DELETE_NEWS_LOADING
+  }
+}
+export const deleteNewsSuccess       = (success, docsId) => {
+  return {
+    type   : DELETE_NEWS_SUCCESS,
+    payload: { success, docsId }
+  }
+}
+export const deleteNewsError         = (err) => {
+  return {
+    type   : DELETE_NEWS_ERRORS,
+    payload: err
+  }
+}
+
+export const requestApiDeleteNewsletter = (newsId) => {
+  return dispatch => {
+    /*dispatch(deleteNewsLoading())*/
+    axios.delete(`/admin/delete/news/${newsId}`)
+         .then(res => dispatch(deleteNewsSuccess(res.data.success, newsId)))
+         .catch(err => dispatch(deleteNewsError(err.response)))
+  }
+}
+
+export const updateNewsLoading = () => {
+  return {
+    type: UPDATE_NEWS_LOADING
+  }
+}
+export const updateNewsSuccess = (success) => {
+  return {
+    type   : UPDATE_NEWS_SUCCESS,
+    payload: success
+  }
+}
+export const updateNewsError   = (err) => {
+  return {
+    type   : UPDATE_NEWS_ERRORS,
+    payload: err
+  }
+}
+
+export const requestApiUpdateNewsletter = (updateBody, newsId) => {
+  return dispatch => {
+    axios.patch(`/admin/update/news/${newsId}`, updateBody)
+         .then(res => dispatch(updateNewsSuccess(res.data.success)))
+         .catch(err => dispatch(updateNewsError(err.response)))
   }
 }
 export const resetEvent                 = () => {

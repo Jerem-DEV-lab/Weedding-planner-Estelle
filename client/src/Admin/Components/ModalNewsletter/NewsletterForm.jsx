@@ -23,12 +23,11 @@ const NewsletterForm = (props) => {
       }, 1500)
     }
   }, [successCreateNews])
-  
   return <>
     {successCreateNews && <Alert severity="success">{successCreateNews}</Alert>}
     <Form>
       <Grid container spacing={3}>
-        <Grid item xs={6}>
+        <Grid item xs={12} md={12} lg={6}>
           {errorsCreateNews.titleNews ?
            <Controls.Input
              error
@@ -43,22 +42,22 @@ const NewsletterForm = (props) => {
              onChange={onChange}
              label="Titre de la news"/>}
         </Grid>
-        <Grid item xs={6}>
-          
+        <Grid item xs={12} md={12} lg={6}>
+    
           {errorsCreateNews.categoryNews ?
            <Controls.RadioGroup
              errors={true}
              items={itemsNews}
              name="categoryNews"
              label="Type de la news"
-             value={itemsNews.id}
+             value={values.categoryNews}
              helperText={errorsCreateNews.categoryNews}
              onChange={onChange}/> :
            <Controls.RadioGroup
              items={itemsNews}
              name="categoryNews"
              label="Type de la news"
-             value={itemsNews.id}
+             value={values.categoryNews}
              onChange={onChange}/>
           }
         </Grid>
@@ -79,7 +78,7 @@ const NewsletterForm = (props) => {
            <TextField
              label="Description de la newsletter"
              multiline
-             rows={4}
+             rows={1}
              name="contentNews"
              value={values.contentNews}
              onChange={onChange}

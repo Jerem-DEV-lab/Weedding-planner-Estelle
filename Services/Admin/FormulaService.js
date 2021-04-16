@@ -1,4 +1,5 @@
-const FormulaSchema = require('../../db/Schema/FormulaSchema')
+
+const FormulaSchema    = require('../../db/Schema/FormulaSchema')
 
 module.exports.createFormula = async (req, res) => {
   const { type, image, name, title, descriptif, price, offerInfo, formuleSection } = req.body

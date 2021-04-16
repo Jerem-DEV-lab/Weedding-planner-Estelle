@@ -1,19 +1,34 @@
 import {
   CHANGE_PRICE_FORMULA_ERROR,
   CHANGE_PRICE_FORMULA_LOADING,
-  CHANGE_PRICE_FORMULA_SUCCESS, CREATE_NEWS_ERRORS, CREATE_NEWS_LOADING, CREATE_NEWS_SUCCESS,
+  CHANGE_PRICE_FORMULA_SUCCESS,
+  CREATE_NEWS_ERRORS,
+  CREATE_NEWS_LOADING,
+  CREATE_NEWS_SUCCESS,
   DELETE_FORMULA_ERROR,
   DELETE_FORMULA_LOADING,
   DELETE_FORMULA_SUCCESS,
+  DELETE_NEWS_ERRORS,
+  DELETE_NEWS_LOADING,
+  DELETE_NEWS_SUCCESS,
   GET_FORMULA_ERROR,
   GET_FORMULA_LOADING,
-  GET_FORMULA_SUCCESS, GET_MESSAGES_ERROR,
+  GET_FORMULA_SUCCESS,
+  GET_MESSAGES_ERROR,
   GET_MESSAGES_LOADING,
   GET_MESSAGES_SUCCESS,
+  GET_NEWS_ERRORS,
+  GET_NEWS_LOADING,
+  GET_NEWS_SUCCESS,
   GET_USER_ERROR,
   GET_USER_LOADING,
   GET_USER_SUCCESS,
-  RESET_EVENTS_ACTION, SET_MESSAGES_ISREAD_ERROR, SET_MESSAGES_ISREAD_SUCCESS
+  RESET_EVENTS_ACTION,
+  SET_MESSAGES_ISREAD_ERROR,
+  SET_MESSAGES_ISREAD_SUCCESS,
+  UPDATE_NEWS_ERRORS,
+  UPDATE_NEWS_LOADING,
+  UPDATE_NEWS_SUCCESS
 } from '../actions/adminAction'
 
 const initialState = {
@@ -31,6 +46,7 @@ const initialState = {
   messages          : [],
   newsLetters       : [],
   successCreateNews : '',
+  updateSuccessNews : '',
   errorsCreateNews  : {}
 }
 
@@ -165,6 +181,50 @@ export default function adminReducers (state = initialState, action) {
         errorsCreateNews : action.payload,
         successCreateNews: ''
       }
+    case GET_NEWS_LOADING:
+      return {
+        ...state,
+        isLoading: true
+      }
+    case GET_NEWS_SUCCESS:
+      return {
+        ...state,
+        newsLetters: action.payload,
+        isLoading  : false,
+      }
+    case GET_NEWS_ERRORS:
+      return {
+        ...state,
+        isLoading: false,
+        anyErrors: action.payload,
+      }
+    case DELETE_NEWS_LOADING:
+      return { ...state, isLoading: true }
+    case DELETE_NEWS_SUCCESS:
+      return {
+        ...state,
+        isLoading  : false,
+        newsLetters: state.newsLetters.filter(news => news._id !== action.payload.docsId)
+      }
+    case DELETE_NEWS_ERRORS:
+      return { ...state, isLoading: false }
+    case UPDATE_NEWS_LOADING:
+      return {
+        ...state,
+        isLoading: false
+      }
+    case UPDATE_NEWS_SUCCESS:
+      return {
+        ...state,
+        isLoading        : false,
+        updateSuccessNews: action.payload.success
+      }
+    case UPDATE_NEWS_ERRORS:
+      return {
+        ...state,
+        isLoading: false
+      }
+  
     case RESET_EVENTS_ACTION: {
       return {
         ...state,
@@ -175,9 +235,11 @@ export default function adminReducers (state = initialState, action) {
         deleteSuccess     : '',
         deleteError       : '',
         successCreateNews : '',
-        errorsCreateNews  : {}
+        errorsCreateNews  : {},
+        updateSuccessNews : ''
       }
     }
+  
     default:
       return initialState
   }
