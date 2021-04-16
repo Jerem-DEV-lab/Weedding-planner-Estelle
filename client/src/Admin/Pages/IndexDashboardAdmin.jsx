@@ -1,12 +1,13 @@
 import React, { useEffect }                   from 'react'
-import { Switch, Route, Redirect }            from 'react-router-dom'
+import { Switch, Route }            from 'react-router-dom'
 import Sidebar                                from '../Components/Sidebar/Sidebar'
 import TableUsers                             from '../Components/Users/TableUsers'
 import IndexFormules                          from './Formules/IndexFormules'
 import IndexNewsLetter                        from './NewsLetter/IndexNewsLetter'
 import { useDispatch, useSelector }           from 'react-redux'
 import { requestApiMessage, requestApiUsers } from '../../actions/adminAction'
-import IndexMessagesAdmin                     from './Messages/IndexMessagesAdmin'
+import IndexMessagesAdmin from './Messages/IndexMessagesAdmin'
+import DialogMessage      from './Messages/DialogMessage'
 
 export default function IndexDashboardAdmin () {
   const dispatch   = useDispatch()
@@ -33,7 +34,9 @@ export default function IndexDashboardAdmin () {
         <Route path="/admin/messages" exact>
           <IndexMessagesAdmin/>
         </Route>
-        <Redirect to="/admin"/>
+        <Route path="/admin/message/send" exact>
+          <DialogMessage/>
+        </Route>
       </Switch>
     </Sidebar>
   </>
