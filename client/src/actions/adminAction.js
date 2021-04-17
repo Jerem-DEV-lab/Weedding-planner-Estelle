@@ -18,6 +18,9 @@ export const GET_MESSAGES_ERROR           = 'GET_MESSAGES_ERROR'
 export const GET_MESSAGES_SUCCESS         = 'GET_MESSAGES_SUCCESS'
 export const SET_MESSAGES_ISREAD_ERROR    = 'SET_MESSAGES_ISREAD_ERROR'
 export const SET_MESSAGES_ISREAD_SUCCESS  = 'SET_MESSAGES_ISREAD_SUCCESS'
+export const SEND_EMAIL_LOADING           = 'SEND_EMAIL_LOADING'
+export const SEND_EMAIL_SUCCESS           = 'SEND_EMAIL_SUCCESS'
+export const SEND_EMAIL_ERROR             = 'SEND_EMAIL_ERROR'
 export const CREATE_NEWS_LOADING          = 'CREATE_NEWS_LOADING'
 export const CREATE_NEWS_SUCCESS          = 'CREATE_NEWS_SUCCESS'
 export const CREATE_NEWS_ERRORS           = 'CREATE_NEWS_ERRORS'
@@ -175,6 +178,32 @@ export const requestApiMessage = () => {
     axios.get('/admin/get/messages')
          .then(res => dispatch(getMessageSuccess(res.data)))
          .catch(err => dispatch(getMessageError(err.response.data.errors)))
+  }
+}
+
+export const sendEmailLoading   = () => {
+  return {
+    type: SEND_EMAIL_LOADING
+  }
+}
+export const sendEmailSuccess   = (success) => {
+  return {
+    type   : SEND_EMAIL_SUCCESS,
+    payload: success
+  }
+}
+export const sendEmailError     = (error) => {
+  return {
+    type   : SEND_EMAIL_ERROR,
+    payload: error
+  }
+}
+export const requestApiSendMail = (data) => {
+  return dispatch => {
+    dispatch(sendEmailLoading())
+    axios.post('/admin/send/email', data)
+         .then(res => dispatch(sendEmailSuccess(res.data.success)))
+         .catch(err => dispatch(sendEmailError(err.response.data.errors)))
   }
 }
 

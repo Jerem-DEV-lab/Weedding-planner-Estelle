@@ -1,18 +1,9 @@
 import React           from 'react'
-import { useForm }     from '../../../../Hooks/useForm'
 import Controls        from '../../../Components/Controls/Controls'
 import { FormControl } from '@material-ui/core'
 
-const FormEmail = ({ formContext }) => {
-  const { userEmail, subjectEmail }                 = formContext
-  const initialValue                  = {
-    userEmail   : userEmail ? userEmail : '',
-    subjectEmail: subjectEmail ? subjectEmail : '',
-    contentEmail: '',
-  }
-  console.log(formContext)
-  const { values, handleChangeInput } = useForm(initialValue)
-  console.log('values', values)
+const FormEmail = ({values, handleChangeInput}) => {
+  
   return <>
     <form>
       <FormControl fullWidth={true}>
@@ -25,7 +16,7 @@ const FormEmail = ({ formContext }) => {
       </FormControl>
       <FormControl fullWidth={true} margin="normal">
         <Controls.Input
-          name="titleEmail"
+          name="subjectEmail"
           value={values.subjectEmail}
           onChange={handleChangeInput}
           label="Sujet de contact"
@@ -35,8 +26,9 @@ const FormEmail = ({ formContext }) => {
         <Controls.Input
           multiline={true}
           rows={5}
+          name="contentMessage"
           onChange={handleChangeInput}
-          value={values.contentEmail}
+          value={values.contentMessage}
           label="Message"/>
       </FormControl>
     </form>

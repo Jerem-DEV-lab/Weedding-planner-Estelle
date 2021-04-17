@@ -1,6 +1,7 @@
 const router               = require('express').Router()
 const UserSchema           = require('../../db/Schema/UserSchema')
 const adminController      = require('../../controller/Admin/AdminController')
+const { sendEmail }        = require('../../Services/Admin/SendMail')
 const { updateNewsletter } = require('../../Services/Admin/NewsletterService')
 const { deleteNewsletter } = require('../../Services/Admin/NewsletterService')
 const { getNewsletters }   = require('../../Services/Admin/NewsletterService')
@@ -51,6 +52,9 @@ function createRouterAdmin () {
   router.post('/admin/send/news', checkRole('ROLE_ADMIN'), (req, res) => {
     const adminService = new adminController(req, res)
     return adminService.sendNewsletter(req, res)
+  })
+  router.post('/admin/send/email', checkRole('ROLE_ADMIN'), (req, res) => {
+    return sendEmail(req, res)
   })
   router.post('/admin/create/news', checkRole('ROLE_ADMIN'), (req, res) => {
     return createNewsletter(req, res)

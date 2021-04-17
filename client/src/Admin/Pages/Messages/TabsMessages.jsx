@@ -45,6 +45,7 @@ const useStyles = makeStyles(
   })
 export default function TabsMessages ({ messages, select, selected, openMessage }) {
   const classes  = useStyles()
+
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="customized table">
@@ -63,7 +64,7 @@ export default function TabsMessages ({ messages, select, selected, openMessage 
         <TableBody>
           {messages.map((row) => (
             <StyledTableRow key={row._id}
-                            onClick={() => openMessage(row.lastName, row.firstName, row.message, row.email)}>
+                            onClick={() => openMessage(row.lastName, row.firstName, row.message, row.email, row._id )}>
               <StyledTableCell align="left">
                 <Box>
                   <Checkbox

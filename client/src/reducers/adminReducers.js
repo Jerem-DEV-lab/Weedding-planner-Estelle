@@ -23,7 +23,7 @@ import {
   GET_USER_ERROR,
   GET_USER_LOADING,
   GET_USER_SUCCESS,
-  RESET_EVENTS_ACTION,
+  RESET_EVENTS_ACTION, SEND_EMAIL_ERROR, SEND_EMAIL_LOADING, SEND_EMAIL_SUCCESS,
   SET_MESSAGES_ISREAD_ERROR,
   SET_MESSAGES_ISREAD_SUCCESS,
   UPDATE_NEWS_ERRORS,
@@ -47,7 +47,10 @@ const initialState = {
   newsLetters       : [],
   successCreateNews : '',
   updateSuccessNews : '',
-  errorsCreateNews  : {}
+  errorsCreateNews  : {},
+  sendEmailLoading  : false,
+  successSendMail  : '',
+  errorSendMail    : '',
 }
 
 
@@ -164,6 +167,27 @@ export default function adminReducers (state = initialState, action) {
         ...state,
         isLoading: false
       }
+    case SEND_EMAIL_LOADING:
+      return {
+        ...state,
+        sendEmailLoading: true
+      }
+    case SEND_EMAIL_SUCCESS:
+      return {
+        ...state,
+        sendEmailLoading: false,
+        successSendMail : action.payload,
+        errorSendMail   : ''
+      }
+  
+    case SEND_EMAIL_ERROR:
+      return {
+        ...state,
+        sendEmailLoading: false,
+        successSendMail : '',
+        errorSendMail   : action.payload
+      }
+  
     case CREATE_NEWS_LOADING:
       return {
         ...state,
@@ -236,7 +260,9 @@ export default function adminReducers (state = initialState, action) {
         deleteError       : '',
         successCreateNews : '',
         errorsCreateNews  : {},
-        updateSuccessNews : ''
+        updateSuccessNews : '',
+        successSendMail  : '',
+        errorSendMail    : '',
       }
     }
   

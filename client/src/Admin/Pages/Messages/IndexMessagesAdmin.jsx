@@ -24,24 +24,29 @@ const IndexMessagesAdmin = () => {
   const adminInfo                         = useSelector(state => state.adminReducers)
   const [selectAll, setSelectAll]         = useState(false)
   const [open, setOpen]                   = useState(false)
-  const [targetContext, setTargetContext] = useState({})
   const [routerDial, setRouterdial]       = useState({})
   
+  const closeModal     = (v) => {
+    setOpen(v)
+  }
+  const openMessage    = (userFirstName, userLastName, messageContent, userEmail, messageId) => {
+    setOpen(true)
+    setRouterdial(
+      {
+        title: `Message de : ${userFirstName} ${userLastName}`,
+        path : 'readEmail',
+        messageContent,
+        userEmail,
+        messageId
+      })
+  }
   const createNewEmail = () => {
     setOpen(true)
     setRouterdial({ title: 'Nouveau message', path: 'createEmail' }
     )
   }
-  const closeModal     = (v) => {
-    setOpen(v)
-    setTargetContext({})
-  }
-  const openMessage    = (userFirstName, userLastName, messageContent, userEmail) => {
-    setOpen(true)
-    setRouterdial({ title: `Message de : ${userFirstName} ${userLastName}`, path: 'readEmail', messageContent,userEmail })
-  }
   return <>
-    <DialogMessage open={open} routerDial={routerDial} close={closeModal} targetContext={targetContext}/>
+    <DialogMessage open={open} routerDial={routerDial} close={closeModal} />
     <Grid container>
       <Grid item xs={12}>
         <Box component="div" marginBottom={2} alignItems="center" display="flex" width="100%"
