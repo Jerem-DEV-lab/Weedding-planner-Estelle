@@ -22,18 +22,6 @@ const ContactSchema = new Schema
      lowercase: true,
      validate : [isEmail]
    },
-   eventDep        : {
-     type    : String,
-     required: true,
-   },
-   organizationName: {
-     type    : String,
-     required: true,
-   },
-   numberOfGuests  : {
-     type    : Number,
-     required: true
-   },
    message         : {
      type     : String,
      required : true,
@@ -45,7 +33,6 @@ const ContactSchema = new Schema
        type: Boolean, required: true, default: false
      }
    }
-  
  }, { timestamps: true })
 
 module.exports = model('contact', ContactSchema)

@@ -45,7 +45,7 @@
   "cardServiceSecularSubtitle": "D-Day plan",
   "cardServiceSecularSubtitle2": "Partial support plan",
   "cardServiceSecularSubtitle3": "Turn-key plan",
-  "titleHeroContact": "Let's talk about your project together, to better prepare the best day of your life. ",
+  "titleHeroContact": "Let's talk about your project together...",
   "firstName": "First name",
   "lastName": "Last name",
   "email": "Email",
@@ -117,5 +117,7 @@
   "new_baby": "A new baby ?",
   "new_baby_content": "You are expecting a baby or one of your friends is pregnant? Have you thought about the Baby Shower? I organize for you a day especially dedicated to the future mother. From the decoration, through the delicacies to the different animations adapted to the pregnancy as a belly painting, a photo session, games around the arrival of baby, I offer you a turnkey solution to wait with joy and love the child so much expected.",
   "new_baby_content_1": "The variations of the baby shower : You wish to organize a party to announce the sex of your future child to your close relations ? Contact me I have many original ideas for you! And if you prefer to wait for the arrival of the baby to celebrate, I also have a \"Welcome Baby\" formula that will satisfy you in order to celebrate with your friends and family this beautiful gift full of love!",
-  "my_plan_baby_shower": "My plans for baby shower"
+  "my_plan_baby_shower": "My plans for baby shower",
+  "rgpd_cookie_label": "By submitting this, you agree to the Privacy Policy and Cookie Policy.",
+  "go_back_label": "Back to home"
 }
