@@ -124,5 +124,11 @@
   "notification_profil_label": "Notifications",
   "settings_profil_label": "Paramètres du compte",
   "pref_newsletter": "Recevoir des mails pour la newsletter",
-  "message_private_label": "Recevoir un email lors d'un nouveau message privé"
+  "message_private_label": "Recevoir un email lors d'un nouveau message privé",
+  "your_events": "Vos événements",
+  "add_event": "Ajouter un événement",
+  "general_account_settings": "Paramètres générale du compte",
+  "security_label": "Sécurité",
+  "pref_language": "Préférence de la langue",
+  "translation_website": "Traduction du site"
 }

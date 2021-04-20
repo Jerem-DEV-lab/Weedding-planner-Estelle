@@ -118,7 +118,7 @@ export default function FormChangePassword () {
           </Grid>
         </Grid>
         <Box display="flex" marginTop={theme.spacing(0.2)} justifyContent="flex-end">
-          <Button variant="outlined" color="primary" onClick={changePassword}>Modifier le mot de passe</Button>
+          <Button variant="outlined" color="primary" onClick={changePassword}>{t('update_my_password')}</Button>
         </Box>
       </form>
     </>

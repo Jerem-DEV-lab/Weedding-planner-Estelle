@@ -123,5 +123,11 @@
   "notification_profil_label": "Notifications",
   "settings_profil_label": "Account settings",
   "pref_newsletter": "Receive emails for the newsletter",
-  "message_private_label": "Receive an email for a new private message"
+  "message_private_label": "Receive an email for a new private message",
+  "your_events": "Your events",
+  "add_event": "Add event",
+  "general_account_settings": "General account settings",
+  "security_label": "Security",
+  "pref_language": "Language preference",
+  "translation_website": "Translation of the site"
 }
