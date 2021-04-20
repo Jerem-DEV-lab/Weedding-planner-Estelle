@@ -1,29 +1,44 @@
-import React                                  from 'react'
-import { Grid, InputLabel, MenuItem, Select } from '@material-ui/core'
-import Typography                             from '@material-ui/core/Typography'
-import Box                                    from '@material-ui/core/Box'
-import PersonIcon                             from '@material-ui/icons/Person'
-import Divider                                from '@material-ui/core/Divider'
-import { ContentProfil }                      from '../GeneralProfil'
-import { makeStyles, useTheme }               from '@material-ui/core/styles'
-import FormChangePassword                     from './FormChangePassword'
-import Button                                 from '@material-ui/core/Button'
-import { FaPlus }                             from 'react-icons/fa'
-import { useTranslation }                     from 'react-i18next'
-import GTranslateIcon                         from '@material-ui/icons/GTranslate'
-import FormControl                            from '@material-ui/core/FormControl'
-import i18next                                from 'i18next'
+import React                                         from 'react'
+import { Grid, InputLabel, MenuItem, Paper, Select } from '@material-ui/core'
+import Typography                                    from '@material-ui/core/Typography'
+import Box                                           from '@material-ui/core/Box'
+import PersonIcon                                    from '@material-ui/icons/Person'
+import Divider                                       from '@material-ui/core/Divider'
+import { ContentProfil }                             from '../GeneralProfil'
+import { makeStyles, useTheme }                      from '@material-ui/core/styles'
+import FormChangePassword                            from './FormChangePassword'
+import { useTranslation }                            from 'react-i18next'
+import GTranslateIcon                                from '@material-ui/icons/GTranslate'
+import FormControl                                   from '@material-ui/core/FormControl'
+import i18next                                       from 'i18next'
+import { useSelector }                               from 'react-redux'
+import SettingsIcon                                  from '@material-ui/icons/Settings'
+import SpaIcon                                       from '@material-ui/icons/Spa'
+import { Alert }                                     from '@material-ui/lab'
 
+const useStyles2      = makeStyles((theme) => (
+  {
+    rootPaper: {
+      padding: theme.spacing(2),
+      '& > *': {
+        marginBottom: theme.spacing(2)
+      }
+    }
+  }
+))
 const SettingsAccount = () => {
-  const { t } = useTranslation()
-  const theme = useTheme()
+  const { t }         = useTranslation()
+  const theme         = useTheme()
+  const classes       = useStyles2()
+  const { eventUser } = useSelector(state => state.userReducers).userInfo
+  
   return (
     <>
       <Grid container={true} spacing={5}>
         <Grid item={true} xs={12} md={9}>
           <ContentProfil>
             <Box component="span" display="flex" alignItems="center">
-              <PersonIcon style={{ marginRight: '10px' }}/>
+              <SettingsIcon style={{ marginRight: '10px' }}/>
               <Typography variant="h6" component="span" color="textPrimary">
                 {t('general_account_settings')}
               </Typography>
@@ -58,19 +73,71 @@ const SettingsAccount = () => {
         <Grid item={true} xs={12} md={9}>
           <ContentProfil>
             <Box component="span" display="flex" alignItems="center">
-              <PersonIcon style={{ marginRight: '10px' }}/>
-              <Typography variant="h6" component="span" color="textPrimary">
-                {t('your_events')}
-              </Typography>
+              <div style={{ display: 'flex', flexGrow: 1, marginRight: '.75rem' }}>
+                <SpaIcon style={{ marginRight: '10px' }}/>
+                <Typography variant="h6" component="span" color="textPrimary">
+                  {t('workshop')}
+                </Typography>
+              </div>
             </Box>
             <Divider/>
             <Box component="div" marginY={theme.spacing(0.2)}>
-              <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '.75rem' }}>
-                <Button variant="contained" disableElevation={true} size="small" color="secondary"
-                        startIcon={<FaPlus/>}>
-                  {t('add_event')}
-                </Button>
-              </div>
+              <Paper className={classes.rootPaper} elevation={0}>
+                <Typography variant="body1" style={{ fontWeight: 500 }}>
+                  Votre prochaine événement :
+                </Typography>
+                <Divider/>
+                <Box component="span" display="inline-flex" flexGrow={1} justifyContent="flex-end" width="100%">
+                  <Alert elevation={0} severity="success">Terminer</Alert>
+                </Box>
+                <Typography>
+                  L'atelier aura lieu le : <span style={{ fontWeight: 500 }}> 16 avril 2021 </span>
+                </Typography>
+                <Typography>
+                  Thème du prochaine atelier : <span style={{ fontWeight: 500 }}>Non renseigner</span>
+                </Typography>
+                <Typography>
+                  Abonnement pour les ateliers : <span style={{ fontWeight: 500 }}>Non renseigner</span>
+                </Typography>
+              </Paper>
+              <Paper className={classes.rootPaper} elevation={0}>
+                <Typography variant="body1" style={{ fontWeight: 500 }}>
+                  Votre prochaine événement :
+                </Typography>
+                <Divider/>
+                <Box component="span" display="inline-flex" flexGrow={1} justifyContent="flex-end" width="100%">
+                  <Alert elevation={0} severity="info">Dans 3 jours</Alert>
+                </Box>
+                <Typography>
+                  L'atelier aura lieu le : <span style={{ fontWeight: 500 }}> 16 avril 2021 </span>
+                  <Typography component="span" variant="subtitle2">(3 jours)</Typography>
+                </Typography>
+                <Typography>
+                  Thème du prochaine atelier : <span style={{ fontWeight: 500 }}>Non renseigner</span>
+                </Typography>
+                <Typography>
+                  Abonnement pour les ateliers : <span style={{ fontWeight: 500 }}>Non renseigner</span>
+                </Typography>
+              </Paper>
+              <Paper className={classes.rootPaper} elevation={0}>
+                <Typography variant="body1" style={{ fontWeight: 500 }}>
+                  Votre prochaine événement :
+                </Typography>
+                <Divider/>
+                <Box component="span" display="inline-flex" flexGrow={1} justifyContent="flex-end" width="100%">
+                  <Alert elevation={0} severity="warning">Dans 0 jour 16 heures</Alert>
+                </Box>
+                <Typography>
+                  L'atelier aura lieu le : <span style={{ fontWeight: 500 }}> 16 avril 2021 </span>
+                  <Typography component="span" variant="subtitle2">(3 jours)</Typography>
+                </Typography>
+                <Typography>
+                  Thème du prochaine atelier : <span style={{ fontWeight: 500 }}>Non renseigner</span>
+                </Typography>
+                <Typography>
+                  Abonnement pour les ateliers : <span style={{ fontWeight: 500 }}>Non renseigner</span>
+                </Typography>
+              </Paper>
             </Box>
           </ContentProfil>
         </Grid>

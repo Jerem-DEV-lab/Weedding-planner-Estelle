@@ -5,6 +5,8 @@ import {
   LOGIN_USER_SUCCESS, LOGOUT_USER
 } from '../actions/authenticatorAction'
 import {
+  ADD_EVENT_ERRORS,
+  ADD_EVENT_LOADING, ADD_EVENT_SUCCESS,
   CHANGE_PASSWORD_ERROR,
   CHANGE_PASSWORD_LOADING, CHANGE_PASSWORD_SUCCESS,
   CHANGE_USER_INFO_ERROR,
@@ -25,7 +27,10 @@ const initialState = {
   isLogged           : false,
   userId             : null,
   userRole           : 'ROLE_USER',
-  successChange      : ''
+  successChange      : '',
+  addEventSuccess    : '',
+  addEventErrors     : '',
+  addEventLoading    : false,
 }
 
 export default function userReducers (state = initialState, action) {
@@ -115,6 +120,25 @@ export default function userReducers (state = initialState, action) {
         ...state,
         changeError  : '',
         successChange: ''
+      }
+    case ADD_EVENT_LOADING:
+      return {
+        ...state,
+        isLoading: true
+      }
+    case ADD_EVENT_SUCCESS:
+      return {
+        ...state,
+        isLoading      : false,
+        addEventSuccess: action.payload,
+        addEventErrors : ''
+      }
+    case ADD_EVENT_ERRORS:
+      return {
+        ...state,
+        isLoading      : false,
+        addEventSuccess: '',
+        addEventErrors : action.payload
       }
     default:
       return state

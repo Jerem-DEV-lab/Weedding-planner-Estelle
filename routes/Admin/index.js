@@ -1,12 +1,14 @@
-const router               = require('express').Router()
-const UserSchema           = require('../../db/Schema/UserSchema')
-const adminController      = require('../../controller/Admin/AdminController')
-const { sendEmail }        = require('../../Services/Admin/SendMail')
-const { updateNewsletter } = require('../../Services/Admin/NewsletterService')
-const { deleteNewsletter } = require('../../Services/Admin/NewsletterService')
-const { getNewsletters }   = require('../../Services/Admin/NewsletterService')
-const { createNewsletter } = require('../../Services/Admin/NewsletterService')
-const { checkRole }        = require('../../tools/Auth')
+const router                           = require('express').Router()
+const UserSchema                       = require('../../db/Schema/UserSchema')
+const adminController                  = require('../../controller/Admin/AdminController')
+const { createWorkshop }               = require('../../Services/Admin/WorkshopService')
+const { findUserByRegisteredWorkshop } = require('../../Services/Admin/WorkshopService')
+const { sendEmail }                    = require('../../Services/Admin/SendMail')
+const { updateNewsletter }             = require('../../Services/Admin/NewsletterService')
+const { deleteNewsletter }             = require('../../Services/Admin/NewsletterService')
+const { getNewsletters }               = require('../../Services/Admin/NewsletterService')
+const { createNewsletter }             = require('../../Services/Admin/NewsletterService')
+const { checkRole }                    = require('../../tools/Auth')
 
 function createRouterAdmin () {
   router.get('/admin/get-users', checkRole('ROLE_ADMIN'), async (req, res) => {
@@ -58,6 +60,12 @@ function createRouterAdmin () {
   })
   router.post('/admin/create/news', checkRole('ROLE_ADMIN'), (req, res) => {
     return createNewsletter(req, res)
+  })
+  router.post('/admin/workshop/create', checkRole('ROLE_ADMIN'), (req, res) => {
+    return createWorkshop(req, res)
+  })
+  router.get('/admin/users/manage-workshop', checkRole('ROLE_ADMIN'), (req, res) => {
+    return findUserByRegisteredWorkshop(req, res)
   })
   return router
 }
