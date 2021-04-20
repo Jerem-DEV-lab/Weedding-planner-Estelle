@@ -3,6 +3,10 @@ import axios from 'axios'
 export const CHANGE_USER_INFO_LOADING = 'CHANGE_USER_INFO_LOADING'
 export const CHANGE_USER_INFO_ERROR   = 'CHANGE_USER_INFO_ERROR'
 export const CHANGE_USER_INFO_SUCCESS = 'CHANGE_USER_INFO_SUCCESS'
+export const CHANGE_PASSWORD_SUCCESS  = 'CHANGE_PASSWORD_SUCCESS'
+export const CHANGE_PASSWORD_ERROR    = 'CHANGE_PASSWORD_ERROR'
+export const CHANGE_PASSWORD_LOADING  = 'CHANGE_PASSWORD_LOADING'
+export const RESET_EVENT_USER         = 'RESET_EVENT_USER'
 
 export const changeInfoUserLoading = () => {
   return {
@@ -36,5 +40,42 @@ export const requestApiChangeInfoUser = (data) => {
          .catch(err => {
            dispatch(changeInfoUserError(err.response.data))
          })
+  }
+}
+
+export const changePasswordLoading = () => {
+  return {
+    type: 'CHANGE_PASSWORD_LOADING'
+  }
+}
+export const changePasswordSuccess = (success) => {
+  return {
+    type   : 'CHANGE_PASSWORD_SUCCESS',
+    payload: success
+  }
+}
+export const changePasswordError   = (error) => {
+  return {
+    type   : 'CHANGE_PASSWORD_ERROR',
+    payload: error
+  }
+}
+
+export const requestApiChangePassword = (data) => {
+  return dispatch => {
+    dispatch(changePasswordLoading())
+    axios.post('/user/changePassword', data)
+         .then(res => {
+           dispatch(changePasswordSuccess(res.data.success))
+         })
+         .catch(err => {
+           dispatch(changePasswordError(err.response.data))
+         })
+  }
+}
+
+export const resetEventUser = () => {
+  return {
+    type: RESET_EVENT_USER
   }
 }

@@ -1,5 +1,4 @@
 import axios  from 'axios'
-import cookie from 'js-cookie'
 
 export const LOGIN_USER_LOADING = 'LOGIN_USER_LOADING'
 export const LOGIN_USER_ERROR   = 'LOGIN_USER_ERROR'

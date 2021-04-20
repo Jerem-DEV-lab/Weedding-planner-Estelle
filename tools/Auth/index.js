@@ -1,6 +1,5 @@
 const UserSchema        = require('../../db/Schema/UserSchema')
 const jwt               = require('jsonwebtoken')
-const User              = require('../../controller/User/User')
 const { hash, compare } = require('bcryptjs')
 
 module.exports.ErrorAuthentification = (err) => {

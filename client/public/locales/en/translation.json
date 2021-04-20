@@ -93,7 +93,6 @@
   "update_my_password": "Update my password",
   "label_preferences": "Preferences",
   "pref_code_promo": "Receive promotional codes by email.",
-  "pref_newsletter": "I wish to receive the newsletters by email.",
   "my_interest": "My interests",
   "old_password": "Old password",
   "new_password": "New password",
@@ -119,5 +118,10 @@
   "new_baby_content_1": "The variations of the baby shower : You wish to organize a party to announce the sex of your future child to your close relations ? Contact me I have many original ideas for you! And if you prefer to wait for the arrival of the baby to celebrate, I also have a \"Welcome Baby\" formula that will satisfy you in order to celebrate with your friends and family this beautiful gift full of love!",
   "my_plan_baby_shower": "My plans for baby shower",
   "rgpd_cookie_label": "By submitting this, you agree to the Privacy Policy and Cookie Policy.",
-  "go_back_label": "Back to home"
+  "go_back_label": "Back to home",
+  "general_profil_label": "General",
+  "notification_profil_label": "Notifications",
+  "settings_profil_label": "Account settings",
+  "pref_newsletter": "Receive emails for the newsletter",
+  "message_private_label": "Receive an email for a new private message"
 }

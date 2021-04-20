@@ -35,7 +35,7 @@ class User {
     const newPasswordHashed = await HashPassword(newPassword)
     return UserSchema.findByIdAndUpdate({ _id: this.userInfo.userId }, {
       password: newPasswordHashed
-    }, { new: false })
+    }, { new: true })
   }
   
   static logoutUser (req, res) {

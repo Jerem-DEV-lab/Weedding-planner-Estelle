@@ -262,7 +262,7 @@ export default function adminReducers (state = initialState, action) {
         errorsCreateNews  : {},
         updateSuccessNews : '',
         successSendMail  : '',
-        errorSendMail    : '',
+        errorSendMail    : ''
       }
     }
   

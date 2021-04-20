@@ -3,8 +3,14 @@ import {
   LOGIN_USER_ERROR,
   LOGIN_USER_LOADING,
   LOGIN_USER_SUCCESS, LOGOUT_USER
-}                                                                                     from '../actions/authenticatorAction'
-import { CHANGE_USER_INFO_ERROR, CHANGE_USER_INFO_LOADING, CHANGE_USER_INFO_SUCCESS } from '../actions/userAction'
+} from '../actions/authenticatorAction'
+import {
+  CHANGE_PASSWORD_ERROR,
+  CHANGE_PASSWORD_LOADING, CHANGE_PASSWORD_SUCCESS,
+  CHANGE_USER_INFO_ERROR,
+  CHANGE_USER_INFO_LOADING,
+  CHANGE_USER_INFO_SUCCESS, RESET_EVENT_USER
+} from '../actions/userAction'
 
 const initialState = {
   isLoading          : false,
@@ -14,10 +20,12 @@ const initialState = {
   loginSuccess       : '',
   registrationFail   : '',
   registrationSuccess: '',
+  errorChange        : '',
   langPref           : 'FR_fr',
   isLogged           : false,
   userId             : null,
-  userRole           : 'ROLE_USER'
+  userRole           : 'ROLE_USER',
+  successChange      : ''
 }
 
 export default function userReducers (state = initialState, action) {
@@ -34,7 +42,9 @@ export default function userReducers (state = initialState, action) {
         loginSuccess       : action.payload.message,
         loginError         : '',
         registrationFail   : '',
-        registrationSuccess: ''
+        registrationSuccess: '',
+        errorChange        : '',
+        successChange      : ''
       }
     }
     case LOGIN_USER_ERROR:
@@ -67,7 +77,7 @@ export default function userReducers (state = initialState, action) {
     case CHANGE_USER_INFO_SUCCESS:
       return {
         ...state,
-        successChange: 'sa marche',
+        successChange: '',
         isLoading    : false,
         userInfo     : action.payload
       }
@@ -77,10 +87,34 @@ export default function userReducers (state = initialState, action) {
         isLoading  : false,
         changeError: action.payload
       }
+    case CHANGE_PASSWORD_LOADING:
+      return {
+        ...state,
+        isLoading: true,
+      }
+    case CHANGE_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        isLoading    : false,
+        successChange: action.payload,
+      }
+    case CHANGE_PASSWORD_ERROR:
+      return {
+        ...state,
+        isLoading    : false,
+        successChange: '',
+        errorChange  : action.payload
+      }
     case LANG_USER_PREF:
       return {
         ...state,
         langPref: action.payload
+      }
+    case RESET_EVENT_USER:
+      return {
+        ...state,
+        changeError  : '',
+        successChange: ''
       }
     default:
       return state
