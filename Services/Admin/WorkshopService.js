@@ -34,7 +34,7 @@ module.exports.createWorkshop = async (request, response) => {
         membersWorkshop
       })
     await workShop.save()
-    await UserSchema.updateMany({ _id: { $in: request.body.membersWorkshop } }, { workshopInfos: workShop._id })
+    await UserSchema.updateMany({ _id: { $in: request.body.membersWorkshop } }, { $push: { workshopInfos: workShop._id } })
     return response.status(201).json({ success: 'Le workShop a bien été programmer ' })
   } catch (e) {
     return response.status(500).json({ errors: 'Impossible d\'ajouter votre événement pour le moment' })

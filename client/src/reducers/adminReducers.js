@@ -23,7 +23,12 @@ import {
   GET_USER_ERROR,
   GET_USER_LOADING,
   GET_USER_SUCCESS,
-  RESET_EVENTS_ACTION, SEND_EMAIL_ERROR, SEND_EMAIL_LOADING, SEND_EMAIL_SUCCESS,
+  RESET_EVENTS_ACTION,
+  SCHEDULE_WORKSHOP_ERRORS,
+  SCHEDULE_WORKSHOP_LOADING, SCHEDULE_WORKSHOP_SUCCESS,
+  SEND_EMAIL_ERROR,
+  SEND_EMAIL_LOADING,
+  SEND_EMAIL_SUCCESS,
   SET_MESSAGES_ISREAD_ERROR,
   SET_MESSAGES_ISREAD_SUCCESS,
   UPDATE_NEWS_ERRORS,
@@ -49,8 +54,10 @@ const initialState = {
   updateSuccessNews : '',
   errorsCreateNews  : {},
   sendEmailLoading  : false,
-  successSendMail  : '',
-  errorSendMail    : '',
+  successSendMail   : '',
+  errorSendMail     : '',
+  successSchedule   : '',
+  errorsSchedule    : '',
 }
 
 
@@ -247,6 +254,24 @@ export default function adminReducers (state = initialState, action) {
       return {
         ...state,
         isLoading: false
+      }
+    case SCHEDULE_WORKSHOP_LOADING:
+      return {
+        ...state,
+        isLoading: true
+      }
+    case SCHEDULE_WORKSHOP_ERRORS:
+      return {
+        ...state,
+        isLoading     : false,
+        errorsSchedule: action.payload
+      }
+    case SCHEDULE_WORKSHOP_SUCCESS:
+      return {
+        ...state,
+        isLoading      : false,
+        errorsSchedule : '',
+        successSchedule: action.payload
       }
   
     case RESET_EVENTS_ACTION: {

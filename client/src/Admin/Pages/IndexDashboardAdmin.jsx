@@ -9,6 +9,7 @@ import { requestApiMessage, requestApiUsers } from '../../actions/adminAction'
 import IndexMessagesAdmin                     from './Messages/IndexMessagesAdmin'
 import DialogMessage                          from './Messages/DialogMessage'
 import ReplyMessage                           from './Messages/ReplyMessage'
+import IndexWorkshop                          from './Workshop/indexWorkshop'
 
 export default function IndexDashboardAdmin () {
   const dispatch   = useDispatch()
@@ -36,10 +37,13 @@ export default function IndexDashboardAdmin () {
           <IndexMessagesAdmin/>
         </Route>
         <Route path="/admin/messages/reply/:messageId" exact>
-          <ReplyMessage />
+          <ReplyMessage/>
         </Route>
         <Route path="/admin/message/send" exact>
           <DialogMessage/>
+        </Route>
+        <Route path="/admin/atelier" exact>
+          <IndexWorkshop/>
         </Route>
       </Switch>
     </Sidebar>

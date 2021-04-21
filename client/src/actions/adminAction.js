@@ -33,6 +33,9 @@ export const DELETE_NEWS_ERRORS           = 'DELETE_NEWS_ERRORS'
 export const UPDATE_NEWS_LOADING          = 'UPDATE_NEWS_LOADING'
 export const UPDATE_NEWS_SUCCESS          = 'UPDATE_NEWS_SUCCESS'
 export const UPDATE_NEWS_ERRORS           = 'UPDATE_NEWS_ERRORS'
+export const SCHEDULE_WORKSHOP_LOADING    = 'SCHEDULE_WORKSHOP_LOADING'
+export const SCHEDULE_WORKSHOP_SUCCESS    = 'SCHEDULE_WORKSHOP_SUCCESS'
+export const SCHEDULE_WORKSHOP_ERRORS     = 'SCHEDULE_WORKSHOP_ERRORS'
 
 export const getUserLoading  = () => {
   return {
@@ -324,12 +327,42 @@ export const updateNewsError   = (err) => {
     payload: err
   }
 }
-
 export const requestApiUpdateNewsletter = (updateBody, newsId) => {
   return dispatch => {
     axios.patch(`/admin/update/news/${newsId}`, updateBody)
          .then(res => dispatch(updateNewsSuccess(res.data.success)))
          .catch(err => dispatch(updateNewsError(err.response)))
+  }
+}
+
+export const scheduleWorkshopLoading = () => {
+  return {
+    type: SCHEDULE_WORKSHOP_LOADING
+  }
+}
+export const scheduleWorkshopSuccess = (success) => {
+  return {
+    type   : SCHEDULE_WORKSHOP_SUCCESS,
+    payload: success
+  }
+}
+export const scheduleWorkshopErrors  = (errors) => {
+  return {
+    type   : SCHEDULE_WORKSHOP_ERRORS,
+    payload: errors
+  }
+}
+
+export const requestApiScheduleWorkshop = (data) => {
+  return dispatch => {
+    dispatch(scheduleWorkshopLoading())
+    axios.post(`/admin/workshop/create`, data)
+         .then(res => {
+           dispatch(scheduleWorkshopSuccess(res.data.success))
+         })
+         .catch(err => {
+           dispatch(scheduleWorkshopErrors(err.response.errors))
+         })
   }
 }
 export const resetEvent                 = () => {

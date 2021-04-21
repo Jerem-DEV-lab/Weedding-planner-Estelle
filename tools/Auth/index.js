@@ -63,7 +63,7 @@ module.exports.checkUserLogin = (req, res) => {
         return res.status(400).json({ err })
       
       } else {
-        const user = res.locals.user = await UserSchema.findById(decodedToken.userId).select('-password')
+        const user = res.locals.user = await UserSchema.findById(decodedToken.userId).populate('workshopInfos').select('-password')
         return res.status(200).json(user)
       }
     })

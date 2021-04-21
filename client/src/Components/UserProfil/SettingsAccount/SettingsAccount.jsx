@@ -2,7 +2,6 @@ import React                                         from 'react'
 import { Grid, InputLabel, MenuItem, Paper, Select } from '@material-ui/core'
 import Typography                                    from '@material-ui/core/Typography'
 import Box                                           from '@material-ui/core/Box'
-import PersonIcon                                    from '@material-ui/icons/Person'
 import Divider                                       from '@material-ui/core/Divider'
 import { ContentProfil }                             from '../GeneralProfil'
 import { makeStyles, useTheme }                      from '@material-ui/core/styles'
@@ -14,7 +13,7 @@ import i18next                                       from 'i18next'
 import { useSelector }                               from 'react-redux'
 import SettingsIcon                                  from '@material-ui/icons/Settings'
 import SpaIcon                                       from '@material-ui/icons/Spa'
-import { Alert }                                     from '@material-ui/lab'
+import { dateParser }                                from '../../../tools/helperDate'
 
 const useStyles2      = makeStyles((theme) => (
   {
@@ -27,11 +26,10 @@ const useStyles2      = makeStyles((theme) => (
   }
 ))
 const SettingsAccount = () => {
-  const { t }         = useTranslation()
-  const theme         = useTheme()
-  const classes       = useStyles2()
-  const { eventUser } = useSelector(state => state.userReducers).userInfo
-  
+  const { t }             = useTranslation()
+  const theme             = useTheme()
+  const classes           = useStyles2()
+  const { workshopInfos } = useSelector(state => state.userReducers).userInfo
   return (
     <>
       <Grid container={true} spacing={5}>
@@ -82,62 +80,23 @@ const SettingsAccount = () => {
             </Box>
             <Divider/>
             <Box component="div" marginY={theme.spacing(0.2)}>
-              <Paper className={classes.rootPaper} elevation={0}>
-                <Typography variant="body1" style={{ fontWeight: 500 }}>
-                  Votre prochaine événement :
-                </Typography>
-                <Divider/>
-                <Box component="span" display="inline-flex" flexGrow={1} justifyContent="flex-end" width="100%">
-                  <Alert elevation={0} severity="success">Terminer</Alert>
-                </Box>
-                <Typography>
-                  L'atelier aura lieu le : <span style={{ fontWeight: 500 }}> 16 avril 2021 </span>
-                </Typography>
-                <Typography>
-                  Thème du prochaine atelier : <span style={{ fontWeight: 500 }}>Non renseigner</span>
-                </Typography>
-                <Typography>
-                  Abonnement pour les ateliers : <span style={{ fontWeight: 500 }}>Non renseigner</span>
-                </Typography>
-              </Paper>
-              <Paper className={classes.rootPaper} elevation={0}>
-                <Typography variant="body1" style={{ fontWeight: 500 }}>
-                  Votre prochaine événement :
-                </Typography>
-                <Divider/>
-                <Box component="span" display="inline-flex" flexGrow={1} justifyContent="flex-end" width="100%">
-                  <Alert elevation={0} severity="info">Dans 3 jours</Alert>
-                </Box>
-                <Typography>
-                  L'atelier aura lieu le : <span style={{ fontWeight: 500 }}> 16 avril 2021 </span>
-                  <Typography component="span" variant="subtitle2">(3 jours)</Typography>
-                </Typography>
-                <Typography>
-                  Thème du prochaine atelier : <span style={{ fontWeight: 500 }}>Non renseigner</span>
-                </Typography>
-                <Typography>
-                  Abonnement pour les ateliers : <span style={{ fontWeight: 500 }}>Non renseigner</span>
-                </Typography>
-              </Paper>
-              <Paper className={classes.rootPaper} elevation={0}>
-                <Typography variant="body1" style={{ fontWeight: 500 }}>
-                  Votre prochaine événement :
-                </Typography>
-                <Divider/>
-                <Box component="span" display="inline-flex" flexGrow={1} justifyContent="flex-end" width="100%">
-                  <Alert elevation={0} severity="warning">Dans 0 jour 16 heures</Alert>
-                </Box>
-                <Typography>
-                  L'atelier aura lieu le : <span style={{ fontWeight: 500 }}> 16 avril 2021 </span>
-                  <Typography component="span" variant="subtitle2">(3 jours)</Typography>
-                </Typography>
-                <Typography>
-                  Thème du prochaine atelier : <span style={{ fontWeight: 500 }}>Non renseigner</span>
-                </Typography>
-                <Typography>
-                  Abonnement pour les ateliers : <span style={{ fontWeight: 500 }}>Non renseigner</span>
-                </Typography>
-              </Paper>
+              {workshopInfos && workshopInfos.map(w => (
+                <Paper className={classes.rootPaper} elevation={0}>
+                  <Typography variant="body1" style={{ fontWeight: 500 }}>
+                    Votre prochaine événement :
+                  </Typography>
+                  <Divider/>
+                  <Typography>
+                    L'atelier aura lieu le : <span style={{ fontWeight: 500 }}>{dateParser(w.start_at)}</span>
+                  </Typography>
+                  <Typography>
+                    Nom de l'atelier : <span style={{ fontWeight: 500 }}>{w.nameWorkshop}</span>
+                  </Typography>
+                  <Typography>
+                    Type d'atelier: <span style={{ fontWeight: 500 }}>{w.typeWorkshop}</span>
+                  </Typography>
+                </Paper>
+              ))}
             </Box>
           </ContentProfil>
         </Grid>
