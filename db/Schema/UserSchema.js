@@ -26,7 +26,6 @@ const UserSchema = new Schema
    newsLetter              : { type: Boolean, required: true, default: false },
    address                 : { type: String, required: true },
    postalCode              : { type: String, required: true, maxlength: 5, minlength: 5 },
-   workshopUser            : [{ type: String }],
    workshopRegistered      : { type: Boolean, required: true, default: false },
    workshopInfos           : [{ type: Schema.Types.ObjectId, ref: 'workshop' }]
  }, { timestamps: true })
