@@ -1,6 +1,5 @@
 import React from 'react'
 import {
-  Box,
   Dialog,
   DialogActions,
   DialogContent,
@@ -9,13 +8,13 @@ import {
   Typography
 }            from '@material-ui/core'
 
-import Button                 from '@material-ui/core/Button'
-import FormEmail              from './FormMessage/FormEmail'
-import { withStyles }         from '@material-ui/core/styles'
-import { Link }               from 'react-router-dom'
-import { useDispatch }        from 'react-redux'
-import { requestApiSendMail } from '../../../actions/adminAction'
-import { useForm }            from '../../../Hooks/useForm'
+import Button                                        from '@material-ui/core/Button'
+import FormEmail                                     from './FormMessage/FormEmail'
+import { withStyles }                                from '@material-ui/core/styles'
+import { Link }                                      from 'react-router-dom'
+import { useDispatch }                               from 'react-redux'
+import { requestApiDeleteEmail, requestApiSendMail } from '../../../actions/adminAction'
+import { useForm }                                   from '../../../Hooks/useForm'
 
 const HeaderEmailUsers  = withStyles(theme => (
   {
@@ -30,11 +29,16 @@ const initialFieldValue = {
   subjectEmail  : '',
   contentMessage: ''
 }
-const DialogMessage     = ({ open, close, targetContext, routerDial }) => {
+const DialogMessage     = ({ open, close, routerDial }) => {
   const dispatch                      = useDispatch()
   const { values, handleChangeInput } = useForm(initialFieldValue)
   const sendMail                      = () => {
     dispatch(requestApiSendMail(values))
+  }
+  const deleteEmail                   = (e) => {
+    e.preventDefault()
+    dispatch(requestApiDeleteEmail(routerDial.messageId, routerDial.messageId))
+    close(false)
   }
   return (
     <>
@@ -65,8 +69,11 @@ const DialogMessage     = ({ open, close, targetContext, routerDial }) => {
         <DialogActions>
           {routerDial.path === 'readEmail' &&
            <>
-             <Button color="primary">
+             <Button color="primary" variant="contained" disableElevation={true} size="small">
                <Link to={`/admin/messages/reply/${routerDial.messageId}`}>Répondre</Link>
+             </Button>
+             <Button color="secondary" variant="outlined" size="small" onClick={deleteEmail}>
+               Supprimer
              </Button>
            </>}
           {routerDial.path === 'createEmail' &&

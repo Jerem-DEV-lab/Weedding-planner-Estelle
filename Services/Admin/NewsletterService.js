@@ -1,6 +1,7 @@
 const ObjectId            = require('mongoose').Types.ObjectId
 const NewsletterSchema    = require('../../db/Schema/NewsletterSchema')
 const UserSchema          = require('../../db/Schema/UserSchema')
+const EmailSchema         = require('../../db/Schema/ContactSchema')
 const transport           = require('../Lib/mailer')
 const { ErrorCreateNews } = require('../../tools/Newsletter')
 
@@ -83,5 +84,16 @@ module.exports.updateNewsletter = async (req, res) => {
     })
   } catch (e) {
   
+  }
+}
+
+module.exports.deleteEmail = async (req, res) => {
+  const emails = req.body.emails
+  try {
+    await EmailSchema.deleteMany({ _id: emails })
+    return res.status(200).json({ success: 'Email correctement supprimer' })
+  } catch (e) {
+    console.log(e)
+    return res.status(500).json({ errors: 'Impossible de supprimer l\'email' })
   }
 }

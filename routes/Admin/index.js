@@ -1,6 +1,7 @@
 const router                           = require('express').Router()
 const UserSchema                       = require('../../db/Schema/UserSchema')
 const adminController                  = require('../../controller/Admin/AdminController')
+const { deleteEmail }                  = require('../../Services/Admin/NewsletterService')
 const { createWorkshop }               = require('../../Services/Admin/WorkshopService')
 const { findUserByRegisteredWorkshop } = require('../../Services/Admin/WorkshopService')
 const { sendEmail }                    = require('../../Services/Admin/SendMail')
@@ -39,6 +40,9 @@ function createRouterAdmin () {
   })
   router.delete('/admin/delete/news/:newsId', checkRole('ROLE_ADMIN'), (req, res) => {
     return deleteNewsletter(req, res)
+  })
+  router.delete('/admin/delete/email', checkRole('ROLE_ADMIN'), (req, res) => {
+    return deleteEmail(req, res)
   })
   router.patch('/admin/update/formule-price/:formulaId', checkRole('ROLE_ADMIN'), (req, res) => {
     const adminService = new adminController(req, res)

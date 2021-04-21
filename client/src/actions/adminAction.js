@@ -30,6 +30,8 @@ export const GET_NEWS_ERRORS              = 'GET_NEWS_ERRORS'
 export const DELETE_NEWS_LOADING          = 'DELETE_NEWS_LOADING'
 export const DELETE_NEWS_SUCCESS          = 'DELETE_NEWS_SUCCESS'
 export const DELETE_NEWS_ERRORS           = 'DELETE_NEWS_ERRORS'
+export const DELETE_EMAIL_SUCCESS         = 'DELETE_EMAIL_SUCCESS'
+export const DELETE_EMAIL_ERRORS          = 'DELETE_EMAIL_ERRORS'
 export const UPDATE_NEWS_LOADING          = 'UPDATE_NEWS_LOADING'
 export const UPDATE_NEWS_SUCCESS          = 'UPDATE_NEWS_SUCCESS'
 export const UPDATE_NEWS_ERRORS           = 'UPDATE_NEWS_ERRORS'
@@ -124,9 +126,6 @@ export const requestApiDeleteFormula = (formulaId) => {
     axios.delete(`/admin/delete/formule/${formulaId}`)
          .then(res => {
            dispatch(deleteFormulaSuccess(res.data.success, formulaId))
-/*           setTimeout(() => {
-             dispatch(resetEvent())
-           }, 2000)*/
          })
          .catch(err => dispatch(deleteFormulaError(err.response.data.errors)))
   }
@@ -365,7 +364,36 @@ export const requestApiScheduleWorkshop = (data) => {
          })
   }
 }
-export const resetEvent                 = () => {
+
+export const deleteEmailSuccess = (success, messageId) => {
+  return {
+    type   : DELETE_EMAIL_SUCCESS,
+    payload: { success, messageId }
+  }
+}
+
+export const deleteEmailError      = (errors) => {
+  return {
+    type   : DELETE_EMAIL_ERRORS,
+    payload: errors
+  }
+}
+export const requestApiDeleteEmail = (datas, messageId) => {
+  return (dispatch) => {
+    axios(
+      {
+        method: 'delete',
+        url   : '/admin/delete/email',
+        data  : {
+          emails: [datas]
+        }
+      })
+      .then(res => dispatch(deleteEmailSuccess(res.data.success, messageId)))
+      .catch(err => dispatch(deleteEmailError(err.response.data.errors)))
+  }
+}
+
+export const resetEvent = () => {
   return {
     type: RESET_EVENTS_ACTION
   }

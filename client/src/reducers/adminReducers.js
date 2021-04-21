@@ -4,7 +4,7 @@ import {
   CHANGE_PRICE_FORMULA_SUCCESS,
   CREATE_NEWS_ERRORS,
   CREATE_NEWS_LOADING,
-  CREATE_NEWS_SUCCESS,
+  CREATE_NEWS_SUCCESS, DELETE_EMAIL_SUCCESS,
   DELETE_FORMULA_ERROR,
   DELETE_FORMULA_LOADING,
   DELETE_FORMULA_SUCCESS,
@@ -273,7 +273,11 @@ export default function adminReducers (state = initialState, action) {
         errorsSchedule : '',
         successSchedule: action.payload
       }
-  
+    case DELETE_EMAIL_SUCCESS:
+      return {
+        ...state,
+        messages: state.messages.filter(email => email._id !== action.payload.messageId)
+      }
     case RESET_EVENTS_ACTION: {
       return {
         ...state,
