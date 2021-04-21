@@ -15,6 +15,8 @@ import TableContainer                 from '@material-ui/core/TableContainer'
 import ReplayRoundedIcon              from '@material-ui/icons/ReplayRounded'
 import Button                         from '@material-ui/core/Button'
 import { dateTimeParser }             from '../../../tools/helperDate'
+import { useDispatch }                from 'react-redux'
+import { requestApiSetMessageIsRead } from '../../../actions/adminAction'
 
 const StyledTableRow  = withStyles((theme) => ({
   root: {
@@ -33,7 +35,7 @@ const StyledTableCell = withStyles((theme) => ({
   },
   body: {
     fontSize     : 14,
-    textTransform: 'capitalize'
+    textTransform: 'capitalize',
   },
 }))(TableCell)
 
@@ -44,8 +46,11 @@ const useStyles = makeStyles(
     },
   })
 export default function TabsMessages ({ messages, select, selected, openMessage }) {
-  const classes  = useStyles()
-
+  const classes   = useStyles()
+  const dispatch  = useDispatch()
+  const setIsRead = (messageId) => {
+    dispatch(requestApiSetMessageIsRead(messageId))
+  }
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="customized table">
@@ -63,8 +68,13 @@ export default function TabsMessages ({ messages, select, selected, openMessage 
         </TableHead>
         <TableBody>
           {messages.map((row) => (
-            <StyledTableRow key={row._id}
-                            onClick={() => openMessage(row.lastName, row.firstName, row.message, row.email, row._id )}>
+            <StyledTableRow
+              key={row._id}
+              onClick={() => {
+                openMessage(row.lastName, row.firstName, row.message, row.email, row._id)
+                setIsRead(row._id)
+              }
+              }>
               <StyledTableCell align="left">
                 <Box>
                   <Checkbox
@@ -73,15 +83,18 @@ export default function TabsMessages ({ messages, select, selected, openMessage 
                   />
                 </Box>
               </StyledTableCell>
-              <StyledTableCell align="left">{row.lastName} {row.firstName}</StyledTableCell>
-              <StyledTableCell align="left">
+              <StyledTableCell style={{ fontWeight: !row.propertyMessage.isRead && '600' }}
+                               align="left">{row.lastName} {row.firstName}</StyledTableCell>
+              <StyledTableCell align="left"
+                               style={{ fontWeight: !row.propertyMessage.isRead && '600' }}>
                 <div style={{ width: 350, whiteSpace: 'nowrap' }}>
                   <Box component="div" textOverflow="ellipsis" overflow="hidden">
                     {row.message}
                   </Box>
                 </div>
               </StyledTableCell>
-              <StyledTableCell align="left">{dateTimeParser(row.createdAt)}</StyledTableCell>
+              <StyledTableCell align="left"
+                               style={{ fontWeight: !row.propertyMessage.isRead && '600' }}>{dateTimeParser(row.createdAt)}</StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>
