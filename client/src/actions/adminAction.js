@@ -371,7 +371,6 @@ export const deleteEmailSuccess = (success, messageId) => {
     payload: { success, messageId }
   }
 }
-
 export const deleteEmailError      = (errors) => {
   return {
     type   : DELETE_EMAIL_ERRORS,

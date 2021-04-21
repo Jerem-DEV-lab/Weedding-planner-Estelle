@@ -16,7 +16,7 @@ import ReplayRoundedIcon              from '@material-ui/icons/ReplayRounded'
 import Button                         from '@material-ui/core/Button'
 import { dateTimeParser }             from '../../../tools/helperDate'
 import { useDispatch }                from 'react-redux'
-import { requestApiSetMessageIsRead } from '../../../actions/adminAction'
+import { requestApiMessage, requestApiSetMessageIsRead } from '../../../actions/adminAction'
 
 const StyledTableRow  = withStyles((theme) => ({
   root: {
@@ -46,10 +46,13 @@ const useStyles = makeStyles(
     },
   })
 export default function TabsMessages ({ messages, select, selected, openMessage }) {
-  const classes   = useStyles()
-  const dispatch  = useDispatch()
-  const setIsRead = (messageId) => {
+  const classes        = useStyles()
+  const dispatch       = useDispatch()
+  const setIsRead      = (messageId) => {
     dispatch(requestApiSetMessageIsRead(messageId))
+  }
+  const refreshMessage = () => {
+    dispatch(requestApiMessage())
   }
   return (
     <TableContainer component={Paper}>
@@ -61,7 +64,7 @@ export default function TabsMessages ({ messages, select, selected, openMessage 
                 <Checkbox checked={selected} onClick={select}/>
               </Tooltip>
               <Tooltip title="Recharger les messages">
-                <Button size="small"><ReplayRoundedIcon/></Button>
+                <Button size="small" onClick={refreshMessage}><ReplayRoundedIcon/></Button>
               </Tooltip>
             </Box>
           </TableRow>
