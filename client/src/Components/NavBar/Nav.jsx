@@ -52,6 +52,7 @@ const Nav = () => {
       cName: 'dropdown-link'
     },
   ]
+  const roleUser                = userContext.userInfo.roles
   return <>
     <nav className="navbar">
       <div className={`overlay-nav ${click ? 'active' : ''}`} onClick={handleClick}/>
@@ -80,7 +81,7 @@ const Nav = () => {
           {<Dropdown items={sublink}/>}
         </li>
         <li className={`nav-item dropdown ${openDrop ? 'active' : ''} `}
-          onClick={testDrop}
+            onClick={testDrop}
         >
           <div className={`nav-links `}>
             {t('secularCeremony')} <FaCaretDown/>
@@ -110,9 +111,11 @@ const Nav = () => {
         <li className="nav-item">
           <NavLink to={'/contact'} className="nav-links">{t('contact')}</NavLink>
         </li>
-        <li className="nav-item">
-          <NavLink to={'/admin'} className="nav-links">Admin</NavLink>
-        </li>
+        {roleUser && roleUser.includes('ROLE_ADMIN') &&
+         <li className="nav-item">
+           <NavLink to={'/admin'} className="nav-links">Administration</NavLink>
+         </li>
+        }
       </ul>
       {!userContext.isLogged ?
        <div className="navbar-account">
