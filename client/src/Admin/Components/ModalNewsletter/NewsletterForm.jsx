@@ -1,11 +1,11 @@
-import React, { useEffect }         from 'react'
-import { Form }                     from '../../../Hooks/useForm'
-import { Grid, TextField }          from '@material-ui/core'
-import Controls                     from '../Controls/Controls'
-import Input                        from '../Controls/Input'
-import { useDispatch, useSelector } from 'react-redux'
-import { Alert }                    from '@material-ui/lab'
-import { resetEvent }               from '../../../actions/adminAction'
+import React, { useEffect }                    from 'react'
+import { Form }                                from '../../../Hooks/useForm'
+import { Grid, TextField }                     from '@material-ui/core'
+import Controls                                from '../Controls/Controls'
+import Input                                   from '../Controls/Input'
+import { useDispatch, useSelector }            from 'react-redux'
+import { Alert }                               from '@material-ui/lab'
+import { requestApiGetNewsletter, resetEvent } from '../../../actions/adminAction'
 
 const itemsNews      = [
   { id: 'Code Promo', title: 'Code Promo' },
@@ -20,6 +20,7 @@ const NewsletterForm = (props) => {
       setTimeout(() => {
         open()
         dispatch(resetEvent())
+        dispatch(requestApiGetNewsletter())
       }, 1500)
     }
   }, [successCreateNews])
