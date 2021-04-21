@@ -25,7 +25,7 @@ import { useDispatch, useSelector }              from 'react-redux'
 export default function Sidebar ({ messages, children }) {
   const classes         = useStyleSidebar()
   const theme           = useTheme()
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(true)
   const dispatch        = useDispatch()
   
   function checkMessageStatus (message) {
@@ -54,6 +54,7 @@ export default function Sidebar ({ messages, children }) {
     <div className={classes.root}>
       <AppBar
         position="fixed"
+        elevation={0}
         className={clsx(classes.appBar, {
           [classes.appBarShift]: open,
         })}>
