@@ -130,5 +130,10 @@
   "general_account_settings": "Paramètres générale du compte",
   "security_label": "Sécurité",
   "pref_language": "Préférence de la langue",
-  "translation_website": "Traduction du site"
+  "translation_website": "Traduction du site",
+  "next_workShop": "Votre prochain atelier",
+  "workShopNotExist": "Vous n'avez aucun atelier de programmer",
+  "workShopDate": "L'atelier aura lieu le",
+  "workshopName": "Nom de l'atelier",
+  "workshopType": "Type de l'atelier"
 }

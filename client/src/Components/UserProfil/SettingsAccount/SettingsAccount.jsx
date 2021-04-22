@@ -80,23 +80,24 @@ const SettingsAccount = () => {
             </Box>
             <Divider/>
             <Box component="div" marginY={theme.spacing(0.2)}>
-              {workshopInfos && workshopInfos.map(w => (
+              {workshopInfos && workshopInfos.length > 0 ? workshopInfos.map(w => (
                 <Paper className={classes.rootPaper} elevation={0}>
                   <Typography variant="body1" style={{ fontWeight: 500 }}>
-                    Votre prochaine événement :
-                  </Typography>
-                  <Divider/>
-                  <Typography>
-                    L'atelier aura lieu le : <span style={{ fontWeight: 500 }}>{dateParser(w.start_at)}</span>
+                    {t('next_workShop')} :
                   </Typography>
                   <Typography>
-                    Nom de l'atelier : <span style={{ fontWeight: 500 }}>{w.nameWorkshop}</span>
+                    {t('workShopDate')} : <span style={{ fontWeight: 500 }}>{dateParser(w.start_at)}</span>
                   </Typography>
                   <Typography>
-                    Type d'atelier: <span style={{ fontWeight: 500 }}>{w.typeWorkshop}</span>
+                    {t('workshopName')} : <span style={{ fontWeight: 500 }}>{w.nameWorkshop}</span>
+                  </Typography>
+                  <Typography>
+                    {t('workshopType')} : <span style={{ fontWeight: 500 }}>{w.typeWorkshop}</span>
                   </Typography>
                 </Paper>
-              ))}
+              )) : <Typography>
+                 {t('workShopNotExist')} :
+               </Typography>}
             </Box>
           </ContentProfil>
         </Grid>

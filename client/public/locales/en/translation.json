@@ -129,5 +129,10 @@
   "general_account_settings": "General account settings",
   "security_label": "Security",
   "pref_language": "Language preference",
-  "translation_website": "Translation of the site"
+  "translation_website": "Translation of the site",
+  "next_workShop": "Your next workshop",
+  "workShopNotExist": "You have no workshop to program",
+  "workShopDate": "The workshop will take place on",
+  "workshopName": "Name of the workshop ",
+  "workshopType": "Type of workshop"
 }
