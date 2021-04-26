@@ -59,10 +59,7 @@ export default function TabsMessages ({ messages, select, selected, openMessage 
       <Table className={classes.table} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <Box mx={2} display="flex" width="100%">
-              <Tooltip title="Sélectionner tous les messages">
-                <Checkbox checked={selected} onClick={select}/>
-              </Tooltip>
+            <Box px={2} display="flex" width="100%">
               <Tooltip title="Recharger les messages">
                 <Button size="small" onClick={refreshMessage}><ReplayRoundedIcon/></Button>
               </Tooltip>
@@ -78,14 +75,6 @@ export default function TabsMessages ({ messages, select, selected, openMessage 
                 setIsRead(row._id)
               }
               }>
-              <StyledTableCell align="left">
-                <Box>
-                  <Checkbox
-                    checked={selected}
-                    inputProps={{ 'aria-label': 'primary checkbox' }}
-                  />
-                </Box>
-              </StyledTableCell>
               <StyledTableCell style={{ fontWeight: !row.propertyMessage.isRead && '600' }}
                                align="left">{row.lastName} {row.firstName}</StyledTableCell>
               <StyledTableCell align="left"
@@ -96,7 +85,7 @@ export default function TabsMessages ({ messages, select, selected, openMessage 
                   </Box>
                 </div>
               </StyledTableCell>
-              <StyledTableCell align="left"
+              <StyledTableCell align="right"
                                style={{ fontWeight: !row.propertyMessage.isRead && '600' }}>{dateTimeParser(row.createdAt)}</StyledTableCell>
             </StyledTableRow>
           ))}

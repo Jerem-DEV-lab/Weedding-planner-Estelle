@@ -1,6 +1,7 @@
-import React              from 'react'
-import HeaderPage         from '../../Components/HeaderPage/HeaderPage'
-import { useTranslation } from 'react-i18next'
+import React                       from 'react'
+import HeaderPage                  from '../../Components/HeaderPage/HeaderPage'
+import { useTranslation }          from 'react-i18next'
+import Footer                      from '../../Components/Footer/Footer'
 
 const About = () => {
   const { t } = useTranslation()
@@ -58,6 +59,7 @@ const About = () => {
         </div>
       </div>
     </section>
+    <Footer/>
   </>
 }
 

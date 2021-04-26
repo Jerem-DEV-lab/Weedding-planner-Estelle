@@ -1,8 +1,10 @@
-import React              from 'react'
-import HeaderPage         from '../../Components/HeaderPage/HeaderPage'
-import Button             from '../../Components/Button/Button'
-import { useTranslation } from 'react-i18next'
-import FormuleCard        from '../../Components/Card/FormuleCard'
+import React                       from 'react'
+import HeaderPage                  from '../../Components/HeaderPage/HeaderPage'
+import Button                      from '../../Components/Button/Button'
+import { useTranslation }          from 'react-i18next'
+import FormuleCard                 from '../../Components/Card/FormuleCard'
+import Footer                      from '../../Components/Footer/Footer'
+import { BrowserRouter as Router } from 'react-router-dom'
 
 const BabyShower = () => {
   const { t }          = useTranslation()
@@ -85,6 +87,7 @@ const BabyShower = () => {
         </div>
       </div>
     </section>
+    <Footer/>
   </>
 }
 

@@ -1,16 +1,17 @@
 import React                from 'react'
 import { makeStyles }       from '@material-ui/core/styles'
-import Tabs                 from '@material-ui/core/Tabs'
-import Tab                  from '@material-ui/core/Tab'
-import Typography           from '@material-ui/core/Typography'
-import Box                  from '@material-ui/core/Box'
-import Nav                  from '../../Components/NavBar/Nav'
-import { Container, Paper } from '@material-ui/core'
-import Divider              from '@material-ui/core/Divider'
-import { useTranslation }   from 'react-i18next'
-import GeneralProfil        from '../../Components/UserProfil/GeneralProfil'
-import NotificationsProfile from '../../Components/UserProfil/NotificationsProfile'
-import SettingsAccount      from '../../Components/UserProfil/SettingsAccount/SettingsAccount'
+import Tabs                        from '@material-ui/core/Tabs'
+import Tab                         from '@material-ui/core/Tab'
+import Typography                  from '@material-ui/core/Typography'
+import Box                         from '@material-ui/core/Box'
+import Nav                         from '../../Components/NavBar/Nav'
+import { Container, Paper }        from '@material-ui/core'
+import Divider                     from '@material-ui/core/Divider'
+import { useTranslation }          from 'react-i18next'
+import GeneralProfil               from '../../Components/UserProfil/GeneralProfil'
+import NotificationsProfile        from '../../Components/UserProfil/NotificationsProfile'
+import SettingsAccount             from '../../Components/UserProfil/SettingsAccount/SettingsAccount'
+import Footer                      from '../../Components/Footer/Footer'
 
 function TabPanel (props) {
   const { children, value, index, ...other } = props
@@ -80,6 +81,7 @@ export default function UserProfil () {
           </TabPanel>
         </div>
       </Container>
+      <Footer/>
     </>
   )
 }

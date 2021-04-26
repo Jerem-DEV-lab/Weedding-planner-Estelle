@@ -3,6 +3,7 @@ import HeaderPage                       from '../../Components/HeaderPage/Header
 import Card                             from '../../Components/Card/Card'
 import { FaChartBar, FaHeart, FaMedal } from 'react-icons/fa'
 import { useTranslation }               from 'react-i18next'
+import Footer                           from '../../Components/Footer/Footer'
 
 const Home = () => {
   const {t} = useTranslation()
@@ -33,6 +34,7 @@ const Home = () => {
         </div>
       </div>
     </section>
+    <Footer/>
   </>
 }
 

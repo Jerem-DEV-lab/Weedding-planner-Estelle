@@ -13,7 +13,6 @@ import { ModalAuthContext } from '../../Context/ModalAuth'
 import IndexDashboardAdmin  from '../../Admin/Pages/IndexDashboardAdmin'
 import PrivateRoutes        from './PrivateRoutes'
 import Contact              from '../../Pages/Contact/Contact'
-import Footer               from '../Footer/Footer'
 
 const Routes = () => {
   const maintenance     = false
@@ -44,7 +43,6 @@ const Routes = () => {
          <Route path="/contact" exact component={Contact}/>
          <Redirect to={'/'}/>
        </Switch>}
-      <Footer/>
     </Router>
   </ModalAuthContext.Provider>
 }

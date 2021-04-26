@@ -1,6 +1,8 @@
-import React              from 'react'
-import HeaderPage         from '../../Components/HeaderPage/HeaderPage'
-import { useTranslation } from 'react-i18next'
+import React                       from 'react'
+import HeaderPage                  from '../../Components/HeaderPage/HeaderPage'
+import { useTranslation }          from 'react-i18next'
+import Footer                      from '../../Components/Footer/Footer'
+import { BrowserRouter as Router } from 'react-router-dom'
 
 const Wedding = () => {
   const { t } = useTranslation()
@@ -105,6 +107,7 @@ const Wedding = () => {
         </div>
       </div>
     </section>
+    <Footer/>
   </>
 }
 

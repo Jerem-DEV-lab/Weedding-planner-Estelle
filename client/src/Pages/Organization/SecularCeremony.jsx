@@ -1,10 +1,10 @@
-import React              from 'react'
-import HeaderPage         from '../../Components/HeaderPage/HeaderPage'
-import injectHtmlCode     from '../../tools/injectHtml'
-import Button             from '../../Components/Button/Button'
-import FormuleCard        from '../../Components/Card/FormuleCard'
-import { useTranslation } from 'react-i18next'
-
+import React                       from 'react'
+import HeaderPage                  from '../../Components/HeaderPage/HeaderPage'
+import injectHtmlCode              from '../../tools/injectHtml'
+import Button                      from '../../Components/Button/Button'
+import FormuleCard                 from '../../Components/Card/FormuleCard'
+import { useTranslation }          from 'react-i18next'
+import Footer                      from '../../Components/Footer/Footer'
 const SecularCeremony = () => {
   const { t }          = useTranslation()
   const formuleContent = 'Sunt in cognito mortalem itinera omnes casu agitare conaretur milites.Sunt in cognito mo' +
@@ -84,6 +84,8 @@ const SecularCeremony = () => {
         </div>
       </div>
     </section>
+    <Footer/>
+
   </>
 }
 

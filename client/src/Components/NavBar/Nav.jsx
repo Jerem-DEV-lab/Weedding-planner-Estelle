@@ -3,10 +3,8 @@ import { Link, NavLink }               from 'react-router-dom'
 import { FaBars, FaCaretDown, FaUser } from 'react-icons/fa'
 import Dropdown                        from '../Dropdown/Dropdown'
 import { useTranslation }              from 'react-i18next'
-import i18next                         from 'i18next'
 import { ModalAuthContext }            from '../../Context/ModalAuth'
 import { useSelector }                 from 'react-redux'
-import Logout                          from '../Authentification/Logout'
 
 const Nav = () => {
   const modalContext = useContext(ModalAuthContext)
@@ -62,9 +60,6 @@ const Nav = () => {
       <div className="menu-icon" onClick={handleClick}>
         <FaBars size={25}/>
       </div>
-      <Logout/>
-      {languages.map((l, index) => (
-        <button className="nav-lang" key={index} onClick={() => i18next.changeLanguage(l.code)}>{l.code}</button>))}
       <ul className={click ? 'nav-menu active' : 'nav-menu'}>
         <li className="nav-item">
           <NavLink activeClassName="active" className="nav-links" to="/">{t('home')}</NavLink>
@@ -92,8 +87,7 @@ const Nav = () => {
           className={`nav-item dropdown ${openDrop ? 'active' : ''} `}
           onClick={testDrop}>
           <div
-            className={`nav-links `}
-          >
+            className={`nav-links `}>
             {t('workshop')} <FaCaretDown/>
           </div>
           {<Dropdown items={sublink}/>}
