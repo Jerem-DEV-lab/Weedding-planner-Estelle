@@ -8,6 +8,7 @@ import PersonIcon                         from '@material-ui/icons/Person'
 import { useTranslation }                 from 'react-i18next'
 import Box                                from '@material-ui/core/Box'
 import Button                             from '@material-ui/core/Button'
+import Logout                             from '../Authentification/Logout'
 
 const useStyles = makeStyles(theme => (
   {
@@ -51,6 +52,7 @@ const GeneralProfil        = () => {
             <Typography variant="subtitle2" component="h6" className="mt3">
               {userInfo.lastName} {userInfo.firstName}
             </Typography>
+            <Logout />
           </Paper>
         </Grid>
         <Grid item={true} xs={12} md={9}>
