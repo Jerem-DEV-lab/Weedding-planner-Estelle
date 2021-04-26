@@ -9,18 +9,6 @@ import { useSelector }                 from 'react-redux'
 const Nav = () => {
   const modalContext = useContext(ModalAuthContext)
   const userContext  = useSelector(state => state.userReducers)
-  const languages               = [
-    {
-      code        : 'fr',
-      name        : 'Français',
-      country_code: 'fr',
-    },
-    {
-      code        : 'en',
-      name        : 'English',
-      country_code: 'gb'
-    }
-  ]
   const { t }                   = useTranslation()
   const [click, setClick]       = useState(false)
   const [openDrop, setOpenDrop] = useState(false)
@@ -115,7 +103,7 @@ const Nav = () => {
        <div className="navbar-account">
          <FaUser onClick={modalContext.changeContextModal}/>
          <span>
-           <button onClick={modalContext.changeContextModal}>{t('login')} / {t('register')}</button>
+           <Link to="/connexion">{t('login')} / {t('register')}</Link>
          </span>
        </div> : <div className="navbar-account connected">
          <div className="navbar-avatar">

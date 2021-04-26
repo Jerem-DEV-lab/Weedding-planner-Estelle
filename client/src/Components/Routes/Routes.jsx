@@ -8,11 +8,11 @@ import Evj                  from '../../Pages/Organization/Evj'
 import UserProfil           from '../../Pages/User/UserProfil'
 import About                from '../../Pages/About/About'
 import BabyShower           from '../../Pages/BabyShower/BabyShower'
-import ModalAuth            from '../ModalAuth'
 import { ModalAuthContext } from '../../Context/ModalAuth'
 import IndexDashboardAdmin  from '../../Admin/Pages/IndexDashboardAdmin'
 import PrivateRoutes        from './PrivateRoutes'
 import Contact              from '../../Pages/Contact/Contact'
+import Login2               from '../../Pages/Login/Login2'
 
 const Routes = () => {
   const maintenance     = false
@@ -20,10 +20,10 @@ const Routes = () => {
   const handleClose = () => setShow(false)
   return <ModalAuthContext.Provider value={{ contextModal: show, changeContextModal: () => setShow(!show) }}>
     <Router>
-      {show && <>
-        <div className={`overlay-modal ${show ? 'overlay-modal-visible' : ''}`} onClick={handleClose}/>
-        <ModalAuth openModal={show} closeModal={handleClose}/>
-      </>}
+      {/*      {show && <>
+       <div className={`overlay-modal ${show ? 'overlay-modal-visible' : ''}`} onClick={handleClose}/>
+       <ModalAuth openModal={show} closeModal={handleClose}/>
+       </>}*/}
       {maintenance ?
        <>
          <Route path="/" exact component={Maintenance}/>
@@ -39,6 +39,7 @@ const Routes = () => {
            exact component={UserProfil}/>
          <Route path={'/a-propos'} exact component={About}/>
          <Route path={'/baby-shower'} exact component={BabyShower}/>
+         <Route path={'/connexion'} exact component={Login2}/>
          <PrivateRoutes path={'/admin*'} role="ROLE_ADMIN" exact component={IndexDashboardAdmin}/>
          <Route path="/contact" exact component={Contact}/>
          <Redirect to={'/'}/>

@@ -78,16 +78,12 @@
   display                : flex;
   justify-content        : center;
   align-items            : center;
-  width                  : 10vw;
+  padding                : .75rem;
   background             : var(--color-primary);
   height                 : 100%;
   border-top-left-radius : 50px;
   font-size              : 15px;
   transition             : all .3s ease-in;
-
-  > svg {
-    margin-right : .375rem;
-  }
 }
 
 @include down(1386.99) {
