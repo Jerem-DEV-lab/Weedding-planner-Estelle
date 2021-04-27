@@ -32,17 +32,19 @@ const SettingsAccount = () => {
   const { workshopInfos } = useSelector(state => state.userReducers).userInfo
   return (
     <>
-      <Grid container={true} spacing={5}>
-        <Grid item={true} xs={12} md={9}>
-          <ContentProfil>
-            <Box component="span" display="flex" alignItems="center">
-              <SettingsIcon style={{ marginRight: '10px' }}/>
-              <Typography variant="h6" component="span" color="textPrimary">
-                {t('general_account_settings')}
-              </Typography>
-            </Box>
-            <Divider/>
-            <Box component="div" marginY={theme.spacing(0.2)}>
+      <div style={{ minHeight: 'calc(100vh - 340px)' }}>
+    
+        <Grid container={true} spacing={5}>
+          <Grid item={true} xs={12} md={9}>
+            <ContentProfil>
+              <Box component="span" display="flex" alignItems="center">
+                <SettingsIcon style={{ marginRight: '10px' }}/>
+                <Typography variant="h6" component="span" color="textPrimary">
+                  {t('general_account_settings')}
+                </Typography>
+              </Box>
+              <Divider/>
+              <Box component="div" marginY={theme.spacing(0.2)}>
               <Typography component="h6" variant="subtitle2" style={{ marginBottom: theme.spacing(2) }}>
                 {t('security_label')}
               </Typography>
@@ -101,7 +103,8 @@ const SettingsAccount = () => {
             </Box>
           </ContentProfil>
         </Grid>
-      </Grid>
+        </Grid>
+      </div>
     </>
   )
 }

@@ -41,7 +41,7 @@ const GeneralProfil        = () => {
   const { t }        = useTranslation()
   return (
     <>
-      <Grid container={true} spacing={4}>
+      <Grid container={true} spacing={4} style={{minHeight: "calc(100vh - 329px)"}}>
         <Grid item={true} xs={12} md={3}>
           <Paper className={classes.root}>
             <div className={classes.dashed}>
@@ -52,7 +52,7 @@ const GeneralProfil        = () => {
             <Typography variant="subtitle2" component="h6" className="mt3">
               {userInfo.lastName} {userInfo.firstName}
             </Typography>
-            <Logout />
+            <Logout/>
           </Paper>
         </Grid>
         <Grid item={true} xs={12} md={9}>

@@ -23,17 +23,18 @@ const NotificationsProfile = () => {
   
   return (
     <>
-      <Paper className={classes.root} variant="outlined">
-        <Typography variant="body1" style={{ fontWeight: '500', marginBottom: theme.spacing(2) }} component="h2">
-          {t('notification_profil_label')}
-        </Typography>
-        <Box component="div" display="flex" flexDirection="column">
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={values.newsLetter}
-                name="newsLetter"
-                color="primary"
+      <div style={{ minHeight: 'calc(100vh - 360px)' }}>
+        <Paper className={classes.root} variant="outlined">
+          <Typography variant="body1" style={{ fontWeight: '500', marginBottom: theme.spacing(2) }} component="h2">
+            {t('notification_profil_label')}
+          </Typography>
+          <Box component="div" display="flex" flexDirection="column">
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={values.newsLetter}
+                  name="newsLetter"
+                  color="primary"
                 onChange={(e) => setValues({ ...values, newsLetter: e.target.checked })}
               />
             }
@@ -51,8 +52,9 @@ const NotificationsProfile = () => {
             }
             label={t('message_private_label')}
           />
-        </Box>
-      </Paper>
+          </Box>
+        </Paper>
+      </div>
     </>
   )
 }

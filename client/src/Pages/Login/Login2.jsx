@@ -1,9 +1,9 @@
-import React                        from 'react'
+import React, { useEffect }         from 'react'
 import { Box, Grid, Hidden, Paper } from '@material-ui/core'
 import { makeStyles, withStyles }   from '@material-ui/core/styles'
 import Typography                   from '@material-ui/core/Typography'
 import Button                       from '@material-ui/core/Button'
-import { Link }                     from 'react-router-dom'
+import { Link, useHistory }         from 'react-router-dom'
 import ArrowBackIcon                from '@material-ui/icons/ArrowBack'
 import FormControl                  from '@material-ui/core/FormControl'
 import InputLabel                   from '@material-ui/core/InputLabel'
@@ -11,8 +11,10 @@ import OutlinedInput                from '@material-ui/core/OutlinedInput'
 import { useTranslation }           from 'react-i18next'
 import { useForm }                  from '../../Hooks/useForm'
 import Divider                      from '@material-ui/core/Divider'
-import { useDispatch }              from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { requestApiAuth }           from '../../actions/authenticatorAction'
+import { Alert }                    from '@material-ui/lab'
+import { resetEvent }               from '../../actions/adminAction'
 
 const OverlayForm = withStyles((theme) => (
   {
@@ -81,18 +83,26 @@ const usesStyles = makeStyles((theme) => ({
 }))
 
 const LoginForm = () => {
-  const classes                                  = usesStyles()
-  const { t }                                    = useTranslation()
-  const initialState                             = {
+  const classes                       = usesStyles()
+  const { t }                         = useTranslation()
+  const history                       = useHistory()
+  const initialState                  = {
     email   : '',
     password: ''
   }
-  const { values, setValues, handleChangeInput } = useForm(initialState)
-  const dispatch                                 = useDispatch()
-  const submitForm                               = (e) => {
+  const { values, handleChangeInput } = useForm(initialState)
+  const dispatch                      = useDispatch()
+  const { loginError, loginSuccess }  = useSelector(state => state.userReducers)
+  const submitForm                    = (e) => {
     e.preventDefault()
+    dispatch(resetEvent())
     dispatch(requestApiAuth(values))
   }
+  useEffect(() => {
+    if (loginSuccess) {
+      history.push('/')
+    }
+  }, [loginSuccess])
   return <>
     <div className={classes.root}>
       <Paper className={classes.containerForm} elevation={0}>
@@ -102,6 +112,8 @@ const LoginForm = () => {
         <div className="d-flex justify-center">
           <img src="/assets/logo.png" alt="logo de côté campagne" height={150}/>
         </div>
+        {loginError && <Alert severity="error">{loginError}</Alert>}
+        {loginSuccess && <Alert severity="success">{loginSuccess}</Alert>}
         <div className="mt4">
           <form>
             <Grid container={true} spacing={4}>
@@ -110,6 +122,7 @@ const LoginForm = () => {
                   <InputLabel htmlFor="email">Email</InputLabel>
                   <OutlinedInput
                     name="email"
+                    type="email"
                     value={values.email}
                     onChange={handleChangeInput}
                     label="Email"/>
@@ -121,6 +134,7 @@ const LoginForm = () => {
                   <OutlinedInput
                     name="password"
                     value={values.password}
+                    type="password"
                     onChange={handleChangeInput}
                     label="Mot de passe"/>
                 </FormControl>
