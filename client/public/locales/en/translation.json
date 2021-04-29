@@ -134,5 +134,9 @@
   "workShopNotExist": "You have no workshop to program",
   "workShopDate": "The workshop will take place on",
   "workshopName": "Name of the workshop ",
-  "workshopType": "Type of workshop"
+  "workshopType": "Type of workshop",
+  "ratingTitle": "What they say about me",
+  "buttonRating": "Give your opinion",
+  "titleFormReview": "What was your experience with Côté Campagne",
+  "opinion": "Avis"
 }

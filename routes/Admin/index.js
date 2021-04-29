@@ -1,6 +1,9 @@
 const router                           = require('express').Router()
 const UserSchema                       = require('../../db/Schema/UserSchema')
 const adminController                  = require('../../controller/Admin/AdminController')
+const { deleteNotice }                 = require('../../Services/Admin/RatingsService')
+const { valideNotice }                 = require('../../Services/Admin/RatingsService')
+const { getAllRatingUnpublished }      = require('../../Services/Admin/NewsletterService')
 const { deleteEmail }                  = require('../../Services/Admin/NewsletterService')
 const { createWorkshop }               = require('../../Services/Admin/WorkshopService')
 const { findUserByRegisteredWorkshop } = require('../../Services/Admin/WorkshopService')
@@ -24,17 +27,20 @@ function createRouterAdmin () {
     const adminService = new adminController(req, res)
     return adminService.getFormules(req, res)
   })
-  router.get('/admin/get/messages',checkRole('ROLE_ADMIN'), async (req, res) => {
+  router.get('/admin/get/messages', checkRole('ROLE_ADMIN'), async (req, res) => {
     const adminService = new adminController(req, res)
     return adminService.getAllMessages(req, res)
   })
   router.get('/admin/get/news', checkRole('ROLE_ADMIN'), (req, res) => {
     return getNewsletters(req, res)
   })
+  router.get('/admin/get/ratings', checkRole('ROLE_ADMIN'), (req, res) => {
+    return getAllRatingUnpublished(req, res)
+  })
   router.post('/admin/create/formule', checkRole('ROLE_ADMIN'), async (req, res) => {
     return adminController.formulaCreate(req, res)
   })
-  router.delete('/admin/delete/formule/:formulaId',checkRole('ROLE_ADMIN'),  async (req, res) => {
+  router.delete('/admin/delete/formule/:formulaId', checkRole('ROLE_ADMIN'), async (req, res) => {
     const adminService = new adminController(req, res)
     return adminService.formulaDelete(req, res)
   })
@@ -70,6 +76,14 @@ function createRouterAdmin () {
   })
   router.get('/admin/users/manage-workshop', checkRole('ROLE_ADMIN'), (req, res) => {
     return findUserByRegisteredWorkshop(req, res)
+  })
+  
+  router.patch('/admin/patch/ratings/:noticeId', checkRole('ROLE_ADMIN'), (req, res) => {
+    return valideNotice(req, res)
+  })
+  
+  router.delete('/admin/delete/ratings/:noticeId', checkRole('ROLE_ADMIN'), (req, res) => {
+    return deleteNotice(req, res)
   })
   return router
 }

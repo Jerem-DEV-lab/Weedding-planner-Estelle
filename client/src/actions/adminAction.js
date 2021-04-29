@@ -38,6 +38,12 @@ export const UPDATE_NEWS_ERRORS           = 'UPDATE_NEWS_ERRORS'
 export const SCHEDULE_WORKSHOP_LOADING    = 'SCHEDULE_WORKSHOP_LOADING'
 export const SCHEDULE_WORKSHOP_SUCCESS    = 'SCHEDULE_WORKSHOP_SUCCESS'
 export const SCHEDULE_WORKSHOP_ERRORS     = 'SCHEDULE_WORKSHOP_ERRORS'
+export const GET_ALL_RATINGS_SUCCESS      = 'GET_ALL_RATINGS_SUCCESS'
+export const GET_ALL_RATINGS_ERROR        = 'GET_ALL_RATINGS_ERROR'
+export const VALID_RATING_SUCCESS         = 'VALID_RATING_SUCCESS'
+export const VALID_RATING_ERROR           = 'VALID_RATING_ERROR'
+export const DELETE_RATING_SUCCESS        = 'DELETE_RATING_SUCCESS'
+export const DELETE_RATING_ERROR          = 'DELETE_RATING_ERROR'
 
 export const getUserLoading  = () => {
   return {
@@ -392,7 +398,74 @@ export const requestApiDeleteEmail = (datas, messageId) => {
   }
 }
 
-export const resetEvent = () => {
+export const getAllUnpublishedRatingsSuccess = (ratings) => {
+  return {
+    type   : GET_ALL_RATINGS_SUCCESS,
+    payload: ratings
+  }
+}
+export const getAllUnpublishedRatingsError   = (err) => {
+  return {
+    type   : GET_ALL_RATINGS_ERROR,
+    payload: err
+  }
+}
+export const requestApiRating                = () => {
+  return dispatch => {
+    axios.get(`/admin/get/ratings`)
+         .then(res => {
+           dispatch(getAllUnpublishedRatingsSuccess(res.data))
+         })
+         .catch(err => {
+           dispatch(getAllUnpublishedRatingsError(err.response.errors))
+         })
+  }
+}
+
+export const validRatingSuccess = (success, noticeId) => {
+  return {
+    type   : VALID_RATING_SUCCESS,
+    payload: { success, noticeId }
+  }
+}
+export const validRatingError   = (error) => {
+  return {
+    type   : VALID_RATING_ERROR,
+    payload: error
+  }
+}
+export const requestValidRating = (noticeId) => {
+  return dispatch => {
+    axios.patch(`/admin/patch/ratings/${noticeId}`)
+         .then(res => {
+           dispatch(validRatingSuccess(res.data.success, noticeId))
+         })
+         .catch(err => dispatch(validRatingError(err.response.data.error)))
+  }
+}
+
+export const deleteRatingSuccess = (success, noticeId) => {
+  return {
+    type   : DELETE_RATING_SUCCESS,
+    payload: { success, noticeId }
+  }
+}
+export const deleteRatingError   = (error) => {
+  return {
+    type   : DELETE_RATING_ERROR,
+    payload: error
+  }
+}
+export const requestDeleteRating = (noticeId) => {
+  return dispatch => {
+    axios.delete(`/admin/delete/ratings/${noticeId}`)
+         .then(res => {
+           dispatch(deleteRatingSuccess(res.data.success, noticeId))
+         })
+         .catch(err => dispatch(deleteRatingError(err.response.data.error)))
+  }
+}
+export const resetEvent          = () => {
   return {
     type: RESET_EVENTS_ACTION
   }

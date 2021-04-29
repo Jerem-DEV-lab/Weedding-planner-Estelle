@@ -10,6 +10,7 @@ import IndexMessagesAdmin                     from './Messages/IndexMessagesAdmi
 import DialogMessage                          from './Messages/DialogMessage'
 import ReplyMessage                           from './Messages/ReplyMessage'
 import IndexWorkshop                          from './Workshop/indexWorkshop'
+import ResumeAdminDashboard                   from './ResumeAdminDashboard'
 
 export default function IndexDashboardAdmin () {
   const dispatch   = useDispatch()
@@ -24,7 +25,7 @@ export default function IndexDashboardAdmin () {
     
     <Sidebar messages={adminState.messages}>
       <Switch>
-        <Route path="/admin" exact>
+        <Route path="/admin/users" exact>
           <TableUsers userDetails={adminState.listUser}/>
         </Route>
         <Route path="/admin/gestion-formules" exact>
@@ -44,6 +45,9 @@ export default function IndexDashboardAdmin () {
         </Route>
         <Route path="/admin/atelier" exact>
           <IndexWorkshop/>
+        </Route>
+        <Route path="/admin/avis" exact>
+          <ResumeAdminDashboard/>
         </Route>
       </Switch>
     </Sidebar>

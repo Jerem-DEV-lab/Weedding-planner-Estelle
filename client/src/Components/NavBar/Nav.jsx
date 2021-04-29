@@ -93,9 +93,12 @@ const Nav = () => {
         <li className="nav-item">
           <NavLink to={'/contact'} className="nav-links">{t('contact')}</NavLink>
         </li>
+        <li className="nav-item">
+          <NavLink to={'/avis'} className="nav-links">{t('opinion')}</NavLink>
+        </li>
         {roleUser && roleUser.includes('ROLE_ADMIN') &&
          <li className="nav-item">
-           <NavLink to={'/admin'} className="nav-links">Administration</NavLink>
+           <NavLink to={'/admin/users'} className="nav-links">Administration</NavLink>
          </li>
         }
       </ul>

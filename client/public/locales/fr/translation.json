@@ -135,5 +135,9 @@
   "workShopNotExist": "Vous n'avez aucun atelier de programmer",
   "workShopDate": "L'atelier aura lieu le",
   "workshopName": "Nom de l'atelier",
-  "workshopType": "Type de l'atelier"
+  "workshopType": "Type de l'atelier",
+  "ratingTitle": "Ce qu'ils pensent de moi",
+  "buttonRating": "Donner votre avis",
+  "titleFormReview": "Quelle a été votre expérience avec Côté Campagne",
+  "opinion": "Avis"
 }

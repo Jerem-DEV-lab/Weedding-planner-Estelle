@@ -2,6 +2,7 @@ const ObjectId            = require('mongoose').Types.ObjectId
 const NewsletterSchema    = require('../../db/Schema/NewsletterSchema')
 const UserSchema          = require('../../db/Schema/UserSchema')
 const EmailSchema         = require('../../db/Schema/ContactSchema')
+const RatingSchema        = require('../../db/Schema/RatingSchema')
 const transport           = require('../Lib/mailer')
 const { ErrorCreateNews } = require('../../tools/Newsletter')
 
@@ -95,5 +96,20 @@ module.exports.deleteEmail = async (req, res) => {
   } catch (e) {
     console.log(e)
     return res.status(500).json({ errors: 'Impossible de supprimer l\'email' })
+  }
+}
+
+module.exports.getAllRatingUnpublished = async (req, res) => {
+  try {
+    await RatingSchema.find({ isPublished: false }, (err, docs) => {
+      if (!err && !docs) {
+        return res.status(200)
+      }
+      if (docs) {
+        return res.status(200).json(docs)
+      }
+    })
+  } catch (e) {
+    return res.status(500).json(e)
   }
 }

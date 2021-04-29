@@ -10,7 +10,7 @@ import {
   DELETE_FORMULA_SUCCESS,
   DELETE_NEWS_ERRORS,
   DELETE_NEWS_LOADING,
-  DELETE_NEWS_SUCCESS,
+  DELETE_NEWS_SUCCESS, DELETE_RATING_ERROR, DELETE_RATING_SUCCESS, GET_ALL_RATINGS_SUCCESS,
   GET_FORMULA_ERROR,
   GET_FORMULA_LOADING,
   GET_FORMULA_SUCCESS,
@@ -33,31 +33,35 @@ import {
   SET_MESSAGES_ISREAD_SUCCESS,
   UPDATE_NEWS_ERRORS,
   UPDATE_NEWS_LOADING,
-  UPDATE_NEWS_SUCCESS
+  UPDATE_NEWS_SUCCESS, VALID_RATING_SUCCESS
 } from '../actions/adminAction'
 
 const initialState = {
-  listUser          : [],
-  isLoading         : false,
-  errorFetchUsers   : '',
-  changePriceError  : '',
-  changePriceSuccess: '',
-  isSuccess         : null,
-  status            : '',
-  deleteSuccess     : '',
-  deleteError       : '',
-  formulas          : [],
-  anyErrors         : '',
-  messages          : [],
-  newsLetters       : [],
-  successCreateNews : '',
-  updateSuccessNews : '',
-  errorsCreateNews  : {},
-  sendEmailLoading  : false,
-  successSendMail   : '',
-  errorSendMail     : '',
-  successSchedule   : '',
-  errorsSchedule    : '',
+  listUser           : [],
+  isLoading          : false,
+  errorFetchUsers    : '',
+  changePriceError   : '',
+  changePriceSuccess : '',
+  isSuccess          : null,
+  status             : '',
+  deleteSuccess      : '',
+  deleteError        : '',
+  formulas           : [],
+  anyErrors          : '',
+  messages           : [],
+  newsLetters        : [],
+  successCreateNews  : '',
+  updateSuccessNews  : '',
+  errorsCreateNews   : {},
+  sendEmailLoading   : false,
+  successSendMail    : '',
+  errorSendMail      : '',
+  successSchedule    : '',
+  errorsSchedule     : '',
+  ratings            : [],
+  deleteNoticeError  : '',
+  deleteNotice       : '',
+  deleteNoticeSuccess: ''
 }
 
 
@@ -290,11 +294,40 @@ export default function adminReducers (state = initialState, action) {
         successCreateNews : '',
         errorsCreateNews  : {},
         updateSuccessNews : '',
-        successSendMail  : '',
-        errorSendMail    : ''
+        successSendMail   : '',
+        errorSendMail     : ''
       }
     }
-  
+    case GET_ALL_RATINGS_SUCCESS: {
+      return {
+        ...state,
+        ratings: action.payload
+      }
+    }
+    case VALID_RATING_SUCCESS: {
+      return {
+        ...state,
+        ratings: state.ratings.filter(notice => notice._id !== action.payload.noticeId)
+      }
+    }
+    case DELETE_RATING_SUCCESS: {
+      return {
+        ...state,
+        ratings: state.ratings.filter(notice => notice._id !== action.payload.noticeId),
+        deleteNoticeSuccess: action.payload
+      }
+    }
+    case DELETE_RATING_ERROR: {
+      return {
+        ...state,
+        errors: action.payload
+      }
+    }
+    /*    case GET_ALL_RATINGS_ERROR:
+     return {
+     ...state,
+   
+     }*/
     default:
       return initialState
   }

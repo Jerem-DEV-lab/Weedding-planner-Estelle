@@ -13,6 +13,7 @@ import IndexDashboardAdmin  from '../../Admin/Pages/IndexDashboardAdmin'
 import PrivateRoutes        from './PrivateRoutes'
 import Contact              from '../../Pages/Contact/Contact'
 import Login2               from '../../Pages/Login/Login2'
+import Rating               from '../../Pages/Rating/Rating'
 
 const Routes = () => {
   const maintenance     = false
@@ -37,6 +38,7 @@ const Routes = () => {
          <Route
            path={['/profil/:userId', '/profil/:userId/', '/profil/:userId/messages', '/profil/:userId/gestion-compte']}
            exact component={UserProfil}/>
+         <Route path={'/avis'} exact component={Rating}/>
          <Route path={'/a-propos'} exact component={About}/>
          <Route path={'/baby-shower'} exact component={BabyShower}/>
          <Route path={'/connexion'} exact component={Login2}/>
