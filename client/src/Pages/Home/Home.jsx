@@ -4,6 +4,7 @@ import Card                             from '../../Components/Card/Card'
 import { FaChartBar, FaHeart, FaMedal } from 'react-icons/fa'
 import { useTranslation }               from 'react-i18next'
 import Footer                           from '../../Components/Footer/Footer'
+import { Link }                         from 'react-router-dom'
 
 const Home = () => {
   const {t} = useTranslation()
@@ -18,7 +19,7 @@ const Home = () => {
         <h2 className="h2">{t('titleSection1')}</h2>
         <p dangerouslySetInnerHTML={injectHtmlCode(t('contentSection1'))}/>
         <div className="btn-center-x">
-          <button className="btn btn-primary hover-opacity">{t('buttonSection1')}</button>
+          <Link to="/a-propos" className="btn btn-primary hover-opacity">{t('buttonSection1')}</Link>
         </div>
       </div>
     </section>

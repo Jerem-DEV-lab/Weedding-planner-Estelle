@@ -14,17 +14,13 @@ import PrivateRoutes        from './PrivateRoutes'
 import Contact              from '../../Pages/Contact/Contact'
 import Login2               from '../../Pages/Login/Login2'
 import Rating               from '../../Pages/Rating/Rating'
+import Gallery              from '../../Pages/Gallery/Gallery'
 
 const Routes = () => {
   const maintenance     = false
   const [show, setShow] = useState(false)
-  const handleClose = () => setShow(false)
   return <ModalAuthContext.Provider value={{ contextModal: show, changeContextModal: () => setShow(!show) }}>
     <Router>
-      {/*      {show && <>
-       <div className={`overlay-modal ${show ? 'overlay-modal-visible' : ''}`} onClick={handleClose}/>
-       <ModalAuth openModal={show} closeModal={handleClose}/>
-       </>}*/}
       {maintenance ?
        <>
          <Route path="/" exact component={Maintenance}/>
@@ -38,6 +34,7 @@ const Routes = () => {
          <Route
            path={['/profil/:userId', '/profil/:userId/', '/profil/:userId/messages', '/profil/:userId/gestion-compte']}
            exact component={UserProfil}/>
+         <Route path={'/galerie'} exact component={Gallery}/>
          <Route path={'/avis'} exact component={Rating}/>
          <Route path={'/a-propos'} exact component={About}/>
          <Route path={'/baby-shower'} exact component={BabyShower}/>

@@ -83,7 +83,7 @@ const Nav = () => {
         <li
           className="nav-item"
         >
-          <NavLink to={'/gallery'} className="nav-links">{t('gallery')}</NavLink>
+          <NavLink to={'/galerie'} className="nav-links">{t('gallery')}</NavLink>
         </li>
         <li
           className="nav-item"
