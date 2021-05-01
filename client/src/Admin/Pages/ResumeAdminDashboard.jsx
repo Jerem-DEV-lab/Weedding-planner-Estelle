@@ -7,6 +7,7 @@ import { requestApiRating }         from '../../actions/adminAction'
 import Box                          from '@material-ui/core/Box'
 import Button                       from '@material-ui/core/Button'
 import Ratings                      from '../../Components/Ratings'
+import { Link }                     from 'react-router-dom'
 
 const ResumeAdminDashboard = () => {
   const dispatch       = useDispatch()
@@ -27,7 +28,7 @@ const ResumeAdminDashboard = () => {
             </Typography>
             Vous avez {ratingReducers && ratingReducers.length} avis en attente de validation
             <Box display="flex" justifyContent="flex-end">
-              <Button color="primary" variant="outlined" size="small">Voir les avis</Button>
+              <Link to="/avis"> <Button color="primary" variant="outlined" size="small">Voir les avis</Button></Link>
             </Box>
           </Paper>
         </Grid>
