@@ -20,6 +20,7 @@ import axios                        from 'axios'
 import Ratings                      from '../../Components/Ratings'
 import { useDispatch, useSelector } from 'react-redux'
 import { requestApiAddRating }      from '../../actions/ratingAction'
+import Toastify                     from '../../Components/Toastify'
 
 const styles        = {
   title: {
@@ -43,6 +44,7 @@ const Rating        = () => {
   const { t }                           = useTranslation()
   const [ratings, setRatings]           = useState([])
   const [createReview, setCreateReview] = useState(false)
+  const ratingReducer                   = useSelector(state => state.ratingReducers)
   
   useEffect(() => {
     axios.get('/rating')
@@ -50,8 +52,10 @@ const Rating        = () => {
            setRatings(res.data)
          })
   }, [])
+  console.log(ratingReducer.successSubmit)
   return (
     <>
+      {ratingReducer.successSubmit && <Toastify message={ratingReducer.successSubmit}/>}
       <Nav/>
       <DialogFormReview open={createReview} close={() => setCreateReview(!createReview)}/>
       <Container maxWidth="lg">
@@ -82,7 +86,6 @@ const DialogFormReview = ({ open, close }) => {
   }
   const { values, setValues, handleChangeInput } = useForm(initialValues)
   const dispatch                                 = useDispatch()
-  const ratingReducer                            = useSelector(state => state.ratingReducers)
   
   const submitReview = (e) => {
     e.preventDefault()

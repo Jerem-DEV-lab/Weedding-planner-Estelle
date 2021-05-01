@@ -5,7 +5,7 @@ module.exports.sendRating = async (req, res) => {
   try {
     const newRating = new RatingSchema(req.body)
     await newRating.save()
-    return res.status(201).json({ success: 'Votre avis à bien été enregistré', newRating })
+    return res.status(201).json({ success: 'Votre avis sera soumis à une vérification ', newRating })
   } catch (e) {
     let errors = ErrorRatingUser(e)
     console.log(e)
