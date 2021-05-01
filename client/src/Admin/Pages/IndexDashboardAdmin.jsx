@@ -11,6 +11,7 @@ import DialogMessage                          from './Messages/DialogMessage'
 import ReplyMessage                           from './Messages/ReplyMessage'
 import IndexWorkshop                          from './Workshop/indexWorkshop'
 import ResumeAdminDashboard                   from './ResumeAdminDashboard'
+import UpdateCustomer                         from './UpdateUsers/UpdateCustomers'
 
 export default function IndexDashboardAdmin () {
   const dispatch   = useDispatch()
@@ -27,6 +28,9 @@ export default function IndexDashboardAdmin () {
       <Switch>
         <Route path="/admin/users" exact>
           <TableUsers userDetails={adminState.listUser}/>
+        </Route>
+        <Route path="/admin/user/:customerId" exact>
+          <UpdateCustomer/>
         </Route>
         <Route path="/admin/gestion-formules" exact>
           <IndexFormules/>
