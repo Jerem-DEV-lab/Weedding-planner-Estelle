@@ -4,7 +4,7 @@ import { Link, NavLink }           from 'react-router-dom'
 import { FaBars, FaTimes, FaUser } from 'react-icons/fa'
 import { useSelector }             from 'react-redux'
 
-const Nav = () => {
+const Nav = ({ bgColor = '', typoColor = '' }) => {
   const [clicked, setClicked] = useState(false)
   const { t }                 = useTranslation()
   const userContext           = useSelector(state => state.userReducers)
@@ -73,7 +73,7 @@ const Nav = () => {
     }
   ]
   return (
-    <nav className="navbar">
+    <nav className="navbar" style={{ background: bgColor, color: typoColor }}>
       <div className="menu-mobile" onClick={() => setClicked(!clicked)}>
         {!clicked ? <FaBars/> : <FaTimes/>}
       </div>
