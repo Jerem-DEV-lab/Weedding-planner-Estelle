@@ -1,12 +1,11 @@
 import React                       from 'react'
-import HeaderPage                  from '../../Components/HeaderPage/HeaderPage'
 import { useTranslation }          from 'react-i18next'
 import Footer                      from '../../Components/Footer/Footer'
 
 const About = () => {
   const { t } = useTranslation()
   return <>
-    <HeaderPage nameImg="about.jpg" positionImg="top 20% center" titleHero={`${t('title_about')}...`}/>
+    {/*<HeaderPage nameImg="about.jpg" positionImg="top 20% center" titleHero={`${t('title_about')}...`}/>*/}
     <div className="section-decoration"/>
     <section className="container p-relative">
       <div className="row wrap-reverse-sm">

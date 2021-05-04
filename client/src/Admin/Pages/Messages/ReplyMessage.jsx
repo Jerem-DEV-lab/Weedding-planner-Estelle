@@ -1,4 +1,4 @@
-import React, { useEffect, useState }                 from 'react'
+import React, { useEffect }                           from 'react'
 import { useParams }                                  from 'react-router-dom'
 import { useDispatch, useSelector }                   from 'react-redux'
 import { Box, Button, FormControl, Paper, TextField } from '@material-ui/core'
@@ -29,6 +29,7 @@ const ReplyMessage = () => {
     if (messages) {
       setValues({ ...values, userEmail: findMessageById(messageId, messages).email })
     }
+    // eslint-disable-next-line
   }, [messageId, messages])
   
   const sendEmail = () => {
@@ -42,6 +43,7 @@ const ReplyMessage = () => {
         history.push('/admin/messages')
       }, 2000)
     }
+    // eslint-disable-next-line
   }, [successSendMail])
   
   return <>

@@ -2,7 +2,7 @@ import {
   LANG_USER_PREF,
   LOGIN_USER_ERROR,
   LOGIN_USER_LOADING,
-  LOGIN_USER_SUCCESS, LOGOUT_USER
+  LOGIN_USER_SUCCESS, LOGOUT_USER, REGISTER_USER_ERROR, REGISTER_USER_LOADING, REGISTER_USER_SUCCESS
 } from '../actions/authenticatorAction'
 import {
   ADD_EVENT_ERRORS,
@@ -20,7 +20,7 @@ const initialState = {
   userInfo           : {},
   loginError         : '',
   loginSuccess       : '',
-  registrationFail   : '',
+  registrationFail   : {},
   registrationSuccess: '',
   errorChange        : '',
   langPref           : 'FR_fr',
@@ -139,6 +139,24 @@ export default function userReducers (state = initialState, action) {
         isLoading      : false,
         addEventSuccess: '',
         addEventErrors : action.payload
+      }
+    case REGISTER_USER_LOADING:
+      return {
+        ...state,
+        isLoading: true,
+      }
+    case REGISTER_USER_ERROR:
+      return {
+        ...state,
+        isLoading       : false,
+        registrationFail: action.payload
+      }
+    case REGISTER_USER_SUCCESS:
+      return {
+        ...state,
+        isLoading          : false,
+        registrationFail   : {},
+        registrationSuccess: action.payload
       }
     default:
       return state

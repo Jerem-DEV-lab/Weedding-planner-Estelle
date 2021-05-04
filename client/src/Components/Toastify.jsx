@@ -16,6 +16,7 @@ const Toastify = ({ message = 'Veuillez renseigner un message' }) => {
     }
     
     notify()
+    // eslint-disable-next-line
   }, [message])
   
   return <ToastContainer/>

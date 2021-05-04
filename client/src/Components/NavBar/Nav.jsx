@@ -1,125 +1,130 @@
-import React, { useContext, useState } from 'react'
-import { Link, NavLink }               from 'react-router-dom'
-import { FaBars, FaCaretDown, FaUser } from 'react-icons/fa'
-import Dropdown                        from '../Dropdown/Dropdown'
-import { useTranslation }              from 'react-i18next'
-import { ModalAuthContext }            from '../../Context/ModalAuth'
-import { useSelector }                 from 'react-redux'
+import React, { useState }         from 'react'
+import { useTranslation }          from 'react-i18next'
+import { Link, NavLink }           from 'react-router-dom'
+import { FaBars, FaTimes, FaUser } from 'react-icons/fa'
+import { useSelector }             from 'react-redux'
 
 const Nav = () => {
-  const modalContext = useContext(ModalAuthContext)
-  const userContext  = useSelector(state => state.userReducers)
-  const { t }                   = useTranslation()
-  const [click, setClick]       = useState(false)
-  const [openDrop, setOpenDrop] = useState(false)
-  const handleClick             = () => setClick(!click)
-  const testDrop                = () => {
-    setOpenDrop(!openDrop)
-  }
-  const sublink                 = [
+  const [clicked, setClicked] = useState(false)
+  const { t }                 = useTranslation()
+  const userContext           = useSelector(state => state.userReducers)
+  const roleUser              = userContext.userInfo.roles
+  const navItems              = [
     {
-      label: t('Weeding'),
-      url  : '/organisation/mariage',
-      cName: 'dropdown-link'
+      label: t('home'),
+      url  : '/accueil',
+      cName: 'nav-link'
+    },
+    {
+      label: t('organization'),
+      cName: 'nav-link',
+      child: [
+        {
+          label: 'Mariage',
+          url  : '/organisation/mariage',
+          cName: 'dropdown-link'
+        },
+        {
+          label: 'Conception floral',
+          url  : '/organisation/ceremonie-laique',
+          cName: 'dropdown-link'
+        },
+        {
+          label: 'EVJG / EVJF',
+          url  : '/organisation/evj',
+          cName: 'dropdown-link'
+        },
+        {
+          label: 'Baby shower',
+          url  : '/baby-shower',
+          cName: 'dropdown-link'
+        },
+      ]
     },
     {
       label: t('secularCeremony'),
-      url  : '/organisation/ceremonie-laique',
-      cName: 'dropdown-link'
+      url  : '/organisation',
+      cName: 'nav-link'
     },
     {
-      label: t('evjg'),
-      url  : '/organisation/evj',
-      cName: 'dropdown-link'
+      label: t('workshop'),
+      url  : '/organisation',
+      cName: 'nav-link'
     },
     {
-      label: t('babyShower'),
-      url  : '/baby-shower',
-      cName: 'dropdown-link'
+      label: t('gallery'),
+      url  : '/galerie',
+      cName: 'nav-link'
     },
+    {
+      label: t('about'),
+      url  : '/a-propos',
+      cName: 'nav-link'
+    },
+    {
+      label: t('contact'),
+      url  : '/contact',
+      cName: 'nav-link'
+    },
+    {
+      label: t('opinion'),
+      url  : '/avis',
+      cName: 'nav-link'
+    }
   ]
-  const roleUser                = userContext.userInfo.roles
-  return <>
+  return (
     <nav className="navbar">
-      <div className={`overlay-nav ${click ? 'active' : ''}`} onClick={handleClick}/>
-      <Link to="/" className="navbar-logo">
-        <img src="/assets/logo.png" alt="Logo de côté campagne" height={50} width={50}/>
-      </Link>
-      <div className="menu-icon" onClick={handleClick}>
-        <FaBars size={25}/>
+      <div className="menu-mobile" onClick={() => setClicked(!clicked)}>
+        {!clicked ? <FaBars/> : <FaTimes/>}
       </div>
-      <ul className={click ? 'nav-menu active' : 'nav-menu'}>
-        <li className="nav-item">
-          <NavLink activeClassName="active" className="nav-links" to="/">{t('home')}</NavLink>
-        </li>
-        <li
-          className={`nav-item dropdown ${openDrop ? 'active' : ''} `}
-          onClick={testDrop}
-        >
-          <div
-            className={`nav-links `}
-          >
-            {t('organization')} <FaCaretDown/>
-          </div>
-          {<Dropdown items={sublink}/>}
-        </li>
-        <li className={`nav-item dropdown ${openDrop ? 'active' : ''} `}
-            onClick={testDrop}
-        >
-          <div className={`nav-links `}>
-            {t('secularCeremony')} <FaCaretDown/>
-          </div>
-          {<Dropdown items={sublink}/>}
-        </li>
-        <li
-          className={`nav-item dropdown ${openDrop ? 'active' : ''} `}
-          onClick={testDrop}>
-          <div
-            className={`nav-links `}>
-            {t('workshop')} <FaCaretDown/>
-          </div>
-          {<Dropdown items={sublink}/>}
-        </li>
-        <li
-          className="nav-item"
-        >
-          <NavLink to={'/galerie'} className="nav-links">{t('gallery')}</NavLink>
-        </li>
-        <li
-          className="nav-item"
-        >
-          <NavLink to={'/a-propos'} className="nav-links">{t('about')}</NavLink>
-        </li>
-        <li className="nav-item">
-          <NavLink to={'/contact'} className="nav-links">{t('contact')}</NavLink>
-        </li>
-        <li className="nav-item">
-          <NavLink to={'/avis'} className="nav-links">{t('opinion')}</NavLink>
-        </li>
-        {roleUser && roleUser.includes('ROLE_ADMIN') &&
-         <li className="nav-item">
-           <NavLink to={'/admin/users'} className="nav-links">Administration</NavLink>
-         </li>
-        }
-      </ul>
-      {!userContext.isLogged ?
-       <div className="navbar-account">
-         <FaUser onClick={modalContext.changeContextModal}/>
-         <span>
-           <Link to="/connexion">{t('login')} / {t('register')}</Link>
-         </span>
-       </div> : <div className="navbar-account connected">
-         <div className="navbar-avatar">
-           <Link to={`/profil/${userContext.userInfo._id}`}>
-             <img src={`${userContext.userInfo.userAvatar}`} alt=""/>
-           </Link>
-         </div>
+      <div className={clicked ? 'nav-container active' : 'nav-container'}>
+        <div className="nav-mobile-logo">
+          <img src="/assets/logo.png" alt="logo de Côté Campagne"/>
+        </div>
+        <ul className="nav-list">
+          {navItems.map((link, index) => (<>
+              {!link.child ?
+               <li key={index} className="nav-item">
+                 <Link to={link.url} className="nav-link" onClick={() => setClicked(!clicked)}>{link.label}</Link>
+               </li> :
+               <li key={index} className="nav-item">
+                 <Link to={link.url} className={link.cName} onClick={() => setClicked(!clicked)}>{link.label}</Link>
+                 <div className="dropdown">
+                   <ul className="dropdown-list">
+                     {link.child.map(child => (
+                       <li key={index} className="dropdown-item">
+                         <Link to={child.url} className="dropdown-link"
+                               onClick={() => setClicked(!clicked)}>{child.label}</Link>
+                       </li>
+                     ))}
+                   </ul>
+                 </div>
+               </li>}
+            </>
+          ))}
+          {roleUser && roleUser.includes('ROLE_ADMIN') &&
+           <li className="nav-item">
+             <NavLink to={'/admin/users'} className="nav-links">Administration</NavLink>
+           </li>
+          }
+        </ul>
+      </div>
+      <div className={clicked ? 'overlay-nav active' : 'overlay-nav'} onClick={() => setClicked(!clicked)}/>
+      <div className="nav-user">
+        {!userContext.isLogged ?
+         <Link to="/connexion"> Connexion <span><FaUser/></span></Link>
+                               : <>
+           <div>
          <span> <Link
-           to={`/profil/${userContext.userInfo._id}`}>{userContext.userInfo.firstName} {userContext.userInfo.lastName}</Link>
-         </span>
-       </div>}
+           to={`/profil/${userContext.userInfo._id}`}>{userContext.userInfo.firstName} {userContext.userInfo.lastName}
+           <span><FaUser/></span></Link>
+            </span>
+           </div>
+         </>
+        }
+      </div>
     </nav>
-  </>
+  )
 }
 
 export default Nav

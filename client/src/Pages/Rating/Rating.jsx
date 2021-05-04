@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Nav                            from '../../Components/NavBar/Nav'
+import NavOld                         from '../../Components/NavBar/Nav.old'
 import {
   Container,
   Dialog,
@@ -52,11 +52,10 @@ const Rating        = () => {
            setRatings(res.data)
          })
   }, [])
-  console.log(ratingReducer.successSubmit)
   return (
     <>
       {ratingReducer.successSubmit && <Toastify message={ratingReducer.successSubmit}/>}
-      <Nav/>
+      <NavOld/>
       <DialogFormReview open={createReview} close={() => setCreateReview(!createReview)}/>
       <Container maxWidth="lg">
         <Box marginTop={6} display="flex" justifyContent="space-between">
@@ -127,7 +126,6 @@ const FormRating = ({ values, setValues, handleChangeInput }) => {
   const handleMouseLeave = () => {
     setHoverValue(undefined)
   }
-  console.log(values)
   return <>
     
     <form>

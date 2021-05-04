@@ -50,13 +50,14 @@ function App () {
   }
   useEffect(() => {
     fetchToken()
-    
+    // eslint-disable-next-line
   }, [userLogged.isLogged])
   
   useEffect(() => {
     if (isLogged || userLogged.isLogged) {
       fetchToken()
     }
+    // eslint-disable-next-line
   }, [isLogged, userLogged.isLogged])
   return <>
     <ThemeProvider theme={theme}>

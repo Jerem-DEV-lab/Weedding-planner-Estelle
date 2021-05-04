@@ -13,7 +13,7 @@ module.exports.ErrorAuthentification = (err) => {
     postalCode     : '',
   }
   if (err.message.includes('email') && err.message.includes('is required')) {
-    errors.name = 'Vous devez renseigner une adresse mail valide'
+    errors.email = 'Vous devez renseigner une adresse mail valide'
   }
   if (err.message.includes('password') && err.message.includes('is required')) {
     errors.name = 'Vous devez renseigner un mot de passe'

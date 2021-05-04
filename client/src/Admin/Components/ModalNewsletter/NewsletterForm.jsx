@@ -23,6 +23,7 @@ const NewsletterForm = (props) => {
         dispatch(requestApiGetNewsletter())
       }, 1500)
     }
+    // eslint-disable-next-line
   }, [successCreateNews])
   return <>
     {successCreateNews && <Alert severity="success">{successCreateNews}</Alert>}

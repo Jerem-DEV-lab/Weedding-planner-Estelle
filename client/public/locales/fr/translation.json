@@ -1,7 +1,10 @@
 {
-  "titleHero": "Découvrez l'univers floral de Côté Campagne",
-  "titleSection1": "Pourquoi faire appel à moi ?",
-  "contentSection1": "Bienvenue dans l’univers Côté campagne. Wedding planner & Designer floral certifié je serais ravie de vous accompagner\ndans l’élaboration de votre projet. J’organise tout types d’évènements privés, Vous accompagne dans la préparation et\ninterprétation de votre cérémonie grâce à mon activité d’officiante de cérémonies personnalisées et laïques. j’aime\npartager ma passion du végétal autour d’un atelier d’art floral de loisir ou de manière plus professionnelle pour\nl’obtention d’une certification au métier de fleuriste. Également praticienne en art thérapie je vous accompagne et vous\naide à surmonter vos tracas du quotidien grâce à différents médiums artistiques. J’ai hâte de vous rencontrer pour\nécrire ensemble la prochaine page de l’aventure Côté Campagne.",
+  "titleHeroHome": "Découvrez l'univers floral de Côté Campagne",
+  "subtitleHeroHome": "Chaque événement reste unique",
+  "titleSection1Home": "Quelques images",
+  "contentSection1Home": "Parfois, les images valent mieux que les longs discours... Si vous voulez voir plus d’organisations que propose <strong>Côté Campagne</strong>, je vous invite à vous rendre sur ma <span>galerie d’images</span> ou mon <span>instagram</span> .",
+  "titleSection2Home": "Pourquoi faire appel à moi ?",
+  "contentSection2Home": "Wedding planner & Designer floral certifié, je serais ravie de vous accompagner dans l’élaboration de votre projet. J’organise tous types d’évènements privés, je vous accompagne dans la préparation et interprétation de votre cérémonie grâce à mon activité d’officiante de cérémonies personnalisées et laïques. J’aime partager ma passion du végétal autour d’un atelier d’art floral de loisir ou de manière plus professionnelle pour l’obtention d’une certification au métier de fleuriste. Également praticienne en art-thérapie je vous accompagne et vous aide à surmonter vos tracas du quotidien grâce à différents médiums artistiques. J’ai hâte de vous rencontrer pour écrire ensemble la prochaine page de l’aventure Côté Campagne.",
   "buttonSection1": "En savoir plus",
   "cardTitleContent1": "Une organisatrice diplômée",
   "cardContent1": "Formée au métier de l'événementiel, je respecte une méthode de travail rigoureuse",
@@ -50,7 +53,6 @@
   "lastName": "Nom",
   "email": "Email",
   "yourDepartment": "Votre région",
-  "organization": "Organisation",
   "numberOfGuests": "Nombre d'invités",
   "yourBudget": "Votre budget",
   "message": "Message",
@@ -139,5 +141,8 @@
   "ratingTitle": "Ce qu'ils pensent de moi",
   "buttonRating": "Donner votre avis",
   "titleFormReview": "Quelle a été votre expérience avec Côté Campagne",
-  "opinion": "Avis"
+  "opinion": "Avis",
+  "organization": "Organisation",
+  "organizations": "organisations",
+  "decorations": "decorations"
 }

@@ -20,6 +20,7 @@ export default function IndexDashboardAdmin () {
   useEffect(() => {
     dispatch(requestApiUsers())
     dispatch(requestApiMessage())
+    // eslint-disable-next-line
   }, [])
   
   return <>

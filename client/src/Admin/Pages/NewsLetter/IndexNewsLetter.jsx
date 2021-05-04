@@ -72,6 +72,7 @@ const IndexNewsLetter = () => {
   const newsData    = useSelector(state => state.adminReducers)
   useEffect(() => {
     dispatch(requestApiGetNewsletter())
+    // eslint-disable-next-line
   }, [])
   
   return (

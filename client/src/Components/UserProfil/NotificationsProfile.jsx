@@ -1,5 +1,5 @@
 import React                                             from 'react'
-import { Checkbox, FormControlLabel, Paper, RadioGroup } from '@material-ui/core'
+import { Checkbox, FormControlLabel, Paper } from '@material-ui/core'
 import Typography                                        from '@material-ui/core/Typography'
 import Box                                               from '@material-ui/core/Box'
 import { useTranslation }                                from 'react-i18next'

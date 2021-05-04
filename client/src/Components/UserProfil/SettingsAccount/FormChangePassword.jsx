@@ -59,6 +59,7 @@ export default function FormChangePassword () {
         dispatch(resetEventUser())
       }, 2000)
     }
+    // eslint-disable-next-line
   }, [successChange])
   return (
     <>

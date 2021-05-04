@@ -1,20 +1,21 @@
 import React, { useState }                                  from 'react'
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom'
 import Maintenance                                          from '../../Pages/Maintenance'
-import Home                 from '../../Pages/Home/Home'
-import Wedding              from '../../Pages/Organization/Wedding'
-import SecularCeremony      from '../../Pages/Organization/SecularCeremony'
-import Evj                  from '../../Pages/Organization/Evj'
-import UserProfil           from '../../Pages/User/UserProfil'
+import Home                                                 from '../../Pages/Home/Home'
+import Wedding                                              from '../../Pages/Organization/Wedding'
+import SecularCeremony                                      from '../../Pages/Organization/SecularCeremony'
+import Evj                                                  from '../../Pages/Organization/Evj'
+import UserProfil                                           from '../../Pages/User/UserProfil'
 import About                from '../../Pages/About/About'
-import BabyShower           from '../../Pages/BabyShower/BabyShower'
+import BabyShower           from '../../Pages/Organization/BabyShower'
 import { ModalAuthContext } from '../../Context/ModalAuth'
-import IndexDashboardAdmin  from '../../Admin/Pages/IndexDashboardAdmin'
-import PrivateRoutes        from './PrivateRoutes'
-import Contact              from '../../Pages/Contact/Contact'
-import Login2               from '../../Pages/Login/Login2'
-import Rating               from '../../Pages/Rating/Rating'
-import Gallery              from '../../Pages/Gallery/Gallery'
+import IndexDashboardAdmin                                  from '../../Admin/Pages/IndexDashboardAdmin'
+import PrivateRoutes                                        from './PrivateRoutes'
+import Contact                                              from '../../Pages/Contact/Contact'
+import Rating                                               from '../../Pages/Rating/Rating'
+import Gallery                                              from '../../Pages/Gallery/Gallery'
+import Login                                                from '../../Pages/Authentification/Login'
+import Register                                             from '../../Pages/Authentification/Register'
 
 const Routes = () => {
   const maintenance     = false
@@ -38,7 +39,8 @@ const Routes = () => {
          <Route path={'/avis'} exact component={Rating}/>
          <Route path={'/a-propos'} exact component={About}/>
          <Route path={'/baby-shower'} exact component={BabyShower}/>
-         <Route path={'/connexion'} exact component={Login2}/>
+         <Route path={'/connexion'} exact component={Login}/>
+         <Route path={'/inscription'} exact component={Register}/>
          <PrivateRoutes path={'/admin*'} role="ROLE_ADMIN" exact component={IndexDashboardAdmin}/>
          <Route path="/contact" exact component={Contact}/>
          <Redirect to={'/'}/>

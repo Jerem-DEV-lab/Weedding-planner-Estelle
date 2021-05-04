@@ -1,7 +1,10 @@
 {
-  "titleHero": "Discover the floral universe from the countryside side",
-  "titleSection1": "Why call on me ? ",
-  "contentSection1": "Welcome to the world of Côté campagne. Certified Wedding Planner & Floral Designer, I would be delighted to accompany you\nin the development of your project. I organize all types of private events, I accompany you in the preparation and\nceremony thanks to my activity as an officiant of personalized and secular ceremonies.\nto share my passion for plants around a leisurely floral art workshop or in a more professional way for\nto obtain a certification as a florist. I am also a practitioner of art therapy and I will accompany you and help you\nand help you to overcome your daily worries thanks to different artistic mediums. I look forward to meeting you to\nthe next page of the Côté Campagne adventure.",
+  "titleHeroHome": "Discover the floral universe of Côté Campagne",
+  "subtitleHeroHome": "Each event remains unique",
+  "titleSection1Home": "Some pictures",
+  "contentSection1Home": "Sometimes, pictures are better than long speeches <br/> If you want to see more of the organizations that <strong>Côté Campagne</strong> offers, I invite you to visit my <span>image gallery</span> or <span>my instagram</span>.",
+  "titleSection2Home": "Why call on me?",
+  "contentSection2Home": "Certified Wedding Planner & Floral Designer, I would be delighted to accompany you in the development of your project. I organize all types of private events, I accompany you in the preparation and interpretation of your ceremony thanks to my activity of officiant of personalized and secular ceremonies. I like to share my passion for plants around a floral art workshop or in a more professional way to obtain a certification as a florist. I am also a practitioner in art therapy and I will help you to overcome your daily worries thanks to different artistic mediums. I look forward to meeting you and writing the next page of the Côté Campagne adventure together.",
   "buttonSection1": "Find out more",
   "cardTitleContent1": "A qualified organizer",
   "cardContent1": "Trained in the event industry, I respect a rigorous working method",
@@ -10,7 +13,6 @@
   "cardTitleContent3": "An optimized and controlled budget ",
   "cardContent3": "I work with you to develop a detailed budget that meets your needs and expectations.",
   "home": "Home Page",
-  "organization": "Organization",
   "workshop": "My workshop",
   "floralScenography": "Floral scenography",
   "gallery": "Gallery",
@@ -138,5 +140,8 @@
   "ratingTitle": "What they say about me",
   "buttonRating": "Give your opinion",
   "titleFormReview": "What was your experience with Côté Campagne",
-  "opinion": "Avis"
+  "opinion": "Avis",
+  "organization": "Organization",
+  "organizations": "organizations",
+  "decorations": "decorations"
 }

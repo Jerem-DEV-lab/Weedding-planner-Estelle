@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import axios                          from 'axios'
-import Nav                            from '../../Components/NavBar/Nav'
-import { Card, Container, Grid }      from '@material-ui/core'
+import axios                     from 'axios'
+import NavOld                    from '../../Components/NavBar/Nav.old'
+import { Card, Container, Grid } from '@material-ui/core'
 import { makeStyles }                 from '@material-ui/core/styles'
 import CardMedia                      from '@material-ui/core/CardMedia'
 import Footer                         from '../../Components/Footer/Footer'
@@ -70,7 +70,7 @@ const Gallery   = () => {
   }, [])
   return (
     <>
-      <Nav/>
+      <NavOld/>
       <Container maxWidth="md" style={{ marginBottom: '1.75rem' }}>
         <Grid container={true} spacing={1}>
           {gallery.map((pictures, index) => (

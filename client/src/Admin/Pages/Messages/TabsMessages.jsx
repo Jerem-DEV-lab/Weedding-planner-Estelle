@@ -2,7 +2,6 @@ import React                          from 'react'
 import { withStyles }                 from '@material-ui/core/styles'
 import {
   Box,
-  Checkbox,
   makeStyles,
   Paper,
   Table,
@@ -45,7 +44,7 @@ const useStyles = makeStyles(
       minWidth: 500,
     },
   })
-export default function TabsMessages ({ messages, select, selected, openMessage }) {
+export default function TabsMessages ({ messages, openMessage }) {
   const classes        = useStyles()
   const dispatch       = useDispatch()
   const setIsRead      = (messageId) => {

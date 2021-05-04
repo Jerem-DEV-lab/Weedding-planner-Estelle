@@ -35,7 +35,6 @@ class Authentification {
       return response.status(200).json({ message: 'Un email vient de vous être envoyé pour confirmer votre compte.' })
     } catch (e) {
       const errors = ErrorAuthentification(e)
-      console.log(e)
       return response.status(400).json(errors)
     }
   }

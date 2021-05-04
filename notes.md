@@ -48,12 +48,12 @@ Cours particulier niveau 1  : 80€ Cours particulier niveau 2 : 120€ Cours pa
 
 ###Texte Google :
 
-###Côté campagne | Estelle Rouillé | Wedding planner | | Wedding designer | Officiante de Cérémonie laïque | Art floral |
+###Côté campagne | Estelle Rouillé | WeddingOld planner | | WeddingOld designer | Officiante de Cérémonie laïque | Art floral |
 ###Art Thérapie | Formatrice CAP Fleuriste | Eco Boss | Fleuriste Scénographe |
 
 #### Texte accueil :
 
-###Bienvenue dans l’univers Côté campagne. Wedding planner & Designer floral certifié je serais ravie de vous accompagner
+###Bienvenue dans l’univers Côté campagne. WeddingOld planner & Designer floral certifié je serais ravie de vous accompagner
 ###dans l’élaboration de votre projet. J’organise tout types d’évènements privés, Vous accompagne dans la préparation et
 ###interprétation de votre cérémonie grâce à mon activité d’officiante de cérémonies personnalisées et laïques. j’aime
 ###partager ma passion du végétal autour d’un atelier d’art floral de loisir ou de manière plus professionnelle pour

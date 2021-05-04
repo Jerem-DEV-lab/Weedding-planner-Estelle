@@ -71,6 +71,7 @@ const ContactForm    = () => {
         history.push('/')
       }, 2000)
     }
+    // eslint-disable-next-line
   }, [successSubmit])
   
   return (
