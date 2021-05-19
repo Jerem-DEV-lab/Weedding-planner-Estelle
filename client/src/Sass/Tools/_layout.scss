@@ -291,3 +291,18 @@
     max-width : 50%;
   }
 }
+
+.list-number {
+  list-style-type : decimal;
+}
+.list-bull{
+  list-style-type: circle;
+}
+
+.list-number, .list-bull{
+  padding-left    : 2.55rem;
+  font-weight     : 600;
+  & li {
+    margin-bottom : .75rem;
+  }
+}

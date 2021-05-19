@@ -6,7 +6,7 @@ const RatingSchema        = require('../../db/Schema/RatingSchema')
 const transport           = require('../Lib/mailer')
 const { ErrorCreateNews } = require('../../tools/Newsletter')
 
-function templateMail (receiverEmail, subject, messageContent) {
+module.exports.templateMail = (receiverEmail, subject, messageContent) => {
   return {
     from   : '<test.dev.node@gmail.com>',
     to     : receiverEmail,

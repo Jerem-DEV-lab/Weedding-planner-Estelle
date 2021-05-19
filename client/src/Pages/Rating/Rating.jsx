@@ -21,6 +21,8 @@ import Ratings                      from '../../Components/Ratings'
 import { useDispatch, useSelector } from 'react-redux'
 import { requestApiAddRating }      from '../../actions/ratingAction'
 import Toastify                     from '../../Components/Toastify'
+import Nav                          from '../../Components/NavBar/Nav'
+import HeroPage                     from '../../Components/HeroPage/HeroPage'
 
 const styles        = {
   title: {
@@ -55,7 +57,17 @@ const Rating        = () => {
   return (
     <>
       {ratingReducer.successSubmit && <Toastify message={ratingReducer.successSubmit}/>}
-      <NavOld/>
+      <HeroPage nameImg="home.jpg" positionImg={'center center'}>
+        <Nav/>
+        <div className="hero-container">
+          <div className="hero-home-content">
+            <span style={{ marginBottom: '20px' }}>{t('organizations')} <span
+              style={{ fontSize: '20px' }}>&</span> {t('decorations')}</span>
+            <h1>{t('titleHeroHome')}</h1>
+            <span style={{ marginTop: '20px' }}>{t('subtitleHeroHome')}</span>
+          </div>
+        </div>
+      </HeroPage>
       <DialogFormReview open={createReview} close={() => setCreateReview(!createReview)}/>
       <Container maxWidth="lg">
         <Box marginTop={6} display="flex" justifyContent="space-between">
@@ -63,10 +75,10 @@ const Rating        = () => {
           <SendRatingBtn endIcon={<Edit/>} onClick={() => setCreateReview(true)}>{t('buttonRating')}</SendRatingBtn>
         </Box>
         <Grid container={true} spacing={2}>
-          {ratings && ratings.map((r, index) => (
-            <Grid item={true} xs={12} md={6} lg={4} xl={4}>
+          {ratings && ratings.length > 0 ? ratings.map((r, index) => (
+            <Grid item={true} xs={12} md={6} lg={4} xl={4} key={index}>
               <Ratings noticeInfo={r}/>
-            </Grid>))}
+            </Grid>)): <p className="mt5 mb5">Soyez le premier à laisser un avis sur nos prestations</p>}
     
         </Grid>
       </Container>

@@ -4,6 +4,9 @@ const { ComparePassword }       = require('../../../tools/Auth')
 const { setTokenAuth }          = require('../../../tools/Auth')
 const { ErrorAuthentification } = require('../../../tools/Auth')
 const maxAge                    = 24 * 60 * 60 * 1000
+const transport                 = require('../../../Services/Lib/mailer')
+const { templateMail }          = require('../../../Services/Admin/NewsletterService')
+const { v1, v4 }                = require('uuid')
 
 class Authentification {
   constructor (request, response) {
@@ -13,7 +16,7 @@ class Authentification {
   
   async createUser (request, response) {
     const { email, password, address, firstName, lastName, phone, birthday, civility, postalCode } = request.body
-  
+    
     const ROLE           = 'ROLE_USER'
     const hashedPassword = await HashPassword(password)
     try {
@@ -60,8 +63,51 @@ class Authentification {
         return response.status(403).json({ error: 'Email ou mot de passe incorrect' })
       }
     } catch (e) {
-      console.log(e)
+      return response.status(500)
     }
+  }
+  
+  async resetPassword (request, response) {
+    const userEmail = request.body.email
+    const findUser  = await UserSchema.findOne({ email: userEmail })
+    try {
+      if (!userEmail) {
+        return response.status(404).json({ errors: 'Veuillez renseigner une adresse mail correcte' })
+      }
+      if (!findUser) {
+        return response.status(404).json({ errors: 'Vérifier votre email' })
+      }
+      const token              = v1()
+      const setTokenToUser     = await UserSchema.findOneAndUpdate({ email: userEmail }, { resetPasswordToken: token }, { new: true })
+      const resetLinkWithToken = `${process.env.LINK_RESET_PASSWORD}${setTokenToUser.resetPasswordToken}`
+      await transport.sendMail(templateMail(userEmail, 'Demande de nouveau mot de passe', `Cliquez sur le liens pour réinitialisé votre mot de passe : <a href="${resetLinkWithToken}">Réinialisation ici</a>`))
+      return response.status(200).json({ success: 'Un email viens de vous être envoyer sur ' + userEmail })
+    } catch (e) {
+      return response.status(500)
+    }
+  }
+  
+  async confirmResetPassword (request, response) {
+    const reqToken = request.params.tokenReset
+    if (!reqToken) {
+      return response.status(403).json({ errors: 'Invalid Token' })
+    }
+    if (!request.body.password) {
+      return response.status(400).json({ errors: 'Merci de renseigner un mot de passe' })
+    }
+    const foundUser = await UserSchema.findOne({ resetPasswordToken: reqToken })
+    if (!foundUser) {
+      return response.status(403).json({ errors: 'Lien expirer' })
+    }
+    const hashedNewPassword      = await HashPassword(request.body.password)
+    foundUser.resetPasswordToken = ''
+    foundUser.password           = hashedNewPassword
+    await foundUser.save({}, (err, docs) => {
+      if (err) {
+        return response.status(500).json({ errors: 'Impossible de réinitialisé votre mot de passe pour le moment' })
+      }
+      return response.status(200).json({ success: 'Vous pouvez désormais vous connectez avec votre nouveau mot de passe' })
+    })
   }
   
   async logoutUser (request, response) {

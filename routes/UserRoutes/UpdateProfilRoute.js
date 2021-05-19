@@ -69,7 +69,7 @@ function createRouterUpdateProfil () {
       }
       return res.status(200).json({ success: await user.updateProfilInfo({ ...req.body }) })
     } catch (e) {
-      console.log('err', '=>>>>>', e)
+      return res.status(400).json({errors: "Impossible de modifier votre mot de passe pour le moment"})
     }
   })
   

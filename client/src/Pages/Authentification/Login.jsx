@@ -1,9 +1,9 @@
-import React, { useEffect }         from 'react'
-import { Box, Grid, Hidden, Paper } from '@material-ui/core'
-import { makeStyles, withStyles }   from '@material-ui/core/styles'
-import Typography                   from '@material-ui/core/Typography'
-import Button                       from '@material-ui/core/Button'
-import { Link, useHistory }         from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Box, Grid, Hidden, Paper }   from '@material-ui/core'
+import { makeStyles, withStyles }     from '@material-ui/core/styles'
+import Typography                     from '@material-ui/core/Typography'
+import Button                         from '@material-ui/core/Button'
+import { Link, useHistory }           from 'react-router-dom'
 import ArrowBackIcon                from '@material-ui/icons/ArrowBack'
 import FormControl                  from '@material-ui/core/FormControl'
 import InputLabel                   from '@material-ui/core/InputLabel'
@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { requestApiAuth }           from '../../actions/authenticatorAction'
 import { Alert }                    from '@material-ui/lab'
 import { resetEvent }               from '../../actions/adminAction'
+import ResetPassword                from '../ResetPassword/ResetPassword'
 
 export const OverlayForm = withStyles((theme) => (
   {
@@ -31,6 +32,9 @@ export const OverlayForm = withStyles((theme) => (
   }))(Box)
 
 const Login = () => {
+  
+  const [openResetPassword, setOpenResetPassword] = useState(false)
+  console.log(openResetPassword)
   return <>
     <Grid container={true} style={{ backgroundColor: '#F6F8FB' }}>
       <Hidden smDown>
@@ -51,9 +55,10 @@ const Login = () => {
         </Grid>
       </Hidden>
       <Grid item={true} xs={12} sm={12} md={5}>
-        <LoginForm/>
+        <LoginForm openModalResetPassword={()=> setOpenResetPassword(true)}/>
       </Grid>
     </Grid>
+    {openResetPassword && <ResetPassword openModalResetPassword={openResetPassword} close={()=> setOpenResetPassword(false)} />}
   </>
 }
 
@@ -82,7 +87,7 @@ const usesStyles = makeStyles((theme) => ({
   }
 }))
 
-const LoginForm = () => {
+const LoginForm = ({openModalResetPassword}) => {
   const classes                       = usesStyles()
   const { t }                         = useTranslation()
   const history                       = useHistory()
@@ -98,12 +103,14 @@ const LoginForm = () => {
     dispatch(resetEvent())
     dispatch(requestApiAuth(values))
   }
+  
   useEffect(() => {
     if (loginSuccess) {
       history.push('/')
     }
     // eslint-disable-next-line
   }, [loginSuccess])
+  
   return <>
     <div className={classes.root}>
       <Paper className={classes.containerForm} elevation={0}>
@@ -153,12 +160,10 @@ const LoginForm = () => {
               Vous n'avez pas de compte ? Inscrivez-vous
             </Typography>
           </Link>
-          <Link to="/mot-de-passe-oublie">
-            <Typography variant="body2" component="p" gutterBottom={true}
-                        style={{ marginTop: '.75rem', color: 'grey', fontSize: '13px' }}>
+            <Typography variant="body2" component="p" gutterBottom={true} onClick={openModalResetPassword}
+                        style={{ marginTop: '.75rem', color: 'grey', fontSize: '13px', cursor: 'pointer'}}>
               Mot de passe oublié ?
             </Typography>
-          </Link>
         </div>
       </Paper>
     </div>

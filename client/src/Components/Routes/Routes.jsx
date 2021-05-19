@@ -9,13 +9,18 @@ import UserProfil                                           from '../../Pages/Us
 import About                from '../../Pages/About/About'
 import BabyShower           from '../../Pages/Organization/BabyShower'
 import { ModalAuthContext } from '../../Context/ModalAuth'
-import IndexDashboardAdmin                                  from '../../Admin/Pages/IndexDashboardAdmin'
-import PrivateRoutes                                        from './PrivateRoutes'
-import Contact                                              from '../../Pages/Contact/Contact'
-import Rating                                               from '../../Pages/Rating/Rating'
-import Gallery                                              from '../../Pages/Gallery/Gallery'
-import Login                                                from '../../Pages/Authentification/Login'
-import Register                                             from '../../Pages/Authentification/Register'
+import IndexDashboardAdmin from '../../Admin/Pages/IndexDashboardAdmin'
+import PrivateRoutes       from './PrivateRoutes'
+import Contact             from '../../Pages/Contact/Contact'
+import Rating              from '../../Pages/Rating/Rating'
+import Gallery             from '../../Pages/Gallery/Gallery'
+import Login               from '../../Pages/Authentification/Login'
+import Register            from '../../Pages/Authentification/Register'
+import OtherEvents         from '../../Pages/Organization/OtherEvents'
+import FloralDesign        from '../../Pages/FloralDesign/FloralDesign'
+import MyWorkShop          from '../../Pages/MyWorkShop/MyWorkShop'
+import ResetPassword       from '../../Pages/ResetPassword/ResetPassword'
+import ResetPasswordForm   from '../../Pages/Authentification/ResetPassword'
 
 const Routes = () => {
   const maintenance     = false
@@ -32,6 +37,9 @@ const Routes = () => {
          <Route path={`/organisation/mariage`} exact component={Wedding}/>
          <Route path={`/organisation/evj`} exact component={Evj}/>
          <Route path={`/organisation/ceremonie-laique`} exact component={SecularCeremony}/>
+         <Route path={`/organisation/autres-evenements`} exact component={OtherEvents}/>
+         <Route path={`/conception-floral`} exact component={FloralDesign}/>
+         <Route path={`/mes-ateliers`} exact component={MyWorkShop}/>
          <Route
            path={['/profil/:userId', '/profil/:userId/', '/profil/:userId/messages', '/profil/:userId/gestion-compte']}
            exact component={UserProfil}/>
@@ -41,6 +49,8 @@ const Routes = () => {
          <Route path={'/baby-shower'} exact component={BabyShower}/>
          <Route path={'/connexion'} exact component={Login}/>
          <Route path={'/inscription'} exact component={Register}/>
+         <Route path={'/inscription'} exact component={Register}/>
+         <Route path={'/mot-de-passe-oublier/:tokenReset'} exact component={ResetPasswordForm}/>
          <PrivateRoutes path={'/admin*'} role="ROLE_ADMIN" exact component={IndexDashboardAdmin}/>
          <Route path="/contact" exact component={Contact}/>
          <Redirect to={'/'}/>

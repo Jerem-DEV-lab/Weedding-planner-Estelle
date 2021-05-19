@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import axios                     from 'axios'
-import NavOld                    from '../../Components/NavBar/Nav.old'
-import { Card, Container, Grid } from '@material-ui/core'
+import axios                          from 'axios'
+import { Card, Container, Grid }      from '@material-ui/core'
 import { makeStyles }                 from '@material-ui/core/styles'
 import CardMedia                      from '@material-ui/core/CardMedia'
 import Footer                         from '../../Components/Footer/Footer'
+import Nav                            from '../../Components/NavBar/Nav'
 
 const useStyles = makeStyles(theme => ({
   root     : {
@@ -64,22 +64,23 @@ const Gallery   = () => {
          .then(res => {
            setGallery(res.data.data)
          })
-         .catch(err => {
-           console.log(err)
+         .catch(() => {
          })
   }, [])
   return (
     <>
-      <NavOld/>
-      <Container maxWidth="md" style={{ marginBottom: '1.75rem' }}>
+      <Nav bgColor="#FFF" typoColor="#000"/>
+      <Container maxWidth="md" style={{ marginBottom: '1.75rem', marginTop: '1.75rem' }}>
         <Grid container={true} spacing={1}>
           {gallery.map((pictures, index) => (
             <>
               <Grid item={true} xs={4} sm={4} md={4} lg={4} xl={4}>
                 <Card className={classes.root} elevation={0}>
-                  {!pictures.media_url.includes('video') ? <CardMedia className={classes.mediaCard}
-                                                                              image={pictures.media_url}/> : <video controls
-                      width="100%" height="100%">
+                  {!pictures.media_url.includes('video') ?
+                   <CardMedia className={classes.mediaCard}
+                              image={pictures.media_url}/> :
+                   <video controls
+                          width="100%" height="100%">
                      <source src={pictures.media_url}/>
                    </video>}
               

@@ -5,12 +5,14 @@ import HeroPage                        from '../../Components/HeroPage/HeroPage'
 import Nav                             from '../../Components/NavBar/Nav'
 import { Container, Grid, makeStyles } from '@material-ui/core'
 import Button                          from '../../Components/Button/Button'
+import injectHtmlCode                  from '../../tools/injectHtml'
+import FormuleCard                     from '../../Components/Card/FormuleCard'
 
 const Evj = () => {
-  const classes        = useStyles()
-/*  const formuleContent = 'Sunt in cognito mortalem itinera omnes casu agitare conaretur milites.Sunt in cognito mo' +
-                         ' rtalem itinera omnes casu agitare conaretur milites.'*/
-  const { t }          = useTranslation()
+  const classes   = useStyles()
+  const { t }     = useTranslation()
+  const listEvent = [t('evjfEvent1'), t('evjfEvent2'), t('evjfEvent3'), t('evjfEvent4'), t('evjfEvent5')]
+  
   return <>
     <HeroPage nameImg="/organizations/evj.jpg" positionImg={'center center'}>
       <Nav/>
@@ -22,20 +24,27 @@ const Evj = () => {
     </HeroPage>
     <section>
       <Container maxWidth="lg">
-        <Grid container={true}>
+        <Grid container={true} spacing={4}>
           <Grid item={true} xs={12} md={6}>
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
-              <img src="/assets/organizations/EVJ_section.jpg" className="my3"
-                   style={{ maxHeight: '450px' }}
+            <div>
+              <img src="/assets/organizations/EVJ_section.jpg"
                    alt="illustration de 3 copines assis sur une branche d'un arbre"/>
             </div>
           </Grid>
           <Grid item={true} xs={12} md={6}>
-            <h3 className={classes.title}>{t('title_evj_section1')}</h3>
-            <p className={classes.paragraphe}>{t('content_evj_section1')}</p>
+            <h3 className={classes.title}>{t('title_evjf_section')}</h3>
+            <p dangerouslySetInnerHTML={injectHtmlCode(t('content_evjf_section'))} className="section-content"/>
+            <p className="section-content" style={{ marginTop: '.75rem' }}>
+              <ul className="list-bull list-number">
+                {listEvent.map((events, index) => (
+                  <li key={index}>{events}</li>
+                ))}
+              </ul>
+              {t('partenaireEvj')}
+            </p>
             <div className="btn-center-x">
               <Button isButton={false} isAnchor={true} label={t('seeMyOffers')} className="my1" color="primary-light"
-                      size="lg" link={'ceremonie-laique#Mes-formules'}/>
+                      size="lg" link={'evj#Mes-formules'}/>
             </div>
           </Grid>
         </Grid>
@@ -43,59 +52,45 @@ const Evj = () => {
     </section>
     <section>
       <Container maxWidth="lg">
-        <Grid container={true}>
+        <Grid container={true} spacing={4}>
           <Grid item={true} xs={12} md={6}>
-            <h3 className={classes.title}>{t('title_evj_section1')}</h3>
-            <p className={classes.paragraphe}>{t('content_evj_section1')}</p>
+            <h3 className={classes.title}>{t('title_evjg_section')}</h3>
+            <p className={`${classes.paragraphe} section-content`}
+               dangerouslySetInnerHTML={injectHtmlCode(t('content_evjg_section'))}/>
+            <br/>
+            <p className={`${classes.paragraphe} section-content`}>
+              {t('partenaireEvj')}
+            </p>
             <div className="btn-center-x">
               <Button isButton={false} isAnchor={true} label={t('seeMyOffers')} className="my1" color="primary-light"
-                      size="lg" link={'ceremonie-laique#Mes-formules'}/>
+                      size="lg" link={'/organisation/evj#Mes-formules'}/>
             </div>
           </Grid>
           <Grid item={true} xs={12} md={6}>
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
-              <img src="/assets/organizations/evjg.jpg" className="my3"
-                   style={{ maxHeight: '450px' }}
+            <div>
+              <img src="/assets/organizations/evjg.jpg"
                    alt="illustration de 3 copines assis sur une branche d'un arbre"/>
             </div>
           </Grid>
         </Grid>
       </Container>
     </section>
-    {/*<section className="pt0" id="Mes-formules">
-      <div className="container-margin py3">
-        <h1 className="h1 text-strong text-center mb5">{t('myPlanForSecularCeremonies')} :</h1>
-        <div className="grid-3-col-md card-group-sm flex-column-sm">
-          <FormuleCard formuleTitle={t('cardMediumFormuleTitle')}
-                       cardContent={formuleContent}
-                       pathImg="/assets/secularCeremony2-lg.jpg"
-                       cardSubtitle={t('cardServiceSecularSubtitle')}
-                       formuleInfo={t('offerFrom')}
-                       formuleOfferInfo={t('customizableOffer')}
-                       formulePrice="800 €"
-        
-          />
-          <FormuleCard formuleTitle={t('cardBestFormuleTitle')}
-                       cardContent={formuleContent}
-                       pathImg="/assets/home.jpg"
-                       isImportant={true}
-                       cardSubtitle={t('cardServiceSecularSubtitle2')}
-                       formuleOfferInfo={t('customizableOffer')}
-                       formulePrice="1300 €"
-                       formuleInfo={t('offerFrom')}
-        
-          />
-          <FormuleCard formuleTitle={t('cardVipFormuleTitle')}
-                       cardContent={formuleContent}
-                       pathImg="/assets/contact.jpg"
-                       cardSubtitle={t('cardServiceSecularSubtitle3')}
-                       formuleOfferInfo={t('customizableOffer')}
-                       formulePrice="2400 €"
-                       formuleInfo={t('offerFrom')}
-          />
-        </div>
-      </div>
-    </section>*/}
+    <section>
+      <Container>
+        <h2>{t('offerTitle')} :</h2>
+        <Grid container={true} spacing={4}>
+          <Grid item xs={12} md={4} lg={4}>
+            <FormuleCard formuleTitle={t('formuleDayD')} formulePrice={'800'}/>
+          </Grid>
+          <Grid item xs={12} md={4} lg={4}>
+            <FormuleCard formuleTitle={t('formuleHelpMe')} formulePrice={'1 300'}/>
+          </Grid>
+          <Grid item xs={12} md={4} lg={4}>
+            <FormuleCard formuleTitle={t('formuleSoCool')} formulePrice={'2 400'}/>
+          </Grid>
+        </Grid>
+      </Container>
+    </section>
     <Footer/>
   </>
 }
@@ -104,15 +99,14 @@ export default Evj
 const useStyles = makeStyles(theme => (
   {
     title     : {
-      fontSize     : '26px',
+      fontSize     : '20px',
+      textAlign    : 'justify',
       lineHeight   : 1.5,
-      fontWeight   : '500',
+      fontWeight   : '600',
       textTransform: 'uppercase',
       marginBottom : '.75rem'
     },
     paragraphe: {
-      maxWidth  : '90%',
-      margin    : 'auto',
       fontWeight: '500',
       textAlign : 'justify',
       lineHeight: 1.5,

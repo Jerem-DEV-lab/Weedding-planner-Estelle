@@ -25,7 +25,7 @@ const Nav = ({ bgColor = '', typoColor = '' }) => {
           cName: 'dropdown-link'
         },
         {
-          label: 'Conception floral',
+          label: 'Cérémonie Laïque',
           url  : '/organisation/ceremonie-laique',
           cName: 'dropdown-link'
         },
@@ -39,16 +39,21 @@ const Nav = ({ bgColor = '', typoColor = '' }) => {
           url  : '/baby-shower',
           cName: 'dropdown-link'
         },
+        {
+          label: 'Autres événements',
+          url  : '/organisation/autres-evenements',
+          cName: 'dropdown-link'
+        },
       ]
     },
     {
-      label: t('secularCeremony'),
-      url  : '/organisation',
+      label: t('floralDesign'),
+      url  : '/conception-floral',
       cName: 'nav-link'
     },
     {
       label: t('workshop'),
-      url  : '/organisation',
+      url  : '/mes-ateliers',
       cName: 'nav-link'
     },
     {

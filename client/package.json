@@ -26,6 +26,7 @@
     "react-i18next": "^11.8.12",
     "react-icons": "^4.2.0",
     "react-redux": "^7.2.3",
+    "react-responsive-carousel": "^3.2.18",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "react-toastify": "^7.0.3",
