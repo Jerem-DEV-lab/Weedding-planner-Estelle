@@ -10,17 +10,17 @@ import About                from '../../Pages/About/About'
 import BabyShower           from '../../Pages/Organization/BabyShower'
 import { ModalAuthContext } from '../../Context/ModalAuth'
 import IndexDashboardAdmin from '../../Admin/Pages/IndexDashboardAdmin'
-import PrivateRoutes       from './PrivateRoutes'
-import Contact             from '../../Pages/Contact/Contact'
-import Rating              from '../../Pages/Rating/Rating'
-import Gallery             from '../../Pages/Gallery/Gallery'
-import Login               from '../../Pages/Authentification/Login'
-import Register            from '../../Pages/Authentification/Register'
-import OtherEvents         from '../../Pages/Organization/OtherEvents'
-import FloralDesign        from '../../Pages/FloralDesign/FloralDesign'
-import MyWorkShop          from '../../Pages/MyWorkShop/MyWorkShop'
-import ResetPassword       from '../../Pages/ResetPassword/ResetPassword'
-import ResetPasswordForm   from '../../Pages/Authentification/ResetPassword'
+import PrivateRoutes     from './PrivateRoutes'
+import Contact           from '../../Pages/Contact/Contact'
+import Rating            from '../../Pages/Rating/Rating'
+import Gallery           from '../../Pages/Gallery/Gallery'
+import Login             from '../../Pages/Authentification/Login'
+import Register          from '../../Pages/Authentification/Register'
+import OtherEvents       from '../../Pages/Organization/OtherEvents'
+import FloralDesign      from '../../Pages/FloralDesign/FloralDesign'
+import MyWorkShop        from '../../Pages/MyWorkShop/MyWorkShop'
+import ResetPasswordForm from '../../Pages/Authentification/ResetPassword'
+import ProtectedRoutes   from './ProtectedRoutes'
 
 const Routes = () => {
   const maintenance     = false
@@ -47,10 +47,9 @@ const Routes = () => {
          <Route path={'/avis'} exact component={Rating}/>
          <Route path={'/a-propos'} exact component={About}/>
          <Route path={'/baby-shower'} exact component={BabyShower}/>
-         <Route path={'/connexion'} exact component={Login}/>
-         <Route path={'/inscription'} exact component={Register}/>
-         <Route path={'/inscription'} exact component={Register}/>
-         <Route path={'/mot-de-passe-oublier/:tokenReset'} exact component={ResetPasswordForm}/>
+         <ProtectedRoutes path={'/connexion'} exact component={Login}/>
+         <ProtectedRoutes path={'/inscription'} exact component={Register}/>
+         <ProtectedRoutes path={'/mot-de-passe-oublier/:tokenReset'} exact component={ResetPasswordForm}/>
          <PrivateRoutes path={'/admin*'} role="ROLE_ADMIN" exact component={IndexDashboardAdmin}/>
          <Route path="/contact" exact component={Contact}/>
          <Redirect to={'/'}/>

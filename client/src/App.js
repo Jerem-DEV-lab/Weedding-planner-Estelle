@@ -61,7 +61,7 @@ function App () {
   }, [isLogged, userLogged.isLogged])
   return <>
     <ThemeProvider theme={theme}>
-      <UserContext.Provider value={value}>
+      <UserContext.Provider value={userLogged}>
         <Routes/>
       </UserContext.Provider>
     </ThemeProvider>
