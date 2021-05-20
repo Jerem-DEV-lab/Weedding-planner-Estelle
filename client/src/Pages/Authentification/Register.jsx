@@ -1,19 +1,18 @@
-import React                        from 'react'
-import { Box, Grid, Hidden, Paper } from '@material-ui/core'
-import { OverlayForm }              from './Login'
-import { useTranslation }           from 'react-i18next'
-import { Link }                     from 'react-router-dom'
-import { useForm }                  from '../../Hooks/useForm'
-import { useDispatch, useSelector } from 'react-redux'
-import Typography                   from '@material-ui/core/Typography'
-import ArrowBackIcon                from '@material-ui/icons/ArrowBack'
-import FormControl                  from '@material-ui/core/FormControl'
-import InputLabel                   from '@material-ui/core/InputLabel'
-import OutlinedInput                from '@material-ui/core/OutlinedInput'
-import Button                       from '@material-ui/core/Button'
-import Divider                      from '@material-ui/core/Divider'
-import { makeStyles }               from '@material-ui/core/styles'
-import { requestApiRegister }       from '../../actions/authenticatorAction'
+import React, { useEffect }                    from 'react'
+import { Box, Grid, Hidden, Paper, TextField } from '@material-ui/core'
+import { OverlayForm }                         from './Login'
+import { useTranslation }   from 'react-i18next'
+import { Link, useHistory } from 'react-router-dom'
+import { useForm }          from '../../Hooks/useForm'
+import { useDispatch, useSelector }            from 'react-redux'
+import Typography                              from '@material-ui/core/Typography'
+import ArrowBackIcon                           from '@material-ui/icons/ArrowBack'
+import FormControl                             from '@material-ui/core/FormControl'
+import Button                                  from '@material-ui/core/Button'
+import Divider                                 from '@material-ui/core/Divider'
+import { makeStyles }                          from '@material-ui/core/styles'
+import { requestApiRegister }                  from '../../actions/authenticatorAction'
+import { Alert }                               from '@material-ui/lab'
 
 const useStyles = makeStyles(theme => ({
   root          : {
@@ -28,7 +27,6 @@ const useStyles = makeStyles(theme => ({
     paddingLeft  : theme.spacing(4),
     paddingRight : theme.spacing(4),
     paddingBottom: theme.spacing(4),
-    height       : '100%'
   },
   backHomeButton: {
     display       : 'flex',
@@ -71,7 +69,7 @@ export default Register
 const RegisterForm = () => {
   const classes = useStyles()
   const { t }   = useTranslation()
-  /*const history                       = useHistory()*/
+  const history                       = useHistory()
   const initialState                  = {
     email     : '',
     password  : '',
@@ -135,16 +133,19 @@ const RegisterForm = () => {
       error: errorForm.postalCode || ''
     },
   ]
+  const successForm                   = useSelector(state => state.userReducers).registrationSuccess
   
   const submitForm = (e) => {
     e.preventDefault()
     dispatch(requestApiRegister(values))
   }
-  /*useEffect(() => {
-   if (loginSuccess) {
-   history.push('/')
-   }
-   }, [loginSuccess])*/
+  useEffect(() => {
+    if(successForm){
+      setTimeout(() => {
+        history.push('/connexion')
+      }, 2000)
+    }
+   }, [successForm])
   return <>
     <div className={classes.root}>
       <Paper className={classes.containerForm} elevation={0}>
@@ -154,19 +155,21 @@ const RegisterForm = () => {
         <div className="d-flex justify-center">
           <img src="/assets/logo.png" alt="logo de côté campagne" height={150}/>
         </div>
+        {successForm && <Alert severity="success">{t('successRegisterLabel')}</Alert>}
         <div className="mt4">
           <form>
             <Grid container={true} spacing={3}>
               {InputsForm.map((input, index) => (
                 <Grid item={true} xs={12} lg={6} key={index}>
                   <FormControl variant="outlined" size="small" fullWidth={true}>
-                    <InputLabel htmlFor="email">{input.label}</InputLabel>
-                    <OutlinedInput
+                    <TextField
+                      size="small"
                       name={input.name}
                       type={input.name}
                       value={values.value}
+                      variant={'outlined'}
                       onChange={handleChangeInput}
-                      error={input.error ? true : false}
+                      error={!!input.error}
                       helperText={input.error}
                       label={input.label}/>
                   </FormControl>
@@ -175,14 +178,14 @@ const RegisterForm = () => {
             </Grid>
             <Button fullWidth={true} color="primary" variant="contained" style={{ marginTop: '1.75rem' }}
                     onClick={submitForm}>
-              Connexion
+              {t('login')}
             </Button>
           </form>
           <Divider style={{ marginTop: '1.75rem' }}/>
           <Link to="/connexion">
             <Typography variant="body2" component="p" gutterBottom={true}
                         style={{ marginTop: '.75rem', color: 'grey', fontSize: '13px' }}>
-              Vous avez déjà un compte ? Connectez-vous
+              {t('existingAccountLabel')}
             </Typography>
           </Link>
         </div>

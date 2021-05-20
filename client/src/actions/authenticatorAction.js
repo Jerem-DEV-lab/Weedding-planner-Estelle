@@ -85,7 +85,7 @@ export const requestApiRegister = (data) => {
     dispatch(registerLoading())
     axios.post('/register', data)
          .then(res => {
-           dispatch(registerSuccess(res.data.success))
+           dispatch(registerSuccess(res.data.message))
          })
          .catch(err => {
            dispatch(registerErrors(err.response.data))
