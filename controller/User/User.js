@@ -47,6 +47,49 @@ class User {
                      .then(() => ({ success: 'Votre compte à bien été supprimer' }))
                      .catch(err => err)
   }
+  
+  async changeAvatar (pathAvatar) {
+    let responseHelper = {
+      errors        : false,
+      reason        : '',
+      success       : false,
+      successMessage: '',
+      statusCode    : null
+    }
+    return new Promise((resolve, reject) => {
+      if (!pathAvatar) {
+        return reject(
+          {
+            ...responseHelper,
+            errors: true,
+            statusCode: 403,
+            reason: 'Vous devez sélectionner une image',
+          })
+      }
+      UserSchema.findByIdAndUpdate(this.userInfo.userId, {
+        userAvatar: pathAvatar
+      }, { new: true }, (err, docs) => {
+        if (!err) {
+          return resolve(
+            {
+              ...responseHelper,
+              success       : true,
+              successMessage: 'Votre avatar a bien été changer',
+              statusCode: 201,
+            })
+        } else {
+          return reject(
+            {
+              ...responseHelper,
+              errors: false,
+              reason: 'Impossible de modifier votre avatar pour le moment',
+              statusCode: 500,
+            }
+          )
+        }
+      })
+    })
+  }
 }
 
 module.exports = User

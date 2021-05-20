@@ -3,6 +3,8 @@ import { useDispatch }          from 'react-redux'
 import { requestApiLogoutUser } from '../../actions/authenticatorAction'
 import { FaArrowRight }         from 'react-icons/fa'
 import { useHistory }           from 'react-router-dom'
+import { Button }               from '@material-ui/core'
+import { useTranslation }       from 'react-i18next'
 
 const Logout = () => {
   const dispatch   = useDispatch()
@@ -11,8 +13,12 @@ const Logout = () => {
     dispatch(requestApiLogoutUser())
     history.push('/')
   }
+  const { t }      = useTranslation()
   return <>
-    <button type="button" onClick={logoutUser}><FaArrowRight/>Déconnexion</button>
+    <Button onClick={logoutUser} startIcon={<FaArrowRight/>} variant="contained" color={'secondary'}
+            disableElevation={true} size="small">
+      {t('logout')}
+    </Button>
   </>
 }
 

@@ -6,7 +6,7 @@ import {
 } from '../actions/authenticatorAction'
 import {
   ADD_EVENT_ERRORS,
-  ADD_EVENT_LOADING, ADD_EVENT_SUCCESS,
+  ADD_EVENT_LOADING, ADD_EVENT_SUCCESS, CHANGE_AVATAR_ERROR, CHANGE_AVATAR_LOADING, CHANGE_AVATAR_SUCCESS,
   CHANGE_PASSWORD_ERROR,
   CHANGE_PASSWORD_LOADING, CHANGE_PASSWORD_SUCCESS,
   CHANGE_USER_INFO_ERROR,
@@ -49,7 +49,10 @@ export default function userReducers (state = initialState, action) {
         registrationFail   : '',
         registrationSuccess: '',
         errorChange        : '',
-        successChange      : ''
+        successChange      : '',
+        changeAvatarSuccess: '',
+        changeAvatarLoading: false,
+        changeAvatarError  : '',
       }
     }
     case LOGIN_USER_ERROR:
@@ -157,6 +160,25 @@ export default function userReducers (state = initialState, action) {
         isLoading          : false,
         registrationFail   : {},
         registrationSuccess: action.payload
+      }
+    case CHANGE_AVATAR_LOADING:
+      return {
+        ...state,
+        changeAvatarLoading: true
+      }
+    case CHANGE_AVATAR_SUCCESS:
+      return {
+        ...state,
+        changeAvatarLoading: false,
+        changeAvatarSuccess: action.payload,
+        changeAvatarError  : ''
+      }
+    case CHANGE_AVATAR_ERROR:
+      return {
+        ...state,
+        changeAvatarLoading: false,
+        changeAvatarError  : action.payload,
+        changeAvatarSuccess: ''
       }
     default:
       return state

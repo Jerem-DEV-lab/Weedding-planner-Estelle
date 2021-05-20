@@ -20,7 +20,7 @@ const UserSchema = new Schema
    resetPasswordToken      : { type: String, default: '' },
    confirmAccountToken     : { type: String, default: '' },
    expireTokenResetPassword: { type: Date, default: '' },
-   userAvatar              : { type: String, required: true, default: 'https://i.pravatar.cc/300' },
+   userAvatar              : { type: String, required: true, default: '/assets/avatars/avatar-h2.png' },
    phone                   : { type: String, required: true, maxlength: 10 },
    newsLetter              : { type: Boolean, required: true, default: false },
    address                 : { type: String, required: true },

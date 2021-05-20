@@ -6,6 +6,9 @@ export const CHANGE_USER_INFO_SUCCESS = 'CHANGE_USER_INFO_SUCCESS'
 export const CHANGE_PASSWORD_SUCCESS  = 'CHANGE_PASSWORD_SUCCESS'
 export const CHANGE_PASSWORD_ERROR    = 'CHANGE_PASSWORD_ERROR'
 export const CHANGE_PASSWORD_LOADING  = 'CHANGE_PASSWORD_LOADING'
+export const CHANGE_AVATAR_LOADING    = 'CHANGE_AVATAR_LOADING'
+export const CHANGE_AVATAR_SUCCESS    = 'CHANGE_AVATAR_SUCCESS'
+export const CHANGE_AVATAR_ERROR      = 'CHANGE_AVATAR_ERROR'
 export const ADD_EVENT_LOADING        = 'ADD_EVENT_LOADING'
 export const ADD_EVENT_SUCCESS        = 'ADD_EVENT_SUCCESS'
 export const ADD_EVENT_ERRORS         = 'ADD_EVENT_ERRORS'
@@ -95,5 +98,34 @@ export const requestApiAddEvent = (userId, eventData) => {
 export const resetEventUser     = () => {
   return {
     type: RESET_EVENT_USER
+  }
+}
+
+export const changeAvatarLoading = () => {
+  return {
+    type: CHANGE_AVATAR_LOADING
+  }
+}
+
+export const changeAvatarSuccess = (success) => {
+  return {
+    type   : CHANGE_AVATAR_SUCCESS,
+    payload: success
+  }
+}
+
+export const changeAvatarError = (errors) => {
+  return {
+    type   : CHANGE_AVATAR_SUCCESS,
+    payload: errors
+  }
+}
+
+export const requestApiChangeAvatar = (newPathAvatar) => {
+  return dispatch => {
+    dispatch(changeAvatarLoading())
+    axios.put('/user/change-avatar', { avatarPath: newPathAvatar }, { withCredentials: true })
+         .then(res => dispatch(changeAvatarSuccess(res.data.success)))
+         .catch(err => dispatch(changeAvatarError(err.response.data.errors)))
   }
 }

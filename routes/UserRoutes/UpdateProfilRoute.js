@@ -49,7 +49,7 @@ function createRouterUpdateProfil () {
   
       return res.status(200).json({ success: 'Votre nouveau mot de passe à bien été modifier' })
     } catch (e) {
-      console.log('err', '=>>>>>', e)
+      return res.status(500).json({ errors: 'Impossible de communiquer pour le moment' })
     }
   })
   
@@ -79,7 +79,6 @@ function createRouterUpdateProfil () {
     if (!authJwtCookie || !authJwtCookie.startsWith('Bearer ')) {
       return res.status(400).json({ error: 'Vous devez être connecté' })
     }
-    
     try {
       const user          = new User(authJwtCookie.split('Bearer ')[1])
       const deleteAccount = await user.deleteAccount()
@@ -89,6 +88,21 @@ function createRouterUpdateProfil () {
       }
     } catch (e) {
       console.log(e)
+    }
+  })
+  
+  router.put('/user/change-avatar', async (req, res) => {
+    const authCookie    = req.cookies
+    const authJwtCookie = authCookie.jwt
+    if (!authJwtCookie || !authJwtCookie.startsWith('Bearer ')) {
+      return res.status(401).json({ errors: 'Vous devez être connecté' })
+    }
+    try {
+      const user         = new User(authJwtCookie.split('Bearer ')[1])
+      const changeAvatar = await user.changeAvatar(req.body.avatarPath)
+      return res.status(changeAvatar.statusCode).json({ success: changeAvatar.successMessage })
+    } catch (e) {
+      return res.status(e.statusCode).json({ errors: e.reason })
     }
   })
   return router
