@@ -1,6 +1,5 @@
 const UserSchema        = require('../../db/Schema/UserSchema')
 const jwt               = require('jsonwebtoken')
-const User              = require('../../controller/User/User')
 const { hash, compare } = require('bcryptjs')
 
 module.exports.ErrorAuthentification = (err) => {
@@ -14,7 +13,7 @@ module.exports.ErrorAuthentification = (err) => {
     postalCode     : '',
   }
   if (err.message.includes('email') && err.message.includes('is required')) {
-    errors.name = 'Vous devez renseigner une adresse mail valide'
+    errors.email = 'Vous devez renseigner une adresse mail valide'
   }
   if (err.message.includes('password') && err.message.includes('is required')) {
     errors.name = 'Vous devez renseigner un mot de passe'
@@ -64,7 +63,7 @@ module.exports.checkUserLogin = (req, res) => {
         return res.status(400).json({ err })
       
       } else {
-        const user = res.locals.user = await UserSchema.findById(decodedToken.userId).select('-password')
+        const user = res.locals.user = await UserSchema.findById(decodedToken.userId).populate('workshopInfos').select('-password')
         return res.status(200).json(user)
       }
     })
@@ -147,15 +146,14 @@ module.exports.isEmpty = (value) => {
 }
 module.exports.checkRole = role => (req, res, next) => {
   const token = req.cookies.jwt;
-  const parseCookie = token.split('Bearer ')
-  if (parseCookie[1]) {
-    jwt.verify(parseCookie[1], process.env.SECRET_KEY, async (err, decodedToken) => {
+  if (token && token.split('Bearer ')) {
+    jwt.verify(token.split('Bearer ')[1], process.env.SECRET_KEY, async (err, decodedToken) => {
       if (err) {
-        return res.status(400).json({access_denied: "Accès refuser"})
+        return res.status(400).json({ access_denied: 'Accès refuser' })
       } else {
-        let user = await UserSchema.findById(decodedToken.userId);
-        if(!role.includes(user.roles)){
-          return res.status(401).send("Accès refuser")
+        let user = await UserSchema.findById(decodedToken.userId)
+        if (!role.includes(user.roles)) {
+          return res.status(401).send('Accès refuser')
         } else {
           next()
         }

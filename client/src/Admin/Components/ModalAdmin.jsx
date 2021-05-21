@@ -1,15 +1,15 @@
-import React, { useEffect, useState }                                        from 'react'
-import Button                                                                from '@material-ui/core/Button'
-import Dialog                                                                from '@material-ui/core/Dialog'
-import DialogActions                                                         from '@material-ui/core/DialogActions'
-import DialogTitle                                                           from '@material-ui/core/DialogTitle'
-import Slide                                                                 from '@material-ui/core/Slide'
-import { DialogContent }                                                     from '@material-ui/core'
-import TextField                                                             from '@material-ui/core/TextField'
-import { makeStyles }                                                        from '@material-ui/core/styles'
-import SaveIcon                                                              from '@material-ui/icons/Save'
-import Alert                                                                 from '@material-ui/lab/Alert'
-import { useDispatch, useSelector }                                          from 'react-redux'
+import React, { useState }          from 'react'
+import Button                       from '@material-ui/core/Button'
+import Dialog                       from '@material-ui/core/Dialog'
+import DialogActions                from '@material-ui/core/DialogActions'
+import DialogTitle                  from '@material-ui/core/DialogTitle'
+import Slide                        from '@material-ui/core/Slide'
+import { DialogContent }            from '@material-ui/core'
+import TextField                    from '@material-ui/core/TextField'
+import { makeStyles }               from '@material-ui/core/styles'
+import SaveIcon                     from '@material-ui/icons/Save'
+import Alert                        from '@material-ui/lab/Alert'
+import { useDispatch, useSelector } from 'react-redux'
 import { requestApiChangePriceFormula, requestApiDeleteFormula, resetEvent } from '../../actions/adminAction'
 
 const Transition = React.forwardRef(function Transition (props, ref) {
@@ -90,7 +90,6 @@ const ModalAdmin = ({ open, formuleInfo }) => {
   const actionDelete = () => {
     dispatch(requestApiDeleteFormula(formuleInfo._id))
   }
-  console.log(deleteSuccess)
   return (
     <div>
       <Dialog

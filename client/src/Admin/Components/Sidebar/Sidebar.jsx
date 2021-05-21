@@ -1,16 +1,15 @@
-import React, { useState }                       from 'react'
-import clsx                                      from 'clsx'
-import { useTheme }                              from '@material-ui/core/styles'
-import Drawer                                    from '@material-ui/core/Drawer'
-import AppBar                                    from '@material-ui/core/AppBar'
-import Toolbar                                   from '@material-ui/core/Toolbar'
-import List                                      from '@material-ui/core/List'
-import CssBaseline                               from '@material-ui/core/CssBaseline'
-import Typography                                from '@material-ui/core/Typography'
-import Divider                                   from '@material-ui/core/Divider'
-import IconButton                                from '@material-ui/core/IconButton'
-import MenuIcon                                  from '@material-ui/icons/Menu'
-import ChevronLeftIcon                           from '@material-ui/icons/ChevronLeft'
+import React, { useState } from 'react'
+import clsx                from 'clsx'
+import { useTheme }        from '@material-ui/core/styles'
+import Drawer              from '@material-ui/core/Drawer'
+import AppBar              from '@material-ui/core/AppBar'
+import Toolbar             from '@material-ui/core/Toolbar'
+import List                from '@material-ui/core/List'
+import Typography          from '@material-ui/core/Typography'
+import Divider             from '@material-ui/core/Divider'
+import IconButton          from '@material-ui/core/IconButton'
+import MenuIcon            from '@material-ui/icons/Menu'
+import ChevronLeftIcon     from '@material-ui/icons/ChevronLeft'
 import ChevronRightIcon                          from '@material-ui/icons/ChevronRight'
 import ListItem                                  from '@material-ui/core/ListItem'
 import ListItemIcon                              from '@material-ui/core/ListItemIcon'
@@ -23,15 +22,19 @@ import { Link }                                  from 'react-router-dom'
 import { requestApiLogoutUser }                  from '../../../actions/authenticatorAction'
 import { useDispatch, useSelector }              from 'react-redux'
 
-export default function Sidebar ({ children }) {
-  const classes          = useStyleSidebar()
-  const theme            = useTheme()
-  const [open, setOpen]  = useState(false)
-  const dispatch         = useDispatch()
-  const handleDrawerOpen = () => {
-    setOpen(true)
+export default function Sidebar ({ messages, children }) {
+  const classes         = useStyleSidebar()
+  const theme           = useTheme()
+  const [open, setOpen] = useState(true)
+  const dispatch        = useDispatch()
+  
+  function checkMessageStatus (message) {
+    return message.propertyMessage.isRead === false
   }
   
+  const handleDrawerOpen        = () => {
+    setOpen(true)
+  }
   const handleDrawerClose       = () => {
     setOpen(false)
   }
@@ -49,9 +52,9 @@ export default function Sidebar ({ children }) {
   }
   return (
     <div className={classes.root}>
-      <CssBaseline/>
       <AppBar
         position="fixed"
+        elevation={0}
         className={clsx(classes.appBar, {
           [classes.appBarShift]: open,
         })}>
@@ -68,7 +71,7 @@ export default function Sidebar ({ children }) {
           </IconButton>
           <div className={classes.appBarRightSide}>
             <Button>
-              <Badge badgeContent={4} color="primary">
+              <Badge badgeContent={messages.filter(checkMessageStatus).length} color="primary">
                 <MailIcon/>
               </Badge>
             </Button>
@@ -101,7 +104,9 @@ export default function Sidebar ({ children }) {
                       }),
         }}>
         <div className={classes.toolbar}>
-          <Typography variant="h6" noWrap>Côté campagne</Typography>
+          <Link to="/">
+            <Typography variant="h6" noWrap>Côté campagne</Typography>
+          </Link>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'rtl' ? <ChevronRightIcon/> : <ChevronLeftIcon/>}
           </IconButton>

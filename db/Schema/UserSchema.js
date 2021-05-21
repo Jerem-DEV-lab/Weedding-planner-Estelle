@@ -12,7 +12,7 @@ const UserSchema = new Schema
      validate : [isEmail]
    },
    password                : { type: String, required: true, minlength: 6, maxlength: 1024 },
-   roles                   : [{ type: String, defaultValue: 'ROLE_USER' }],
+   roles                   : [{ type: String, default: 'ROLE_USER' }],
    firstName               : { type: String, required: true, minlength: 3, maxlength: 25 },
    lastName                : { type: String, required: true, minlength: 3, maxlength: 25 },
    userIsBan               : { type: Boolean, required: true, default: false },
@@ -20,13 +20,13 @@ const UserSchema = new Schema
    resetPasswordToken      : { type: String, default: '' },
    confirmAccountToken     : { type: String, default: '' },
    expireTokenResetPassword: { type: Date, default: '' },
-   userAvatar              : { type: String, required: true, default: 'https://i.pravatar.cc/300' },
+   userAvatar              : { type: String, required: true, default: '/assets/avatars/avatar-h2.png' },
    phone                   : { type: String, required: true, maxlength: 10 },
-   civility                : { type: String, required: true },
-   birthday                : { type: String, required: true },
    newsLetter              : { type: Boolean, required: true, default: false },
    address                 : { type: String, required: true },
    postalCode              : { type: String, required: true, maxlength: 5, minlength: 5 },
+   workshopRegistered      : { type: Boolean, required: true, default: false },
+   workshopInfos           : [{ type: Schema.Types.ObjectId, ref: 'workshop' }]
  }, { timestamps: true })
 
 module.exports = model('user', UserSchema)

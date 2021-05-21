@@ -1,31 +1,32 @@
-import React, { useContext, useState }                      from 'react'
+import React, { useState }                                  from 'react'
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom'
 import Maintenance                                          from '../../Pages/Maintenance'
-import ModalAuthentification                                from '../../Pages/Authentification/ModalAuthentification'
 import Home                                                 from '../../Pages/Home/Home'
-import Contact                                              from '../../Pages/Contact/Contact'
 import Wedding                                              from '../../Pages/Organization/Wedding'
 import SecularCeremony                                      from '../../Pages/Organization/SecularCeremony'
 import Evj                                                  from '../../Pages/Organization/Evj'
-import ProtectedRoutes                                      from './ProtectedRoutes'
 import UserProfil                                           from '../../Pages/User/UserProfil'
-import About                                                from '../../Pages/About/About'
-import BabyShower                                           from '../../Pages/BabyShower/BabyShower'
-import ModalAuth                                            from '../ModalAuth'
-import { ModalAuthContext }                                 from '../../Context/ModalAuth'
-import IndexDashboardAdmin                                  from '../../Admin/Pages/IndexDashboardAdmin'
-import PrivateRoutes                                        from './PrivateRoutes'
+import About                from '../../Pages/About/About'
+import BabyShower           from '../../Pages/Organization/BabyShower'
+import { ModalAuthContext } from '../../Context/ModalAuth'
+import IndexDashboardAdmin from '../../Admin/Pages/IndexDashboardAdmin'
+import PrivateRoutes     from './PrivateRoutes'
+import Contact           from '../../Pages/Contact/Contact'
+import Rating            from '../../Pages/Rating/Rating'
+import Gallery           from '../../Pages/Gallery/Gallery'
+import Login             from '../../Pages/Authentification/Login'
+import Register          from '../../Pages/Authentification/Register'
+import OtherEvents       from '../../Pages/Organization/OtherEvents'
+import FloralDesign      from '../../Pages/FloralDesign/FloralDesign'
+import MyWorkShop        from '../../Pages/MyWorkShop/MyWorkShop'
+import ResetPasswordForm from '../../Pages/Authentification/ResetPassword'
+import ProtectedRoutes   from './ProtectedRoutes'
 
 const Routes = () => {
   const maintenance     = false
   const [show, setShow] = useState(false)
-  const handleClose = () => setShow(false)
   return <ModalAuthContext.Provider value={{ contextModal: show, changeContextModal: () => setShow(!show) }}>
     <Router>
-      {show && <>
-        <div className={`overlay-modal ${show ? 'overlay-modal-visible' : ''}`} onClick={handleClose}/>
-        <ModalAuth openModal={show} closeModal={handleClose}/>
-      </>}
       {maintenance ?
        <>
          <Route path="/" exact component={Maintenance}/>
@@ -36,14 +37,20 @@ const Routes = () => {
          <Route path={`/organisation/mariage`} exact component={Wedding}/>
          <Route path={`/organisation/evj`} exact component={Evj}/>
          <Route path={`/organisation/ceremonie-laique`} exact component={SecularCeremony}/>
+         <Route path={`/organisation/autres-evenements`} exact component={OtherEvents}/>
+         <Route path={`/conception-floral`} exact component={FloralDesign}/>
+         <Route path={`/mes-ateliers`} exact component={MyWorkShop}/>
          <Route
            path={['/profil/:userId', '/profil/:userId/', '/profil/:userId/messages', '/profil/:userId/gestion-compte']}
            exact component={UserProfil}/>
+         <Route path={'/galerie'} exact component={Gallery}/>
+         <Route path={'/avis'} exact component={Rating}/>
          <Route path={'/a-propos'} exact component={About}/>
          <Route path={'/baby-shower'} exact component={BabyShower}/>
+         <ProtectedRoutes path={'/connexion'} exact component={Login}/>
+         <ProtectedRoutes path={'/inscription'} exact component={Register}/>
+         <ProtectedRoutes path={'/mot-de-passe-oublier/:tokenReset'} exact component={ResetPasswordForm}/>
          <PrivateRoutes path={'/admin*'} role="ROLE_ADMIN" exact component={IndexDashboardAdmin}/>
-         <ProtectedRoutes path="/inscription" exact component={ModalAuthentification}/>
-         <ProtectedRoutes path="/connexion" exact component={ModalAuthentification}/>
          <Route path="/contact" exact component={Contact}/>
          <Redirect to={'/'}/>
        </Switch>}

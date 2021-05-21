@@ -26,7 +26,8 @@
 }
 
 body {
-  color : var(--color);
+  background : #F4F5F7;
+  color      : var(--color);
 }
 
 @import 'Components/ModalAuth';

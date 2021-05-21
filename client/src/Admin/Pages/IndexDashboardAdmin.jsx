@@ -1,35 +1,60 @@
-import React, { useEffect, useState } from 'react'
-import { Switch, Route, Redirect }    from 'react-router-dom'
-import Sidebar                        from '../Components/Sidebar/Sidebar'
-import { Grid }                       from '@material-ui/core'
-import TableUsers                     from '../Components/Users/TableUsers'
-import axios                          from 'axios'
-import IndexFormules                  from './Formules/IndexFormules'
+import React, { useEffect }                   from 'react'
+import { Switch, Route }                      from 'react-router-dom'
+import Sidebar                                from '../Components/Sidebar/Sidebar'
+import TableUsers                             from '../Components/Users/TableUsers'
+import IndexFormules                          from './Formules/IndexFormules'
+import IndexNewsLetter                        from './NewsLetter/IndexNewsLetter'
+import { useDispatch, useSelector }           from 'react-redux'
+import { requestApiMessage, requestApiUsers } from '../../actions/adminAction'
+import IndexMessagesAdmin                     from './Messages/IndexMessagesAdmin'
+import DialogMessage                          from './Messages/DialogMessage'
+import ReplyMessage                           from './Messages/ReplyMessage'
+import IndexWorkshop                          from './Workshop/indexWorkshop'
+import ResumeAdminDashboard                   from './ResumeAdminDashboard'
+import UpdateCustomer                         from './UpdateUsers/UpdateCustomers'
 
 export default function IndexDashboardAdmin () {
-  const [users, setUsers] = useState([])
-  const getUsersDb        = () => {
-    axios.get('/admin/get-users')
-         .then(res => setUsers(res.data.users))
-         .catch(err => console.log(err))
-  }
+  const dispatch   = useDispatch()
+  const adminState = useSelector(state => state.adminReducers)
+
   useEffect(() => {
-    getUsersDb()
+    dispatch(requestApiUsers())
+    dispatch(requestApiMessage())
+    // eslint-disable-next-line
   }, [])
+  
   return <>
     
-    <Sidebar>
-      <Grid container spacing={3}>
-        <Switch>
-          <Route path="/admin" exact>
-            <TableUsers userDetails={users}/>
-          </Route>
-          <Route path="/admin/gestion-formules" exact>
-            <IndexFormules/>
-          </Route>
-          <Redirect to="/admin"/>
-        </Switch>
-      </Grid>
+    <Sidebar messages={adminState.messages}>
+      <Switch>
+        <Route path="/admin/users" exact>
+          <TableUsers userDetails={adminState.listUser}/>
+        </Route>
+        <Route path="/admin/user/:customerId" exact>
+          <UpdateCustomer/>
+        </Route>
+        <Route path="/admin/gestion-formules" exact>
+          <IndexFormules/>
+        </Route>
+        <Route path="/admin/newsletter" exact>
+          <IndexNewsLetter/>
+        </Route>
+        <Route path="/admin/messages" exact>
+          <IndexMessagesAdmin/>
+        </Route>
+        <Route path="/admin/messages/reply/:messageId" exact>
+          <ReplyMessage/>
+        </Route>
+        <Route path="/admin/message/send" exact>
+          <DialogMessage/>
+        </Route>
+        <Route path="/admin/atelier" exact>
+          <IndexWorkshop/>
+        </Route>
+        <Route path="/admin/avis" exact>
+          <ResumeAdminDashboard/>
+        </Route>
+      </Switch>
     </Sidebar>
   </>
 }

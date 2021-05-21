@@ -1,108 +1,87 @@
-import React, { useContext }  from 'react'
-import HeaderPage             from '../../Components/HeaderPage/HeaderPage'
-import { UserContext }        from '../../Context/UserContext'
-import { FaBell, FaEnvelope } from 'react-icons/fa'
-import Button                 from '../../Components/Button/Button'
-import { useTranslation }     from 'react-i18next'
-import {
-  Switch,
-  Route,
-  NavLink,
-}                             from 'react-router-dom'
-import ResumeProfil           from '../../Components/UserProfil/ResumeProfil'
-import MessageProfil          from '../../Components/UserProfil/MessageProfil'
-import ParamsAccount          from '../../Components/UserProfil/ParamsAccount'
-import { useSelector }        from 'react-redux'
+import React                from 'react'
+import { makeStyles }       from '@material-ui/core/styles'
+import Tabs                 from '@material-ui/core/Tabs'
+import Tab                  from '@material-ui/core/Tab'
+import Typography           from '@material-ui/core/Typography'
+import Box                  from '@material-ui/core/Box'
+import { Container, Paper } from '@material-ui/core'
+import Divider              from '@material-ui/core/Divider'
+import { useTranslation }   from 'react-i18next'
+import GeneralProfil        from '../../Components/UserProfil/GeneralProfil'
+import NotificationsProfile from '../../Components/UserProfil/NotificationsProfile'
+import SettingsAccount      from '../../Components/UserProfil/SettingsAccount/SettingsAccount'
+import Footer               from '../../Components/Footer/Footer'
+import Nav                  from '../../Components/NavBar/Nav'
 
-function RouterProfil () {
-  return <>
-    <Switch>
-      <Route exact path="/profil/:userId">
-        <ResumeProfil/>
-      </Route>
-      <Route exact path="/profil/:userId/messages">
-        <MessageProfil/>
-      </Route>
-      <Route exact path="/profil/:userId/gestion-compte">
-        <ParamsAccount/>
-      </Route>
-    </Switch>
-  </>
+function TabPanel (props) {
+  const { children, value, index, ...other } = props
+  
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box p={3}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  )
 }
 
-function MenuProfil ({ userId = '' }) {
-  const { t } = useTranslation()
-  return <>
-    <div className="menu-profil">
-      <ul className="menu-profil-items">
-        <li className="menu-profil-item">
-          <NavLink to={`/profil/${userId}`} activeClassName='active' className="menu-profil-link">
-            {t('resume_profil')}
-          </NavLink>
-        </li>
-        <li className="menu-profil-item">
-          <NavLink to={`/profil/${userId}/messages`} activeClassName='active' className="menu-profil-link">
-            Messages
-          </NavLink>
-        </li>
-        <li className="menu-profil-item">
-          <NavLink to={`/profil/${userId}/gestion-compte`} activeClassName='active' className="menu-profil-link">
-            {t('manage_account')}
-          </NavLink>
-        </li>
-      </ul>
-    </div>
-  </>
+function a11yProps (index) {
+  return {
+    id             : `simple-tab-${index}`,
+    'aria-controls': `simple-tabpanel-${index}`,
+  }
 }
 
-const UserProfil = () => {
-  const {userInfo} = useSelector(state => state.userReducers)
-  return <>
-    <HeaderPage nameImg="home.jpg"/>
-    <HeaderProfil userInfo={userInfo}/>
-    <RouterProfil/>
-  </>
-}
+const useStyles = makeStyles((theme) => ({
+  root: {
+    marginTop: '0',
+    flexGrow : 1,
+  },
+}))
 
-export default UserProfil
-
-function HeaderProfil ({ userInfo = '' }) {
-  const { t }       = useTranslation()
-  const userContext = useContext(UserContext)
-  return <>
-    <div className="container-profil container-margin color-female">
-      <div className="profil-info">
-        <div className="profil-avatar">
-          <img src={userInfo.userAvatar} alt=""/>
+export default function UserProfil () {
+  const classes           = useStyles()
+  const [value, setValue] = React.useState(0)
+  const { t }             = useTranslation()
+  const handleChange      = (event, newValue) => {
+    setValue(newValue)
+  }
+  
+  return (
+    <>
+      <Nav bgColor="#FFF" typoColor="#000"/>
+      <Divider/>
+      <Container maxWidth="xl">
+        <div className={classes.root}>
+          <Paper square={true} style={{ background: 'transparent' }} elevation={0}>
+            <Tabs value={value} onChange={handleChange} aria-label="simple tabs example"
+                  variant="scrollable"
+                  scrollButtons="auto">
+              <Tab label={t('general_profil_label')} {...a11yProps(0)} />
+              <Tab label={t('notification_profil_label')}  {...a11yProps(1)} />
+              <Tab label={t('settings_profil_label')} {...a11yProps(2)} />
+            </Tabs>
+          </Paper>
+          <TabPanel value={value} index={0}>
+            <GeneralProfil/>
+          </TabPanel>
+          <TabPanel value={value} index={1}>
+            <NotificationsProfile/>
+          </TabPanel>
+          <TabPanel value={value} index={2}>
+            <SettingsAccount/>
+          </TabPanel>
         </div>
-        <div className="profil-name text-strong">{userInfo.lastName} {userInfo.firstName}</div>
-        <div className="profil-address">{userInfo.address}</div>
-        <div className="profil-postalCode">{userInfo.postalCode}</div>
-        <div className="profil-phone">N ° : {userInfo.phone}</div>
-        <Button isButton={false} label={t('update_my_informations')} color="profil"
-                link={`/profil/${userContext._id}/gestion-compte`}/>
-      </div>
-      <div className="profil-notif">
-        <h2 className="text-strong welcome-profil">{t('welcome_message')} {userInfo.firstName}</h2>
-        <div className="notif">
-          <div className="icon">
-            <FaBell/>
-            <span className="number-notif"/>
-          </div>
-          <span>{t('new_promo_message')}</span>
-        </div>
-        <div className="notif">
-          <div className="icon">
-            <FaEnvelope/>
-            <span className="number-notif"/>
-          </div>
-          
-          <span>{t('new_promo_message')}</span>
-        </div>
-      </div>
-    </div>
-    <div className="container-margin">
-      <MenuProfil userId={userInfo._id}/>
-    </div>
-  </>
+      </Container>
+      <Footer/>
+    </>
+  )
 }

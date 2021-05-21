@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { makeStyles }                 from '@material-ui/core/styles'
-import axios                          from 'axios'
 import { Paper }                      from '@material-ui/core'
 import TableBody                      from '@material-ui/core/TableBody'
 import TableCell                      from '@material-ui/core/TableCell'
@@ -66,6 +65,7 @@ const IndexFormules = () => {
     })
   useEffect(() => {
     dispatch(requestApiFormula())
+    // eslint-disable-next-line
   }, [])
   
   const handleChangePage = (event, newPage) => {
@@ -80,6 +80,7 @@ const IndexFormules = () => {
     if (adminState.status === 'closed') {
       setOpenModal({ ...openModal, open: false, target: {} })
     }
+    // eslint-disable-next-line
   }, [adminState.status])
   return <>
     {openModal.open &&

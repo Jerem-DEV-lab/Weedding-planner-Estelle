@@ -6,10 +6,9 @@ import TableContainer            from '@material-ui/core/TableContainer'
 import TableHead                 from '@material-ui/core/TableHead'
 import TableRow                  from '@material-ui/core/TableRow'
 import Paper                     from '@material-ui/core/Paper'
-import { Button, ButtonGroup }   from '@material-ui/core'
-import DeleteForeverOutlinedIcon from '@material-ui/icons/DeleteForeverOutlined'
 import CreateOutlinedIcon        from '@material-ui/icons/CreateOutlined'
 import { useHistory }            from 'react-router-dom'
+import IconButton                from '@material-ui/core/IconButton'
 
 export default function TableUsers ({ userDetails }) {
   const history = useHistory()
@@ -38,11 +37,8 @@ export default function TableUsers ({ userDetails }) {
               <TableCell align="start">{user.email}</TableCell>
               <TableCell align="start">{user.phone}</TableCell>
               <TableCell align="center">
-                <ButtonGroup size="small" aria-label="small outlined button group">
-                  <Button variant="contained" color="secondary" disableElevation><DeleteForeverOutlinedIcon/></Button>
-                  <Button variant="contained" color="primary" disableElevation
-                          onClick={() => goTo(user._id)}><CreateOutlinedIcon/></Button>
-                </ButtonGroup>
+                <IconButton size="small" color="primary"
+                            onClick={() => goTo(user._id)}><CreateOutlinedIcon/></IconButton>
               </TableCell>
             </TableRow>
           ))}

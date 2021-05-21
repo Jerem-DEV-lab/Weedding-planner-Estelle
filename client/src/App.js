@@ -5,7 +5,7 @@ import axios                             from 'axios'
 import { useDispatch, useSelector }      from 'react-redux'
 import { loginUserSuccess }              from './actions/authenticatorAction'
 import { ThemeProvider, createMuiTheme } from '@material-ui/core'
-
+require ('dotenv').config()
 const theme = createMuiTheme(
   {
     typography: {
@@ -16,7 +16,6 @@ const theme = createMuiTheme(
       ].join(','),
     },
   })
-
 function App () {
   const [userLogged, setUserLogged] = useState(
     {
@@ -51,17 +50,18 @@ function App () {
   }
   useEffect(() => {
     fetchToken()
-    
+    // eslint-disable-next-line
   }, [userLogged.isLogged])
   
   useEffect(() => {
     if (isLogged || userLogged.isLogged) {
       fetchToken()
     }
+    // eslint-disable-next-line
   }, [isLogged, userLogged.isLogged])
   return <>
     <ThemeProvider theme={theme}>
-      <UserContext.Provider value={value}>
+      <UserContext.Provider value={userLogged}>
         <Routes/>
       </UserContext.Provider>
     </ThemeProvider>
