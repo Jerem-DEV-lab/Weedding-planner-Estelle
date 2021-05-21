@@ -6,12 +6,9 @@ import Nav                             from '../../Components/NavBar/Nav'
 import { Container, Grid, makeStyles } from '@material-ui/core'
 import FormuleCard                     from '../../Components/Card/FormuleCard'
 import SliderImg                       from '../../Components/SliderImg/SliderImg'
-import injectHtmlCode                  from '../../tools/injectHtml'
+import { useStyles }                   from '../Styles/OrganizationStyle'
 
 const usesStyle       = makeStyles((theme) => ({
-  title     : {
-    marginBottom: theme.spacing(4)
-  },
   imgContent: {
     position      : 'relative',
     objectFit     : 'contain',
@@ -33,9 +30,10 @@ const usesStyle       = makeStyles((theme) => ({
   }
 }))
 const SecularCeremony = () => {
-  const { t }   = useTranslation()
-  const classes = usesStyle()
-  const imgs    = [
+  const { t }        = useTranslation()
+  const classes      = usesStyle()
+  const generalStyle = useStyles()
+  const imgs         = [
     {
       imgSrc : '/assets/organizations/decoration_secular_ceremony.jpg',
       altAttr: 'aucune'
@@ -56,7 +54,7 @@ const SecularCeremony = () => {
     </HeroPage>
     <section>
       <Container>
-        <h2 className={classes.title}>{t('titleCeremonyOfficiant')}</h2>
+        <h2 className={`${generalStyle.titleResponsive}`}>{t('titleCeremonyOfficiant')}</h2>
         <Grid container={true} spacing={5}>
           <Grid item={true} xs={12} md={6} lg={6}>
             <div style={{ overflow: 'hidden', height: '450px', width: '100%' }}>
@@ -77,7 +75,7 @@ const SecularCeremony = () => {
     </section>
     <section>
       <Container>
-        <h2>{t('offerTitle')} :</h2>
+        <h2 className={`${generalStyle.titleResponsive}`}>{t('offerTitle')} :</h2>
         <Grid container spacing={4}>
           <Grid item xs={12} md={4} lg={4}>
             <FormuleCard formuleTitle={t('d-dayOfficiant')} formulePrice="450"

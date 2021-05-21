@@ -5,8 +5,10 @@ import { useTranslation }  from 'react-i18next'
 import { Container, Grid } from '@material-ui/core'
 import FormuleCard         from '../../Components/Card/FormuleCard'
 import SliderImg           from '../../Components/SliderImg/SliderImg'
+import { useStyles }       from '../Styles/OrganizationStyle'
 
 const OtherEvents = () => {
+  const classes = useStyles()
   const { t }            = useTranslation()
   const listOtherEvents1 = [
     t('other_events1'),
@@ -48,13 +50,13 @@ const OtherEvents = () => {
       <Nav/>
       <div className="hero-container">
         <div className="hero-home-content">
-          <h1>{t('other_type_event')}</h1>
+          <h1 className={classes.titleHero}>{t('other_type_event')}</h1>
         </div>
       </div>
     </HeroPage>
     <section>
       <Container>
-        <h2>Nos événements</h2>
+        <h2 className={classes.titleResponsive}>Nos événements</h2>
         <Grid container={true} spacing={6}>
           <Grid item={true} xs={12} md={12} lg={6}>
             <p className="section-content">
@@ -100,7 +102,7 @@ const OtherEvents = () => {
     </section>
     <section>
       <Container>
-        <h2>{t('offerTitle')} :</h2>
+        <h2 className={classes.titleResponsive}>{t('offerTitle')} :</h2>
         <Grid container={true} spacing={4}>
           <Grid item xs={12} md={4} lg={4}>
             <FormuleCard formuleTitle={t('Alittlehelp')} formulePrice="50" cardContent={t('formulaEventsLittleHelp')}/>

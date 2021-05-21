@@ -1,12 +1,13 @@
-import React                                  from 'react'
-import HeroPage                               from '../../Components/HeroPage/HeroPage'
-import Nav                                    from '../../Components/NavBar/Nav'
-import { useTranslation }                     from 'react-i18next'
+import React                           from 'react'
+import HeroPage                        from '../../Components/HeroPage/HeroPage'
+import Nav                             from '../../Components/NavBar/Nav'
+import { useTranslation }              from 'react-i18next'
 import { Container, Grid, makeStyles } from '@material-ui/core'
-import injectHtmlCode                         from '../../tools/injectHtml'
-import Footer                                 from '../../Components/Footer/Footer'
+import injectHtmlCode                  from '../../tools/injectHtml'
+import Footer                          from '../../Components/Footer/Footer'
+import { useStyles }                   from '../Styles/OrganizationStyle'
 
-const useStyles    = makeStyles((theme) => ({
+const usesStyles    = makeStyles((theme) => ({
   address : {
     fontSize  : '20px',
     fontWeight: '600',
@@ -23,7 +24,8 @@ const useStyles    = makeStyles((theme) => ({
 }))
 const FloralDesign = () => {
   const { t }                       = useTranslation()
-  const classes                     = useStyles()
+  const classes                     = usesStyles()
+  const generalStyle = useStyles()
   const listPossibilityAllOccasions = [
     t('otherPossibilityAllOccasions1'), t('otherPossibilityAllOccasions2'), t('otherPossibilityAllOccasions3'),
     'Bougie florale : à partir de 12€']
@@ -69,7 +71,7 @@ const FloralDesign = () => {
           <Grid item={true} xs={12} lg={6}>
             <section>
               <Container>
-                <h2>Explications de la conception floral</h2>
+                <h2 className={generalStyle.titleResponsive}>Explications de la conception floral</h2>
                 <p className="section-content">
                   {t('contentFloralDesign1')} <br/>
                   {t('contentFloralDesign2')} <br/>
@@ -80,14 +82,14 @@ const FloralDesign = () => {
               </Container>
             </section>
             <section>
-              <h2 >{t('subscription')}</h2>
+              <h2 className={generalStyle.titleResponsive}>{t('subscription')}</h2>
               <p className="section-content">{t('subscriptionContent')}</p>
             </section>
           </Grid>
           <Grid item={true} xs={12} lg={6}>
             <section>
               <Container>
-                <h2>Explications de la conception floral</h2>
+                <h2 className={generalStyle.titleResponsive}>Explications de la conception floral</h2>
                 <p className="section-content">
                   {t('contentFloralDesign1')} <br/>
                   {t('contentFloralDesign2')} <br/>
@@ -98,7 +100,7 @@ const FloralDesign = () => {
               </Container>
             </section>
             <section>
-              <h2 >{t('subscription')}</h2>
+              <h2 className={generalStyle.titleResponsive}>{t('subscription')}</h2>
               <p className="section-content">{t('subscriptionContent')}</p>
             </section>
           </Grid>
@@ -119,14 +121,14 @@ const FloralDesign = () => {
           <Grid item={true} xs={12} lg={6}>
             <section>
               <Container>
-                <h2>{t('HowWork')}</h2>
+                <h2 className={generalStyle.titleResponsive}>{t('HowWork')}</h2>
                 <p className="section-content">{t('HowWorkContent1')}</p>
                 <p className="section-content">{t('HowWorkContent2')}</p>
               </Container>
             </section>
             <section>
               <Container>
-                <h2>{t('commitment')}</h2>
+                <h2 className={generalStyle.titleResponsive}>{t('commitment')}</h2>
                 <p className="section-content" dangerouslySetInnerHTML={injectHtmlCode(t('commitmentContent1'))}/>
               </Container>
             </section>
@@ -134,7 +136,7 @@ const FloralDesign = () => {
         </Grid>
         <section>
           <Container>
-            <h2>{t('prices')}</h2>
+            <h2 className={generalStyle.titleResponsive}>{t('prices')}</h2>
             <p className="section-content">
               {t('price1')} <br/>
               {t('price2')} <br/>
@@ -148,7 +150,7 @@ const FloralDesign = () => {
         </section>
         <section>
           <Container>
-            <h2>{t('otherPossibility')}</h2>
+            <h2 className={generalStyle.titleResponsive}>{t('otherPossibility')}</h2>
             <Grid container={true} spacing={4}>
               <Grid item={true} xs={12} md="4">
                 <p className={`section-content`}><span

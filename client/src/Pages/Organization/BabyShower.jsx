@@ -6,9 +6,11 @@ import Nav                 from '../../Components/NavBar/Nav'
 import { Container, Grid } from '@material-ui/core'
 import Button              from '../../Components/Button/Button'
 import SliderImg           from '../../Components/SliderImg/SliderImg'
+import { useStyles }       from '../Styles/OrganizationStyle'
 
 const BabyShower = () => {
   const { t } = useTranslation()
+  const classes = useStyles()
   const imgs  = [
     {
       imgSrc : '/assets/organizations/baby_shower1.jpg',
@@ -56,18 +58,15 @@ const BabyShower = () => {
             </div>
           </Grid>
           <Grid item={true} xs={12} md={12} lg={6}>
-            <h2 className="">{t('new_baby')}...</h2>
+            <h2 className={classes.titleResponsive}>{t('new_baby')}...</h2>
             <p className="section-content">{t('new_baby_content')}</p>
             <br/>
-            <h2 style={{ fontSize: '26px' }}>{t('new_baby_subtitle1')}</h2>
+            <h2 className={classes.titleResponsive}>{t('new_baby_subtitle1')}</h2>
             <p className="section-content">{t('new_baby_content2')}</p>
             <br/>
             <p className="section-content">{t('new_baby_content3')}</p>
             <br/>
             <p className="section-content">{t('morePlanBaby_ShowerContent')}</p>
-            <div className="btn-center-x">
-              <Button isButton={false} label={t('seeMyOffers')} size={'lg'} color="primary"/>
-            </div>
           </Grid>
         </Grid>
       </Container>

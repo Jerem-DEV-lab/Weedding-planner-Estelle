@@ -1,25 +1,27 @@
-import React                           from 'react'
-import Nav                             from '../../Components/NavBar/Nav'
-import HeroPage                        from '../../Components/HeroPage/HeroPage'
+import React                     from 'react'
+import Nav                       from '../../Components/NavBar/Nav'
+import HeroPage                  from '../../Components/HeroPage/HeroPage'
 import { Container, Typography } from '@material-ui/core'
-import { useTranslation }              from 'react-i18next'
-import { Link }                        from 'react-router-dom'
-import Footer                          from '../../Components/Footer/Footer'
+import { useTranslation }        from 'react-i18next'
+import { Link }                  from 'react-router-dom'
+import Footer                    from '../../Components/Footer/Footer'
+import { useStyles }             from '../Styles/OrganizationStyle'
 
 const Home = () => {
-  const { t } = useTranslation()
+  const { t }   = useTranslation()
+  const classes = useStyles()
   return (<>
       <HeroPage nameImg="home.jpg" positionImg={'center center'}>
         <Nav/>
         <div className="hero-container">
-          <div className="hero-home-content">
-            <h1>{t('titleHeroHome')}</h1>
+          <div className={'hero-home-content '}>
+            <h1 className={classes.titleHero}>{t('titleHeroHome')}</h1>
           </div>
         </div>
       </HeroPage>
       <section>
         <Container>
-          <h2 className="mb4">{t('titleSection2Home')}</h2>
+          <h2 className={` ${classes.titleResponsive}`}>{t('titleSection2Home')}</h2>
           <div className="section-about">
             <Typography component="p">{t('contentSection2Home')}</Typography>
           </div>
@@ -27,7 +29,7 @@ const Home = () => {
       </section>
       <section className="section-gallery">
         <Container maxWidth="lg">
-          <h2>{t('titleSection1Home')}...</h2>
+          <h2 className={classes.titleResponsive}>{t('titleSection1Home')}...</h2>
           <div className="gallery">
             <div className="img-1">
               <img src="/assets/galleryHome/1.jpg" alt="baby shower organisé par Estelle Rouillé"/>

@@ -15,5 +15,19 @@ export const useStyles = makeStyles(theme => (
       fontWeight: '500',
       textAlign : 'justify',
       lineHeight: 1.5,
+    },
+    titleHero      : {
+      [theme.breakpoints.down('sm')]: {
+        fontSize  : '28px!important',
+        lineHeight: '42px',
+      }
+    },
+    titleResponsive: {
+      marginBottom                  : 'calc(4 * var(--space))',
+      [theme.breakpoints.down('sm')]: {
+        fontSize    : '28px',
+        lineHeight  : '38px',
+        marginBottom: 'calc(1 * var(--space))'
+      }
     }
   }))

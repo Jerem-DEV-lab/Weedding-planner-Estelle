@@ -7,8 +7,10 @@ import { Container, Grid } from '@material-ui/core'
 import injectHtmlCode      from '../../tools/injectHtml'
 import FormuleCard         from '../../Components/Card/FormuleCard'
 import SliderImg           from '../../Components/SliderImg/SliderImg'
+import { useStyles }       from '../Styles/OrganizationStyle'
 
 const Wedding = () => {
+  const classes = useStyles()
   const { t }     = useTranslation()
   const imgs      = [
     {
@@ -36,7 +38,7 @@ const Wedding = () => {
     </HeroPage>
     <section>
       <Container>
-        <h2>{t('titleSectionWedding1')}</h2>
+        <h2 className={classes.titleResponsive}>{t('titleSectionWedding1')}</h2>
         <Grid container={true} spacing={1}>
           <Grid item={true} xs={12} md={6} lg={6}>
             <div style={{ overflow: 'hidden', height: '450px', width: '100%' }}>
@@ -56,7 +58,7 @@ const Wedding = () => {
     </section>
     <section>
       <Container>
-        <h2>{t('titleSectionWedding2')}</h2>
+        <h2 className={classes.titleResponsive}>{t('titleSectionWedding2')}</h2>
         <p dangerouslySetInnerHTML={injectHtmlCode(t('contentSectionWedding2'))} className="section-content"/><br/>
         <p className="section-content">
           <ul className="list-number">
