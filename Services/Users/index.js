@@ -1,4 +1,5 @@
 const RatingSchema        = require('../../db/Schema/RatingSchema')
+const UserSchema          = require('../../db/Schema/UserSchema')
 const { ErrorRatingUser } = require('../../tools/UserTools')
 
 module.exports.sendRating = async (req, res) => {
@@ -26,4 +27,24 @@ module.exports.getAllRatings = async (req, res) => {
     console.log(e)
     return res.status(404).json(e)
   }
+}
+
+module.exports.checkTokenResetPassword = async (token) => {
+  const userCheckedToken = await UserSchema.findOne({ resetPasswordToken: token },
+                                                    'resetPasswordToken email userIsBan', {})
+  return new Promise((resolve, reject) => {
+    if (!userCheckedToken) {
+      return reject({ errors: true, statusCode: 403, reason: 'Lien expiré', valideToken: false })
+    }
+    if (userCheckedToken.userIsBan) {
+      reject({ errors: true, statusCode: 404, reason: 'Votre compte à été banni', valideToken: false })
+    }
+    if (!userCheckedToken.resetPasswordToken) {
+      reject({ errors: true, statusCode: 403, reason: 'Lien expiré', valideToken: false })
+    }
+    if (userCheckedToken.resetPasswordToken !== token) {
+      reject({ errors: true, statusCode: 403, reason: 'Token invalid', valideToken: false })
+    }
+    return resolve({ success: true, statusCode: 200, docs: userCheckedToken, valideToken: true })
+  })
 }

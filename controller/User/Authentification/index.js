@@ -1,12 +1,13 @@
-const { HashPassword }          = require('../../../tools/Auth')
-const UserSchema                = require('../../../db/Schema/UserSchema')
-const { ComparePassword }       = require('../../../tools/Auth')
-const { setTokenAuth }          = require('../../../tools/Auth')
-const { ErrorAuthentification } = require('../../../tools/Auth')
-const maxAge                    = 24 * 60 * 60 * 1000
-const transport                 = require('../../../Services/Lib/mailer')
-const { templateMail }          = require('../../../Services/Admin/NewsletterService')
-const { v1, v4 }                = require('uuid')
+const { HashPassword }            = require('../../../tools/Auth')
+const UserSchema                  = require('../../../db/Schema/UserSchema')
+const { ComparePassword }         = require('../../../tools/Auth')
+const { setTokenAuth }            = require('../../../tools/Auth')
+const { ErrorAuthentification }   = require('../../../tools/Auth')
+const maxAge                      = 24 * 60 * 60 * 1000
+const transport                   = require('../../../Services/Lib/mailer')
+const { checkTokenResetPassword } = require('../../../Services/Users')
+const { templateMail }            = require('../../../Services/Admin/NewsletterService')
+const { v1, v4 }                  = require('uuid')
 
 class Authentification {
   constructor (request, response) {
@@ -87,6 +88,15 @@ class Authentification {
     }
   }
   
+  async checkTokenResetPassword (request, response) {
+    const reqToken = request.params.tokenReset
+    try {
+      const userChecked = await checkTokenResetPassword(reqToken)
+      return response.status(userChecked.statusCode).json(userChecked)
+    } catch (e) {
+      return response.status(e.statusCode).json(e)
+    }
+  }
   async confirmResetPassword (request, response) {
     const reqToken = request.params.tokenReset
     if (!reqToken) {

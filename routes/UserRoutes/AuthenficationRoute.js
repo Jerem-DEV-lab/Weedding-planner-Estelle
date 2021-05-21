@@ -9,7 +9,8 @@ function createRouterAuthentification (req, res, next) {
   router.post('/login', AuthentificationController.loginUser)
   router.get('/logoutUser', AuthentificationController.logoutUser)
   router.post('/resetPassword', AuthentificationController.resetPassword)
-  router.patch('/confirmResetPassword/:tokenReset', AuthentificationController.confirmResetPassword)
+  router.put('/confirmResetPassword/:tokenReset', AuthentificationController.confirmResetPassword)
+  router.get('/check-token-reset/:tokenReset', AuthentificationController.checkTokenResetPassword)
   router.get('/check', checkUserLogin)
   return router
 }
