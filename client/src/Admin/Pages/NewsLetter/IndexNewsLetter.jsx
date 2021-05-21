@@ -14,8 +14,8 @@ import { useForm }    from '../../../Hooks/useForm'
 import {
   requestApiDeleteNewsletter,
   requestApiGetNewsletter,
-  requestApiUpdateNewsletter
-}                     from '../../../actions/adminAction'
+  requestApiUpdateNewsletter, resetEvent
+} from '../../../actions/adminAction'
 import { Alert }      from '@material-ui/lab'
 import ModalSendNewsletter
                       from '../../Components/ModalNewsletter/ModalSendNewsletter'
@@ -72,6 +72,7 @@ const IndexNewsLetter = () => {
   const closePopup         = () => {
     setOpenPopup(false)
     setValues(initialTarget)
+    dispatch(resetEvent())
   }
   const closeModalSendNews = () => {
     setOpenModalSendNew(false)

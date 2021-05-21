@@ -272,7 +272,7 @@ export default function adminReducers (state = initialState, action) {
       return {
         ...state,
         isLoading        : false,
-        updateSuccessNews: action.payload.success
+        updateSuccessNews: action.payload
       }
     case UPDATE_NEWS_ERRORS:
       return {

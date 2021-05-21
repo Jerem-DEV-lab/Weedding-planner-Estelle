@@ -372,7 +372,7 @@ export const requestApiUpdateNewsletter = (updateBody, newsId) => {
   return dispatch => {
     axios.patch(`/admin/update/news/${newsId}`, updateBody)
          .then(res => dispatch(updateNewsSuccess(res.data.success)))
-         .catch(err => dispatch(updateNewsError(err.response)))
+         .catch(err => dispatch(updateNewsError(err.response.data.errors)))
   }
 }
 
