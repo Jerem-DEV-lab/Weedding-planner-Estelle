@@ -5,12 +5,12 @@ const NewsLetterSchema = require('../../db/Schema/NewsletterSchema')
 const RatingSchema     = require('../../db/Schema/RatingSchema')
 const faker            = require('faker')
 
-/*
+
  function createRouterTest () {
  const roles = ['ROLE_USER']
  router.post('/fake-data', async (req, res) => {
  try {
- for (let i = 1; i < 2; i++) {
+ for (let i = 0; i < 5; i++) {
  const user = new UserSchema(
  {
  firstName         : faker.name.firstName(),
@@ -27,33 +27,34 @@ const faker            = require('faker')
  })
  await user.save()
  }
- for (let i = 1; i < 2; i++) {
- const user = new UserSchema(
- {
- firstName         : faker.name.firstName(),
- lastName          : faker.name.lastName(),
- email             : faker.internet.email(),
- phone             : faker.phone.phoneNumber('0695415462'),
- password          : '123456',
- civility          : 'Mme',
- address           : faker.address.cityName(),
- postalCode        : faker.address.zipCode('21490'),
- roles             : roles,
- workshopRegistered: false,
- workshopUser      : ''
- })
- await user.save()
+ for (let i = 0; i < 5; i++) {
+   const user = new UserSchema(
+     {
+       firstName         : faker.name.firstName(),
+       lastName          : faker.name.lastName(),
+       email             : faker.internet.email(),
+       phone             : faker.phone.phoneNumber('0695415462'),
+       password          : '123456',
+       civility          : 'Mme',
+       address           : faker.address.cityName(),
+       postalCode        : faker.address.zipCode('21490'),
+       roles             : roles,
+       workshopRegistered: false,
+       workshopUser      : ''
+     })
+   await user.save()
  }
- 
- return res.status(200).send('Data correctement générer')
+  
+   return res.status(200).send('Data correctement générer')
  } catch (e) {
- console.log('err', e)
+   console.log('err', e)
  }
  })
- 
- return router
+  
+   return router
  }
- 
+
+/*
  function getRandomInt (max) {
  return Math.floor(Math.random() * max)
  }
@@ -101,40 +102,40 @@ const faker            = require('faker')
  }
  })
  return router
+ }
+ function createRouterTest () {
+ router.post('/fake-data', async (req, res) => {
+ try {
+ for (let i = 1; i < 4; i++) {
+ const rating = new RatingSchema(
+ {
+ firstName: faker.name.firstName(),
+ lastName : faker.name.lastName(),
+ content  : faker.lorem.text(),
+ rating: 4
+ })
+ await rating.save()
+ }
+ for (let i = 1; i < 6; i++) {
+ const rating = new RatingSchema(
+ {
+ firstName  : faker.name.firstName(),
+ lastName   : faker.name.lastName(),
+ isPublished: true,
+ content    : faker.lorem.text(),
+ rating: 5
+ })
+ await rating.save()
+ }
+ 
+ return res.status(200).send('Data correctement générer')
+ } catch (e) {
+ console.log('err', e)
+ }
+ })
+ 
+ return router
  }*/
-function createRouterTest () {
-  router.post('/fake-data', async (req, res) => {
-    try {
-      for (let i = 1; i < 4; i++) {
-        const rating = new RatingSchema(
-          {
-            firstName: faker.name.firstName(),
-            lastName : faker.name.lastName(),
-            content  : faker.lorem.text(),
-            rating: 4
-          })
-        await rating.save()
-      }
-      for (let i = 1; i < 6; i++) {
-        const rating = new RatingSchema(
-          {
-            firstName  : faker.name.firstName(),
-            lastName   : faker.name.lastName(),
-            isPublished: true,
-            content    : faker.lorem.text(),
-            rating: 5
-          })
-        await rating.save()
-      }
-      
-      return res.status(200).send('Data correctement générer')
-    } catch (e) {
-      console.log('err', e)
-    }
-  })
-  
-  return router
-}
 module.exports = {
   createRouterTest
 }

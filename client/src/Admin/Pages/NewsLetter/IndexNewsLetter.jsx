@@ -6,19 +6,21 @@ import PersonRoundedIcon                                          from '@materia
 import AddCircleIcon                                              from '@material-ui/icons/AddCircle'
 import Button                                                     from '@material-ui/core/Button'
 import ModalCreateNewsletter
-                                                                  from '../../Components/ModalNewsletter/ModalCreateNewsletter'
-import CardNews                                                   from '../../Components/Card/CardNews'
-import Popup                                                      from '../../Components/Popup/Popup'
-import NewsletterForm                                             from '../../Components/ModalNewsletter/NewsletterForm'
-import { useForm }                                                from '../../../Hooks/useForm'
+                      from '../../Components/ModalNewsletter/ModalCreateNewsletter'
+import CardNews       from '../../Components/Card/CardNews'
+import Popup          from '../../Components/Popup/Popup'
+import NewsletterForm from '../../Components/ModalNewsletter/NewsletterForm'
+import { useForm }    from '../../../Hooks/useForm'
 import {
   requestApiDeleteNewsletter,
   requestApiGetNewsletter,
   requestApiUpdateNewsletter
-}                                                                 from '../../../actions/adminAction'
-import { Alert }                                                  from '@material-ui/lab'
+}                     from '../../../actions/adminAction'
+import { Alert }      from '@material-ui/lab'
+import ModalSendNewsletter
+                      from '../../Components/ModalNewsletter/ModalSendNewsletter'
 
-const useStyles = makeStyles((theme) => ({
+const useStyles       = makeStyles((theme) => ({
   root        : {
     display           : 'flex',
     alignItems        : 'center',
@@ -54,29 +56,37 @@ const IndexNewsLetter = () => {
   const orderUserNewsletter                      = adminState.listUser.filter(checkUserWithNewsLetter)
   const [openPopup, setOpenPopup]                = useState(false)
   const { values, setValues, handleChangeInput } = useForm(initialTarget)
+  const [openModalSendNew, setOpenModalSendNew]  = useState(false)
   
-  const handleClick = (targetContext) => {
+  const handleClick        = (targetContext) => {
     setOpenPopup(true)
     setValues({ ...values, ...targetContext })
   }
-  const deleteNews  = (newsId) => {
+  const openModalSendNews  = (targetContext) => {
+    setOpenModalSendNew(true)
+    setValues({ ...values, ...targetContext })
+  }
+  const deleteNews         = (newsId) => {
     dispatch(requestApiDeleteNewsletter(newsId))
   }
-  const closePopup  = () => {
+  const closePopup         = () => {
     setOpenPopup(false)
     setValues(initialTarget)
   }
-  const updateNews  = (newsId) => {
+  const closeModalSendNews = () => {
+    setOpenModalSendNew(false)
+  }
+  const updateNews         = (newsId) => {
     dispatch(requestApiUpdateNewsletter(values, newsId))
   }
-  const newsData    = useSelector(state => state.adminReducers)
+  const newsData           = useSelector(state => state.adminReducers)
   useEffect(() => {
     dispatch(requestApiGetNewsletter())
     // eslint-disable-next-line
   }, [])
-  
   return (
     <>
+      <ModalSendNewsletter open={openModalSendNew} close={closeModalSendNews} newsInfo={values}/>
       <Popup openPopup={openPopup} title="Modifier la news" onClose={closePopup}>
         {adminState.updateSuccessNews &&
          <div className="mb2">
@@ -143,8 +153,10 @@ const IndexNewsLetter = () => {
                  contentCard={news.contentNews}
                  onClick1={() => handleClick(news)}
                  onClick2={() => deleteNews(news._id)}
+                 onClick3={() => openModalSendNews(news)}
                  labelBtn1="Éditer"
                  labelBtn2="Supprimer"
+                 labelBtn3="Envoyer"
                />
              </Grid>))}
       </Grid>

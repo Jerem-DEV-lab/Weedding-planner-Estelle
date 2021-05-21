@@ -44,25 +44,61 @@ export const VALID_RATING_SUCCESS         = 'VALID_RATING_SUCCESS'
 export const VALID_RATING_ERROR           = 'VALID_RATING_ERROR'
 export const DELETE_RATING_SUCCESS        = 'DELETE_RATING_SUCCESS'
 export const DELETE_RATING_ERROR          = 'DELETE_RATING_ERROR'
+export const BAN_USER_LOADING             = 'BAN_USER_LOADING'
+export const BAN_USER_ERROR               = 'BAN_USER_ERROR'
+export const BAN_USER_SUCCESS             = 'BAN_USER_SUCCESS'
 
-export const getUserLoading  = () => {
+export const banUserLoading = () => {
+  return {
+    type: BAN_USER_LOADING
+  }
+}
+export const banUserSuccess = (success) => {
+  return {
+    type   : BAN_USER_SUCCESS,
+    payload: success
+  }
+}
+
+export const banUserError = (error) => {
+  return {
+    type   : BAN_USER_ERROR,
+    payload: error
+  }
+}
+
+export const requestApiBanUser = (userId, userIsBan) => {
+  return dispatch => {
+    dispatch(banUserLoading())
+    axios.put(`/admin/users/banUser/${userId}`, {
+           userIsBan
+         })
+         .then(res => {
+           dispatch(banUserSuccess(res.data.success))
+         })
+         .catch(err => {
+           dispatch(banUserError(err.response.data.errors))
+         })
+  }
+}
+export const getUserLoading    = () => {
   return {
     type: GET_USER_LOADING
   }
 }
-export const getUserSuccess  = (users) => {
+export const getUserSuccess    = (users) => {
   return {
     type   : GET_USER_SUCCESS,
     payload: users
   }
 }
-export const getUserError    = (err) => {
+export const getUserError      = (err) => {
   return {
     type   : GET_USER_SUCCESS,
     payload: err
   }
 }
-export const requestApiUsers = () => {
+export const requestApiUsers   = () => {
   return dispatch => {
     dispatch(getUserLoading())
     axios.get('/admin/get-users')
@@ -465,6 +501,7 @@ export const requestDeleteRating = (noticeId) => {
          .catch(err => dispatch(deleteRatingError(err.response.data.error)))
   }
 }
+
 export const resetEvent          = () => {
   return {
     type: RESET_EVENTS_ACTION

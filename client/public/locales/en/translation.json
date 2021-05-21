@@ -22,6 +22,7 @@
   "login": "Login",
   "logout": "Logout",
   "cancelLabel": "Cancel",
+  "askNewPassword": "Ask new password",
   "saveLabel": "Save",
   "successRegisterLabel": "An email has been sent to you to confirm your account.",
   "register": "Register",

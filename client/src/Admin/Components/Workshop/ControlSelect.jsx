@@ -21,13 +21,13 @@ const useStyles     = makeStyles((theme) => ({
     minWidth: '100%'
   }
 }))
-const ControlSelect = ({ filteredUser = [], handleInputChange, selected }) => {
+const ControlSelect = ({ filteredUser = [], handleInputChange, selected, name= "membersWorkshop" }) => {
   const classes = useStyles()
   return <>
     <FormControl className={classes.formControl}>
       <InputLabel>Participants</InputLabel>
       <Select
-        name="membersWorkshop"
+        name={name}
         multiple
         value={selected}
         onChange={handleInputChange}

@@ -4,7 +4,6 @@ import { Redirect, Route }   from 'react-router-dom'
 
 const ProtectedRoutes = ({ component: Component, ...rest }) => {
   const { isLogged } = useContext(UserContext)
-  console.log(isLogged)
   return <>
     {!isLogged ? <Route {...rest} render={
       props => <Component {...rest} {...props} />

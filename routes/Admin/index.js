@@ -1,6 +1,7 @@
 const router                           = require('express').Router()
 const UserSchema                       = require('../../db/Schema/UserSchema')
 const adminController                  = require('../../controller/Admin/AdminController')
+const User                             = require('../../controller/User/User')
 const { deleteNotice }                 = require('../../Services/Admin/RatingsService')
 const { valideNotice }                 = require('../../Services/Admin/RatingsService')
 const { getAllRatingUnpublished }      = require('../../Services/Admin/NewsletterService')
@@ -77,7 +78,20 @@ function createRouterAdmin () {
   router.get('/admin/users/manage-workshop', checkRole('ROLE_ADMIN'), (req, res) => {
     return findUserByRegisteredWorkshop(req, res)
   })
-  
+  router.put('/admin/users/banUser/:userId', checkRole('ROLE_ADMIN'), async (req, res) => {
+    const authCookie    = req.cookies
+    const authJwtCookie = authCookie.jwt
+    if (!authJwtCookie || !authJwtCookie.startsWith('Bearer ')) {
+      return res.status(400).json({ error: 'Vous devez être connecté' })
+    }
+    const adminService = new adminController(req, res, authJwtCookie.split('Bearer ')[1])
+    try {
+      const response = await adminService.banUser()
+      return res.status(response.statusCode).json({ success: response.successMessage })
+    } catch (e) {
+      return res.status(e.statusCode).json({ errors: e.reason })
+    }
+  })
   router.patch('/admin/patch/ratings/:noticeId', checkRole('ROLE_ADMIN'), (req, res) => {
     return valideNotice(req, res)
   })

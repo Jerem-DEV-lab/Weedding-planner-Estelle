@@ -4,8 +4,9 @@ import { Grid, TextField }            from '@material-ui/core'
 import ControlSelect                  from './ControlSelect'
 import { useDispatch, useSelector }   from 'react-redux'
 import FormControl                    from '@material-ui/core/FormControl'
-import Button                         from '@material-ui/core/Button'
-import { requestApiScheduleWorkshop } from '../../../actions/adminAction'
+import Button                                     from '@material-ui/core/Button'
+import { requestApiScheduleWorkshop, resetEvent } from '../../../actions/adminAction'
+import Toastify                                   from '../../../Components/Toastify'
 
 const initialFValue   = {
   nameWorkshop   : '',
@@ -14,22 +15,26 @@ const initialFValue   = {
   membersWorkshop: []
 }
 const FormAddWorkshop = () => {
-  const { values, handleChangeInput }   = useForm(initialFValue)
-  const { listUser }                    = useSelector(state => state.adminReducers)
-  const [filteredUser, setFilteredUser] = useState([])
-  const dispatch                        = useDispatch()
+  const { values, setValues, handleChangeInput } = useForm(initialFValue)
+  const { listUser, successSchedule }            = useSelector(state => state.adminReducers)
+  const [filteredUser, setFilteredUser]          = useState([])
+  const dispatch                                 = useDispatch()
+  
   useEffect(() => {
+    dispatch(resetEvent())
     if (listUser) {
       setFilteredUser(listUser.filter(u => u.workshopRegistered !== false))
     }
   }, [listUser])
-  console.log(values)
+  
   const handleSubmit = (e) => {
     e.preventDefault()
     dispatch(requestApiScheduleWorkshop(values))
+    setValues(initialFValue)
   }
   return (
     <>
+      {successSchedule && <Toastify message={successSchedule}/>}
       <form onSubmit={handleSubmit}>
         <Grid container={true} spacing={4}>
           <Grid item xs={12} sm={4} lg={4} xl={4}>

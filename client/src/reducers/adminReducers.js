@@ -1,4 +1,6 @@
 import {
+  BAN_USER_ERROR,
+  BAN_USER_LOADING, BAN_USER_SUCCESS,
   CHANGE_PRICE_FORMULA_ERROR,
   CHANGE_PRICE_FORMULA_LOADING,
   CHANGE_PRICE_FORMULA_SUCCESS,
@@ -61,7 +63,9 @@ const initialState = {
   ratings            : [],
   deleteNoticeError  : '',
   deleteNotice       : '',
-  deleteNoticeSuccess: ''
+  deleteNoticeSuccess: '',
+  successBan         : '',
+  errorBan           : ''
 }
 
 
@@ -70,6 +74,22 @@ export default function adminReducers (state = initialState, action) {
     case GET_FORMULA_LOADING:
       return {
         ...state, isLoading: true,
+      }
+    case BAN_USER_LOADING:
+      return {
+        ...state, isLoading: true,
+      }
+    case BAN_USER_SUCCESS:
+      return {
+        ...state,
+        successBan: action.payload,
+        errorBan  : ''
+      }
+    case BAN_USER_ERROR:
+      return {
+        ...state,
+        successBan: '',
+        errorBan  : action.payload
       }
     case GET_FORMULA_SUCCESS:
       return {
@@ -295,7 +315,11 @@ export default function adminReducers (state = initialState, action) {
         errorsCreateNews  : {},
         updateSuccessNews : '',
         successSendMail   : '',
-        errorSendMail     : ''
+        errorSendMail     : '',
+        successBan        : '',
+        errorBan          : '',
+        successSchedule   : '',
+        errorsSchedule    : ''
       }
     }
     case GET_ALL_RATINGS_SUCCESS: {

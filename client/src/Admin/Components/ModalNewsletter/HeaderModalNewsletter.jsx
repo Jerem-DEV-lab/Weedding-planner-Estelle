@@ -34,10 +34,10 @@ const HeaderModalNewsletter = ({ open, children, onClickBtn }) => {
             <CloseIcon/>
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            Envoi de la newsletter
+           Préparation de la newsletter
           </Typography>
           <Button autoFocus color="inherit" endIcon={<SendRoundedIcon/>} onClick={onClickBtn}>
-            Envoyer
+            Sauvegarder
           </Button>
         </Toolbar>
       </AppBar>

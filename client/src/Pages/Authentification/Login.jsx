@@ -34,7 +34,6 @@ export const OverlayForm = withStyles((theme) => (
 const Login = () => {
   
   const [openResetPassword, setOpenResetPassword] = useState(false)
-  console.log(openResetPassword)
   return <>
     <Grid container={true} style={{ backgroundColor: '#F6F8FB' }}>
       <Hidden smDown>

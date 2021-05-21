@@ -25,7 +25,6 @@ class User {
       if (!err) {
         return decodedToken
       } else {
-        console.log(err)
         return new Error('Le token est invalide')
       }
     })

@@ -1,8 +1,8 @@
-import React           from 'react'
-import Typography      from '@material-ui/core/Typography'
-import { Paper }       from '@material-ui/core'
-import { makeStyles }  from '@material-ui/core/styles'
-import FormAddWorkshop from '../../Components/Workshop/FormAddWorkshop'
+import React  from 'react'
+import Typography           from '@material-ui/core/Typography'
+import { Paper }            from '@material-ui/core'
+import { makeStyles }       from '@material-ui/core/styles'
+import FormAddWorkshop      from '../../Components/Workshop/FormAddWorkshop'
 
 const useStyles     = makeStyles(theme => (
   {

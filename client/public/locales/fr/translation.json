@@ -23,6 +23,7 @@
   "logout": "Déconnexion",
   "cancelLabel": "Annuler",
   "saveLabel": "Sauvegarder",
+  "askNewPassword": "Demander un nouveau mot de passe",
   "successRegisterLabel": "Un email vient de vous être envoyé pour confirmer votre compte.",
   "titleSectionSecularCeremony": "Cérémonie laïque",
   "register": "Inscription",
