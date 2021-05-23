@@ -70,12 +70,12 @@ export default function Sidebar ({ messages, children }) {
             <MenuIcon/>
           </IconButton>
           <div className={classes.appBarRightSide}>
-            <Button>
+            <Link to={"/admin/messages"}>
               <Badge badgeContent={messages.filter(checkMessageStatus).length} color="primary">
                 <MailIcon/>
               </Badge>
-            </Button>
-            <Avatar alt="Remy Sharp" src={userInfo.userAvatar}/>
+            </Link>
+            <Avatar alt="avatar utilisateur" src={userInfo.userAvatar}/>
             <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
               {userInfo.firstName}
             </Button>
