@@ -1,13 +1,15 @@
 import axios from 'axios'
 
-export const LOGIN_USER_LOADING    = 'LOGIN_USER_LOADING'
-export const LOGIN_USER_ERROR      = 'LOGIN_USER_ERROR'
-export const LOGIN_USER_SUCCESS    = 'LOGIN_USER_SUCCESS'
-export const REGISTER_USER_LOADING = 'REGISTER_USER_LOADING'
-export const REGISTER_USER_ERROR   = 'REGISTER_USER_ERROR'
-export const REGISTER_USER_SUCCESS = 'REGISTER_USER_SUCCESS'
-export const LANG_USER_PREF        = 'LANG_USER_PREF'
-export const LOGOUT_USER           = 'LOGOUT_USER'
+export const LOGIN_USER_LOADING      = 'LOGIN_USER_LOADING'
+export const LOGIN_USER_ERROR        = 'LOGIN_USER_ERROR'
+export const LOGIN_USER_SUCCESS      = 'LOGIN_USER_SUCCESS'
+export const REGISTER_USER_LOADING   = 'REGISTER_USER_LOADING'
+export const REGISTER_USER_ERROR     = 'REGISTER_USER_ERROR'
+export const REGISTER_USER_SUCCESS   = 'REGISTER_USER_SUCCESS'
+export const LANG_USER_PREF          = 'LANG_USER_PREF'
+export const LOGOUT_USER             = 'LOGOUT_USER'
+export const CONFIRM_ACCOUNT_SUCCESS = 'CONFIRM_ACCOUNT_SUCCESS'
+export const CONFIRM_ACCOUNT_ERROR   = 'CONFIRM_ACCOUNT_ERROR'
 
 export const loginUserLoading = () => {
   return {
@@ -15,7 +17,7 @@ export const loginUserLoading = () => {
   }
 }
 
-export const changeLangPref       = (lang) => {
+export const changeLangPref   = (lang) => {
   return {
     type   : LANG_USER_PREF,
     payload: lang
@@ -31,6 +33,19 @@ export const loginUserError   = (err) => {
   return {
     type   : LOGIN_USER_ERROR,
     payload: err
+  }
+}
+
+export const confirmAccountSuccess = (success) => {
+  return {
+    type   : CONFIRM_ACCOUNT_SUCCESS,
+    payload: success
+  }
+}
+export const confirmAccountError   = (error) => {
+  return {
+    type   : CONFIRM_ACCOUNT_ERROR,
+    payload: error
   }
 }
 

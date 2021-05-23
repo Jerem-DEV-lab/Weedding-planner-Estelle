@@ -96,7 +96,12 @@ const LoginForm = ({openModalResetPassword}) => {
   }
   const { values, handleChangeInput } = useForm(initialState)
   const dispatch                      = useDispatch()
-  const { loginError, loginSuccess }  = useSelector(state => state.userReducers)
+  const {
+          loginError,
+          loginSuccess,
+          confirmAccountSuccess,
+          confirmAccountError
+        }                             = useSelector(state => state.userReducers)
   const submitForm                    = (e) => {
     e.preventDefault()
     dispatch(resetEvent())
@@ -121,6 +126,8 @@ const LoginForm = ({openModalResetPassword}) => {
         </div>
         {loginError && <Alert severity="error">{loginError}</Alert>}
         {loginSuccess && <Alert severity="success">{loginSuccess}</Alert>}
+        {confirmAccountSuccess && <Alert severity="success">{confirmAccountSuccess}</Alert>}
+        {confirmAccountError && <Alert severity="error">{confirmAccountError}</Alert>}
         <div className="mt4">
           <form>
             <Grid container={true} spacing={4}>

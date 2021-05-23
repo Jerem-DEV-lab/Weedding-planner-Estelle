@@ -21,6 +21,7 @@ import FloralDesign      from '../../Pages/FloralDesign/FloralDesign'
 import MyWorkShop        from '../../Pages/MyWorkShop/MyWorkShop'
 import ResetPasswordForm from '../../Pages/Authentification/ResetPassword'
 import ProtectedRoutes   from './ProtectedRoutes'
+import AccountConfirm    from '../../Pages/Authentification/AccountConfirm'
 
 const Routes = () => {
   const maintenance     = false
@@ -48,6 +49,7 @@ const Routes = () => {
          <Route path={'/a-propos'} exact component={About}/>
          <Route path={'/baby-shower'} exact component={BabyShower}/>
          <ProtectedRoutes path={'/connexion'} exact component={Login}/>
+         <ProtectedRoutes path={'/confirm-account/:tokenActive'} exact component={AccountConfirm}/>
          <ProtectedRoutes path={'/inscription'} exact component={Register}/>
          <ProtectedRoutes path={'/mot-de-passe-oublier/:tokenReset'} exact component={ResetPasswordForm}/>
          <PrivateRoutes path={'/admin*'} role="ROLE_ADMIN" exact component={IndexDashboardAdmin}/>

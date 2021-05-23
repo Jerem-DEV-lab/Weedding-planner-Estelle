@@ -6,8 +6,8 @@ const { ErrorAuthentification }   = require('../../../tools/Auth')
 const maxAge                      = 24 * 60 * 60 * 1000
 const transport                   = require('../../../Services/Lib/mailer')
 const { checkTokenResetPassword } = require('../../../Services/Users')
-const { templateMail }            = require('../../../Services/Admin/NewsletterService')
-const { v1, v4 }                  = require('uuid')
+const sendMailSG                  = require('../../../Services/Lib/mailer')
+const { v1 }                      = require('uuid')
 
 class Authentification {
   constructor (request, response) {
@@ -16,26 +16,24 @@ class Authentification {
   }
   
   async createUser (request, response) {
-    const { email, password, address, firstName, lastName, phone, birthday, civility, postalCode } = request.body
-    
-    const ROLE           = 'ROLE_USER'
-    const hashedPassword = await HashPassword(password)
+    const { email, password, address, firstName, lastName, phone, postalCode } = request.body
+    const ROLE                                                                 = 'ROLE_USER'
+    const hashedPassword                                                       = await HashPassword(password)
     try {
       const newUser = new UserSchema(
         {
           email,
-          roles   : ROLE,
-          password: hashedPassword,
+          roles               : ROLE,
+          password            : hashedPassword,
           address,
           firstName,
           lastName,
           phone,
-          birthday,
-          civility,
           postalCode,
-        
+          tokenAccountVerified: v1()
         })
       await newUser.save()
+      await sendMailSG(email, `${lastName} ${firstName}`, 'Confirmation de votre compte', `${newUser.tokenAccountVerified}`)
       return response.status(200).json({ message: 'Un email vient de vous être envoyé pour confirmer votre compte.' })
     } catch (e) {
       const errors = ErrorAuthentification(e)
@@ -43,17 +41,43 @@ class Authentification {
     }
   }
   
+  async setVerifiedAccount (req, res) {
+    const userFind = await UserSchema.findOne({ confirmAccountToken: req.params.tokenAccount }, 'email _id' +
+                                                                                                ' tokenAccountVerified')
+    return new Promise((resolve, reject) => {
+      if (!userFind) {
+        return reject({
+                        errors: true, statusCode: 404, reason: 'Impossible d\'activer votre compte ! Lien invalide !' +
+                                                               ' ❌'
+                      })
+      }
+      userFind.confirmAccountToken = ''
+      userFind.save()
+      return resolve({ success: true, statusCode: 200, userFind })
+    })
+  }
+  
   async loginUser (request, response) {
     const { email, password } = request.body
     const findUser            = await UserSchema.findOne({ email })
+    
     try {
-      if (!findUser) {
-        return response.status(403).json({ error: 'Email ou mot de passe incorrect' })
+      if (!findUser) {return response.status(403).json({ error: 'Email ou mot de passe incorrect' })}
+      
+      if (findUser.userIsBan) {
+        return response.status(403).json(
+          { error: 'Votre compte a été banni pour non respect des conditions d\'utilisation' })
+      }
+      if (!findUser.accountVerified) {
+        return response.status(403).json(
+          {
+            error: 'Vérifier vos e-mails pour activer votre compte. Penser a vérifier vos spams...'
+          })
       }
       const passwordMatch = await ComparePassword(password, findUser.password)
       if (passwordMatch) {
         const tokenAuth = setTokenAuth(findUser.roles, findUser._id, maxAge)
-        response.cookie('jwt', 'Bearer' + ' ' + tokenAuth  , { httpOnly: true, maxAge })
+        response.cookie('jwt', 'Bearer' + ' ' + tokenAuth, { httpOnly: true, maxAge })
         return response.status(200).json(
           {
             userAuthenticated: true,
@@ -80,7 +104,7 @@ class Authentification {
       }
       const token              = v1()
       const setTokenToUser     = await UserSchema.findOneAndUpdate({ email: userEmail }, { resetPasswordToken: token }, { new: true })
-      const resetLinkWithToken = `${process.env.LINK_RESET_PASSWORD}${setTokenToUser.resetPasswordToken}`
+      const resetLinkWithToken = `${process.env.DOMAIN}${process.env.LINK_RESET_PASSWORD}${setTokenToUser.resetPasswordToken}`
       await transport(userEmail, findUser.firstName, "Réinitialisation mot de passe")
       return response.status(200).json({ success: 'Un email viens de vous être envoyer sur ' + userEmail })
     } catch (e) {

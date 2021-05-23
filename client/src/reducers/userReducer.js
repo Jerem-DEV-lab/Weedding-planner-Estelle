@@ -1,4 +1,6 @@
 import {
+  CONFIRM_ACCOUNT_ERROR,
+  CONFIRM_ACCOUNT_SUCCESS,
   LANG_USER_PREF,
   LOGIN_USER_ERROR,
   LOGIN_USER_LOADING,
@@ -15,22 +17,24 @@ import {
 } from '../actions/userAction'
 
 const initialState = {
-  isLoading          : false,
-  userIsLogged       : false,
-  userInfo           : {},
-  loginError         : '',
-  loginSuccess       : '',
-  registrationFail   : {},
-  registrationSuccess: '',
-  errorChange        : '',
-  langPref           : 'FR_fr',
-  isLogged           : false,
-  userId             : null,
-  userRole           : 'ROLE_USER',
-  successChange      : '',
-  addEventSuccess    : '',
-  addEventErrors     : '',
-  addEventLoading    : false,
+  isLoading            : false,
+  userIsLogged         : false,
+  userInfo             : {},
+  loginError           : '',
+  loginSuccess         : '',
+  registrationFail     : {},
+  registrationSuccess  : '',
+  errorChange          : '',
+  langPref             : 'FR_fr',
+  isLogged             : false,
+  userId               : null,
+  userRole             : 'ROLE_USER',
+  successChange        : '',
+  addEventSuccess      : '',
+  addEventErrors       : '',
+  addEventLoading      : false,
+  confirmAccountSuccess: '',
+  confirmAccountError  : ''
 }
 
 export default function userReducers (state = initialState, action) {
@@ -179,6 +183,18 @@ export default function userReducers (state = initialState, action) {
         changeAvatarLoading: false,
         changeAvatarError  : action.payload,
         changeAvatarSuccess: ''
+      }
+    case CONFIRM_ACCOUNT_SUCCESS:
+      return {
+        ...state,
+        confirmAccountError  : '',
+        confirmAccountSuccess: action.payload
+      }
+    case CONFIRM_ACCOUNT_ERROR:
+      return {
+        ...state,
+        confirmAccountError  : action.payload,
+        confirmAccountSuccess: ''
       }
     default:
       return state
