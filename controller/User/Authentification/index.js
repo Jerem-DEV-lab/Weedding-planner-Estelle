@@ -81,7 +81,7 @@ class Authentification {
       const token              = v1()
       const setTokenToUser     = await UserSchema.findOneAndUpdate({ email: userEmail }, { resetPasswordToken: token }, { new: true })
       const resetLinkWithToken = `${process.env.LINK_RESET_PASSWORD}${setTokenToUser.resetPasswordToken}`
-      await transport.sendMail(templateMail(userEmail, 'Demande de nouveau mot de passe', `Cliquez sur le liens pour réinitialisé votre mot de passe : <a href="${resetLinkWithToken}">Réinialisation ici</a>`))
+      await transport(userEmail, findUser.firstName, "Réinitialisation mot de passe")
       return response.status(200).json({ success: 'Un email viens de vous être envoyer sur ' + userEmail })
     } catch (e) {
       return response.status(500)

@@ -4,8 +4,8 @@ const ContactSchema    = require('../../db/Schema/ContactSchema')
 const NewsLetterSchema = require('../../db/Schema/NewsletterSchema')
 const RatingSchema     = require('../../db/Schema/RatingSchema')
 const faker            = require('faker')
-
-
+const axios            = require('axios')
+/*
  function createRouterTest () {
  const roles = ['ROLE_USER']
  router.post('/fake-data', async (req, res) => {
@@ -136,6 +136,76 @@ const faker            = require('faker')
  
  return router
  }*/
+
+/*const msg = {
+ to     : 'guillemet.jeremy087@gmail.com', // Change to your recipient
+ from   : 'estelle-rouille@estelle-events.fr', // Change to your verified sender
+ subject: 'Sending with SendGrid is Fun',
+ html   : require('./mail.html'),
+ }
+ sgMail
+ .send(msg)
+ .then(() => {
+ console.log('Email sent')
+ })
+ .catch((error) => {
+ console.error(error)
+ })*/
+
+const sgMail               = require('@sendgrid/mail')
+const templateMailSendGrid = require('../../Services/Lib/templateMail')
+
+/*
+ function createRouterTest () {
+ router.post('/fake-data', async (req, res) => {
+ const obj = {
+ 'personalizations': [{
+ 'to'     : [{ 'email': 'guillemet.jeremy087@gmail.com', 'name': 'John Doe' }],
+ 'subject': 'Hello, World!'
+ }],
+ 'content'         : [{ 'type': 'text/html', 'value': templateMailSendGrid }],
+ 'from'            : { 'email': 'estelle-rouille@estelle-events.fr', 'name': 'Sam Smith' },
+ 'reply_to'        : { 'email': 'estelle-rouille@estelle-events.fr', 'name': 'Sam Smith' },
+ }
+ axios.post('https://api.sendgrid.com/v3/mail/send', obj, {
+ headers: { Authorization: 'Bearer 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' }
+ }).then(res => {
+ console.log('email send')
+ })
+ .catch(err => {
+ console.log(err.response.data)
+ console.log('email not send')
+ })
+ 
+ })
+ return router
+ }
+ */
+function createRouterTest () {
+  router.post('/fake-data', async (req, res) => {
+    sgMail.setApiKey('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')
+    const obj = {
+      'personalizations': [{
+        'to'     : [{ 'email': 'kev87rouil@hotmail.fr', 'name': 'KEVIN' }],
+        'subject': 'TEST DEPUIS NODE'
+      }],
+      'content'         : [{ 'type': 'text/html', 'value': templateMailSendGrid }],
+      'from'            : { 'email': 'estelle-rouille@estelle-events.fr', 'name': 'Sam Smith' },
+      'reply_to'        : { 'email': 'guillemet.jeremy087@gmail.com', 'name': 'Sam Smith' },
+    }
+    sgMail
+      .send(obj)
+      .then(() => {}, error => {
+        console.error(error);
+      
+        if (error.response) {
+          console.error(error.response.body)
+        }
+      });
+  })
+  return router
+}
+
 module.exports = {
   createRouterTest
 }
