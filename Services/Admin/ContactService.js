@@ -1,6 +1,6 @@
 const ContactSchema           = require('../../db/Schema/ContactSchema')
 module.exports.getAllMessages = async (req, res) => {
-  return ContactSchema.find(function (err, docs) {
+  return ContactSchema.find({}, null, { sort: { createdAt: -1 } }, function (err, docs) {
   
     if (!docs) {
       return res.status(400).json({ docs: docs })

@@ -1,22 +1,22 @@
-import React, { useEffect, useState }                                    from 'react'
-import { useHistory, useParams }                                         from 'react-router-dom'
-import { useDispatch, useSelector }                                      from 'react-redux'
-import { CardHeader, Grid, Card, Typography, TableCell, Switch, Button } from '@material-ui/core'
-import { makeStyles, useTheme }                                          from '@material-ui/core/styles'
-import Divider                                                           from '@material-ui/core/Divider'
+import React, { useEffect, useState }                                            from 'react'
+import { useHistory, useParams }                                                 from 'react-router-dom'
+import { useDispatch, useSelector }                                              from 'react-redux'
+import { CardHeader, Grid, Card, Typography, TableCell, Switch, Button, Avatar } from '@material-ui/core'
+import { makeStyles, useTheme }                                                  from '@material-ui/core/styles'
+import Divider                                                                   from '@material-ui/core/Divider'
 import TableContainer
-                                                                         from '@material-ui/core/TableContainer'
-import TableBody                                                         from '@material-ui/core/TableBody'
-import TableRow                                                          from '@material-ui/core/TableRow'
-import CreateIcon                                                        from '@material-ui/icons/Create'
-import { isEmpty }                                                       from '../../../tools'
+                                                                                 from '@material-ui/core/TableContainer'
+import TableBody                                                                 from '@material-ui/core/TableBody'
+import TableRow                                                                  from '@material-ui/core/TableRow'
+import CreateIcon                                                                from '@material-ui/icons/Create'
+import { isEmpty }                                                               from '../../../tools'
 import {
   requestApiBanUser,
   requestApiUsers,
   resetEvent
-}                                                                        from '../../../actions/adminAction'
-import Toastify                                                          from '../../../Components/Toastify'
-import IconButton                                                        from '@material-ui/core/IconButton'
+}                                                                                from '../../../actions/adminAction'
+import Toastify                                                                  from '../../../Components/Toastify'
+import IconButton                                                                from '@material-ui/core/IconButton'
 
 const useStyles = makeStyles(theme => ({
   root           : {
@@ -108,9 +108,8 @@ const UpdateCustomer = () => {
             <Card variant="outlined">
               <CardHeader className={classes.root} title={
                 <Typography variant="h6" component="span">Détails du client</Typography>
-              } action={<>
+              } avatar={<Avatar alt={userTarget.firstName} src={userTarget.userAvatar}/>} action={
                 <ActionsCard userId={userTarget._id}/>
-              </>
               }/>
               <Divider/>
               <TableContainer component={'table'}>
