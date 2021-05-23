@@ -27,7 +27,7 @@ const ModalSendNewsletter = ({ open, close, newsInfo }) => {
   useEffect(() => {
     dispatch(resetEvent())
     if (listUser) {
-      setFilteredUser(listUser.filter(u => u.workshopRegistered !== false))
+      setFilteredUser(listUser.filter(u => u.newsLetter === true))
     }
     //eslint-disable-next-line
   }, [listUser])
@@ -61,7 +61,6 @@ const ModalSendNewsletter = ({ open, close, newsInfo }) => {
           <DialogContentText>
             {errors && <Alert severity="error">{errors}</Alert>}
             {success && <Alert severity="success">{success}</Alert>}
-          
           </DialogContentText>
           <DialogContentText>
             Vous devez sélectionner les utilisateurs à qui vous voulez envoyer la newsletter. <br/>
@@ -70,8 +69,8 @@ const ModalSendNewsletter = ({ open, close, newsInfo }) => {
                          handleInputChange={handleChangeInput}/>
         </DialogContent>
         <DialogActions>
-          <Button onClick={close} color="primary">
-            Cancel
+          <Button onClick={close} color="secondary">
+            Annuler
           </Button>
           <Button onClick={sendNews} color="primary">
             Envoyer la news

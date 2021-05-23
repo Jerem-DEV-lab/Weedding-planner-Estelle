@@ -80,13 +80,30 @@ class User {
           return reject(
             {
               ...responseHelper,
-              errors: false,
-              reason: 'Impossible de modifier votre avatar pour le moment',
+              errors    : false,
+              reason    : 'Impossible de modifier votre avatar pour le moment',
               statusCode: 500,
             }
           )
         }
       })
+    })
+  }
+  
+  async changeInfoPref (preferenceName, preferenceValue) {
+    return new Promise((resolve, reject) => {
+      if (preferenceName === 'newsletter') {
+        UserSchema.findByIdAndUpdate(this.userInfo.userId, { newsLetter: preferenceValue }, { new: true }, (err, docs) => {
+          if (!err) {
+            return resolve(
+              {
+                success: true, statusCode: 200, docs, successMsg: 'Votre préférence à correctement été mis a jour'
+              })
+          } else {
+            return reject({ errors: true, statusCode: 403, reason: 'Impossible de mettre à jour votre profil', })
+          }
+        }).select('newsLetter')
+      }
     })
   }
 }

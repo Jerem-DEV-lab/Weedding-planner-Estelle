@@ -105,6 +105,22 @@ function createRouterUpdateProfil () {
       return res.status(e.statusCode).json({ errors: e.reason })
     }
   })
+  
+  router.put('/user/change-preference-new', async (req, res) => {
+    const authCookie                          = req.cookies
+    const authJwtCookie                       = authCookie.jwt
+    const user                                = new User(authJwtCookie.split('Bearer ')[1])
+    const { preferenceName, preferenceValue } = req.body
+    try {
+      if (!preferenceName && !preferenceValue) {
+        return res.status(403).json({ errors: 'Vous devez sélectionner une préférence' })
+      }
+      const response = await user.changeInfoPref(preferenceName, preferenceValue)
+      return res.status(response.statusCode).json(response.docs)
+    } catch (e) {
+      console.log(e)
+    }
+  })
   return router
 }
 
