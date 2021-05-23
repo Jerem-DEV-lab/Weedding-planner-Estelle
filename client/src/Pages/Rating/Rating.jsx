@@ -100,15 +100,16 @@ const Rating        = () => {
           <Typography variant="h4" component="h1" className={classes.titleHeader}>{t('ratingTitle')}</Typography>
           <SendRatingBtn endIcon={<Edit/>} onClick={() => setCreateReview(true)}>{t('buttonRating')}</SendRatingBtn>
         </div>
-        {ratings && ratings.length > 0 ? ratings.map((r, index) => (
-          <Grid container={true} spacing={2}>
+        <Grid container={true} spacing={2}>
+          {ratings && ratings.length > 0 && ratings.map((r, index) => (
             <Grid item={true} xs={12} md={6} lg={4} xl={4} key={index}>
               <Ratings noticeInfo={r}/>
-            </Grid>
-          </Grid>)) : <div className={classes.labelCenter}>
+            </Grid>))}
+        </Grid>
+        {ratings.length <= 0 &&
+         <div className={classes.labelCenter}>
            <p className={classes.labelNoRating}>{t('noRatingContent')}</p>
          </div>}
-    
       </Container>
       <Footer/>
     </>
@@ -131,6 +132,7 @@ const DialogFormReview = ({ open, close }) => {
     e.preventDefault()
     close()
     dispatch(requestApiAddRating(values))
+    setValues(initialValues)
   }
   
   const { t } = useTranslation()
