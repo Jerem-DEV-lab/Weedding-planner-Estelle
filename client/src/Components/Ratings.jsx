@@ -1,7 +1,6 @@
 import React, { useContext }                       from 'react'
 import Box                                         from '@material-ui/core/Box'
 import { makeStyles }                              from '@material-ui/core/styles'
-import { dateParser }                              from '../tools/helperDate'
 import { FaStar }                                  from 'react-icons/fa'
 import Typography                                  from '@material-ui/core/Typography'
 import Button                                      from '@material-ui/core/Button'
@@ -9,6 +8,9 @@ import { ButtonGroup, CardActions }                from '@material-ui/core'
 import { useDispatch }                             from 'react-redux'
 import { requestDeleteRating, requestValidRating } from '../actions/adminAction'
 import { UserContext }                             from '../Context/UserContext'
+import TimeAgo                                     from 'react-timeago'
+import frenchStrings                               from 'react-timeago/lib/language-strings/fr'
+import buildFormatter                              from 'react-timeago/lib/formatters/buildFormatter'
 
 const useStyles = makeStyles(theme => (
   {
@@ -30,7 +32,6 @@ const useStyles = makeStyles(theme => (
     },
     ratingUser      : {
       display                       : 'flex',
-      alignItems                    : 'center',
       [theme.breakpoints.down('md')]: {
         flexWrap: 'wrap'
       },
@@ -41,6 +42,10 @@ const useStyles = makeStyles(theme => (
     headerCardRating: {
       display       : 'flex',
       justifyContent: 'space-between',
+      flexWrap      : 'wrap',
+      '& > * '      : {
+        marginBottom: theme.spacing(1)
+      },
       '& img'       : {
         width       : '40px',
         height      : '40px',
@@ -59,6 +64,9 @@ const useStyles = makeStyles(theme => (
       flexDirection : 'row',
       width         : '100%',
       marginTop     : theme.spacing(2)
+    },
+    smallTypo       : {
+      fontSize: '12px'
     }
   }
 ))
@@ -69,10 +77,12 @@ const colors  = {
   
 }
 const Ratings = ({ noticeInfo }) => {
-  const classes        = useStyles()
-  const stars          = Array(5).fill(0)
-  const dispatch       = useDispatch()
-  const  userLogged  = useContext(UserContext)
+  const classes    = useStyles()
+  const stars      = Array(5).fill(0)
+  const dispatch   = useDispatch()
+  const userLogged = useContext(UserContext)
+  
+  const formatter = buildFormatter(frenchStrings)
   return (
     <>
       <Box className={classes.root}
@@ -98,8 +108,8 @@ const Ratings = ({ noticeInfo }) => {
               </div>
             </div>
           </div>
-          <Typography variant="body2" className="mobile-hidden">
-            Le : {dateParser(noticeInfo.createdAt)}
+          <Typography variant="body2" className={`${classes.smallTypo} mobile-hidden`}>
+            <TimeAgo date={noticeInfo.createdAt} formatter={formatter}/>
           </Typography>
         </div>
         <div className={classes.ratingContent}>
