@@ -1,38 +1,73 @@
 import React, { useEffect, useState } from 'react'
-import NavOld                         from '../../Components/NavBar/Nav.old'
 import {
   Container,
   Dialog,
   DialogActions,
   DialogContent,
-  DialogTitle, Grid,
+  DialogTitle, Grid, makeStyles,
   TextField
 }                                     from '@material-ui/core'
-import Typography                   from '@material-ui/core/Typography'
-import Box                          from '@material-ui/core/Box'
-import { useTranslation }           from 'react-i18next'
-import Button                       from '@material-ui/core/Button'
-import { Edit }                     from '@material-ui/icons'
-import { withStyles }               from '@material-ui/core/styles'
-import { FaStar }                   from 'react-icons/fa'
-import { useForm }                  from '../../Hooks/useForm'
-import axios                        from 'axios'
-import Ratings                      from '../../Components/Ratings'
-import { useDispatch, useSelector } from 'react-redux'
-import { requestApiAddRating }      from '../../actions/ratingAction'
-import Toastify                     from '../../Components/Toastify'
-import Nav                          from '../../Components/NavBar/Nav'
-import HeroPage                     from '../../Components/HeroPage/HeroPage'
+import Typography                     from '@material-ui/core/Typography'
+import { useTranslation }             from 'react-i18next'
+import Button                         from '@material-ui/core/Button'
+import { Edit }                       from '@material-ui/icons'
+import { withStyles }                 from '@material-ui/core/styles'
+import { FaStar }                     from 'react-icons/fa'
+import { useForm }                    from '../../Hooks/useForm'
+import axios                          from 'axios'
+import Ratings                        from '../../Components/Ratings'
+import { useDispatch, useSelector }   from 'react-redux'
+import { requestApiAddRating }        from '../../actions/ratingAction'
+import Toastify                       from '../../Components/Toastify'
+import Nav                            from '../../Components/NavBar/Nav'
+import Footer                         from '../../Components/Footer/Footer'
 
 const styles        = {
-  title: {
-    fontWeight: '500'
-  },
   stars: {
     display      : 'flex',
     flexDirection: 'row',
-  },
+  }
 }
+const useStyles     = makeStyles((theme) => (
+  {
+    titleHeader  : {
+      fontWeight                   : '500',
+      [theme.breakpoints.down(461)]: {
+        fontSize: '25px'
+      }
+    },
+    labelCenter  : {
+      display: 'flex',
+      height : '100%'
+    },
+    labelNoRating: {
+      fontSize                     : '25px',
+      lineHeight                   : '55px',
+      margin                       : `${theme.spacing(20)}px 0`,
+      [theme.breakpoints.down(453)]: {
+        fontSize: '18px',
+        margin  : `${theme.spacing(10)}px 0`,
+      }
+    },
+    fullH        : {
+      minHeight                    : 'calc(100vh - 305px)',
+      [theme.breakpoints.down(453)]: {
+        minHeight: 'calc(100vh - 320px)',
+      }
+    },
+    headerRatings: {
+      display                      : 'flex',
+      justifyContent               : 'space-between',
+      marginTop                    : theme.spacing(4),
+      [theme.breakpoints.down(682)]: {
+        display          : 'block',
+        '& :nth-child(2)': {
+          marginTop: theme.spacing(2)
+        }
+      },
+    }
+  }
+))
 const SendRatingBtn = withStyles(theme => (
   {
     root: {
@@ -44,6 +79,7 @@ const SendRatingBtn = withStyles(theme => (
 ))(Button)
 const Rating        = () => {
   const { t }                           = useTranslation()
+  const classes                         = useStyles()
   const [ratings, setRatings]           = useState([])
   const [createReview, setCreateReview] = useState(false)
   const ratingReducer                   = useSelector(state => state.ratingReducers)
@@ -57,31 +93,24 @@ const Rating        = () => {
   return (
     <>
       {ratingReducer.successSubmit && <Toastify message={ratingReducer.successSubmit}/>}
-      <HeroPage nameImg="home.jpg" positionImg={'center center'}>
-        <Nav/>
-        <div className="hero-container">
-          <div className="hero-home-content">
-            <span style={{ marginBottom: '20px' }}>{t('organizations')} <span
-              style={{ fontSize: '20px' }}>&</span> {t('decorations')}</span>
-            <h1>{t('titleHeroHome')}</h1>
-            <span style={{ marginTop: '20px' }}>{t('subtitleHeroHome')}</span>
-          </div>
-        </div>
-      </HeroPage>
+      <Nav bgColor="#FFF" typoColor="#000"/>
       <DialogFormReview open={createReview} close={() => setCreateReview(!createReview)}/>
-      <Container maxWidth="lg">
-        <Box marginTop={6} display="flex" justifyContent="space-between">
-          <Typography variant="h4" component="h1" style={styles.title}>{t('ratingTitle')}</Typography>
+      <Container maxWidth="lg" className={classes.fullH}>
+        <div className={classes.headerRatings}>
+          <Typography variant="h4" component="h1" className={classes.titleHeader}>{t('ratingTitle')}</Typography>
           <SendRatingBtn endIcon={<Edit/>} onClick={() => setCreateReview(true)}>{t('buttonRating')}</SendRatingBtn>
-        </Box>
-        <Grid container={true} spacing={2}>
-          {ratings && ratings.length > 0 ? ratings.map((r, index) => (
+        </div>
+        {ratings && ratings.length > 0 ? ratings.map((r, index) => (
+          <Grid container={true} spacing={2}>
             <Grid item={true} xs={12} md={6} lg={4} xl={4} key={index}>
               <Ratings noticeInfo={r}/>
-            </Grid>)): <p className="mt5 mb5">Soyez le premier à laisser un avis sur nos prestations</p>}
+            </Grid>
+          </Grid>)) : <div className={classes.labelCenter}>
+           <p className={classes.labelNoRating}>{t('noRatingContent')}</p>
+         </div>}
     
-        </Grid>
       </Container>
+      <Footer/>
     </>
   )
 }
