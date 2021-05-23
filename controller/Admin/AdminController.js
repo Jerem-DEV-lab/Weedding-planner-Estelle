@@ -5,7 +5,9 @@ const { sendNewsletter }                                                = requir
 const { createFormula, deleteFormula, updatePriceFormula, getFormulas } = require('../../Services/Admin/FormulaService')
 const ObjectId                                                          = require('mongoose').Types.ObjectId
 const UserSchema                                                        = require('../../db/Schema/UserSchema')
+const { CheckFormEmail }                                                = require('../../tools/ErrorsHandlerAdmin')
 const { isEmpty }                                                       = require('../../tools/Auth/index')
+const sendMailSG                                                        = require('../../Services/Lib/mailer')
 
 class AdminController extends User {
   constructor (request, response, token) {
@@ -91,6 +93,21 @@ class AdminController extends User {
           statusCode    : 201
         })
     })
+  }
+  
+  async sendEmail () {
+    const reqBody                                     = this.request.body
+    const { userEmail, subjectEmail, contentMessage } = reqBody
+    const optionsMail                                 = {
+      type          : 'text/plain',
+      messageContent: contentMessage
+    }
+    const checkRequest                                = await CheckFormEmail(
+      { userEmail, subjectEmail, contentMessage }
+    )
+    if (checkRequest.isValid) {
+      return sendMailSG(userEmail, 'Test d\'envoi2', subjectEmail, optionsMail)
+    }
   }
 }
 

@@ -246,8 +246,8 @@ export const requestApiSendMail = (data) => {
   return dispatch => {
     dispatch(sendEmailLoading())
     axios.post('/admin/send/email', data)
-         .then(res => dispatch(sendEmailSuccess(res.data.success)))
-         .catch(err => dispatch(sendEmailError(err.response.data.errors)))
+         .then(res => dispatch(sendEmailSuccess(res.data.successMsg)))
+         .catch(err => dispatch(sendEmailError(err.response.data)))
   }
 }
 

@@ -1,20 +1,22 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
+  CircularProgress,
   Dialog,
   DialogActions,
   DialogContent,
   DialogContentText,
   DialogTitle,
   Typography
-}            from '@material-ui/core'
+}                           from '@material-ui/core'
 
-import Button                                        from '@material-ui/core/Button'
-import FormEmail                                     from './FormMessage/FormEmail'
-import { withStyles }                                from '@material-ui/core/styles'
-import { Link }                                      from 'react-router-dom'
-import { useDispatch }                               from 'react-redux'
-import { requestApiDeleteEmail, requestApiSendMail } from '../../../actions/adminAction'
-import { useForm }                                   from '../../../Hooks/useForm'
+import Button                                                    from '@material-ui/core/Button'
+import FormEmail                                                 from './FormMessage/FormEmail'
+import { withStyles }                                            from '@material-ui/core/styles'
+import { Link, useHistory }                                      from 'react-router-dom'
+import { useDispatch, useSelector }                              from 'react-redux'
+import { requestApiDeleteEmail, requestApiSendMail, resetEvent } from '../../../actions/adminAction'
+import { useForm }                                               from '../../../Hooks/useForm'
+import { Alert }                                                 from '@material-ui/lab'
 
 const HeaderEmailUsers  = withStyles(theme => (
   {
@@ -30,20 +32,30 @@ const initialFieldValue = {
   contentMessage: ''
 }
 const DialogMessage     = ({ open, close, routerDial }) => {
-  const dispatch                      = useDispatch()
-  const { values, handleChangeInput } = useForm(initialFieldValue)
-  const sendMail                      = () => {
+  const dispatch                                 = useDispatch()
+  const { values, setValues, handleChangeInput } = useForm(initialFieldValue)
+  const history                                  = useHistory()
+  const sendMail                                 = () => {
     dispatch(requestApiSendMail(values))
+    setValues(initialFieldValue)
   }
-  const deleteEmail                   = (e) => {
+  const handleRequestState                       = useSelector(state => state.adminReducers)
+  const deleteEmail                              = (e) => {
     e.preventDefault()
     dispatch(requestApiDeleteEmail(routerDial.messageId, routerDial.messageId))
     close(false)
   }
+  useEffect(() => {
+    if (handleRequestState.successSendMail) {
+      setTimeout(() => {
+        dispatch(resetEvent())
+        history.push('/admin/messages')
+      }, 1500)
+    }
+  }, [handleRequestState.successSendMail])
   return (
     <>
       <Dialog
-        fullWidth={true}
         maxWidth={'md'}
         open={open}
         onClose={() => close(false)}>
@@ -56,10 +68,12 @@ const DialogMessage     = ({ open, close, routerDial }) => {
                                          :
          <DialogTitle>{routerDial.title}</DialogTitle>
         }
+        {handleRequestState.successSendMail && <Alert severity="success">{handleRequestState.successSendMail}</Alert>}
         <DialogContent dividers={true}>
           <DialogContentText>
             {routerDial.path === 'createEmail' &&
-             <FormEmail values={values} handleChangeInput={handleChangeInput}/>}
+             <FormEmail values={values} handleChangeInput={handleChangeInput}
+                        errorsForm={handleRequestState.errorSendMail}/>}
             {routerDial.path === 'readEmail' &&
              <>
                {routerDial.messageContent}
@@ -78,8 +92,8 @@ const DialogMessage     = ({ open, close, routerDial }) => {
            </>}
           {routerDial.path === 'createEmail' &&
            <>
-             <Button onClick={sendMail} color="primary">
-               Envoyer
+             <Button onClick={sendMail} disabled={handleRequestState.sendEmailLoading} color="primary">
+               Envoyer {handleRequestState.sendEmailLoading && <CircularProgress size={20} className="ml3"/>}
              </Button>
            </>}
         </DialogActions>
