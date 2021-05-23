@@ -126,7 +126,9 @@ export default function userReducers (state = initialState, action) {
       return {
         ...state,
         changeError  : '',
-        successChange: ''
+        successChange: '',
+        confirmAccountSuccess: '',
+        confirmAccountError  : ''
       }
     case ADD_EVENT_LOADING:
       return {

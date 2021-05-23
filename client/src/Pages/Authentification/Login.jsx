@@ -16,6 +16,7 @@ import { requestApiAuth }           from '../../actions/authenticatorAction'
 import { Alert }                    from '@material-ui/lab'
 import { resetEvent }               from '../../actions/adminAction'
 import ResetPassword                from '../ResetPassword/ResetPassword'
+import { resetEventUser }           from '../../actions/userAction'
 
 export const OverlayForm = withStyles((theme) => (
   {
@@ -114,6 +115,16 @@ const LoginForm = ({openModalResetPassword}) => {
     }
     // eslint-disable-next-line
   }, [loginSuccess])
+  
+  useEffect(() => {
+    if (confirmAccountError) {
+      setTimeout(() => dispatch(resetEventUser()), 1500)
+    }
+    if (confirmAccountSuccess) {
+      setTimeout(() => dispatch(resetEvent()), 1500)
+    }
+    //eslint-disable-next-line
+  }, [confirmAccountError, confirmAccountSuccess])
   
   return <>
     <div className={classes.root}>
