@@ -72,7 +72,7 @@ const Ratings = ({ noticeInfo }) => {
   const classes        = useStyles()
   const stars          = Array(5).fill(0)
   const dispatch       = useDispatch()
-  const { userLogged } = useContext(UserContext)
+  const  userLogged  = useContext(UserContext)
   return (
     <>
       <Box className={classes.root}
