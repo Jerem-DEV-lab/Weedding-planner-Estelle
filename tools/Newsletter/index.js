@@ -3,6 +3,12 @@ module.exports.ErrorCreateNews = (err) => {
     titleNews   : '',
     contentNews : '',
     categoryNews: '',
+    dynamicData : {
+      indexLabel: '',
+      nameData  : ''
+    },
+    subjectEmail: '',
+    template_id : ''
   }
   if (err.message.includes('titleNews') && err.message.includes('is required')) {
     errors.titleNews = 'Vous devez renseigner le titre de la newsletter'
@@ -12,6 +18,18 @@ module.exports.ErrorCreateNews = (err) => {
   }
   if (err.message.includes('categoryNews') && err.message.includes('is required')) {
     errors.categoryNews = 'Choisissez le type de newsletter'
+  }
+  if (err.message.includes('dynamicDatas') && err.message.includes('indexLabel') && err.message.includes('is required')) {
+    errors.dynamicData.indexLabel = 'Champs requis !'
+  }
+  if (err.message.includes('dynamicDatas') && err.message.includes('nameData') && err.message.includes('is required')) {
+    errors.dynamicData.nameData = 'Champs requis !'
+  }
+  if (err.message.includes('subjectEmail') && err.message.includes('is required')) {
+    errors.subjectEmail = 'Champs requis !'
+  }
+  if (err.message.includes('template_id') && err.message.includes('is required')) {
+    errors.template_id = 'Champs requis !'
   }
   return errors
 }

@@ -31,15 +31,17 @@ const ModalSendNewsletter = ({ open, close, newsInfo }) => {
     }
     //eslint-disable-next-line
   }, [listUser])
+  console.log(newsInfo)
   const sendNews = (e) => {
     e.preventDefault()
     setErrors('')
     setSuccess('')
     axios.post('/admin/send/news', {
-           users      : values.users,
-           titleNews  : newsInfo.titleNews,
-           contentNews: newsInfo.contentNews,
-           template_id: newsInfo.template_id
+           users       : values.users,
+           titleNews   : newsInfo.titleNews,
+           contentNews : newsInfo.contentNews,
+           template_id : newsInfo.template_id,
+           dynamicDatas: newsInfo.dynamicDatas
          })
          .then(res => setSuccess(res.data.success))
          .catch(err => setErrors(err.response.data.errors))

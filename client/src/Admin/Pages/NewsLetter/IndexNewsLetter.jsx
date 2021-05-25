@@ -46,10 +46,11 @@ function checkUserWithNewsLetter (user) {
 let initialTarget     = {
   titleNews   : '',
   contentNews : '',
-  dynamicData : [],
+  dynamicDatas : [],
   template_id : '',
   subjectEmail: ''
 }
+
 const IndexNewsLetter = () => {
   const dispatch                                 = useDispatch()
   const classes                                  = useStyles()
@@ -59,6 +60,9 @@ const IndexNewsLetter = () => {
   const [openPopup, setOpenPopup]                = useState(false)
   const { values, setValues, handleChangeInput } = useForm(initialTarget)
   const [openModalSendNew, setOpenModalSendNew]  = useState(false)
+  
+  const [inputList, setInputList]           = useState([])
+  const [labelInputList, setLabelInputList] = useState([])
   
   const handleClick        = (targetContext) => {
     setOpenPopup(true)
@@ -87,9 +91,40 @@ const IndexNewsLetter = () => {
     dispatch(requestApiGetNewsletter())
     // eslint-disable-next-line
   }, [])
+  
+  /**
+   * @description : Ajout d'un nouvelle input dans le dom
+   */
+  const addNewInput       = () => {
+    setInputList([...inputList, {
+      indexLabel: '',
+      content  : ''
+    }])
+  }
+  const onInputListChange = (e, index) => {
+    const { name, value } = e.target
+    const list            = [...inputList]
+    list[index][name]     = value
+    setInputList(list)
+  }
+  const onDeleteInput     = (index) => {
+    const list = [...inputList]
+    list.splice(index, 1)
+    setInputList(list)
+  }
+  const onDeleteLabel     = (index) => {
+    const listLab = [...labelInputList]
+    listLab.splice(index, 1)
+    setLabelInputList(listLab)
+  }
+  const onSubmitNewInput  = () => {
+    setLabelInputList([...labelInputList, ...inputList])
+    setInputList([])
+  }
   return (
     <>
-      <ModalSendNewsletter open={openModalSendNew} close={closeModalSendNews} newsInfo={values}/>
+      <ModalSendNewsletter open={openModalSendNew} close={closeModalSendNews}
+                           newsInfo={values}/>
       <Popup openPopup={openPopup} title="Modifier la news" onClose={closePopup}>
         {adminState.updateSuccessNews &&
          <div className="mb2">
@@ -104,7 +139,14 @@ const IndexNewsLetter = () => {
           </ButtonGroup>
         </div>
       </Popup>
-      {createNews && <ModalCreateNewsletter open={() => setCreateNews(!createNews)}/>}
+      {createNews &&
+       <ModalCreateNewsletter open={() => setCreateNews(!createNews)}
+                              onSubmitNewInput={onSubmitNewInput}
+                              addInput={addNewInput}
+                              onDeleteInput={onDeleteInput}
+                              onDeleteLabel={onDeleteLabel}
+                              labelInputList={labelInputList}
+                              onInputListChange={onInputListChange} inputLists={inputList}/>}
       <Typography variant="h6" component="h1" color="textPrimary" gutterBottom>
         Gestion de la newsletter :
       </Typography>

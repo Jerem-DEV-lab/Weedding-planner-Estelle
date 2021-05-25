@@ -7,10 +7,9 @@ const sendMailSG          = require('../Lib/mailer')
 const { ErrorCreateNews } = require('../../tools/Newsletter')
 
 module.exports.createNewsletter = async (req, res) => {
-  const { titleNews, contentNews, template_id } = req.body
-  
+  const { titleNews, contentNews, template_id, subjectEmail, dynamicDatas } = req.body
   try {
-    const Newsletter = new NewsletterSchema({ titleNews, contentNews, template_id })
+    const Newsletter = new NewsletterSchema({ titleNews, contentNews, template_id, subjectEmail, dynamicDatas })
     await Newsletter.save()
     return res.status(200).json({ success: 'News correctement créer' })
   
@@ -22,16 +21,26 @@ module.exports.createNewsletter = async (req, res) => {
 }
 
 module.exports.sendNewsletterWithTemplate = async (req, res) => {
-  const { users, template_id, dynamicData, titleNews } = req.body
-  
+  const { users, template_id, dynamicDatas, titleNews } = req.body
+  const serializeDynamicData                            = (datas) => {
+    let newObj = {}
+    
+    datas.forEach((v) => {
+      newObj = {
+        ...newObj,
+        [Object.values(v)[1]]: Object.values(v)[2]
+      }
+    })
+    return newObj
+  }
   try {
     const usersFind = await UserSchema.find({ _id: users })
     await usersFind.forEach(user => {
       const obj = {
-        'from'                 : { 'email': 'estelle-rouille@estelle-events.fr', 'name': 'noreply@estelle-events' },
+        'from'                 : { 'email': 'estelle-rouille@estelle-events.fr', 'name': 'Côté Campagne' },
         'reply_to'             : { 'email': 'guillemet.jeremy087@gmail.com' },
         'to'                   : user.email,
-        'dynamic_template_data': dynamicData,
+        'dynamic_template_data': serializeDynamicData(dynamicDatas),
         'content'              : [{ 'type': 'text/html', 'value': ' ' }],
         'template_id'          : template_id
       }

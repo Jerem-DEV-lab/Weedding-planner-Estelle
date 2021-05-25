@@ -6,7 +6,7 @@ import CloseIcon                             from '@material-ui/icons/Close'
 import Button                                from '@material-ui/core/Button'
 import SendRoundedIcon                       from '@material-ui/icons/SendRounded'
 import { makeStyles }                        from '@material-ui/core/styles'
-
+import SaveIcon from '@material-ui/icons/Save';
 const useStyles = makeStyles((theme) => ({
   root  : {
     padding: theme.spacing(4),
@@ -36,7 +36,7 @@ const HeaderModalNewsletter = ({ open, children, onClickBtn }) => {
           <Typography variant="h6" className={classes.title}>
            Préparation de la newsletter
           </Typography>
-          <Button autoFocus color="inherit" endIcon={<SendRoundedIcon/>} onClick={onClickBtn}>
+          <Button autoFocus color="inherit" endIcon={<SaveIcon/>} onClick={onClickBtn}>
             Sauvegarder
           </Button>
         </Toolbar>

@@ -100,8 +100,8 @@ class AdminController extends User {
     const { userEmail, subjectEmail, contentMessage } = reqBody
   
     const optionsMail  = {
-      'from'    : { 'email': 'estelle-rouille@estelle-events.fr', 'name': 'noreply@estelle-events' },
-      'reply_to': { 'email': 'guillemet.jeremy087@gmail.com' },
+      'from'    : { 'email': 'estelle-rouille@estelle-events.fr', 'name': 'Côté Campagne' },
+      'reply_to': { 'email': 'guillemet.jeremy087@gmail.com', 'name': 'Côté Campagne' },
       'to'      : userEmail,
       'subject' : subjectEmail,
       'content' : [{ 'type': 'text/html', 'value': `<p>${contentMessage}</p>` }],
