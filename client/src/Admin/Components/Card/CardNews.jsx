@@ -21,8 +21,6 @@ const useStyles = makeStyles(() => ({
 
 const CardNews = (props) => {
   const {
-          pathImg,
-          titleImage,
           titleCard,
           contentCard,
           labelBtn1,
@@ -37,11 +35,6 @@ const CardNews = (props) => {
   
   return <Card className={`${classes.root}`}>
     <CardActionArea>
-      <CardMedia
-        className={classes.media}
-        image={pathImg}
-        title={titleImage}
-      />
       <CardContent>
         <Typography gutterBottom variant="h6" component="h2">
           {titleCard}

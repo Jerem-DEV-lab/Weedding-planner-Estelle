@@ -22,6 +22,7 @@ import MyWorkShop        from '../../Pages/MyWorkShop/MyWorkShop'
 import ResetPasswordForm from '../../Pages/Authentification/ResetPassword'
 import ProtectedRoutes   from './ProtectedRoutes'
 import AccountConfirm    from '../../Pages/Authentification/AccountConfirm'
+import ProfilRoutes      from './ProfilRoutes'
 
 const Routes = () => {
   const maintenance     = false

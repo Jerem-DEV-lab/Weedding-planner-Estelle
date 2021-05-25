@@ -7,10 +7,6 @@ import { useDispatch, useSelector }            from 'react-redux'
 import { Alert }                               from '@material-ui/lab'
 import { requestApiGetNewsletter, resetEvent } from '../../../actions/adminAction'
 
-const itemsNews      = [
-  { id: 'Code Promo', title: 'Code Promo' },
-  { id: 'Autre news', title: 'Autre news' }
-]
 const NewsletterForm = (props) => {
   const { onChange, values, open }              = props
   const dispatch                                = useDispatch()
@@ -36,32 +32,47 @@ const NewsletterForm = (props) => {
              value={values.titleNews}
              name="titleNews"
              onChange={onChange}
+             size="small"
              helperText={errorsCreateNews.titleNews}
              label="Titre de la news"/> :
            <Input
              value={values.titleNews}
+             size="small"
              name="titleNews"
              onChange={onChange}
              label="Titre de la news"/>}
         </Grid>
         <Grid item xs={12} md={12} lg={6}>
-    
-          {errorsCreateNews.categoryNews ?
-           <Controls.RadioGroup
-             errors={true}
-             items={itemsNews}
-             name="categoryNews"
-             label="Type de la news"
-             value={values.categoryNews}
-             helperText={errorsCreateNews.categoryNews}
-             onChange={onChange}/> :
-           <Controls.RadioGroup
-             items={itemsNews}
-             name="categoryNews"
-             label="Type de la news"
-             value={values.categoryNews}
-             onChange={onChange}/>
-          }
+          <Input
+            value={values.template_id}
+            defaultValue={values.template_id}
+            name="template_id"
+            onChange={onChange}
+            size="small"
+            label="ID du template "/>
+        </Grid>
+        <Grid item xs={12}>
+          {errorsCreateNews.subjectEmail ?
+           <TextField
+             error
+             helperText={errorsCreateNews.subjectEmail}
+             label="Sujet de la news"
+             name="subjectEmail"
+             value={values.subjectEmail}
+             onChange={onChange}
+             variant="outlined"
+             size="small"
+             fullWidth
+           /> :
+           <TextField
+             label="Sujet de la news"
+             name="subjectEmail"
+             size="small"
+             value={values.subjectEmail}
+             onChange={onChange}
+             variant="outlined"
+             fullWidth
+           />}
         </Grid>
         <Grid item xs={12}>
           {errorsCreateNews.contentNews ?

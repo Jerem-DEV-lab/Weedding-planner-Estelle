@@ -8,7 +8,6 @@ const { getAllRatingUnpublished }      = require('../../Services/Admin/Newslette
 const { deleteEmail }                  = require('../../Services/Admin/NewsletterService')
 const { createWorkshop }               = require('../../Services/Admin/WorkshopService')
 const { findUserByRegisteredWorkshop } = require('../../Services/Admin/WorkshopService')
-const { sendEmail }                    = require('../../Services/Admin/SendMail')
 const { updateNewsletter }             = require('../../Services/Admin/NewsletterService')
 const { deleteNewsletter }             = require('../../Services/Admin/NewsletterService')
 const { getNewsletters }               = require('../../Services/Admin/NewsletterService')

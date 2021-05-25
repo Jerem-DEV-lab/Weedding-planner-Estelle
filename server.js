@@ -13,9 +13,17 @@ const { createRouterAdmin }            = require('./routes/Admin')
 const { createRouterTest }             = require('./routes/tools')
 require('dotenv').config()
 
+const corsOptions = {
+  origin: process.env.CLIENT_URL,
+  credentials: true,
+  'allowedHeaders': ['sessionId', 'Content-Type'],
+  'exposedHeaders': ['sessionId'],
+  'methods': 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  'preflightContinue': false
+}
+app.use(cors(corsOptions));
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
-app.use(cors())
 app.use(cookieParser())
 app.use('/', createRouterAuthentification())
 app.use('/', createRouterContact())

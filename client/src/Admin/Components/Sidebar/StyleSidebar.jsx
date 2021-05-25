@@ -11,7 +11,7 @@ export const useStyleSidebar = makeStyles((theme) => ({
   appBarRightSide: {
     display       : 'flex',
     justifyContent: 'space-around',
-    width         : '250px',
+    width         : '290px',
     marginLeft    : 'auto',
     alignItems    : 'center'
   },

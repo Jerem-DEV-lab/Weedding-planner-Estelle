@@ -1,13 +1,13 @@
 const User                                                              = require('../User/User')
 const { setMessageIsRead }                                              = require('../../Services/Admin/ContactService')
 const { getAllMessages }                                                = require('../../Services/Admin/ContactService')
-const { sendNewsletter }                                                = require('../../Services/Admin/NewsletterService')
+const { sendNewsletterWithTemplate }                                    = require('../../Services/Admin/NewsletterService')
 const { createFormula, deleteFormula, updatePriceFormula, getFormulas } = require('../../Services/Admin/FormulaService')
 const ObjectId                                                          = require('mongoose').Types.ObjectId
 const UserSchema                                                        = require('../../db/Schema/UserSchema')
 const { CheckFormEmail }                                                = require('../../tools/ErrorsHandlerAdmin')
 const { isEmpty }                                                       = require('../../tools/Auth/index')
-const sendMailSG                                                        = require('../../Services/Lib/mailer')
+const sendSimpleMail                                                    = require('../../Services/Lib/mailer')
 
 class AdminController extends User {
   constructor (request, response, token) {
@@ -50,14 +50,14 @@ class AdminController extends User {
     if (isEmpty(request.users)) {
       return this.response.status(403).json({ errors: 'Vous devez sélectionner un ou plusieurs utilisateur(s)' })
     }
-    if (isEmpty(request.titleNews) && isEmpty(request.contentNews) && isEmpty(request.subjectEmail)) {
+    if (isEmpty(request.titleNews) && isEmpty(request.contentNews) && isEmpty(request.subjectEmail) && isEmpty(request.users)) {
       return this.response.status(403).json({ errors: 'Vous devez choisir une newsletter' })
     }
     try {
-      await sendNewsletter(this.request, this.response)
+      await sendNewsletterWithTemplate(this.request, this.response)
     } catch (e) {
       console.log(e)
-      return this.response.status(500).json({ errors: 'Impossible d\'envoyer la news pour le moment' })
+      return this.response.status(500).json({ errors: 'Impossible d\'envoyer la news pour le moment', e })
     }
   }
   
@@ -98,15 +98,22 @@ class AdminController extends User {
   async sendEmail () {
     const reqBody                                     = this.request.body
     const { userEmail, subjectEmail, contentMessage } = reqBody
-    const optionsMail                                 = {
-      type          : 'text/plain',
-      messageContent: contentMessage
+  
+    const optionsMail  = {
+      'from'    : { 'email': 'estelle-rouille@estelle-events.fr', 'name': 'noreply@estelle-events' },
+      'reply_to': { 'email': 'guillemet.jeremy087@gmail.com' },
+      'to'      : userEmail,
+      'subject' : subjectEmail,
+      'content' : [{ 'type': 'text/html', 'value': `<p>${contentMessage}</p>` }],
     }
-    const checkRequest                                = await CheckFormEmail(
-      { userEmail, subjectEmail, contentMessage }
-    )
+    const checkRequest = await CheckFormEmail(
+      {
+        userEmail,
+        subjectEmail,
+        contentMessage
+      })
     if (checkRequest.isValid) {
-      return sendMailSG(userEmail, 'Test d\'envoi2', subjectEmail, optionsMail)
+      return sendSimpleMail(optionsMail)
     }
   }
 }

@@ -1,19 +1,23 @@
-import React                                         from 'react'
-import { Grid, InputLabel, MenuItem, Paper, Select } from '@material-ui/core'
-import Typography                                    from '@material-ui/core/Typography'
-import Box                                           from '@material-ui/core/Box'
-import Divider                                       from '@material-ui/core/Divider'
-import { ContentProfil }                             from '../GeneralProfil'
-import { makeStyles, useTheme }                      from '@material-ui/core/styles'
-import FormChangePassword                            from './FormChangePassword'
-import { useTranslation }                            from 'react-i18next'
-import GTranslateIcon                                from '@material-ui/icons/GTranslate'
-import FormControl                                   from '@material-ui/core/FormControl'
-import i18next                                       from 'i18next'
-import { useSelector }                               from 'react-redux'
-import SettingsIcon                                  from '@material-ui/icons/Settings'
-import SpaIcon                                       from '@material-ui/icons/Spa'
-import { dateParser }                                from '../../../tools/helperDate'
+import React, { useState }                                   from 'react'
+import { Button, Grid, InputLabel, MenuItem, Paper, Select } from '@material-ui/core'
+import Typography                                            from '@material-ui/core/Typography'
+import Box                                                   from '@material-ui/core/Box'
+import Divider                                               from '@material-ui/core/Divider'
+import { ContentProfil }                                     from '../GeneralProfil'
+import { makeStyles, useTheme }                              from '@material-ui/core/styles'
+import FormChangePassword                                    from './FormChangePassword'
+import { useTranslation }                                    from 'react-i18next'
+import GTranslateIcon                                        from '@material-ui/icons/GTranslate'
+import FormControl                                           from '@material-ui/core/FormControl'
+import i18next                                               from 'i18next'
+import { useSelector }                                       from 'react-redux'
+import SettingsIcon                                          from '@material-ui/icons/Settings'
+import SpaIcon                                               from '@material-ui/icons/Spa'
+import { dateParser }                                        from '../../../tools/helperDate'
+import DeleteForeverIcon                                     from '@material-ui/icons/DeleteForever'
+import HeaderSectionProfil                                   from './HeaderSectionProfil'
+import ContentSectionProfil                                  from './ContentSectionProfil'
+import ModalConfirmDeleteAccount                             from './ModalConfirmDeleteAccount'
 
 const useStyles2      = makeStyles((theme) => (
   {
@@ -26,41 +30,38 @@ const useStyles2      = makeStyles((theme) => (
   }
 ))
 const SettingsAccount = () => {
-  const { t }             = useTranslation()
-  const theme             = useTheme()
-  const classes           = useStyles2()
-  const { workshopInfos } = useSelector(state => state.userReducers).userInfo
+  const { t }                     = useTranslation()
+  const theme                     = useTheme()
+  const classes                   = useStyles2()
+  const { workshopInfos }         = useSelector(state => state.userReducers).userInfo
+  const [modalOpen, setModalOpen] = useState(false)
+  
   return (
     <>
-      <div style={{ minHeight: 'calc(100vh - 340px)' }}>
-    
+      <div style={{ minHeight: 'calc(100vh - 351px)' }}>
+        {modalOpen && <ModalConfirmDeleteAccount open={modalOpen} closeModal={() => setModalOpen(false)}/>}
         <Grid container={true} spacing={5}>
           <Grid item={true} xs={12} md={9}>
             <ContentProfil>
-              <Box component="span" display="flex" alignItems="center">
-                <SettingsIcon style={{ marginRight: '10px' }}/>
-                <Typography variant="h6" component="span" color="textPrimary">
-                  {t('general_account_settings')}
-                </Typography>
-              </Box>
+              <HeaderSectionProfil
+                Icon={<SettingsIcon style={{ marginRight: '10px' }}/>}
+                labelTitle={t('general_account_settings')}
+              />
               <Divider/>
               <Box component="div" marginY={theme.spacing(0.2)}>
-              <Typography component="h6" variant="subtitle2" style={{ marginBottom: theme.spacing(2) }}>
-                {t('security_label')}
-              </Typography>
-              <FormChangePassword/>
-            </Box>
-          </ContentProfil>
+                <Typography component="h6" variant="subtitle2" style={{ marginBottom: theme.spacing(2) }}>
+                  {t('security_label')}
+                </Typography>
+                <FormChangePassword/>
+              </Box>
+            </ContentProfil>
         </Grid>
-        
         <Grid item={true} xs={12} md={3}>
           <ContentProfil>
-            <Box component="div" display="flex" alignItems="center" marginBottom=".35rem">
-              <GTranslateIcon style={{ marginRight: '10px' }}/>
-              <Typography variant="subtitle2" component="h2" color="textPrimary">
-                {t('pref_language')}
-              </Typography>
-            </Box>
+            <HeaderSectionProfil
+              Icon={<GTranslateIcon style={{ marginRight: '10px' }}/>}
+              labelTitle={t('pref_language')}
+            />
             <Divider/>
             <Box component="div" marginY={theme.spacing(0.2)}>
               <Typography component="h6" variant="subtitle2" style={{ marginBottom: theme.spacing(2) }}>
@@ -103,6 +104,29 @@ const SettingsAccount = () => {
             </Box>
           </ContentProfil>
         </Grid>
+          <Grid item={true} xs={12} md={3}>
+            <ContentProfil>
+              <HeaderSectionProfil
+                Icon={<DeleteForeverIcon style={{ marginRight: '10px' }} fontSize="medium" color="textPrimary"/>}
+                labelTitle={t('delete_account')}
+                color="secondary"
+              />
+              <ContentSectionProfil>
+                <Typography variant="subtitle2" component="p" gutterBottom>{t('delete_account_content1')}</Typography>
+                <Typography variant="subtitle2" component="p">{t('delete_account_content2')}</Typography>
+                <Box display="flex" justifyContent="flex-end" width="100%">
+                  <Button
+                    variant="contained"
+                    disableElevation
+                    color="secondary"
+                    size="small"
+                    onClick={() => setModalOpen(true)}
+                    className="mt1">Supprimer mon compte
+                  </Button>
+                </Box>
+              </ContentSectionProfil>
+            </ContentProfil>
+          </Grid>
         </Grid>
       </div>
     </>

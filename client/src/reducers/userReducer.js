@@ -13,7 +13,7 @@ import {
   CHANGE_PASSWORD_LOADING, CHANGE_PASSWORD_SUCCESS,
   CHANGE_USER_INFO_ERROR,
   CHANGE_USER_INFO_LOADING,
-  CHANGE_USER_INFO_SUCCESS, RESET_EVENT_USER
+  CHANGE_USER_INFO_SUCCESS, DELETE_ACCOUNT_ERROR, DELETE_ACCOUNT_LOADING, DELETE_ACCOUNT_SUCCESS, RESET_EVENT_USER
 } from '../actions/userAction'
 
 const initialState = {
@@ -34,7 +34,10 @@ const initialState = {
   addEventErrors       : '',
   addEventLoading      : false,
   confirmAccountSuccess: '',
-  confirmAccountError  : ''
+  confirmAccountError  : '',
+  loadingDeleteAccount : true,
+  successDeleteAccount : '',
+  errorDeleteAccount   : '',
 }
 
 export default function userReducers (state = initialState, action) {
@@ -44,6 +47,7 @@ export default function userReducers (state = initialState, action) {
     }
     case LOGIN_USER_SUCCESS: {
       return {
+        ...state,
         isLoading          : false,
         userInfo           : action.payload.user,
         userIsLogged       : true,
@@ -70,16 +74,17 @@ export default function userReducers (state = initialState, action) {
         loginSuccess       : '',
         registrationFail   : '',
         registrationSuccess: ''
-  
       }
     case LOGOUT_USER:
       return {
         ...state,
-        isLoading   : false,
-        userInfo    : {},
-        isLogged    : false,
-        userIsLogged: false,
-        loginSuccess: ''
+        isLoading           : false,
+        userInfo            : {},
+        isLogged            : false,
+        userIsLogged        : false,
+        loginSuccess        : '',
+        successDeleteAccount: '',
+        errorDeleteAccount  : ''
       }
     case CHANGE_USER_INFO_LOADING:
       return {
@@ -125,10 +130,12 @@ export default function userReducers (state = initialState, action) {
     case RESET_EVENT_USER:
       return {
         ...state,
-        changeError  : '',
-        successChange: '',
+        changeError          : '',
+        successChange        : '',
         confirmAccountSuccess: '',
-        confirmAccountError  : ''
+        confirmAccountError  : '',
+        successDeleteAccount : '',
+        errorDeleteAccount   : ''
       }
     case ADD_EVENT_LOADING:
       return {
@@ -197,6 +204,25 @@ export default function userReducers (state = initialState, action) {
         ...state,
         confirmAccountError  : action.payload,
         confirmAccountSuccess: ''
+      }
+    case DELETE_ACCOUNT_SUCCESS:
+      return {
+        ...state,
+        loadingDeleteAccount: false,
+        successDeleteAccount: action.payload,
+        errorDeleteAccount  : '',
+      }
+    case DELETE_ACCOUNT_ERROR:
+      return {
+        ...state,
+        loadingDeleteAccount: false,
+        successDeleteAccount: '',
+        errorDeleteAccount  : action.payload,
+      }
+    case DELETE_ACCOUNT_LOADING:
+      return {
+        ...state,
+        loadingDeleteAccount: true,
       }
     default:
       return state

@@ -97,17 +97,6 @@ const NotificationsProfile = () => {
                 />}
             label={t('pref_newsletter')}
           />
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={values.privateNotif}
-                onChange={(e) => setValues({ ...values, privateNotif: e.target.checked })}
-                name="privateNotif"
-                color="primary"
-              />
-            }
-            label={t('message_private_label')}
-          />
           </Box>
         </Paper>
       </div>

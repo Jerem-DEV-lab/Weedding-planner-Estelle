@@ -38,7 +38,8 @@ const ModalSendNewsletter = ({ open, close, newsInfo }) => {
     axios.post('/admin/send/news', {
            users      : values.users,
            titleNews  : newsInfo.titleNews,
-           contentNews: newsInfo.contentNews
+           contentNews: newsInfo.contentNews,
+           template_id: newsInfo.template_id
          })
          .then(res => setSuccess(res.data.success))
          .catch(err => setErrors(err.response.data.errors))
@@ -55,7 +56,7 @@ const ModalSendNewsletter = ({ open, close, newsInfo }) => {
   
   return (
     <>
-      <Dialog open={open} onClose={close} aria-labelledby="form-dialog-title">
+      <Dialog open={open} onClose={close} fullWidth="sm" aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Envoyer la newsletter</DialogTitle>
         <DialogContent>
           <DialogContentText>

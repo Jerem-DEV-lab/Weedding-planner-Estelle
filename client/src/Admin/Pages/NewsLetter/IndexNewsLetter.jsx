@@ -46,7 +46,9 @@ function checkUserWithNewsLetter (user) {
 let initialTarget     = {
   titleNews   : '',
   contentNews : '',
-  categoryNews: ''
+  dynamicData : [],
+  template_id : '',
+  subjectEmail: ''
 }
 const IndexNewsLetter = () => {
   const dispatch                                 = useDispatch()
@@ -148,7 +150,6 @@ const IndexNewsLetter = () => {
            news =>
              (<Grid item xs={12} sm={6} md={6} lg={3} xl={3}>
                <CardNews
-                 pathImg="/assets/about.jpg"
                  titleImage="Un test"
                  titleCard={news.titleNews}
                  contentCard={news.contentNews}

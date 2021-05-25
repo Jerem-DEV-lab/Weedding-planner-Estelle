@@ -1,14 +1,14 @@
 import React, { useState }         from 'react'
 import { useTranslation }          from 'react-i18next'
-import { Link, NavLink }           from 'react-router-dom'
+import { Link }                    from 'react-router-dom'
 import { FaBars, FaTimes, FaUser } from 'react-icons/fa'
 import { useSelector }             from 'react-redux'
+import NavAvatarUser               from './NavAvatarUser'
 
 const Nav = ({ bgColor = '', typoColor = '' }) => {
   const [clicked, setClicked] = useState(false)
   const { t }                 = useTranslation()
   const userContext           = useSelector(state => state.userReducers)
-  const roleUser              = userContext.userInfo.roles
   const navItems              = [
     {
       label: t('home'),
@@ -107,11 +107,6 @@ const Nav = ({ bgColor = '', typoColor = '' }) => {
                </li>}
             </>
           ))}
-          {roleUser && roleUser.includes('ROLE_ADMIN') &&
-           <li className="nav-item">
-             <NavLink to={'/admin/users'} className="nav-links">Administration</NavLink>
-           </li>
-          }
         </ul>
       </div>
       <div className={clicked ? 'overlay-nav active' : 'overlay-nav'} onClick={() => setClicked(!clicked)}/>
@@ -120,9 +115,9 @@ const Nav = ({ bgColor = '', typoColor = '' }) => {
          <Link to="/connexion"> Connexion <span><FaUser/></span></Link>
                                : <>
            <div>
-         <span> <Link
-           to={`/profil/${userContext.userInfo._id}`}>{userContext.userInfo.firstName} {userContext.userInfo.lastName}
-           <span><FaUser/></span></Link>
+         <span>
+         <NavAvatarUser label={`${userContext.userInfo.firstName} ${userContext.userInfo.lastName}`}
+                        userInfo={userContext.userInfo}/>
             </span>
            </div>
          </>

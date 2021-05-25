@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => (
 const initialFValue = {
   titleNews   : '',
   contentNews : '',
-  categoryNews: ''
+  template_id: ''
 }
 
 function ModalCreateNewsletter ({ open }) {

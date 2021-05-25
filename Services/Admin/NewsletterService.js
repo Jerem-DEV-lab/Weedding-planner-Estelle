@@ -3,14 +3,14 @@ const NewsletterSchema    = require('../../db/Schema/NewsletterSchema')
 const UserSchema          = require('../../db/Schema/UserSchema')
 const EmailSchema         = require('../../db/Schema/ContactSchema')
 const RatingSchema        = require('../../db/Schema/RatingSchema')
-const transport           = require('../Lib/mailer')
+const sendMailSG          = require('../Lib/mailer')
 const { ErrorCreateNews } = require('../../tools/Newsletter')
 
 module.exports.createNewsletter = async (req, res) => {
-  const { titleNews, contentNews, categoryNews } = req.body
+  const { titleNews, contentNews, template_id } = req.body
   
   try {
-    const Newsletter = new NewsletterSchema({ titleNews, contentNews, categoryNews })
+    const Newsletter = new NewsletterSchema({ titleNews, contentNews, template_id })
     await Newsletter.save()
     return res.status(200).json({ success: 'News correctement créer' })
   
@@ -21,25 +21,26 @@ module.exports.createNewsletter = async (req, res) => {
   
 }
 
-function templateMail (receiverEmail, subject, messageContent) {
-  return {
-    from   : '<test.dev.node@gmail.com>',
-    to     : receiverEmail,
-    subject: subject,
-    html   : messageContent
-  }
-}
-
-module.exports.sendNewsletter = async (req, res) => {
-  const { users, titleNews, contentNews } = req.body
+module.exports.sendNewsletterWithTemplate = async (req, res) => {
+  const { users, template_id, dynamicData, titleNews } = req.body
+  
   try {
     const usersFind = await UserSchema.find({ _id: users })
-    await usersFind.forEach(user => transport.sendMail(templateMail(user.email, titleNews, contentNews)))
+    await usersFind.forEach(user => {
+      const obj = {
+        'from'                 : { 'email': 'estelle-rouille@estelle-events.fr', 'name': 'noreply@estelle-events' },
+        'reply_to'             : { 'email': 'guillemet.jeremy087@gmail.com' },
+        'to'                   : user.email,
+        'dynamic_template_data': dynamicData,
+        'content'              : [{ 'type': 'text/html', 'value': ' ' }],
+        'template_id'          : template_id
+      }
+      sendMailSG(obj)
+    })
     return res.status(200).json({ success: ' Email correctement envoyer', titleNews })
   } catch (e) {
-    console.log(e)
+    return res.status(400).json({ errors: 'Impossible d\'envoyer l\'email pour le moment', e })
   }
-  /*req.body.users*/
 }
 
 module.exports.getNewsletters = async (req, res) => {

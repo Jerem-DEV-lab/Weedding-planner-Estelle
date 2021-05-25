@@ -13,6 +13,9 @@ export const ADD_EVENT_LOADING        = 'ADD_EVENT_LOADING'
 export const ADD_EVENT_SUCCESS        = 'ADD_EVENT_SUCCESS'
 export const ADD_EVENT_ERRORS         = 'ADD_EVENT_ERRORS'
 export const RESET_EVENT_USER         = 'RESET_EVENT_USER'
+export const DELETE_ACCOUNT_LOADING   = 'DELETE_ACCOUNT_LOADING'
+export const DELETE_ACCOUNT_SUCCESS   = 'DELETE_ACCOUNT_SUCCESS'
+export const DELETE_ACCOUNT_ERROR     = 'DELETE_ACCOUNT_ERROR'
 
 export const changeInfoUserLoading    = () => {
   return {
@@ -74,16 +77,14 @@ export const requestApiChangePassword = (data) => {
          })
   }
 }
-
-export const addEventLoading = () => {return { type: ADD_EVENT_LOADING }}
-export const addEventSuccess = (success) => {
+export const addEventLoading          = () => {return { type: ADD_EVENT_LOADING }}
+export const addEventSuccess          = (success) => {
   return { type: ADD_EVENT_SUCCESS, payload: success }
 }
-export const addEventErrors  = (errors) => {
+export const addEventErrors           = (errors) => {
   return { type: ADD_EVENT_ERRORS, payload: errors }
 }
-
-export const requestApiAddEvent = (userId, eventData) => {
+export const requestApiAddEvent       = (userId, eventData) => {
   return dispatch => {
     dispatch(addEventLoading())
     axios.post(`/user/${userId}/add-event`, eventData)
@@ -95,37 +96,64 @@ export const requestApiAddEvent = (userId, eventData) => {
          })
   }
 }
-export const resetEventUser     = () => {
+export const resetEventUser           = () => {
   return {
     type: RESET_EVENT_USER
   }
 }
-
-export const changeAvatarLoading = () => {
+export const changeAvatarLoading      = () => {
   return {
     type: CHANGE_AVATAR_LOADING
   }
 }
-
-export const changeAvatarSuccess = (success) => {
+export const changeAvatarSuccess      = (success) => {
   return {
     type   : CHANGE_AVATAR_SUCCESS,
     payload: success
   }
 }
-
-export const changeAvatarError = (errors) => {
+export const changeAvatarError        = (errors) => {
   return {
     type   : CHANGE_AVATAR_SUCCESS,
     payload: errors
   }
 }
-
-export const requestApiChangeAvatar = (newPathAvatar) => {
+export const requestApiChangeAvatar   = (newPathAvatar) => {
   return dispatch => {
     dispatch(changeAvatarLoading())
     axios.put('/user/change-avatar', { avatarPath: newPathAvatar }, { withCredentials: true })
          .then(res => dispatch(changeAvatarSuccess(res.data.success)))
-         .catch(err => dispatch(changeAvatarError(err.response.data.errors)))
+         .catch(err => dispatch(changeAvatarError(err.response.data.reason)))
+  }
+}
+
+export const deleteAccountLoading = () => {
+  return {
+    type: DELETE_ACCOUNT_LOADING,
+  }
+}
+export const deleteAccountSuccess = (successMsg) => {
+  return {
+    type   : DELETE_ACCOUNT_SUCCESS,
+    payload: successMsg
+  }
+}
+export const deleteAccountError   = (errorMsg) => {
+  return {
+    type   : DELETE_ACCOUNT_ERROR,
+    payload: errorMsg
+  }
+}
+
+export const requestDeleteAccount = (userPassword) => {
+  return dispatch => {
+    dispatch(deleteAccountLoading())
+    axios.delete(`/user/delete-account`, {
+           data: {
+             userPassword: userPassword
+           }
+         })
+         .then((res) => dispatch(deleteAccountSuccess(res.data.success)))
+         .catch((err) => dispatch(deleteAccountError(err.response.data)))
   }
 }

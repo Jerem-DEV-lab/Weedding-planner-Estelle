@@ -1,32 +1,31 @@
 import React, { useState } from 'react'
-import clsx                from 'clsx'
-import { useTheme }        from '@material-ui/core/styles'
-import Drawer              from '@material-ui/core/Drawer'
-import AppBar              from '@material-ui/core/AppBar'
-import Toolbar             from '@material-ui/core/Toolbar'
-import List                from '@material-ui/core/List'
-import Typography          from '@material-ui/core/Typography'
-import Divider             from '@material-ui/core/Divider'
-import IconButton          from '@material-ui/core/IconButton'
-import MenuIcon            from '@material-ui/icons/Menu'
-import ChevronLeftIcon     from '@material-ui/icons/ChevronLeft'
-import ChevronRightIcon                          from '@material-ui/icons/ChevronRight'
-import ListItem                                  from '@material-ui/core/ListItem'
-import ListItemIcon                              from '@material-ui/core/ListItemIcon'
-import ListItemText                              from '@material-ui/core/ListItemText'
-import MailIcon                                  from '@material-ui/icons/Mail'
-import { useStyleSidebar }                       from './StyleSidebar'
-import { Avatar, Badge, Button, Menu, MenuItem } from '@material-ui/core'
-import { SidebarAdminItems }                     from './SidebarItems'
-import { Link }                                  from 'react-router-dom'
-import { requestApiLogoutUser }                  from '../../../actions/authenticatorAction'
-import { useDispatch, useSelector }              from 'react-redux'
+import clsx                  from 'clsx'
+import { useTheme }          from '@material-ui/core/styles'
+import Drawer                from '@material-ui/core/Drawer'
+import AppBar                from '@material-ui/core/AppBar'
+import Toolbar               from '@material-ui/core/Toolbar'
+import List                  from '@material-ui/core/List'
+import Typography            from '@material-ui/core/Typography'
+import Divider               from '@material-ui/core/Divider'
+import IconButton            from '@material-ui/core/IconButton'
+import MenuIcon              from '@material-ui/icons/Menu'
+import ChevronLeftIcon       from '@material-ui/icons/ChevronLeft'
+import ChevronRightIcon      from '@material-ui/icons/ChevronRight'
+import ListItem              from '@material-ui/core/ListItem'
+import ListItemIcon          from '@material-ui/core/ListItemIcon'
+import ListItemText          from '@material-ui/core/ListItemText'
+import MailIcon              from '@material-ui/icons/Mail'
+import { useStyleSidebar }   from './StyleSidebar'
+import { Avatar, Badge }     from '@material-ui/core'
+import { SidebarAdminItems } from './SidebarItems'
+import { Link }              from 'react-router-dom'
+import { useSelector }       from 'react-redux'
+import NavAvatarUser         from '../../../Components/NavBar/NavAvatarUser'
 
 export default function Sidebar ({ messages, children }) {
   const classes         = useStyleSidebar()
   const theme           = useTheme()
   const [open, setOpen] = useState(true)
-  const dispatch        = useDispatch()
   
   function checkMessageStatus (message) {
     return message.propertyMessage.isRead === false
@@ -38,18 +37,7 @@ export default function Sidebar ({ messages, children }) {
   const handleDrawerClose       = () => {
     setOpen(false)
   }
-  const [anchorEl, setAnchorEl] = useState(null)
-  
-  const handleClick  = (event) => {
-    setAnchorEl(event.currentTarget)
-  }
   const { userInfo } = useSelector(state => state.userReducers)
-  const handleClose  = () => {
-    setAnchorEl(null)
-  }
-  const logout       = () => {
-    dispatch(requestApiLogoutUser())
-  }
   return (
     <div className={classes.root}>
       <AppBar
@@ -70,24 +58,14 @@ export default function Sidebar ({ messages, children }) {
             <MenuIcon/>
           </IconButton>
           <div className={classes.appBarRightSide}>
-            <Link to={"/admin/messages"}>
+            <Link to={'/admin/messages'}>
               <Badge badgeContent={messages.filter(checkMessageStatus).length} color="primary">
                 <MailIcon/>
               </Badge>
             </Link>
             <Avatar alt="avatar utilisateur" src={userInfo.userAvatar}/>
-            <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-              {userInfo.firstName}
-            </Button>
-            <Menu
-              id="simple-menu"
-              anchorEl={anchorEl}
-              keepMounted
-              open={Boolean(anchorEl)}
-              onClose={handleClose}
-            >
-              <MenuItem onClick={logout}>Logout</MenuItem>
-            </Menu>
+            <NavAvatarUser label={`${userInfo.firstName} ${userInfo.lastName}`}
+                           userInfo={userInfo}/>
           </div>
         </Toolbar>
       </AppBar>

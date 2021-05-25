@@ -41,10 +41,15 @@ class User {
     return res.cookie('jwt', '', { maxAge: 1 })
   }
   
-  async deleteAccount () {
-    return UserSchema.findByIdAndDelete({ _id: this.userInfo.userId })
-                     .then(() => ({ success: 'Votre compte à bien été supprimer' }))
-                     .catch(err => err)
+  deleteAccount () {
+    return new Promise((resolve, reject) => {
+      UserSchema.findByIdAndDelete({ _id: this.userInfo.userId })
+                .then(() => (resolve(
+                    { success: true, successMsg: 'Votre compte à bien été supprimer', statusCode: 200 })
+                ))
+                .catch((err) => (
+                  reject({ error: true, statusCode: 403, reason: 'Impossible de supprimer votre compte' })))
+    })
   }
   
   async changeAvatar (pathAvatar) {

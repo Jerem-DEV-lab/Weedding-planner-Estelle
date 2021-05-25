@@ -24,7 +24,7 @@ function App () {
       userRole: 'ROLE_USER'
     })
   const { isLogged }                = useSelector(state => state.userReducers)
-  const value                       = { userLogged, setUserLogged }
+  /*const value                       = { userLogged, setUserLogged }*/
   const dispatch                    = useDispatch()
   const fetchToken                  = async () => {
     await axios.get('/check', {

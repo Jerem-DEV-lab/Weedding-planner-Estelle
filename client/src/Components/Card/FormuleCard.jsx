@@ -1,12 +1,12 @@
-import React                             from 'react'
-import { Card, CardActions, makeStyles } from '@material-ui/core'
-import CardContent                       from '@material-ui/core/CardContent'
-import Typography                        from '@material-ui/core/Typography'
-import Button                            from '@material-ui/core/Button'
-import { useTranslation }                from 'react-i18next'
-import injectHtmlCode                    from '../../tools/injectHtml'
+import React                                         from 'react'
+import { Card, CardActions, makeStyles, withStyles } from '@material-ui/core'
+import CardContent                                   from '@material-ui/core/CardContent'
+import Typography                                    from '@material-ui/core/Typography'
+import Button                                        from '@material-ui/core/Button'
+import { useTranslation }                            from 'react-i18next'
+import { Link }                                      from 'react-router-dom'
 
-const useStyles   = makeStyles((theme) => ({
+const useStyles = makeStyles((theme) => ({
   root       : {
     display       : 'flex',
     flexDirection : 'column',
@@ -40,6 +40,13 @@ const useStyles   = makeStyles((theme) => ({
     fontWeight: '400'
   }
 }))
+
+const ButtonQuote = withStyles(theme => ({
+  root: {
+    backgroundColor: '#ECD5B8'
+  }
+}))(Button)
+
 const FormuleCard = ({
                        formuleTitle = '',
                        cardContent,
@@ -65,7 +72,9 @@ const FormuleCard = ({
         </Typography>
       </CardContent>
       <CardActions style={{ justifyContent: 'center' }}>
-        <Button size="medium" style={{ backgroundColor: '#ECD5B8' }}>{t('AskForQuote')}</Button>
+        <Link to="/contact">
+          <ButtonQuote size="medium">{t('AskForQuote')}</ButtonQuote>
+        </Link>
       </CardActions>
     </Card>
   </>

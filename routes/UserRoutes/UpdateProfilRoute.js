@@ -73,19 +73,22 @@ function createRouterUpdateProfil () {
     }
   })
   
-  router.get('/user/delete-account', async (req, res) => {
+  router.delete('/user/delete-account', async (req, res) => {
     const authCookie    = req.cookies
     const authJwtCookie = authCookie.jwt
     if (!authJwtCookie || !authJwtCookie.startsWith('Bearer ')) {
       return res.status(400).json({ error: 'Vous devez être connecté' })
     }
     try {
-      const user          = new User(authJwtCookie.split('Bearer ')[1])
-      const deleteAccount = await user.deleteAccount()
-      if (deleteAccount.success) {
-        User.logoutUser(req, res)
-        return res.status(200).json(deleteAccount)
+      const user         = new User(authJwtCookie.split('Bearer ')[1])
+      const passwordInDB = await user.getEncryptedPassword()
+      const isMatch      = await ComparePassword(req.body.userPassword, passwordInDB)
+      if (!isMatch) {
+        return res.status(403).json({ error: true, reason: 'Votre mot de passe est incorrecte' })
       }
+      const deleteAccount = await user.deleteAccount()
+      res.cookie('jwt', '', { maxAge: 1 })
+      return res.status(deleteAccount.statusCode).json({ success: deleteAccount.successMsg })
     } catch (e) {
       console.log(e)
     }

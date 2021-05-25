@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   CircularProgress,
   Dialog,
@@ -7,7 +7,7 @@ import {
   DialogContentText,
   DialogTitle,
   Typography
-}                           from '@material-ui/core'
+}                                     from '@material-ui/core'
 
 import Button                                                    from '@material-ui/core/Button'
 import FormEmail                                                 from './FormMessage/FormEmail'
@@ -35,6 +35,7 @@ const DialogMessage     = ({ open, close, routerDial }) => {
   const dispatch                                 = useDispatch()
   const { values, setValues, handleChangeInput } = useForm(initialFieldValue)
   const history                                  = useHistory()
+  const [openedList, setOpenedList]              = useState(false)
   const sendMail                                 = () => {
     dispatch(requestApiSendMail(values))
     setValues(initialFieldValue)
@@ -73,6 +74,8 @@ const DialogMessage     = ({ open, close, routerDial }) => {
           <DialogContentText>
             {routerDial.path === 'createEmail' &&
              <FormEmail values={values} handleChangeInput={handleChangeInput}
+                        listOpened={openedList}
+                        openList={(v) => setOpenedList(v)}
                         errorsForm={handleRequestState.errorSendMail}/>}
             {routerDial.path === 'readEmail' &&
              <>

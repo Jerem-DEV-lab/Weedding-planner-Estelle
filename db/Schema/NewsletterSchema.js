@@ -10,9 +10,8 @@ const NewsletterSchema = new Schema(
       type    : String,
       required: true
     },
-    categoryNews: {
+    template_id: {
       type    : String,
-      required: true
     }
   })
 

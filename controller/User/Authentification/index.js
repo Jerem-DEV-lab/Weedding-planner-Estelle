@@ -4,7 +4,6 @@ const { ComparePassword }         = require('../../../tools/Auth')
 const { setTokenAuth }            = require('../../../tools/Auth')
 const { ErrorAuthentification }   = require('../../../tools/Auth')
 const maxAge                      = 24 * 60 * 60 * 1000
-const transport                   = require('../../../Services/Lib/mailer')
 const { checkTokenResetPassword } = require('../../../Services/Users')
 const sendMailSG                  = require('../../../Services/Lib/mailer')
 const { v1 }                      = require('uuid')
@@ -19,21 +18,29 @@ class Authentification {
     const { email, password, address, firstName, lastName, phone, postalCode } = request.body
     const ROLE                                                                 = 'ROLE_USER'
     const hashedPassword                                                       = await HashPassword(password)
+    const token                                                                = v1()
     try {
       const newUser = new UserSchema(
         {
           email,
-          roles               : ROLE,
-          password            : hashedPassword,
+          roles              : ROLE,
+          password           : hashedPassword,
           address,
           firstName,
           lastName,
           phone,
           postalCode,
-          tokenAccountVerified: v1()
+          confirmAccountToken: token
         })
       await newUser.save()
-      await sendMailSG(email, `${lastName} ${firstName}`, 'Confirmation de votre compte', `${newUser.tokenAccountVerified}`)
+      const linkConfirmAccount = `${process.env.DOMAIN}${process.env.LINK_CONFIRM_ACCOUNT}${token}`
+      const options            = {
+        dynamicData: {
+          'link_confirm_account': linkConfirmAccount
+        },
+        template_id: 'd-79438c14ba0d4e76a44b47f25614f039'
+      }
+      await sendMailSG(options, email)
       return response.status(200).json({ message: 'Un email vient de vous être envoyé pour confirmer votre compte.' })
     } catch (e) {
       const errors = ErrorAuthentification(e)
@@ -42,8 +49,11 @@ class Authentification {
   }
   
   async setVerifiedAccount (req, res) {
-    const userFind = await UserSchema.findOne({ confirmAccountToken: req.params.tokenAccount }, 'email _id' +
-                                                                                                ' tokenAccountVerified')
+    const userFind = await UserSchema.findOne(
+      { confirmAccountToken: req.params.tokenAccount },
+      'email _id' +
+      ' accountVerified' +
+      ' confirmAccountToken')
     return new Promise((resolve, reject) => {
       if (!userFind) {
         return reject({
@@ -52,6 +62,7 @@ class Authentification {
                       })
       }
       userFind.confirmAccountToken = ''
+      userFind.accountVerified     = true
       userFind.save()
       return resolve({ success: true, statusCode: 200, userFind })
     })
@@ -104,14 +115,19 @@ class Authentification {
       }
       const token              = v1()
       const setTokenToUser     = await UserSchema.findOneAndUpdate({ email: userEmail }, { resetPasswordToken: token }, { new: true })
-      const resetLinkWithToken = `${process.env.DOMAIN}${process.env.LINK_RESET_PASSWORD}${setTokenToUser.resetPasswordToken}`
-      await transport(userEmail, findUser.firstName, "Réinitialisation mot de passe")
+      const resetLinkWithToken = `${process.env.DOMAIN}/mot-de-passe-oublier/${setTokenToUser.resetPasswordToken}`
+      const options            = {
+        dynamicData: {
+          link_token: resetLinkWithToken
+        },
+        template_id: 'd-0202edc301c74545b652318102b0f780'
+      }
+      await sendMailSG(options, userEmail)
       return response.status(200).json({ success: 'Un email viens de vous être envoyer sur ' + userEmail })
     } catch (e) {
-      return response.status(500)
+      return response.status(500).json(e)
     }
   }
-  
   async checkTokenResetPassword (request, response) {
     const reqToken = request.params.tokenReset
     try {
@@ -143,7 +159,6 @@ class Authentification {
       return response.status(200).json({ success: 'Vous pouvez désormais vous connectez avec votre nouveau mot de passe' })
     })
   }
-  
   async logoutUser (request, response) {
     response.cookie('jwt', '', { maxAge: 1 })
     return response.status(200).json({ logout: true })
