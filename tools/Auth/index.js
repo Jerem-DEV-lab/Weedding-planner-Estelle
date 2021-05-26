@@ -53,17 +53,29 @@ module.exports.setTokenAuth = (role, userId, timeStampCookie) => {
   return jwt.sign({ role, userId }, `${process.env.SECRET_KEY}`, { expiresIn: timeStampCookie })
 }
 
-module.exports.checkUserLogin = (req, res) => {
+module.exports.checkUserLogin = async (req, res) => {
   const authTokenJWT = req.cookies.jwt
   if (authTokenJWT && authTokenJWT.startsWith('Bearer ')) {
     let parsedCookie = authTokenJWT.split('Bearer ')[1]
     jwt.verify(parsedCookie, process.env.SECRET_KEY, async (err, decodedToken) => {
       if (err) {
-        res.locals.user = null
         return res.status(400).json({ err })
-      
+      }
+      const userFind = await UserSchema.findById(decodedToken.userId).populate('workshopInfos').select('-password')
+      if (!userFind) {
+        res.locals.user = null
+        return res.status(400).json({})
+      }
+      if (userFind.userIsBan) {
+        res.locals.user = null
+        return res.status(400).json({})
+      }
+      if (decodedToken.userIsBan) {
+        res.locals.user = null
+        res.cookie('jwt', '', { maxAge: 1 })
+        return res.status(400).json({})
       } else {
-        const user = res.locals.user = await UserSchema.findById(decodedToken.userId).populate('workshopInfos').select('-password')
+        const user = res.locals.user = userFind
         return res.status(200).json(user)
       }
     })

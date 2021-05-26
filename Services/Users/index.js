@@ -37,13 +37,13 @@ module.exports.checkTokenResetPassword = async (token) => {
       return reject({ errors: true, statusCode: 403, reason: 'Lien expiré', valideToken: false })
     }
     if (userCheckedToken.userIsBan) {
-      reject({ errors: true, statusCode: 404, reason: 'Votre compte à été banni', valideToken: false })
+      return reject({ errors: true, statusCode: 404, reason: 'Votre compte à été banni', valideToken: false })
     }
     if (!userCheckedToken.resetPasswordToken) {
-      reject({ errors: true, statusCode: 403, reason: 'Lien expiré', valideToken: false })
+      return reject({ errors: true, statusCode: 403, reason: 'Lien expiré', valideToken: false })
     }
     if (userCheckedToken.resetPasswordToken !== token) {
-      reject({ errors: true, statusCode: 403, reason: 'Token invalid', valideToken: false })
+      return reject({ errors: true, statusCode: 403, reason: 'Token invalid', valideToken: false })
     }
     return resolve({ success: true, statusCode: 200, docs: userCheckedToken, valideToken: true })
   })

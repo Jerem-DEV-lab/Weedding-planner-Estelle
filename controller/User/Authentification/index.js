@@ -118,6 +118,9 @@ class Authentification {
       if (!findUser) {
         return response.status(404).json({ errors: 'Vérifier votre email' })
       }
+      if (findUser.userIsBan) {
+        return response.status(404).json({ errors: 'Votre compte a été banni.' })
+      }
       const token              = v1()
       const setTokenToUser     = await UserSchema.findOneAndUpdate({ email: userEmail }, { resetPasswordToken: token }, { new: true })
       const resetLinkWithToken = `${process.env.DOMAIN}/mot-de-passe-oublier/${setTokenToUser.resetPasswordToken}`
@@ -125,7 +128,11 @@ class Authentification {
         'from'                 : { 'email': 'estelle-rouille@estelle-events.fr', 'name': 'Côté Campagne' },
         'reply_to'             : { 'email': 'guillemet.jeremy087@gmail.com' },
         'to'                   : userEmail,
-        'dynamic_template_data': { 'link_reset_password': resetLinkWithToken },
+        'dynamic_template_data': {
+          'link_reset_password': resetLinkWithToken,
+          'link_to_home'       : process.env.DOMAIN,
+          'domain'             : process.env.DOMAIN
+        },
         'content'              : [{ 'type': 'text/html', 'value': ' ' }],
         'template_id'          : 'd-ce7f30627c874e4c85903f90c2b27483'
       }
@@ -137,6 +144,7 @@ class Authentification {
   }
   async checkTokenResetPassword (request, response) {
     const reqToken = request.params.tokenReset
+  
     try {
       const userChecked = await checkTokenResetPassword(reqToken)
       return response.status(userChecked.statusCode).json(userChecked)
@@ -146,6 +154,7 @@ class Authentification {
   }
   async confirmResetPassword (request, response) {
     const reqToken = request.params.tokenReset
+    console.log(request.params)
     if (!reqToken) {
       return response.status(403).json({ errors: 'Invalid Token' })
     }
