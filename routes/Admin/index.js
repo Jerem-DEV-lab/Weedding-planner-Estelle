@@ -71,7 +71,8 @@ function createRouterAdmin () {
       const sendMail = await AdminController.sendEmail()
       return res.status(200).json(sendMail)
     } catch (e) {
-      return res.status(e.statusCode).json(e)
+      console.log(e)
+      return res.status(400).json(e)
     }
   })
   router.post('/admin/create/news', checkRole('ROLE_ADMIN'), (req, res) => {

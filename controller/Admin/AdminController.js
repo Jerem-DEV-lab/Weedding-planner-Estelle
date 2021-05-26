@@ -7,7 +7,7 @@ const ObjectId                                                          = requir
 const UserSchema                                                        = require('../../db/Schema/UserSchema')
 const { CheckFormEmail }                                                = require('../../tools/ErrorsHandlerAdmin')
 const { isEmpty }                                                       = require('../../tools/Auth/index')
-const sendSimpleMail                                                    = require('../../Services/Lib/mailer')
+const { sendMailSG }                                                    = require('../../Services/Lib/mailer')
 
 class AdminController extends User {
   constructor (request, response, token) {
@@ -113,7 +113,7 @@ class AdminController extends User {
         contentMessage
       })
     if (checkRequest.isValid) {
-      return sendSimpleMail(optionsMail)
+      return sendMailSG(optionsMail)
     }
   }
 }
