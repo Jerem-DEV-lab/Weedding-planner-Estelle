@@ -4,6 +4,7 @@ import Nav                             from '../../Components/NavBar/Nav'
 import { useTranslation }              from 'react-i18next'
 import { Container, Grid, makeStyles } from '@material-ui/core'
 import FormuleCard                     from '../../Components/Card/FormuleCard'
+import Footer                          from '../../Components/Footer/Footer'
 
 const useStyles  = makeStyles((theme) => ({
   dBlock             : {
@@ -179,6 +180,7 @@ const MyWorkShop = () => {
         </Grid>
       </Container>
     </section>
+    <Footer />
   </>
 }
 

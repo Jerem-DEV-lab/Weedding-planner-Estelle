@@ -6,6 +6,7 @@ import { Container, Grid } from '@material-ui/core'
 import FormuleCard         from '../../Components/Card/FormuleCard'
 import SliderImg           from '../../Components/SliderImg/SliderImg'
 import { useStyles }       from '../Styles/OrganizationStyle'
+import Footer              from '../../Components/Footer/Footer'
 
 const OtherEvents = () => {
   const classes = useStyles()
@@ -119,6 +120,7 @@ const OtherEvents = () => {
         </Grid>
       </Container>
     </section>
+    <Footer />
   </>
 }
 
