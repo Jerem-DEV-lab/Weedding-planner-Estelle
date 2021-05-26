@@ -92,11 +92,12 @@ Raison de la suppression de certain champs dans le formulaire de contact
 - [X] Enlever ou faire les actions pour modifier le profil
 - [X] Mettre un choix d'avatar sur le profil de l'utilisateur
 - [X] Retirer l'animation sur le dropdown
-- [X] Permettre à l'administrateur de modifier si l'utilisateur est ban ou non ?
-- [ ] Ajouter les formules en bases de données
-- [ ] Ajouter un loader lors du chargement de la galerie photo
-- [ ] Modifier le header de la page d'avis
 - [X] Fixer la nav lors du scroll
 - [X] Ajouter les animations à l'apparition des éléments
 - [X] Modifier la taille du texte sur les affichages mobile
+- [X] Permettre à l'administrateur de modifier si l'utilisateur est ban ou non ?
+- [X] N'envoi pas de mail pour lors de l'inscription en ligne revoir la fonction
+- [ ] Ajouter les formules en bases de données
+- [ ] Ajouter un loader lors du chargement de la galerie photo
+- [ ] Modifier le header de la page d'avis
 - [ ] Modifier le footer
