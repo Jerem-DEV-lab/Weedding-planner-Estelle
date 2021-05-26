@@ -108,6 +108,9 @@ const LoginForm = ({openModalResetPassword}) => {
     dispatch(resetEvent())
     dispatch(requestApiAuth(values))
   }
+  useEffect(() => {
+    dispatch(resetEventUser())
+  }, [])
   
   useEffect(() => {
     if (loginSuccess) {

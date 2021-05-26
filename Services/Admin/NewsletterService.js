@@ -24,7 +24,6 @@ module.exports.sendNewsletterWithTemplate = async (req, res) => {
   const { users, template_id, dynamicDatas, titleNews } = req.body
   const serializeDynamicData                            = (datas) => {
     let newObj = {}
-    
     datas.forEach((v) => {
       newObj = {
         ...newObj,

@@ -1,11 +1,12 @@
 const { HashPassword }            = require('../../../tools/Auth')
 const UserSchema                  = require('../../../db/Schema/UserSchema')
+const { sendMailSG }              = require('../../../Services/Lib/mailer')
 const { ComparePassword }         = require('../../../tools/Auth')
 const { setTokenAuth }            = require('../../../tools/Auth')
 const { ErrorAuthentification }   = require('../../../tools/Auth')
 const maxAge                      = 24 * 60 * 60 * 1000
 const { checkTokenResetPassword } = require('../../../Services/Users')
-const sendMailSG                  = require('../../../Services/Lib/mailer')
+const { emailRegister }           = require('../../../Services/Lib/mailer')
 const { v1 }                      = require('uuid')
 
 class Authentification {
@@ -34,13 +35,17 @@ class Authentification {
         })
       await newUser.save()
       const linkConfirmAccount = `${process.env.DOMAIN}${process.env.LINK_CONFIRM_ACCOUNT}${token}`
-      const options            = {
-        dynamicData: {
-          'link_confirm_account': linkConfirmAccount
+      const obj                = {
+        'from'       : { 'email': 'estelle-rouille@estelle-events.fr', 'name': 'noreplay@estelle-event.fr' },
+        'reply_to'   : { 'email': 'guillemet.jeremy087@gmail.com' },
+        'to'         : email,
+        'dynamic_template_data': {
+          'link_account_actived': linkConfirmAccount
         },
-        template_id: 'd-79438c14ba0d4e76a44b47f25614f039'
+        'content'    : [{ 'type': 'text/html', 'value': ' ' }],
+        'template_id': 'd-0e51747961614642ad08d1a30f622a36'
       }
-      await sendMailSG(options, email)
+      await emailRegister(obj)
       return response.status(200).json({ message: 'Un email vient de vous être envoyé pour confirmer votre compte.' })
     } catch (e) {
       const errors = ErrorAuthentification(e)
@@ -116,13 +121,15 @@ class Authentification {
       const token              = v1()
       const setTokenToUser     = await UserSchema.findOneAndUpdate({ email: userEmail }, { resetPasswordToken: token }, { new: true })
       const resetLinkWithToken = `${process.env.DOMAIN}/mot-de-passe-oublier/${setTokenToUser.resetPasswordToken}`
-      const options            = {
-        dynamicData: {
-          link_token: resetLinkWithToken
-        },
-        template_id: 'd-0202edc301c74545b652318102b0f780'
+      const obj                = {
+        'from'                 : { 'email': 'estelle-rouille@estelle-events.fr', 'name': 'Côté Campagne' },
+        'reply_to'             : { 'email': 'guillemet.jeremy087@gmail.com' },
+        'to'                   : userEmail,
+        'dynamic_template_data': { 'link_reset_password': resetLinkWithToken },
+        'content'              : [{ 'type': 'text/html', 'value': ' ' }],
+        'template_id'          : 'd-ce7f30627c874e4c85903f90c2b27483'
       }
-      await sendMailSG(options, userEmail)
+      await sendMailSG(obj)
       return response.status(200).json({ success: 'Un email viens de vous être envoyer sur ' + userEmail })
     } catch (e) {
       return response.status(500).json(e)
