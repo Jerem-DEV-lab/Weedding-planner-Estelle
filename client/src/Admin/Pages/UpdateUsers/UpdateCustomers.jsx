@@ -6,17 +6,18 @@ import { makeStyles, useTheme }                                                 
 import Divider                                                                   from '@material-ui/core/Divider'
 import TableContainer
                                                                                  from '@material-ui/core/TableContainer'
-import TableBody                                                                 from '@material-ui/core/TableBody'
-import TableRow                                                                  from '@material-ui/core/TableRow'
-import CreateIcon                                                                from '@material-ui/icons/Create'
-import { isEmpty }                                                               from '../../../tools'
+import TableBody   from '@material-ui/core/TableBody'
+import TableRow    from '@material-ui/core/TableRow'
+import CreateIcon  from '@material-ui/icons/Create'
+import { isEmpty } from '../../../tools'
 import {
   requestApiBanUser,
   requestApiUsers,
   resetEvent
-}                                                                                from '../../../actions/adminAction'
-import Toastify                                                                  from '../../../Components/Toastify'
-import IconButton                                                                from '@material-ui/core/IconButton'
+}                  from '../../../actions/adminAction'
+import Toastify    from '../../../Components/Toastify'
+import IconButton  from '@material-ui/core/IconButton'
+import axios       from 'axios'
 
 const useStyles = makeStyles(theme => ({
   root           : {
@@ -49,9 +50,12 @@ const UpdateCustomer = () => {
   const dispatch                    = useDispatch()
   const history                     = useHistory()
   
+  const [userRegisteredWorkShop, setUserRegisteredWorkShop] = useState(null)
+  
   useEffect(() => {
     setUserTarget(filterUser[0])
     setUserBan(filterUser[0].userIsBan)
+    setUserRegisteredWorkShop(filterUser[0].workshopRegistered)
   }, [])
   useEffect(() => {
     if (adminState.successBan) {
@@ -63,12 +67,11 @@ const UpdateCustomer = () => {
     }
   }, [adminState.successBan])
   
-  function checkIfChanged () {
+  function checkIfChanged (prevState, activeState) {
     if (!isEmpty(userTarget)) {
-      return userBan !== userTarget.userIsBan
+      return activeState !== prevState
     }
   }
-  
   const changeInputState = () => {
     setUpdateUser(true)
   }
@@ -83,14 +86,23 @@ const UpdateCustomer = () => {
     dispatch(requestApiBanUser(userId, userBan))
   }
   
+  function registeredUserWorkShop () {
+    dispatch(resetEvent())
+    console.log(userRegisteredWorkShop)
+    axios.put('/admin/registerUserWorkshop', {
+      userId            : userTarget._id,
+      workshopRegistered: userRegisteredWorkShop
+    }).then(res => console.log(res))
+         .catch(err => console.log(err.response.data))
+  }
+  
   const ActionsCard = ({ userId }) => {
     return (<>
-        {checkIfChanged() && updateUser &&
+        {checkIfChanged(userTarget.userIsBan, userBan) && updateUser &&
          <Button variant="contained" size="small" color="primary"
                  className="mr2"
                  onClick={() => banOrUnbanUser(userId)}
-                 disableElevation={true}>{!userBan ? 'Débannir' : 'Bannir'}</Button>
-        }
+                 disableElevation={true}>{!userBan ? 'Débannir' : 'Bannir'}</Button>}
         {updateUser ? <Button disableElevation={true} color="secondary" onClick={() => setUpdateUser(false)}
                               size="small">Annuler</Button> :
          <IconButton aria-label="edit" color="primary" size="small" onClick={changeInputState}>
@@ -173,9 +185,20 @@ const UpdateCustomer = () => {
                       </Typography>
                     </TableCell>
                     <TableCell align="left">
-                      <Typography component="h6" variant="subtitle2" className={classes.typoTable}>
-                        {userTarget.workshopRegistered ? 'Oui' : 'Non'}
-                      </Typography>
+                      {updateUser ? <>
+                        <Switch
+                          checked={userRegisteredWorkShop}
+                          onChange={(e) => setUserRegisteredWorkShop(e.target.checked)}
+                          inputProps={{ 'aria-label': 'secondary checkbox' }}
+                        />
+                        {checkIfChanged(userTarget.workshopRegistered, userRegisteredWorkShop) &&
+                         <Button variant="outlined" size="small" color="primary" onClick={registeredUserWorkShop}>
+                           {userRegisteredWorkShop ? 'Inscrire l\'utilisateur' : 'Désinscrire l\'utilisateur'}
+                         </Button>
+                        }
+                      </> : <Typography component="h6" variant="subtitle2" className={classes.typoTable}>
+                         {userTarget.workshopRegistered ? 'Oui' : 'Non'}
+                       </Typography>}
                     </TableCell>
                   </TableRow>
                   <TableRow>
@@ -185,14 +208,13 @@ const UpdateCustomer = () => {
                       </Typography>
                     </TableCell>
                     <TableCell align="left">
-                      {updateUser ? <>
-                        <Switch
-                          checked={userBan}
-                          onChange={handleChange}
-                          inputProps={{ 'aria-label': 'secondary checkbox' }}
-                        />
-                      </> : <Typography component="h6" variant="subtitle2" className={classes.typoTable}>
-                         {userTarget.userIsBan ? 'Oui' : 'Non'}
+                      {updateUser ?
+                       <Switch
+                         checked={userBan}
+                         onChange={handleChange}
+                         inputProps={{ 'aria-label': 'secondary checkbox' }}/>
+                                  : <Typography component="h6" variant="subtitle2" className={classes.typoTable}>
+                         {userTarget.workshopRegistered ? 'Oui' : 'Non'}
                        </Typography>}
                     </TableCell>
                   </TableRow>

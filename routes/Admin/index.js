@@ -101,6 +101,16 @@ function createRouterAdmin () {
   router.patch('/admin/patch/ratings/:noticeId', checkRole('ROLE_ADMIN'), (req, res) => {
     return valideNotice(req, res)
   })
+  router.put('/admin/registerUserWorkshop', checkRole('ROLE_ADMIN'), async (req, res) => {
+    const authCookie    = req.cookies
+    const authJwtCookie = authCookie.jwt
+    if (!authJwtCookie || !authJwtCookie.startsWith('Bearer ')) {
+      return res.status(400).json({ error: 'Vous devez être connecté' })
+    }
+    const AdminController = new adminController(req, res, authJwtCookie)
+    const request         = await AdminController.registeredUserInWorkshop()
+    return res.status(request.statusCode).json(request)
+  })
   
   router.delete('/admin/delete/ratings/:noticeId', checkRole('ROLE_ADMIN'), (req, res) => {
     return deleteNotice(req, res)

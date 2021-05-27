@@ -116,6 +116,23 @@ class AdminController extends User {
       return sendMailSG(optionsMail)
     }
   }
+  
+  async registeredUserInWorkshop () {
+    const { workshopRegistered, userId } = this.request.body
+    if (!ObjectId.isValid(userId)) {
+      return {
+        error: true, statusCode: 404, reason: 'Erreur serveur'
+      }
+    }
+    return new Promise((resolve, reject) => {
+      UserSchema.findByIdAndUpdate(userId, { workshopRegistered }, null, (err, docs) => {
+        if (!err) {
+          return resolve({ success: true, statusCode: 200, successMsg: 'L\'utilisateur a correctement été inscrit' })
+        }
+        reject({ error: true, statusCode: 404, reason: 'Erreur serveur' })
+      })
+    })
+  }
 }
 
 module.exports = AdminController
