@@ -54,7 +54,7 @@ const Home = () => {
               <img src="/assets/galleryHome/7.jpg" alt="Demande en mariage homme à sa femme"/>
             </div>
           </div>
-          <Link to="/galerie" className="btn-home">Voir plus de photos</Link>
+          <Link to="/galerie" className="btn-home">{t('more_pictures_label')}</Link>
         </Container>
       </section>
       

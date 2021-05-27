@@ -8,6 +8,7 @@ import DashboardIcon              from '@material-ui/icons/Dashboard'
 import ExitToAppIcon              from '@material-ui/icons/ExitToApp'
 import { useDispatch }            from 'react-redux'
 import { requestApiLogoutUser }   from '../../actions/authenticatorAction'
+import { useTranslation }         from 'react-i18next'
 
 const NavAvatarUser = ({ label, userInfo }) => {
   const [anchorEl, setAnchorEl] = React.useState(null)
@@ -23,7 +24,7 @@ const NavAvatarUser = ({ label, userInfo }) => {
   const logout      = () => {
     dispatch(requestApiLogoutUser())
   }
-  
+  const { t }       = useTranslation()
   return (
     <>
       <Button endIcon={<KeyboardArrowDownIcon/>} color="inherit" onClick={handleClick}>
@@ -47,13 +48,13 @@ const NavAvatarUser = ({ label, userInfo }) => {
           <MenuItem dense onClick={handleClose}>
             <AccountBoxIcon fontSize="small" color="action" className="mr1"/>
             <Typography noWrap variant="inherit">
-              Mon profile
+              {t('my_profile')}
             </Typography>
           </MenuItem>
         </Link>
         <MenuItem dense onClick={logout}>
           <ExitToAppIcon fontSize="small" color="action" className="mr1"/>
-          Déconnexion
+          {t('logout')}
         </MenuItem>
       </Menu>
     </>

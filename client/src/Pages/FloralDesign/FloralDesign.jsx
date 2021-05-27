@@ -71,7 +71,7 @@ const FloralDesign = () => {
           <Grid item={true} xs={12} lg={6}>
             <section>
               <Container>
-                <h2 className={generalStyle.titleResponsive}>Explications de la conception floral</h2>
+                <h2 className={generalStyle.titleResponsive}>{t('titleSectionFloralDesign')}</h2>
                 <p className="section-content">
                   {t('contentFloralDesign1')} <br/>
                   {t('contentFloralDesign2')} <br/>
@@ -89,7 +89,7 @@ const FloralDesign = () => {
           <Grid item={true} xs={12} lg={6}>
             <section>
               <Container>
-                <h2 className={generalStyle.titleResponsive}>Explications de la conception floral</h2>
+                <h2 className={generalStyle.titleResponsive}>{t('titleSectionFloralDesign2')}</h2>
                 <p className="section-content">
                   {t('contentFloralDesign1')} <br/>
                   {t('contentFloralDesign2')} <br/>

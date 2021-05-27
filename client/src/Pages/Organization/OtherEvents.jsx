@@ -57,11 +57,11 @@ const OtherEvents = () => {
     </HeroPage>
     <section>
       <Container>
-        <h2 className={classes.titleResponsive}>Nos événements</h2>
+        <h2 className={classes.titleResponsive}>{t('myEvents')}</h2>
         <Grid container={true} spacing={6}>
           <Grid item={true} xs={12} md={12} lg={6}>
             <p className="section-content">
-              J'interviens dans l'organisation de tout type d'événement privé tel que :
+              {t('subtitleOtherEvent1')}
               <Grid container={true} spacing={10}>
                 <Grid item={true} xs={12} md="6">
                   <ul className="list-bull mt2">

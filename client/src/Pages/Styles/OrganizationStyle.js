@@ -25,7 +25,7 @@ export const useStyles = makeStyles(theme => (
     titleResponsive: {
       marginBottom                  : 'calc(4 * var(--space))',
       [theme.breakpoints.down('sm')]: {
-        fontSize    : '28px',
+        fontSize    : '26px',
         lineHeight  : '38px',
         marginBottom: 'calc(1 * var(--space))'
       }

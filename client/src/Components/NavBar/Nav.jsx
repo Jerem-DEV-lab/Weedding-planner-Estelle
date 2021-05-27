@@ -112,7 +112,7 @@ const Nav = ({ bgColor = '', typoColor = '' }) => {
       <div className={clicked ? 'overlay-nav active' : 'overlay-nav'} onClick={() => setClicked(!clicked)}/>
       <div className="nav-user">
         {!userContext.isLogged ?
-         <Link to="/connexion"> Connexion <span><FaUser/></span></Link>
+         <Link to="/connexion">{t('login')}<span><FaUser/></span></Link>
                                : <>
            <div>
          <span>
