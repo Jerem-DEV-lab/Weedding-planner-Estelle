@@ -3,7 +3,7 @@ const NewsletterSchema    = require('../../db/Schema/NewsletterSchema')
 const UserSchema          = require('../../db/Schema/UserSchema')
 const EmailSchema         = require('../../db/Schema/ContactSchema')
 const RatingSchema        = require('../../db/Schema/RatingSchema')
-const sendMailSG          = require('../Lib/mailer')
+const { sendMailSG }          = require('../Lib/mailer')
 const { ErrorCreateNews } = require('../../tools/Newsletter')
 
 module.exports.createNewsletter = async (req, res) => {
@@ -47,6 +47,7 @@ module.exports.sendNewsletterWithTemplate = async (req, res) => {
     })
     return res.status(200).json({ success: ' Email correctement envoyer', titleNews })
   } catch (e) {
+    console.log(e)
     return res.status(400).json({ errors: 'Impossible d\'envoyer l\'email pour le moment', e })
   }
 }

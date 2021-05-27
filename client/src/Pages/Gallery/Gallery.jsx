@@ -11,7 +11,7 @@ const Gallery = () => {
   const [loading, setLoading] = useState(true)
   const [errors, setErrors]   = useState({ err: false, reason: '' })
   useEffect(() => {
-    axios.get('https://graph.instagram.com/me/media?fields=id,caption,media_url&access_token=' + process.env.REACT_APP_INSTA_TOKEN + '&limit=75')
+    axios.get('https://graph.instagram.com/me/media?fields=id,caption,media_url&access_token=' + process.env.REACT_APP_INSTA_TOKEN + '&limit=87')
          .then(res => {
            setLoading(false)
            setErrors({ err: false, reason: '' })

@@ -10,11 +10,11 @@ export const SidebarAdminItems = [
     url  : '/admin/users',
     icons: <PeopleIcon/>
   },
-  {
+ /* {
     label: 'Gestion formule',
     url  : '/admin/gestion-formules',
     icons: <LoyaltyIcon/>
-  },
+  },*/
   {
     label: 'NewsLetter',
     url  : '/admin/newsletter',

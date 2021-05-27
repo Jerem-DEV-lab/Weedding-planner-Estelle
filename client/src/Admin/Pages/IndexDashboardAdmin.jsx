@@ -2,7 +2,7 @@ import React, { useEffect }                   from 'react'
 import { Switch, Route }                      from 'react-router-dom'
 import Sidebar                                from '../Components/Sidebar/Sidebar'
 import TableUsers                             from '../Components/Users/TableUsers'
-import IndexFormules                          from './Formules/IndexFormules'
+/*import IndexFormules                          from './Formules/IndexFormules'*/
 import IndexNewsLetter                        from './NewsLetter/IndexNewsLetter'
 import { useDispatch, useSelector }           from 'react-redux'
 import { requestApiMessage, requestApiUsers } from '../../actions/adminAction'
@@ -33,9 +33,9 @@ export default function IndexDashboardAdmin () {
         <Route path="/admin/user/:customerId" exact>
           <UpdateCustomer/>
         </Route>
-        <Route path="/admin/gestion-formules" exact>
+{/*        <Route path="/admin/gestion-formules" exact>
           <IndexFormules/>
-        </Route>
+        </Route>*/}
         <Route path="/admin/newsletter" exact>
           <IndexNewsLetter/>
         </Route>
