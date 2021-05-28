@@ -36,7 +36,7 @@ const MyWorkShop = () => {
   const { t }   = useTranslation()
   const classes = useStyles()
   return <>
-    <HeroPage nameImg="myWorkshop/hero_workshop.jpg" positionImg={'center center'}>
+    <HeroPage nameImg="hero_workshop.jpg" positionImg={'center center'}>
       <Nav/>
       <div className="hero-container">
         <div className="hero-home-content">
