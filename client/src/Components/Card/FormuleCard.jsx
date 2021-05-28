@@ -51,7 +51,6 @@ const FormuleCard = ({
                        formuleTitle = '',
                        cardContent,
                        formulePrice = '',
-                       injectHtmlPara
                      }) => {
   const classes = useStyles()
   const { t }   = useTranslation()
@@ -62,9 +61,7 @@ const FormuleCard = ({
           {formuleTitle}
         </Typography>
         <Typography variant="body2" className={classes.paragraphe} color="textSecondary" component="p">
-          {cardContent ? cardContent : 'Lorem  exercitationem illum, ipsa iusto molestiae, perferendis perspiciatis' +
-                                       ' porro, quisquam ratione tempora tempore\n totam?'
-          }
+          {cardContent}
         </Typography>
         <Typography variant="body2" className={classes.price} color="textPrimary" component="p">
           <span className={classes.priceFrom}>{t('PriceFrom')}</span>
