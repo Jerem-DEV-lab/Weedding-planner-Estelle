@@ -4,6 +4,8 @@ import { Link }                    from 'react-router-dom'
 import { FaBars, FaTimes, FaUser } from 'react-icons/fa'
 import { useSelector }             from 'react-redux'
 import NavAvatarUser               from './NavAvatarUser'
+import Menu                        from '@material-ui/core/Menu'
+import MenuItem                    from '@material-ui/core/MenuItem'
 
 const Nav = ({ bgColor = '', typoColor = '' }) => {
   const [clicked, setClicked] = useState(false)
@@ -77,6 +79,17 @@ const Nav = ({ bgColor = '', typoColor = '' }) => {
       cName: 'nav-link'
     }
   ]
+  
+  const [anchorEl, setAnchorEl] = useState(null)
+  
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget)
+  }
+  
+  const handleClose = () => {
+    setAnchorEl(null)
+  }
+  
   return (
     <nav className="navbar" style={{ background: bgColor, color: typoColor }}>
       <div className="menu-mobile" onClick={() => setClicked(!clicked)}>
@@ -91,20 +104,25 @@ const Nav = ({ bgColor = '', typoColor = '' }) => {
               {!link.child ?
                <li key={index} className="nav-item">
                  <Link to={link.url} className="nav-link" onClick={() => setClicked(!clicked)}>{link.label}</Link>
-               </li> :
-               <li key={index} className="nav-item">
-                 <Link to={link.url} className={link.cName} onClick={() => setClicked(!clicked)}>{link.label}</Link>
-                 <div className="dropdown">
-                   <ul className="dropdown-list">
-                     {link.child.map(child => (
-                       <li key={index} className="dropdown-item">
-                         <Link to={child.url} className="dropdown-link"
-                               onClick={() => setClicked(!clicked)}>{child.label}</Link>
-                       </li>
-                     ))}
-                   </ul>
-                 </div>
-               </li>}
+               </li> : <>
+                 <li className="nav-item" onClick={handleClick} style={{cursor: 'pointer'}}>Organisation</li>
+                 <Menu
+                   id="simple-menu"
+                   anchorEl={anchorEl}
+                   keepMounted
+                   open={Boolean(anchorEl)}
+                   onClose={handleClose}
+                 >
+                   {link.child.map((l, index) => (
+                     <>
+                       <MenuItem onClick={handleClose}>
+                         <Link to={l.url}>{l.label}</Link>
+                       </MenuItem>
+                     </>
+                   ))}
+                 </Menu>
+               </>
+              }
             </>
           ))}
         </ul>
