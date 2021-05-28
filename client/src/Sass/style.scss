@@ -39,3 +39,7 @@ body {
 @import 'Pages/Organization/SecularCeremony';
 @import 'Pages/Contact';
 @import 'Pages/About';
+
+.carousel-root{
+  overflow: hidden!important;
+}

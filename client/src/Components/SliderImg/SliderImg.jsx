@@ -16,22 +16,15 @@ const optionsSlider = {
   showThumbs                              : false,
   centerMode                              : false,
   preventMovementUntilSwipeScrollTolerance: 'false',
-  renderThumbs                            : function () {}
 }
 const SliderImg     = ({ imgToShow = [{}], styleImg, options = { ...optionsSlider } }) => {
   return (
-    <Carousel interval={4000} autoFocus={false}
-              showIndicators={false} swipeable={false}
-              useKeyboardArrows={false} showStatus={false}
-              showThumbs={false}
-              emulateTouch={false}
-              stopOnHover={false}
-              autoPlay={true}
-              preventMovementUntilSwipeScrollTolerance={true}
-              thumbWidth={'100%'}
-              showArrows={false} infiniteLoop={true}>
+    <Carousel autoPlay infiniteLoop centerMode={false} showStatus={false} showIndicators={false}
+              showArrows={false} showThumbs={false} width="650px">
       {imgToShow.map((img, index) => (
-        <img key={index} src={img.imgSrc} alt={img.altAttr} style={styleImg}/>
+        <div style={{ overflow: 'hidden' }}>
+          <img key={index} src={img.imgSrc} alt={img.altAttr} style={styleImg}/>
+        </div>
       ))}
     </Carousel>
   )

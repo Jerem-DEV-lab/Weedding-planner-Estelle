@@ -7,14 +7,42 @@ import { Container, Grid, makeStyles } from '@material-ui/core'
 import Button                          from '../../Components/Button/Button'
 import injectHtmlCode                  from '../../tools/injectHtml'
 import FormuleCard                     from '../../Components/Card/FormuleCard'
+import SliderImg                       from '../../Components/SliderImg/SliderImg'
 
 const Evj = () => {
   const classes   = useStyles()
   const { t }     = useTranslation()
   const listEvent = [t('evjfEvent1'), t('evjfEvent2'), t('evjfEvent3'), t('evjfEvent4'), t('evjfEvent5')]
   
+  const imgDiapoEvjf = [
+    
+    {
+      imgSrc : '/assets/organizations/ejvf/evjf2.jpg',
+      altAttr: '5 jeunes filles habillé en blanc et bleu pour un enterrement de vie de jeune fille'
+    },
+    {
+      imgSrc : '/assets/organizations/ejvf/evjf3.jpg',
+      altAttr: '5 jeunes filles habillé en blanc et bleu pour un enterrement de vie de jeune fille'
+    }
+  ]
+  const imgDiapoEvjg = [
+    
+    {
+      imgSrc : '/assets/organizations/evjg/evjg1.jpg',
+      altAttr: '5 jeunes filles habillé en blanc et bleu pour un enterrement de vie de jeune fille'
+    },
+    {
+      imgSrc : '/assets/organizations/evjg/evjg2.jpg',
+      altAttr: '5 jeunes filles habillé en blanc et bleu pour un enterrement de vie de jeune fille'
+    },
+    {
+      imgSrc : '/assets/organizations/evjg/evjg3.jpg',
+      altAttr: '5 jeunes filles habillé en blanc et bleu pour un enterrement de vie de jeune fille'
+    }
+  ]
+  
   return <>
-    <HeroPage nameImg="/organizations/evj.jpg" positionImg={'center center'}>
+    <HeroPage nameImg="/organizations/evj.d.jpg" positionImg={'top center'}>
       <Nav/>
       <div className="hero-container">
         <div className="hero-home-content">
@@ -26,10 +54,7 @@ const Evj = () => {
       <Container maxWidth="lg">
         <Grid container={true} spacing={4}>
           <Grid item={true} xs={12} md={6}>
-            <div>
-              <img src="/assets/organizations/EVJ_section.jpg"
-                   alt="illustration de 3 copines assis sur une branche d'un arbre"/>
-            </div>
+            <SliderImg imgToShow={imgDiapoEvjf}/>
           </Grid>
           <Grid item={true} xs={12} md={6}>
             <h3 className={classes.title}>{t('title_evjf_section')}</h3>
@@ -68,8 +93,7 @@ const Evj = () => {
           </Grid>
           <Grid item={true} xs={12} md={6}>
             <div>
-              <img src="/assets/organizations/evjg.jpg"
-                   alt="illustration de 3 copines assis sur une branche d'un arbre"/>
+              <SliderImg imgToShow={imgDiapoEvjg}/>
             </div>
           </Grid>
         </Grid>

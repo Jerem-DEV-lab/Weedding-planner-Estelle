@@ -6,17 +6,17 @@ import { Container, Grid, makeStyles } from '@material-ui/core'
 import FormuleCard                     from '../../Components/Card/FormuleCard'
 import Footer                          from '../../Components/Footer/Footer'
 
-const useStyles  = makeStyles((theme) => ({
-  dBlock             : {
+const useStyles  = makeStyles(() => ({
+  dBlock              : {
     display: 'block'
   },
-  subtitle           : {
+  subtitle            : {
     textAlign     : 'left',
     fontSize      : '22px',
     fontWeight    : '600',
     textDecoration: 'underline'
   },
-  sectionContainerImg: {
+  sectionContainerImg : {
     display : 'block',
     overflow: 'hidden',
   },
@@ -36,7 +36,7 @@ const MyWorkShop = () => {
   const { t }   = useTranslation()
   const classes = useStyles()
   return <>
-    <HeroPage nameImg="/myWorkshop/hero_workshop.jpg" positionImg={'bottom center'}>
+    <HeroPage nameImg="myWorkshop/hero_workshop.jpg" positionImg={'center center'}>
       <Nav/>
       <div className="hero-container">
         <div className="hero-home-content">
@@ -61,7 +61,7 @@ const MyWorkShop = () => {
           </Grid>
           <Grid item={true} xs={12} md={12} lg={6}>
             <div className={classes.sectionContainerImg2} style={{height: "350px"}}>
-              <img src="/assets/art-therapy/art-therapy2.jpg" alt="" className={classes.imgSection}/>
+              <img src="/assets/art-therapy/at3.jpg" alt="" className={classes.imgSection}/>
             </div>
           </Grid>
         </Grid>
@@ -122,12 +122,13 @@ const MyWorkShop = () => {
         <h2>{t('workShopTitle2')}</h2>
         <Grid container={true} spacing={4}>
           <Grid item={true} xs={12} md={12} lg={6}>
-            <div className={classes.sectionContainerImg} style={{height: "200px"}}>
-              <img src="/assets/art-therapy/art-therapy1.jpg" alt="" className={classes.imgSection}/>
+            <div className={classes.sectionContainerImg} style={{ height: '400px' }}>
+              <img src="/assets/art-therapy/at2.jpg" alt="" className={classes.imgSection}/>
             </div>
           </Grid>
           <Grid item={true} xs={12} md={12} lg={6}>
-            <p className="section-content">
+            <p className="section-content"
+               style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
               {t('workShopContent4')}
             </p>
           </Grid>

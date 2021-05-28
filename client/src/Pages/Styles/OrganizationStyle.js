@@ -23,10 +23,12 @@ export const useStyles = makeStyles(theme => (
       }
     },
     titleResponsive: {
-      marginBottom                  : 'calc(4 * var(--space))',
+      fontSize                      : '2rem',
+      lineHeight                    : '36px',
+      marginBottom                  : 'calc(2 * var(--space))',
       [theme.breakpoints.down('sm')]: {
-        fontSize    : '26px',
-        lineHeight  : '38px',
+        fontSize    : '22px',
+        lineHeight  : '36px',
         marginBottom: 'calc(1 * var(--space))'
       }
     }

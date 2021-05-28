@@ -4,7 +4,6 @@ import Footer              from '../../Components/Footer/Footer'
 import HeroPage            from '../../Components/HeroPage/HeroPage'
 import Nav                 from '../../Components/NavBar/Nav'
 import { Container, Grid } from '@material-ui/core'
-import Button              from '../../Components/Button/Button'
 import SliderImg           from '../../Components/SliderImg/SliderImg'
 import { useStyles }       from '../Styles/OrganizationStyle'
 
@@ -42,20 +41,12 @@ const BabyShower = () => {
       <Container>
         <Grid container={true} spacing={4}>
           <Grid item={true} xs={12} md={12} lg={6}>
-            <div style={{
-              overflow      : 'hidden',
-              height        : '100%',
-              display       : 'flex',
-              justifyContent: 'center',
-              alignItems    : 'center'
-            }}>
               <SliderImg imgToShow={imgs} styleImg={{
                 objectPosition: '50% 50%',
                 height        : '100%',
                 maxHeight     : '600px',
                 objectFit     : 'cover'
               }}/>
-            </div>
           </Grid>
           <Grid item={true} xs={12} md={12} lg={6}>
             <h2 className={classes.titleResponsive}>{t('new_baby')}...</h2>
