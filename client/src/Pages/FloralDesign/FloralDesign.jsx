@@ -20,6 +20,11 @@ const usesStyles    = makeStyles((theme) => ({
     display       : 'block',
     marginBottom  : theme.spacing(2),
     marginTop     : theme.spacing(4)
+  },
+  flexSection:{
+    display: 'flex',
+    height: '100%',
+    alignItems: 'center'
   }
 }))
 const FloralDesign = () => {
@@ -87,67 +92,40 @@ const FloralDesign = () => {
             </section>
           </Grid>
           <Grid item={true} xs={12} lg={6}>
-            <section>
+            <section style={{paddingTop: 0}}>
               <Container>
-                <h2 className={generalStyle.titleResponsive}>{t('titleSectionFloralDesign2')}</h2>
-                <p className="section-content">
-                  {t('contentFloralDesign1')} <br/>
-                  {t('contentFloralDesign2')} <br/>
-                  {t('contentFloralDesign3')} <br/>
-                  {t('contentFloralDesign4')} <br/>
-                  {t('contentFloralDesign5')}
-                </p>
+                <h2 className={generalStyle.titleResponsive}>{t('HowWork')}</h2>
+                <p className="section-content">{t('HowWorkContent1')}</p>
+                <p className="section-content">{t('HowWorkContent2')}</p>
+  
+                <h2 className={generalStyle.titleResponsive} style={{marginTop: "1.2rem"}}>{t('commitment')}</h2>
+                <p className="section-content" dangerouslySetInnerHTML={injectHtmlCode(t('commitmentContent1'))}/>
               </Container>
             </section>
-            <section>
-              <h2 className={generalStyle.titleResponsive}>{t('subscription')}</h2>
-              <p className="section-content">{t('subscriptionContent')}</p>
+            <section style={{paddingTop: 0}}>
+              <Container>
+                <h2 className={generalStyle.titleResponsive}>{t('prices')}</h2>
+                <p className="section-content">
+                  {t('price1')} <br/>
+                  {t('price2')} <br/>
+                  {t('price3')} <br/>
+                  {t('price4')} <br/>
+                  {t('price5')} <br/>
+                </p>
+                <p className="section-content mt2">{t('moreInfoPrices')}</p>
+                <p className={classes.address} style={{lineHeight: '28px'}}>{t('addressConceptStore')}</p>
+              </Container>
             </section>
           </Grid>
           <Grid item={true} xs={12} lg={6}>
             <div style={{ display: 'flex', overflow: 'hidden', maxHeight: '90%', width: '100%' }}>
               <img src="/assets/floralDesign/floralDesign2.jpg"
-                   style={{ objectFit: 'cover', height: '100%', width: '100%' }}
+                   style={{ objectFit: 'cover', width: '100%' }}
                    alt=""/>
             </div>
-          </Grid>
-          <Grid item={true} xs={12} lg={6}>
-            <div style={{ display: 'flex', overflow: 'hidden', maxHeight: '90%', width: '100%' }}>
-              <img src="/assets/floralDesign/floralDesign3.jpg"
-                   style={{ objectFit: 'cover', height: 'auto', maxHeight: "600px", width: '100%' }}
-                   alt=""/>
-            </div>
-          </Grid>
-          <Grid item={true} xs={12} lg={6}>
-            <section>
-              <Container>
-                <h2 className={generalStyle.titleResponsive}>{t('HowWork')}</h2>
-                <p className="section-content">{t('HowWorkContent1')}</p>
-                <p className="section-content">{t('HowWorkContent2')}</p>
-              </Container>
-            </section>
-            <section>
-              <Container>
-                <h2 className={generalStyle.titleResponsive}>{t('commitment')}</h2>
-                <p className="section-content" dangerouslySetInnerHTML={injectHtmlCode(t('commitmentContent1'))}/>
-              </Container>
-            </section>
           </Grid>
         </Grid>
-        <section>
-          <Container>
-            <h2 className={generalStyle.titleResponsive}>{t('prices')}</h2>
-            <p className="section-content">
-              {t('price1')} <br/>
-              {t('price2')} <br/>
-              {t('price3')} <br/>
-              {t('price4')} <br/>
-              {t('price5')} <br/>
-            </p>
-            <p className="section-content mt2">{t('moreInfoPrices')}</p>
-            <p className={classes.address}>{t('addressConceptStore')}</p>
-          </Container>
-        </section>
+
         <section>
           <Container>
             <h2 className={generalStyle.titleResponsive}>{t('otherPossibility')}</h2>

@@ -76,7 +76,7 @@ const ImgsGallery = ({gallery}) => {
             </>
           ))}
         </Grid>
-      </Container>}
+      </Container>
     </>
   )
 }

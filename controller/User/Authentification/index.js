@@ -36,14 +36,14 @@ class Authentification {
       await newUser.save()
       const linkConfirmAccount = `${process.env.DOMAIN}${process.env.LINK_CONFIRM_ACCOUNT}${token}`
       const obj                = {
-        'from'       : { 'email': 'estelle-rouille@estelle-events.fr', 'name': 'noreplay@estelle-event.fr' },
-        'reply_to'   : { 'email': 'guillemet.jeremy087@gmail.com' },
-        'to'         : email,
+        'from'                 : { 'email': 'estelle-rouille@estelle-events.fr', 'name': 'noreplay@estelle-event.fr' },
+        'reply_to'             : { 'email': 'estelle.rouille.events@gmail.com' },
+        'to'                   : email,
         'dynamic_template_data': {
           'link_account_actived': linkConfirmAccount
         },
-        'content'    : [{ 'type': 'text/html', 'value': ' ' }],
-        'template_id': 'd-0e51747961614642ad08d1a30f622a36'
+        'content'              : [{ 'type': 'text/html', 'value': ' ' }],
+        'template_id'          : 'd-25016f2820c44683ad97e88facb3995b'
       }
       await emailRegister(obj)
       return response.status(200).json({ message: 'Un email vient de vous être envoyé pour confirmer votre compte.' })
@@ -126,7 +126,7 @@ class Authentification {
       const resetLinkWithToken = `${process.env.DOMAIN}/mot-de-passe-oublier/${setTokenToUser.resetPasswordToken}`
       const obj                = {
         'from'                 : { 'email': 'estelle-rouille@estelle-events.fr', 'name': 'Côté Campagne' },
-        'reply_to'             : { 'email': 'guillemet.jeremy087@gmail.com' },
+        'reply_to'             : { 'email': 'estelle.rouille.events@gmail.com' },
         'to'                   : userEmail,
         'dynamic_template_data': {
           'link_reset_password': resetLinkWithToken,
@@ -134,7 +134,7 @@ class Authentification {
           'domain'             : process.env.DOMAIN
         },
         'content'              : [{ 'type': 'text/html', 'value': ' ' }],
-        'template_id'          : 'd-ce7f30627c874e4c85903f90c2b27483'
+        'template_id'          : 'd-795f7fb212d34955bbc5ecb896108be3'
       }
       await sendMailSG(obj)
       return response.status(200).json({ success: 'Un email viens de vous être envoyer sur ' + userEmail })

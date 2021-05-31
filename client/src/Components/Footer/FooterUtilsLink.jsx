@@ -1,7 +1,7 @@
 import React              from 'react'
 import { makeStyles }     from '@material-ui/core'
 import { Link }           from 'react-router-dom'
-import { useTranslation } from 'react-i18next'
+/*import { useTranslation } from 'react-i18next'*/
 
 const useStyles = makeStyles((theme) => ({
   listItem: {
@@ -18,15 +18,12 @@ const useStyles = makeStyles((theme) => ({
 
 const FooterUtilsLink = () => {
   const classes = useStyles()
-  const { t }   = useTranslation()
+/*  const { t }   = useTranslation()*/
   return (
     <>
       <ul style={{ padding: '.75rem' }}>
         <li className={classes.listItem}>
           <Link to="/contact">Contact</Link>
-        </li>
-        <li className={classes.listItem}>
-          <Link to="/cgu">{t('cgu')}</Link>
         </li>
       </ul>
     

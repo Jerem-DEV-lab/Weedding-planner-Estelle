@@ -264,7 +264,7 @@
   "privateArtTherapyContent4": "You want to live a new experience while being carried by the friendly atmosphere of the group this session is made for you.",
   "privateArtTherapyTitle5": "In-depth group session",
   "privateArtTherapyContent5": "You want to live a new experience while being carried by the friendly atmosphere of the group this session is made for you.",
-  "noRatingContent": "No one has left us a review 😢 But be the first to tell us what you think of us!",
+  "noRatingContent": "Be the first to give us your opinion!",
   "more_pictures_label": "See more pictures",
   "WeedingStep1": "Presentation of your logbook, indeed we leave together\non a beautiful journey, that of your big day, so this booklet will be there\nto accompany you and allow you to follow step by step\nthe progress of the organization of your project.",
   "WeedingStep2": "Research and meetings of the service providers partners of your\nchosen according to your expectations and your budget. (Book of providers of choice).",
@@ -289,5 +289,8 @@
   "titleSocial": "Find me on the Networks",
   "cgu": "General condition of use",
   "your_account": "Your account",
-  "unsubscribeAccount": "Unsubscribe me"
+  "unsubscribeAccount": "Unsubscribe me",
+  "minimal_price": "This price represents a minimum cost of service, the price may vary depending on the requirements requested.",
+  "footer_preference_lang": "Language preference",
+  "useful_links": "Useful link"
 }

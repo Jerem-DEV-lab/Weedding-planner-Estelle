@@ -43,7 +43,7 @@ const useStyles     = makeStyles((theme) => (
     labelNoRating: {
       fontSize                     : '25px',
       lineHeight                   : '55px',
-      margin                       : `${theme.spacing(20)}px 0`,
+      margin                       : `${theme.spacing(20)}px auto`,
       [theme.breakpoints.down(453)]: {
         fontSize: '18px',
         margin  : `${theme.spacing(10)}px 0`,

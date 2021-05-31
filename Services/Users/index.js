@@ -24,7 +24,6 @@ module.exports.getAllRatings = async (req, res) => {
       }
     })
   } catch (e) {
-    console.log(e)
     return res.status(404).json(e)
   }
 }

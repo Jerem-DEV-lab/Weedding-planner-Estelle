@@ -1,14 +1,17 @@
-import React, { useContext } from 'react'
-import { Container, Grid }   from '@material-ui/core'
-import Typography            from '@material-ui/core/Typography'
-import { makeStyles }        from '@material-ui/core/styles'
-import FooterSocialLink      from './FooterSocialLink'
-import FooterCopyright       from './FooterCopyright'
-import { useTranslation }    from 'react-i18next'
-import FooterUtilsLink       from './FooterUtilsLink'
-import { UserContext }       from '../../Context/UserContext'
-import { useSelector }       from 'react-redux'
-import FooterUser            from './FooterUser'
+import React, { useContext }  from 'react'
+import { Container, Grid }    from '@material-ui/core'
+import Typography             from '@material-ui/core/Typography'
+import { makeStyles }         from '@material-ui/core/styles'
+import FooterSocialLink       from './FooterSocialLink'
+import FooterCopyright        from './FooterCopyright'
+import { useTranslation }     from 'react-i18next'
+import FooterUtilsLink        from './FooterUtilsLink'
+import { UserContext }        from '../../Context/UserContext'
+import { useSelector }        from 'react-redux'
+import FooterUser             from './FooterUser'
+import { SelectLanguagePref } from '../UserProfil/SettingsAccount/SettingsAccount'
+import Button                 from '@material-ui/core/Button'
+import i18next                from 'i18next'
 
 const useStyles = makeStyles(theme => ({
   footer: {
@@ -38,12 +41,23 @@ const Footer    = () => {
             </Typography>
             <FooterUtilsLink/>
           </Grid>
-          {userContext.isLogged &&
+          {userContext.isLogged ?
            <Grid item={true} xs={12} md={4}>
              <Typography variant="subtitle2">
                {t('your_account')}
              </Typography>
              <FooterUser userInfo={userInfo} />
+           </Grid>:
+           <Grid>
+             <Typography>
+               Préférence langue
+             </Typography>
+             <div className="d-flex justify-center mt2">
+               <span className="mr2">
+                 <button onClick={() => i18next.changeLanguage(`en`)}>EN</button>
+               </span>
+               <span><button onClick={() => i18next.changeLanguage(`fr`)}>FR</button></span>
+             </div>
            </Grid>
           }
         </Grid>

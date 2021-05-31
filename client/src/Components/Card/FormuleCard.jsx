@@ -66,6 +66,7 @@ const FormuleCard = ({
         <Typography variant="body2" className={classes.price} color="textPrimary" component="p">
           <span className={classes.priceFrom}>{t('PriceFrom')}</span>
           {formulePrice} € <span style={{ color: '#F8B664', fontWeight: '600' }}>*</span>
+          <span style={{fontSize: '.7rem', display: 'block'}}>(*) Ce prix représente un coût minimum de prestation, le prix peut varier en fonction des exigences demandées.</span>
         </Typography>
       </CardContent>
       <CardActions style={{ justifyContent: 'center' }}>

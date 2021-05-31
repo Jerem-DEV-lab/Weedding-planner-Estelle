@@ -145,7 +145,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-function SelectLanguagePref () {
+export function SelectLanguagePref ({size = "small"}) {
   const classes   = useStyles()
   const languages = [
     {
@@ -161,7 +161,7 @@ function SelectLanguagePref () {
   ]
   return (
     <>
-      <FormControl variant="outlined" size="medium" fullWidth={true} className={classes.formControl}>
+      <FormControl variant="outlined" size={size} fullWidth={true} className={classes.formControl}>
         <InputLabel>Langues</InputLabel>
         <Select onChange={(e) => i18next.changeLanguage(`${e.target.value}`)} label="Langues" autoWidth={true}
                 defaultValue={'Français'}>

@@ -6,7 +6,6 @@ import Nav                             from '../../Components/NavBar/Nav'
 import { Container, Grid, makeStyles } from '@material-ui/core'
 import Button                          from '../../Components/Button/Button'
 import injectHtmlCode                  from '../../tools/injectHtml'
-import FormuleCard                     from '../../Components/Card/FormuleCard'
 import SliderImg                       from '../../Components/SliderImg/SliderImg'
 
 const Evj = () => {
@@ -68,8 +67,8 @@ const Evj = () => {
               {t('partenaireEvj')}
             </p>
             <div className="btn-center-x">
-              <Button isButton={false} isAnchor={true} label={t('seeMyOffers')} className="my1" color="primary-light"
-                      size="lg" link={'evj#Mes-formules'}/>
+              <Button isButton={false} isAnchor={false} label={t('AskForQuote')} className="my1" color="primary-light"
+                      size="lg" link={'/contact'}/>
             </div>
           </Grid>
         </Grid>
@@ -87,30 +86,14 @@ const Evj = () => {
               {t('partenaireEvj')}
             </p>
             <div className="btn-center-x">
-              <Button isButton={false} isAnchor={true} label={t('seeMyOffers')} className="my1" color="primary-light"
-                      size="lg" link={'/organisation/evj#Mes-formules'}/>
+              <Button isButton={false} isAnchor={false} label={t('AskForQuote')} className="my1" color="primary-light"
+                      size="lg" link={'/contact'}/>
             </div>
           </Grid>
           <Grid item={true} xs={12} md={6}>
             <div>
               <SliderImg imgToShow={imgDiapoEvjg}/>
             </div>
-          </Grid>
-        </Grid>
-      </Container>
-    </section>
-    <section>
-      <Container>
-        <h2>{t('offerTitle')} :</h2>
-        <Grid container={true} spacing={4}>
-          <Grid item xs={12} md={4} lg={4}>
-            <FormuleCard formuleTitle={t('formuleDayD')} formulePrice={'800'}/>
-          </Grid>
-          <Grid item xs={12} md={4} lg={4}>
-            <FormuleCard formuleTitle={t('formuleHelpMe')} formulePrice={'1 300'}/>
-          </Grid>
-          <Grid item xs={12} md={4} lg={4}>
-            <FormuleCard formuleTitle={t('formuleSoCool')} formulePrice={'2 400'}/>
           </Grid>
         </Grid>
       </Container>
